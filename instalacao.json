@@ -1,0 +1,1245 @@
+{
+    "Instalacões": [
+        {
+            "id": 1,
+            "nome": "Instalação Python",
+            "descricao": "Esse manual tem como passso a passo a instalação do python",
+            "passo_passo": [
+                {
+                    "passo": 1,
+                    "titulo": "Baixar o Instalador do Python",
+                    "descricao": "Visite o site oficial do Python (https://www.python.org) e baixe a versão mais recente do Python para Windows. Certifique-se de escolher o instalador correto para a arquitetura do seu sistema (32 ou 64 bits).",
+                    "imagem": "/assets/img/instalacao_python/step1.png"
+                },
+                {
+                    "passo": 2,
+                    "titulo": "Executar o Instalador",
+                    "descricao": "Após baixar o instalador, execute o arquivo. Na primeira tela, marque a opção 'Add Python to PATH' e clique em 'Install Now' para iniciar a instalação.",
+                    "imagem": "/assets/img/instalacao_python/step2.png"
+                },
+                {
+                    "passo": 3,
+                    "titulo": "Aguardar a Instalação",
+                    "descricao": "Aguarde até que o Python seja instalado no seu sistema. Isso pode levar alguns minutos.",
+                    "imagem": "/assets/img/instalacao_python/step3.png"
+                },
+                {
+                    "passo": 4,
+                    "titulo": "Verificar a Instalação",
+                    "descricao": "Após a instalação ser concluída, abra o 'Prompt de Comando' (cmd) e digite 'python --version' para verificar se o Python foi instalado corretamente.",
+                    "imagem": "/assets/img/instalacao_python/step4.png"
+                },
+                {
+                    "passo": 5,
+                    "titulo": "Instalar o PIP (Opcional)",
+                    "descricao": "O PIP, gerenciador de pacotes do Python, já vem incluído na instalação padrão. Para verificar, digite 'pip --version' no terminal.",
+                    "imagem": "/assets/img/instalacao_python/step5.png"
+                },
+                {
+                    "passo": 6,
+                    "titulo": "Testar o Python",
+                    "descricao": "Abra o 'Prompt de Comando', digite 'python' e pressione Enter. O interpretador do Python deve ser iniciado, permitindo que você digite comandos diretamente.",
+                    "imagem": "/assets/img/instalacao_python/step6.png"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "nome": "Instalação Power BI",
+            "descricao": "Esse manual contém o passo a passo para a instalação do Power BI.",
+            "passo_passo": [
+                {
+                    "passo": 1,
+                    "titulo": "Baixar o Instalador do Power BI",
+                    "descricao": "Visite o site oficial da Microsoft (https://www.microsoft.com/pt-br/download/details.aspx?id=58494) e baixe a versão mais recente do Power BI Desktop. O instalador está disponível gratuitamente na seção de download.",
+                    "imagem": "/assets/img/instalacao_powerbi/step1.png"
+                },
+                {
+                    "passo": 2,
+                    "titulo": "Executar o Instalador",
+                    "descricao": "Após baixar o arquivo, execute o instalador do Power BI Desktop. Na janela que aparecer, aceite os termos de serviço e clique em 'Avançar'.",
+                    "imagem": "/assets/img/instalacao_powerbi/step2.png"
+                },
+                {
+                    "passo": 3,
+                    "titulo": "Escolher o Local de Instalação",
+                    "descricao": "Selecione o local onde o Power BI será instalado ou deixe o local padrão selecionado. Clique em 'Avançar' para continuar.",
+                    "imagem": "/assets/img/instalacao_powerbi/step3.png"
+                },
+                {
+                    "passo": 4,
+                    "titulo": "Aguardar a Instalação",
+                    "descricao": "Aguarde enquanto o Power BI Desktop é instalado no seu computador. Esse processo pode demorar alguns minutos, dependendo do desempenho da sua máquina.",
+                    "imagem": "/assets/img/instalacao_powerbi/step4.png"
+                },
+                {
+                    "passo": 5,
+                    "titulo": "Concluir a Instalação",
+                    "descricao": "Após a conclusão da instalação, marque a opção 'Iniciar o Power BI Desktop agora' e clique em 'Concluir'. O Power BI será aberto automaticamente.",
+                    "imagem": "/assets/img/instalacao_powerbi/step5.png"
+                },
+                {
+                    "passo": 6,
+                    "titulo": "Iniciar o Power BI",
+                    "descricao": "Agora você pode começar a usar o Power BI Desktop para criar relatórios e painéis de análise de dados. Caso o programa não tenha sido iniciado automaticamente, abra-o através do menu Iniciar do Windows.",
+                    "imagem": "/assets/img/instalacao_powerbi/step6.png"
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "nome": "Instalação e Configuração do Cliente PW3270",
+            "descricao": "Este manual contém o passo a passo para a instalação e configuração do Cliente PW3270 no Windows.",
+            "passo_passo": [
+                {
+                    "passo": 1,
+                    "titulo": "Baixar o Cliente PW3270",
+                    "descricao": "Faça o download do arquivo 'pw3270-4.0-2-setup' no servidor: \\\\mds.net\\mds\\se\\DTI\\CGSS\\SUPORTE\\APLICACOES\\Sipas Novo. Após o download, execute o arquivo.",
+                    "imagem": "/assets/img/pw3270/step1.png"
+                },
+                {
+                    "passo": 2,
+                    "titulo": "Aceitar os Termos de Uso",
+                    "descricao": "Na janela de instalação, clique no botão 'I Agree' para aceitar os termos de uso.",
+                    "imagem": "/assets/img/pw3270/step2.png"
+                },
+                {
+                    "passo": 3,
+                    "titulo": "Avançar na Instalação",
+                    "descricao": "Clique no botão 'Next' para prosseguir com a instalação.",
+                    "imagem": "/assets/img/pw3270/step3.png"
+                },
+                {
+                    "passo": 4,
+                    "titulo": "Selecionar Local de Instalação",
+                    "descricao": "Escolha o local onde o Cliente PW3270 será instalado e clique no botão 'Install'.",
+                    "imagem": "/assets/img/pw3270/step4.png"
+                },
+                {
+                    "passo": 5,
+                    "titulo": "Aguardar a Instalação",
+                    "descricao": "Aguarde enquanto o Cliente PW3270 é instalado no seu computador.",
+                    "imagem": "/assets/img/pw3270/step5.png"
+                },
+                {
+                    "passo": 6,
+                    "titulo": "Concluir a Instalação",
+                    "descricao": "Após o término da instalação, clique no botão 'Close' para finalizar.",
+                    "imagem": "/assets/img/pw3270/step6.png"
+                },
+                {
+                    "passo": 7,
+                    "titulo": "Abrir o Cliente PW3270",
+                    "descricao": "Clique em 'Iniciar', selecione 'Programas' e escolha o 'PW3270' para abrir o cliente.",
+                    "imagem": "/assets/img/pw3270/step7.png"
+                },
+                {
+                    "passo": 8,
+                    "titulo": "Configurar o Servidor",
+                    "descricao": "Na janela 'Selecionar Servidor', informe os seguintes dados: Endereço do servidor: 172.16.32.142; Porta: 1023.",
+                    "imagem": "/assets/img/pw3270/step8.png"
+                },
+                {
+                    "passo": 9,
+                    "titulo": "Conectar ao Servidor",
+                    "descricao": "Clique no botão 'Conectar' para estabelecer a conexão com o servidor.",
+                    "imagem": "/assets/img/pw3270/step9.png"
+                },
+                {
+                    "passo": 10,
+                    "titulo": "Finalizar a Configuração",
+                    "descricao": "O cliente PW3270 está configurado e disponível para uso.",
+                    "imagem": "/assets/img/pw3270/step10.png"
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "nome": "Instalação e Acesso ao SISPOAD",
+            "descricao": "Este manual contém instruções detalhadas para configurar e acessar o SISPOAD, o Sistema Informatizado da SPOG.",
+            "passo_passo": [
+                {
+                    "passo": 1,
+                    "titulo": "Verificar Requisitos do Sistema",
+                    "descricao": "O SISPOAD é um banco de dados em Access que requer o Microsoft Office (2010, 2013, 2016 ou 365) instalado, funcionando nas versões de 32 ou 64 bits, com macros habilitadas.",
+                    "imagem": "/assets/img/sispoad/step1.png"
+                },
+                {
+                    "passo": 2,
+                    "titulo": "Conectar-se à Rede do MDS",
+                    "descricao": "Certifique-se de estar conectado à rede do MDS para acessar o SISPOAD. Caso esteja na rede do Esporte, solicite suporte de TI para realizar o login no domínio do MDS. Quem já está na rede do MDS não precisa realizar este passo.",
+                    "imagem": "/assets/img/sispoad/step2.png"
+                },
+                {
+                    "passo": 3,
+                    "titulo": "Habilitar Macros no Access",
+                    "descricao": "1. Abra o aplicativo Access no menu Iniciar. \n2. Crie um 'Banco de Dados do Desktop em Branco'. \n3. Vá em 'Arquivo' > 'Opções' > 'Central de Confiabilidade' > 'Configurações da Central de Confiabilidade'. \n4. Em 'Configurações de Macro', selecione 'Habilitar todas as macros'. \n5. Clique em 'OK' e feche o Access.",
+                    "imagem": "/assets/img/sispoad/step3.png"
+                },
+                {
+                    "passo": 4,
+                    "titulo": "Criar um Atalho para o SISPOAD",
+                    "descricao": "1. Clique com o botão direito na área de trabalho e selecione 'Novo' > 'Atalho'. \n2. No campo 'Digite o local do item', cole o seguinte link: \\\\wisispoadpd01\\sispoad\\Sispoad - Novo Atalho.lnk. \n3. Clique em 'Avançar' e depois em 'Concluir'.",
+                    "imagem": "/assets/img/sispoad/step4.png"
+                }
+            ]
+        },
+        {
+            "id": 6,
+            "nome": "Instalação SIAFI Hod",
+            "descricao": "Este manual fornece instruções para instalação e configuração do SIAFI Hod.",
+            "passo_passo": [
+                {
+                    "passo": 1,
+                    "titulo": "Acessar o Site HOD Serpro",
+                    "descricao": "O usuário deve acessar o site HOD Serpro utilizando sua conta para iniciar o processo de instalação.",
+                    "imagem": "/assets/img/instalacao_siafi_hod/step1.png"
+                },
+                {
+                    "passo": 2,
+                    "titulo": "Instalar o Arquivo",
+                    "descricao": "Clicar com o botão direito do mouse no arquivo, escolher a opção 'Abrir como', selecionar outro aplicativo, clicar em 'Mais aplicativos' e escolher o executável correto dentro da pasta JAVA (bin/javaws).",
+                    "imagem": "/assets/img/instalacao_siafi_hod/step2.png"
+                },
+                {
+                    "passo": 3,
+                    "titulo": "Resolver o Erro MD5 do Arquivo",
+                    "descricao": "Caso ocorra o erro MD5, siga os passos: a) Acesse o diretório 'C:/ProgramData' e exclua a pasta 'IBMHD'; b) No botão do Windows, pesquise 'Configuração Java', exclua os arquivos temporários e remova o painel de controle do HOD.",
+                    "imagem": "/assets/img/instalacao_siafi_hod/step3.png"
+                },
+                {
+                    "passo": 4,
+                    "titulo": "Concluir a Instalação",
+                    "descricao": "Após seguir os passos acima, reabra o arquivo inicial para verificar se o problema foi resolvido.",
+                    "imagem": "/assets/img/instalacao_siafi_hod/step4.png"
+                }
+            ]
+        },
+        {
+            "id": 7,
+            "nome": "Instalação QlikView",
+            "descricao": "Este manual fornece o passo a passo para a instalação e configuração do software QlikView.",
+            "passo_passo": [
+                {
+                    "passo": 1,
+                    "titulo": "Verificar Necessidade de Licença de Desenvolvedor",
+                    "descricao": "Caso o usuário necessite de licença de desenvolvedor, deve ser orientado a enviar um e-mail para cgbd@cidadania.gov.br e aguardar resposta antes de continuar.",
+                    "imagem": "/assets/img/instalacao_qlikview/step1.png"
+                },
+                {
+                    "passo": 2,
+                    "titulo": "Acessar o Servidor de Arquivos",
+                    "descricao": "Acesse o servidor de arquivos pelo caminho '\\\\mds.net\\mds\\SE\\DTI\\CGSS\\SUPORTE\\APLICACOES\\QlikView' e escolha a versão desejada para instalação.",
+                    "imagem": "/assets/img/instalacao_qlikview/step2.png"
+                },
+                {
+                    "passo": 3,
+                    "titulo": "Configurar a Instalação",
+                    "descricao": "Siga os passos da instalação: selecione o idioma, clique em 'OK', aceite os termos de licença, insira o nome do usuário e organização, escolha o caminho de instalação e tipo de configuração (completa ou personalizada).",
+                    "imagem": "/assets/img/instalacao_qlikview/step3.png"
+                },
+                {
+                    "passo": 4,
+                    "titulo": "Realizar a Instalação",
+                    "descricao": "Clique em 'Instalar' para prosseguir com o processo e, após finalizar, clique em 'Concluir'.",
+                    "imagem": "/assets/img/instalacao_qlikview/step4.png"
+                },
+                {
+                    "passo": 5,
+                    "titulo": "Habilitar Licença de Desenvolvedor",
+                    "descricao": "Após a resposta da CGBD, abra o QlikView, clique em 'Arquivo', escolha 'Abrir no Servidor', insira o nome do servidor (qvp://wiqlikviewpd02), conecte-se utilizando a identidade de rede e valide a licença.",
+                    "imagem": "/assets/img/instalacao_qlikview/step5.png"
+                },
+                {
+                    "passo": 6,
+                    "titulo": "Validar a Licença",
+                    "descricao": "Verifique no cabeçalho do QlikView se a mensagem 'Personal Edition' desapareceu, indicando que a licença foi ativada corretamente.",
+                    "imagem": "/assets/img/instalacao_qlikview/step6.png"
+                }
+            ]
+        },
+        {
+            "id": 8,
+            "nome": "Instalação Oracle Cliente 18.5",
+            "descricao": "Este manual detalha os passos necessários para a instalação do cliente Oracle versão 18.5 e configuração para o SISFAF.",
+            "passo_passo": [
+                {
+                    "passo": 1,
+                    "titulo": "Instalar o vcredist_x86",
+                    "descricao": "Acesse o site da Microsoft (https://www.microsoft.com/en-us/download/details.aspx?displaylang=en&id=14431), baixe o arquivo 'vcredist_x86.exe' e instale-o seguindo as instruções.",
+                    "imagem": "/assets/img/instalacao_oracle/step1.png"
+                },
+                {
+                    "passo": 2,
+                    "titulo": "Baixar os Pacotes Oracle",
+                    "descricao": "Faça o download dos pacotes 'Basic Package' e 'ODBC Package' na versão 18.5.0.0.0 do site da Oracle ou no diretório '\\\\mds.net\\mds\\SE\\DTI\\CGSS\\SUPORTE\\APLICACOES\\Oracle\\Oracle_18.5'.",
+                    "imagem": "/assets/img/instalacao_oracle/step2.png"
+                },
+                {
+                    "passo": 3,
+                    "titulo": "Criar Diretórios no C:",
+                    "descricao": "Crie uma pasta 'Oracle' no 'C:/'. Extraia os conteúdos dos pacotes baixados para 'C:/Oracle' e crie a subpasta 'bin' em 'C:/Oracle/instantclient_18_5'. Copie o arquivo 'oci.dll' para 'C:/Oracle/instantclient_18_5/bin'.",
+                    "imagem": "/assets/img/instalacao_oracle/step3.png"
+                },
+                {
+                    "passo": 4,
+                    "titulo": "Instalar o Driver ODBC",
+                    "descricao": "Execute como administrador o arquivo 'odbc_install.exe' em 'C:/Oracle/instantclient_18_5' para instalar o driver ODBC.",
+                    "imagem": "/assets/img/instalacao_oracle/step4.png"
+                },
+                {
+                    "passo": 5,
+                    "titulo": "Configurar Variáveis de Ambiente",
+                    "descricao": "No editor de variáveis do sistema, adicione o caminho de instalação do cliente Oracle ao 'Path' e crie uma variável 'TNS_ADMIN' com o diretório do SISFAF.",
+                    "imagem": "/assets/img/instalacao_oracle/step5.png"
+                },
+                {
+                    "passo": 6,
+                    "titulo": "Editar o Registro do Windows",
+                    "descricao": "No 'Editor do Registro', limpe as variáveis existentes e configure 'ORACLE_HOME' e 'NLS_LANG' com os valores apropriados.",
+                    "imagem": "/assets/img/instalacao_oracle/step6.png"
+                },
+                {
+                    "passo": 7,
+                    "titulo": "Configurar o Driver ODBC",
+                    "descricao": "Abra o 'ODBC Data Sources (32-bit)', selecione 'DSN de Sistema' e configure o 'Oracle in instantclient_18_5' com os dados do SISFAF.",
+                    "imagem": "/assets/img/instalacao_oracle/step7.png"
+                },
+                {
+                    "passo": 8,
+                    "titulo": "Validar o Acesso ao SISFAF",
+                    "descricao": "Solicite ao usuário que acesse o programa SISFAF e valide a conexão com o banco de dados.",
+                    "imagem": "/assets/img/instalacao_oracle/step8.png"
+                }
+            ]
+        },
+        {
+            "id": 9,
+            "nome": "Instalação e Configuração do DBeaver",
+            "descricao": "Este manual contém as instruções para instalar e configurar o DBeaver, uma ferramenta de gerenciamento de banco de dados multiplataforma.",
+            "passo_passo": [
+                {
+                    "passo": 1,
+                    "titulo": "Baixar o Instalador do DBeaver",
+                    "descricao": "Acesse o site oficial do DBeaver (https://dbeaver.io/) e baixe a versão Community ou Enterprise, conforme sua necessidade. Certifique-se de escolher a versão compatível com o seu sistema operacional (Windows, macOS ou Linux).",
+                    "imagem": "/assets/img/dbeaver/step1.png"
+                },
+                {
+                    "passo": 2,
+                    "titulo": "Executar o Instalador",
+                    "descricao": "Localize o arquivo baixado no seu computador e execute-o. Na janela de instalação, aceite os termos de licença clicando em 'I Agree'.",
+                    "imagem": "/assets/img/dbeaver/step2.png"
+                },
+                {
+                    "passo": 3,
+                    "titulo": "Selecionar Componentes de Instalação",
+                    "descricao": "Escolha os componentes adicionais que deseja instalar, como ícones no desktop ou suporte a Java. Em seguida, clique em 'Next'.",
+                    "imagem": "/assets/img/dbeaver/step3.png"
+                },
+                {
+                    "passo": 4,
+                    "titulo": "Escolher Local de Instalação",
+                    "descricao": "Selecione a pasta onde o DBeaver será instalado ou mantenha o local padrão sugerido. Clique em 'Install' para iniciar a instalação.",
+                    "imagem": "/assets/img/dbeaver/step4.png"
+                },
+                {
+                    "passo": 5,
+                    "titulo": "Aguardar a Instalação",
+                    "descricao": "Aguarde enquanto o instalador configura o DBeaver no seu sistema. Esse processo pode levar alguns minutos.",
+                    "imagem": "/assets/img/dbeaver/step5.png"
+                },
+                {
+                    "passo": 6,
+                    "titulo": "Concluir a Instalação",
+                    "descricao": "Após o término da instalação, clique em 'Finish' para concluir. Caso queira, marque a opção para abrir o DBeaver automaticamente.",
+                    "imagem": "/assets/img/dbeaver/step6.png"
+                },
+                {
+                    "passo": 7,
+                    "titulo": "Adicionar uma Conexão de Banco de Dados",
+                    "descricao": "1. Abra o DBeaver. \n2. Clique em 'New Database Connection' no menu superior ou no painel esquerdo. \n3. Escolha o tipo de banco de dados (MySQL, PostgreSQL, etc.) e clique em 'Next'. \n4. Insira os detalhes de conexão, como host, porta, usuário e senha. \n5. Clique em 'Finish' para salvar a conexão.",
+                    "imagem": "/assets/img/dbeaver/step7.png"
+                },
+                {
+                    "passo": 8,
+                    "titulo": "Testar a Conexão",
+                    "descricao": "Após configurar a conexão, clique em 'Test Connection' para garantir que os parâmetros estão corretos. Caso o teste seja bem-sucedido, você estará pronto para usar o DBeaver.",
+                    "imagem": "/assets/img/dbeaver/step8.png"
+                }
+            ]
+        },
+        {
+            "id": 10,
+            "nome": "Instalação do Windows",
+            "descricao": "Este manual fornece instruções passo a passo para realizar a instalação do sistema operacional Windows em um computador.",
+            "passo_passo": [
+                {
+                    "passo": 1,
+                    "titulo": "Preparar o Pen Drive de Boot",
+                    "descricao": "1. Faça o download da ferramenta de criação de mídia no site oficial da Microsoft (https://www.microsoft.com/software-download/windows). \n2. Execute a ferramenta e selecione 'Criar mídia de instalação'. \n3. Escolha o idioma, a edição e a arquitetura desejados. \n4. Conecte um pen drive (mínimo 8 GB) e siga as instruções para criar o pen drive de boot.",
+                    "imagem": "/assets/img/windows_instalacao/step1.png"
+                },
+                {
+                    "passo": 2,
+                    "titulo": "Iniciar o Computador com o Pen Drive",
+                    "descricao": "1. Insira o pen drive de boot no computador. \n2. Reinicie o computador e entre no menu de boot (geralmente pressionando F12, F2, ou ESC). \n3. Selecione o pen drive como dispositivo de inicialização.",
+                    "imagem": "/assets/img/windows_instalacao/step2.png"
+                },
+                {
+                    "passo": 3,
+                    "titulo": "Configurar o Idioma e Formato de Teclado",
+                    "descricao": "Na tela de instalação do Windows, escolha o idioma, o formato de hora e moeda e o layout do teclado. Clique em 'Avançar' e depois em 'Instalar agora'.",
+                    "imagem": "/assets/img/windows_instalacao/step3.png"
+                },
+                {
+                    "passo": 4,
+                    "titulo": "Escolher a Versão do Windows",
+                    "descricao": "Se solicitado, selecione a versão do Windows que deseja instalar (Home, Pro, etc.) e clique em 'Avançar'.",
+                    "imagem": "/assets/img/windows_instalacao/step4.png"
+                },
+                {
+                    "passo": 5,
+                    "titulo": "Escolher o Tipo de Instalação",
+                    "descricao": "Escolha entre 'Atualização' para manter arquivos e configurações ou 'Personalizada' para uma instalação limpa. Para uma instalação limpa, selecione o disco onde deseja instalar o Windows e clique em 'Avançar'.",
+                    "imagem": "/assets/img/windows_instalacao/step5.png"
+                },
+                {
+                    "passo": 6,
+                    "titulo": "Aguardar a Instalação",
+                    "descricao": "Aguarde enquanto o Windows é instalado. O computador será reiniciado automaticamente várias vezes durante o processo.",
+                    "imagem": "/assets/img/windows_instalacao/step6.png"
+                },
+                {
+                    "passo": 7,
+                    "titulo": "Configurar o Sistema",
+                    "descricao": "Após a instalação, configure a conta de usuário, idioma, fuso horário e outras preferências. Siga as instruções na tela até chegar à área de trabalho.",
+                    "imagem": "/assets/img/windows_instalacao/step7.png"
+                }
+            ]
+        }
+    ],
+    "Outlook": [
+        {
+            "id": 15,
+            "nome": "Outlook - Adicionar uma Nova Caixa de Correio",
+            "descricao": "Este manual contém as instruções para adicionar uma nova caixa de correio compartilhada no Microsoft Outlook enquanto já está logado com sua conta principal.",
+            "passo_passo": [
+                {
+                    "passo": 1,
+                    "titulo": "Abrir Configurações de Conta",
+                    "descricao": "1. Abra o Outlook. \n2. Clique no menu 'Arquivo' no canto superior esquerdo. \n3. Selecione 'Configurações de Conta' e clique novamente em 'Configurações de Conta' no menu suspenso.",
+                    "imagem": "/assets/img/outlook_caixa_compartilhada/step1.png"
+                },
+                {
+                    "passo": 2,
+                    "titulo": "Selecionar sua Conta Principal",
+                    "descricao": "Na janela 'Configurações de Conta', localize sua conta principal. Clique nela para selecioná-la e depois clique no botão 'Alterar...'.",
+                    "imagem": "/assets/img/outlook_caixa_compartilhada/step2.png"
+                },
+                {
+                    "passo": 3,
+                    "titulo": "Acessar Configurações Avançadas",
+                    "descricao": "Na janela de configurações de sua conta, clique em 'Mais Configurações...'.",
+                    "imagem": "/assets/img/outlook_caixa_compartilhada/step3.png"
+                },
+                {
+                    "passo": 4,
+                    "titulo": "Adicionar a Caixa de Correio",
+                    "descricao": "1. Na aba 'Avançado', clique no botão 'Adicionar...'. \n2. Digite o nome da nova caixa de correio compartilhada que você deseja adicionar (por exemplo, caixa@empresa.com.br). \n3. Clique em 'OK'.",
+                    "imagem": "/assets/img/outlook_caixa_compartilhada/step4.png"
+                },
+                {
+                    "passo": 5,
+                    "titulo": "Salvar e Reiniciar o Outlook",
+                    "descricao": "Clique em 'Aplicar' e depois em 'OK' para salvar as configurações. Feche o Outlook e abra-o novamente para carregar a nova caixa de correio.",
+                    "imagem": "/assets/img/outlook_caixa_compartilhada/step5.png"
+                },
+                {
+                    "passo": 6,
+                    "titulo": "Confirmar a Nova Caixa de Correio",
+                    "descricao": "Ao abrir o Outlook novamente, a nova caixa de correio compartilhada estará visível no painel esquerdo, abaixo da sua conta principal.",
+                    "imagem": "/assets/img/outlook_caixa_compartilhada/step6.png"
+                }
+            ]
+        },
+        {
+            "id": 16,
+            "nome": "Outlook - Como Incluir Assinaturas",
+            "descricao": "Este manual ensina a adicionar ou personalizar assinaturas de e-mail no Microsoft Outlook.",
+            "passo_passo": [
+                {
+                    "passo": 1,
+                    "titulo": "Abrir Configurações de Assinatura",
+                    "descricao": "1. No Outlook, clique em 'Arquivo' no menu superior. \n2. Selecione 'Opções' e, em seguida, clique na aba 'Email'. \n3. Clique no botão 'Assinaturas...'.",
+                    "imagem": "/assets/img/outlook_assinatura/step1.png"
+                },
+                {
+                    "passo": 2,
+                    "titulo": "Criar uma Nova Assinatura",
+                    "descricao": "1. Na janela 'Assinaturas e Papel de Carta', clique em 'Nova'. \n2. Insira um nome para a assinatura (ex.: 'Padrão') e clique em 'OK'.",
+                    "imagem": "/assets/img/outlook_assinatura/step2.png"
+                },
+                {
+                    "passo": 3,
+                    "titulo": "Personalizar a Assinatura",
+                    "descricao": "Digite o texto da sua assinatura no campo disponível. Use as opções de formatação (negrito, itálico, etc.) para personalizar.",
+                    "imagem": "/assets/img/outlook_assinatura/step3.png"
+                },
+                {
+                    "passo": 4,
+                    "titulo": "Definir a Assinatura Padrão",
+                    "descricao": "1. Escolha a conta de e-mail na lista 'Conta de Email'. \n2. Selecione a assinatura criada nos menus suspensos 'Novas mensagens' e 'Respostas/encaminhamentos'.",
+                    "imagem": "/assets/img/outlook_assinatura/step4.png"
+                },
+                {
+                    "passo": 5,
+                    "titulo": "Salvar e Testar",
+                    "descricao": "Clique em 'OK' para salvar as alterações. Abra uma nova mensagem para verificar se a assinatura aparece corretamente.",
+                    "imagem": "/assets/img/outlook_assinatura/step5.png"
+                }
+            ]
+        },
+        {
+            "id": 17,
+            "nome": "Outlook - Compartilhamento de Agenda",
+            "descricao": "Este manual explica como compartilhar sua agenda no Microsoft Outlook com outros usuários.",
+            "passo_passo": [
+                {
+                    "passo": 1,
+                    "titulo": "Abrir o Calendário",
+                    "descricao": "Clique em 'Calendário' no painel inferior esquerdo do Outlook.",
+                    "imagem": "/assets/img/outlook_agenda/step1.png"
+                },
+                {
+                    "passo": 2,
+                    "titulo": "Acessar Configurações de Compartilhamento",
+                    "descricao": "1. Clique em 'Compartilhar Calendário' no menu superior. \n2. Selecione a conta que deseja compartilhar.",
+                    "imagem": "/assets/img/outlook_agenda/step2.png"
+                },
+                {
+                    "passo": 3,
+                    "titulo": "Adicionar Pessoas",
+                    "descricao": "Na janela de compartilhamento, clique em 'Adicionar...'. Digite o nome ou endereço de e-mail da pessoa e clique em 'Adicionar' novamente.",
+                    "imagem": "/assets/img/outlook_agenda/step3.png"
+                },
+                {
+                    "passo": 4,
+                    "titulo": "Definir Permissões",
+                    "descricao": "Escolha o nível de acesso (Ex.: 'Pode exibir somente disponibilidade', 'Pode editar', etc.) e clique em 'OK'.",
+                    "imagem": "/assets/img/outlook_agenda/step4.png"
+                },
+                {
+                    "passo": 5,
+                    "titulo": "Confirmar Compartilhamento",
+                    "descricao": "A pessoa adicionada receberá um convite por e-mail com a opção de aceitar. Confirme o status na seção de permissões.",
+                    "imagem": "/assets/img/outlook_agenda/step5.png"
+                }
+            ]
+        },
+        {
+            "id": 18,
+            "nome": "Outlook - Fazer Backup de seus E-mails (PST)",
+            "descricao": "Este manual orienta como exportar e-mails do Outlook para um arquivo PST para backup.",
+            "passo_passo": [
+                {
+                    "passo": 1,
+                    "titulo": "Abrir Configurações de Exportação",
+                    "descricao": "1. Clique em 'Arquivo' no menu superior. \n2. Selecione 'Abrir e Exportar' e depois clique em 'Importar/Exportar'.",
+                    "imagem": "/assets/img/outlook_backup/step1.png"
+                },
+                {
+                    "passo": 2,
+                    "titulo": "Escolher o Tipo de Exportação",
+                    "descricao": "Na janela de assistente, selecione 'Exportar para um arquivo' e clique em 'Avançar'.",
+                    "imagem": "/assets/img/outlook_backup/step2.png"
+                },
+                {
+                    "passo": 3,
+                    "titulo": "Selecionar o Tipo de Arquivo",
+                    "descricao": "Escolha 'Arquivo de Dados do Outlook (.pst)' e clique em 'Avançar'.",
+                    "imagem": "/assets/img/outlook_backup/step3.png"
+                },
+                {
+                    "passo": 4,
+                    "titulo": "Selecionar as Pastas para Backup",
+                    "descricao": "Selecione a pasta de e-mails que deseja exportar (ou escolha a conta inteira). Marque 'Incluir subpastas' e clique em 'Avançar'.",
+                    "imagem": "/assets/img/outlook_backup/step4.png"
+                },
+                {
+                    "passo": 5,
+                    "titulo": "Definir o Local de Backup",
+                    "descricao": "Escolha o local onde o arquivo PST será salvo. Clique em 'Concluir'.",
+                    "imagem": "/assets/img/outlook_backup/step5.png"
+                },
+                {
+                    "passo": 6,
+                    "titulo": "Proteger com Senha (Opcional)",
+                    "descricao": "Se desejar, insira uma senha para proteger o arquivo PST. Clique em 'OK' para iniciar a exportação.",
+                    "imagem": "/assets/img/outlook_backup/step6.png"
+                }
+            ]
+        }
+    ],
+    "Vpn": [
+        {
+            "id": 12,
+            "nome": "Configurar VPN no Windows",
+            "descricao": "Este manual fornece as instruções para configurar e conectar à VPN CIDADANIA em sistemas Windows.",
+            "passo_passo": [
+                {
+                    "passo": 1,
+                    "titulo": "Abrir Configurações de Rede",
+                    "descricao": "1. Clique no menu Iniciar e selecione 'Configurações' (ícone de engrenagem). \n2. Vá para 'Rede e Internet' e selecione 'VPN' no menu lateral.",
+                    "imagem": "/assets/img/vpn_windows/step1.png"
+                },
+                {
+                    "passo": 2,
+                    "titulo": "Adicionar uma Conexão VPN",
+                    "descricao": "Clique no botão 'Adicionar uma conexão VPN'.",
+                    "imagem": "/assets/img/vpn_windows/step2.png"
+                },
+                {
+                    "passo": 3,
+                    "titulo": "Configurar os Detalhes da VPN",
+                    "descricao": "Preencha os campos: \n- Provedor de VPN: 'Windows (integrado)'. \n- Nome da Conexão: 'VPN CIDADANIA'. \n- Nome ou endereço do servidor: 'vpn.cidadania.gov.br'. \n- Tipo de VPN: 'Automático'. \n- Tipo de Informações de Entrada: 'Nome de usuário e senha'. \nClique em 'Salvar'.",
+                    "imagem": "/assets/img/vpn_windows/step3.png"
+                },
+                {
+                    "passo": 4,
+                    "titulo": "Conectar à VPN",
+                    "descricao": "1. Na lista de conexões VPN, selecione 'VPN CIDADANIA'. \n2. Clique no botão 'Conectar'. \n3. Insira seu nome de usuário e senha quando solicitado.",
+                    "imagem": "/assets/img/vpn_windows/step4.png"
+                },
+                {
+                    "passo": 5,
+                    "titulo": "Confirmar a Conexão",
+                    "descricao": "Após conectado, você verá o status 'Conectado' abaixo da conexão 'VPN CIDADANIA'.",
+                    "imagem": "/assets/img/vpn_windows/step5.png"
+                }
+            ]
+        },
+        {
+            "id": 13,
+            "nome": "Configurar VPN no Linux",
+            "descricao": "Este manual fornece as instruções para configurar e conectar à VPN CIDADANIA em sistemas Linux.",
+            "passo_passo": [
+                {
+                    "passo": 1,
+                    "titulo": "Abrir Configurações de Rede",
+                    "descricao": "No ambiente gráfico, clique no ícone de rede na barra de tarefas e selecione 'Configurações de Rede'.",
+                    "imagem": "/assets/img/vpn_linux/step1.png"
+                },
+                {
+                    "passo": 2,
+                    "titulo": "Adicionar uma Conexão VPN",
+                    "descricao": "1. Na janela de Configurações de Rede, clique no botão '+' para adicionar uma nova conexão. \n2. Selecione 'VPN' e clique em 'Criar'.",
+                    "imagem": "/assets/img/vpn_linux/step2.png"
+                },
+                {
+                    "passo": 3,
+                    "titulo": "Configurar os Detalhes da VPN",
+                    "descricao": "Preencha os campos: \n- Nome da Conexão: 'VPN CIDADANIA'. \n- Nome ou endereço do servidor: 'vpn.cidadania.gov.br'. \n- Tipo: 'Automático'. \n- Nome de usuário e senha: insira suas credenciais.",
+                    "imagem": "/assets/img/vpn_linux/step3.png"
+                },
+                {
+                    "passo": 4,
+                    "titulo": "Salvar e Conectar",
+                    "descricao": "Clique em 'Salvar' para salvar a conexão. Na lista de conexões de rede, selecione 'VPN CIDADANIA' e clique em 'Conectar'.",
+                    "imagem": "/assets/img/vpn_linux/step4.png"
+                },
+                {
+                    "passo": 5,
+                    "titulo": "Confirmar a Conexão",
+                    "descricao": "Verifique o status da conexão na barra de tarefas. Ele deve mostrar que a VPN está ativa.",
+                    "imagem": "/assets/img/vpn_linux/step5.png"
+                }
+            ]
+        },
+        {
+            "id": 14,
+            "nome": "Configurar VPN no macOS",
+            "descricao": "Este manual fornece as instruções para configurar e conectar à VPN CIDADANIA em sistemas macOS.",
+            "passo_passo": [
+                {
+                    "passo": 1,
+                    "titulo": "Abrir Preferências do Sistema",
+                    "descricao": "Clique no ícone da maçã no canto superior esquerdo e selecione 'Preferências do Sistema'. Em seguida, clique em 'Rede'.",
+                    "imagem": "/assets/img/vpn_macos/step1.png"
+                },
+                {
+                    "passo": 2,
+                    "titulo": "Adicionar uma Conexão VPN",
+                    "descricao": "1. Na janela de Rede, clique no botão '+' no canto inferior esquerdo. \n2. Selecione 'Interface: VPN', 'Tipo de VPN: Automático', e insira 'VPN CIDADANIA' no campo 'Nome do Serviço'. \n3. Clique em 'Criar'.",
+                    "imagem": "/assets/img/vpn_macos/step2.png"
+                },
+                {
+                    "passo": 3,
+                    "titulo": "Configurar os Detalhes da VPN",
+                    "descricao": "Na nova conexão VPN, insira: \n- Endereço do Servidor: 'vpn.cidadania.gov.br'. \n- Nome da Conta: seu nome de usuário. \nClique em 'Configurações de Autenticação' e insira sua senha.",
+                    "imagem": "/assets/img/vpn_macos/step3.png"
+                },
+                {
+                    "passo": 4,
+                    "titulo": "Aplicar e Conectar",
+                    "descricao": "Clique em 'Aplicar' para salvar as configurações. Em seguida, clique em 'Conectar' para estabelecer a conexão.",
+                    "imagem": "/assets/img/vpn_macos/step4.png"
+                },
+                {
+                    "passo": 5,
+                    "titulo": "Verificar a Conexão",
+                    "descricao": "Verifique o status da conexão na barra de menus do macOS. O ícone da VPN deve indicar que está conectado.",
+                    "imagem": "/assets/img/vpn_macos/step5.png"
+                }
+            ]
+        }
+    ],
+    "Configurações": [
+        {
+            "id": 3,
+            "nome": "Acesso ao HOD SIAPE",
+            "descricao": "Este manual contém as instruções para acessar o HOD SIAPE por meio do SIAPENET Órgão.",
+            "passo_passo": [
+                {
+                    "passo": 1,
+                    "titulo": "Acessar o SIAPENET",
+                    "descricao": "Acesse o endereço www.siapenet.gov.br utilizando seu certificado digital (token) e realize o login.",
+                    "imagem": "/assets/img/acesso_hod/step1.png"
+                },
+                {
+                    "passo": 2,
+                    "titulo": "Iniciar o download do arquivo HOD",
+                    "descricao": "Após o login, clique no ícone 'Acesso SIAPE'. Isso abrirá uma nova janela e iniciará o download do arquivo 'hodcivws.jsp'. Caso o download não inicie automaticamente, clique novamente no ícone.",
+                    "imagem": "/assets/img/acesso_hod/step2.png"
+                },
+                {
+                    "passo": 3,
+                    "titulo": "Escolher o programa para abrir o arquivo",
+                    "descricao": "Ao acessar o HOD pela primeira vez, escolha o programa para abrir o arquivo. Clique em 'Mais aplicativos', depois em 'Procurar outro aplicativo neste PC', localize a pasta de instalação do Java, acesse a pasta 'bin' e selecione o programa 'javaws'.",
+                    "imagem": "/assets/img/acesso_hod/step3.png"
+                },
+                {
+                    "passo": 4,
+                    "titulo": "Lidar com mensagens do Java",
+                    "descricao": "Caso seja apresentada uma mensagem sobre a versão do Java, clique na opção 'Mais Tarde'. Em seguida, confirme a execução da aplicação clicando em 'Executar'.",
+                    "imagem": "/assets/img/acesso_hod/step4.png"
+                },
+                {
+                    "passo": 5,
+                    "titulo": "Finalizar o acesso",
+                    "descricao": "Após seguir os passos, o Painel de Controle será aberto e você terá acesso ao sistema SIAPE.",
+                    "imagem": "/assets/img/acesso_hod/step5.png"
+                }
+            ]
+        },
+        {
+            "id": 11,
+            "nome": "Ativação do Windows",
+            "descricao": "Este manual contém instruções para ativar o sistema operacional Windows usando uma chave de produto válida.",
+            "passo_passo": [
+                {
+                    "passo": 1,
+                    "titulo": "Abrir as Configurações",
+                    "descricao": "1. Clique no menu Iniciar. \n2. Selecione 'Configurações' (ícone de engrenagem).",
+                    "imagem": "/assets/img/windows_ativacao/step1.png"
+                },
+                {
+                    "passo": 2,
+                    "titulo": "Acessar a Página de Ativação",
+                    "descricao": "Nas configurações, vá para 'Atualização e Segurança' e depois clique em 'Ativação'.",
+                    "imagem": "/assets/img/windows_ativacao/step2.png"
+                },
+                {
+                    "passo": 3,
+                    "titulo": "Inserir a Chave de Produto",
+                    "descricao": "Clique no botão 'Alterar chave do produto'. Digite a chave de produto válida (25 caracteres) e clique em 'Avançar'.",
+                    "imagem": "/assets/img/windows_ativacao/step3.png"
+                },
+                {
+                    "passo": 4,
+                    "titulo": "Concluir a Ativação",
+                    "descricao": "Aguarde enquanto o Windows verifica e ativa a chave do produto. Após a ativação, uma mensagem de confirmação será exibida.",
+                    "imagem": "/assets/img/windows_ativacao/step4.png"
+                },
+                {
+                    "passo": 5,
+                    "titulo": "Verificar o Status de Ativação",
+                    "descricao": "Na página de ativação, confirme que o Windows está ativado. A mensagem 'Windows está ativado' será exibida.",
+                    "imagem": "/assets/img/windows_ativacao/step5.png"
+                }
+            ]
+        }
+    ],
+    "Criando-User": [
+        {
+            "id": 19,
+            "nome": "Criar Usuários no Active Directory",
+            "descricao": "Este manual orienta a equipe de atendimento remoto N1 a criar usuários de rede no Active Directory do Ministério da Cidadania.",
+            "passo_passo": [
+                {
+                    "passo": 19,
+                    "titulo": "Abrir Conexão de Área de Trabalho Remota",
+                    "descricao": "Conecte-se ao IP 10.222.11.65 para acessar o Active Directory.",
+                    "imagem": "/assets/img/ad_criacao_usuario/step1.png"
+                },
+                {
+                    "passo": 2,
+                    "titulo": "Pesquisar Active Directory Users and Computers",
+                    "descricao": "No menu iniciar, busque por 'Active Directory Users and Computers'.",
+                    "imagem": "/assets/img/ad_criacao_usuario/step2.png"
+                },
+                {
+                    "passo": 3,
+                    "titulo": "Verificar Existência do Perfil",
+                    "descricao": "Pesquise pelo nome completo do usuário. Se o perfil já existir ou estiver desativado, não crie um novo. Conceda os acessos necessários.",
+                    "imagem": "/assets/img/ad_criacao_usuario/step3.png"
+                },
+                {
+                    "passo": 4,
+                    "titulo": "Criar Usuário na OU Correta",
+                    "descricao": "Escolha a OU correta (Cidadania, Esporte ou Temporário) e se o usuário é terceirizado ou servidor.",
+                    "imagem": "/assets/img/ad_criacao_usuario/step4.png"
+                },
+                {
+                    "passo": 5,
+                    "titulo": "Inserir Nome e Sobrenome",
+                    "descricao": "Insira o primeiro nome e o sobrenome do usuário. O padrão é 'primeiro-último nome'. Exemplo: Douglas Vieira de Araújo deve ser Douglas.araujo.",
+                    "imagem": "/assets/img/ad_criacao_usuario/step5.png"
+                },
+                {
+                    "passo": 6,
+                    "titulo": "Definir Sufixo e Senha",
+                    "descricao": "Altere o sufixo para o domínio correto e defina a senha padrão: mds@123456 para usuários do MDS ou mesp@123456 para usuários do Esporte.",
+                    "imagem": "/assets/img/ad_criacao_usuario/step6.png"
+                },
+                {
+                    "passo": 7,
+                    "titulo": "Inserir Licença do Office 365",
+                    "descricao": "Após a criação do usuário, insira a licença do Office 365.",
+                    "imagem": "/assets/img/ad_criacao_usuario/step7.png"
+                },
+                {
+                    "passo": 8,
+                    "titulo": "Criar Caixa de Correio",
+                    "descricao": "Crie a caixa de correio para o usuário recém-criado.",
+                    "imagem": "/assets/img/ad_criacao_usuario/step8.png"
+                },
+                {
+                    "passo": 9,
+                    "titulo": "Migrar a Conta",
+                    "descricao": "Realize a migração da conta conforme necessário.",
+                    "imagem": "/assets/img/ad_criacao_usuario/step9.png"
+                }
+            ]
+        },
+        {
+            "id": 20,
+            "nome": "Criar Caixa de Correio do Usuário no Exchange",
+            "descricao": "Este manual orienta a equipe de atendimento remoto N1 a criar caixas de correio para os usuários do MDS.",
+            "passo_passo": [
+                {
+                    "passo": 1,
+                    "titulo": "Acessar o Centro de Administração do Exchange",
+                    "descricao": "Entre no Centro de Administração do Exchange através do seguinte link: [Centro de Administração do Exchange](https://webmail.mds.gov.br/owa/auth/logon.aspx?replaceCurrent=1&url=https%3a%2f%2fwebmail.mds.gov.br%2fecp%2f).",
+                    "imagem": "/assets/img/exchange_criacao_caixa/step1.png"
+                },
+                {
+                    "passo": 2,
+                    "titulo": "Navegar até Destinatários",
+                    "descricao": "No painel esquerdo, clique em 'Destinatários' e depois em 'Caixa de Correio'.",
+                    "imagem": "/assets/img/exchange_criacao_caixa/step2.png"
+                },
+                {
+                    "passo": 3,
+                    "titulo": "Iniciar Criação da Caixa de Correio",
+                    "descricao": "Clique no botão '+' e selecione 'Caixa de Correio do Usuário'.",
+                    "imagem": "/assets/img/exchange_criacao_caixa/step3.png"
+                },
+                {
+                    "passo": 4,
+                    "titulo": "Procurar Usuário Recém-Criado",
+                    "descricao": "Clique em 'Procurar' e busque pelo usuário recém-criado no Active Directory.",
+                    "imagem": "/assets/img/exchange_criacao_caixa/step4.png"
+                },
+                {
+                    "passo": 5,
+                    "titulo": "Finalizar Criação da Caixa de Correio",
+                    "descricao": "Após encontrar o usuário, siga as instruções para concluir a criação da caixa de correio.",
+                    "imagem": "/assets/img/exchange_criacao_caixa/step5.png"
+                }
+            ]
+        },
+        {
+            "id": 21,
+            "nome": "Configurar Caixa de Correio do Usuário no Exchange",
+            "descricao": "Este manual orienta a equipe de atendimento remoto N1 a configurar as opções da caixa de correio para os usuários do MDS.",
+            "passo_passo": [
+                {
+                    "passo": 1,
+                    "titulo": "Acessar o Centro de Administração do Exchange",
+                    "descricao": "Entre no Centro de Administração do Exchange através do link fornecido: [Centro de Administração do Exchange](https://webmail.mds.gov.br/owa/auth/logon.aspx?replaceCurrent=1&url=https%3a%2f%2fwebmail.mds.gov.br%2fecp%2f).",
+                    "imagem": "/assets/img/exchange_configuracao_caixa/step1.png"
+                },
+                {
+                    "passo": 2,
+                    "titulo": "Selecionar Destinatários",
+                    "descricao": "No painel esquerdo, clique em 'Destinatários' e depois em 'Caixa de Correio'.",
+                    "imagem": "/assets/img/exchange_configuracao_caixa/step2.png"
+                },
+                {
+                    "passo": 3,
+                    "titulo": "Escolher o Usuário",
+                    "descricao": "Localize e selecione a caixa de correio do usuário que você deseja configurar.",
+                    "imagem": "/assets/img/exchange_configuracao_caixa/step3.png"
+                },
+                {
+                    "passo": 4,
+                    "titulo": "Configurar Opções da Caixa de Correio",
+                    "descricao": "Clique em 'Editar' para alterar as configurações da caixa de correio, como delegação, tamanho máximo e opções de recuperação.",
+                    "imagem": "/assets/img/exchange_configuracao_caixa/step4.png"
+                },
+                {
+                    "passo": 5,
+                    "titulo": "Adicionar Delegados (Opcional)",
+                    "descricao": "Se necessário, adicione usuários como delegados para gerenciar a caixa de correio do usuário.",
+                    "imagem": "/assets/img/exchange_configuracao_caixa/step5.png"
+                },
+                {
+                    "passo": 6,
+                    "titulo": "Salvar Configurações",
+                    "descricao": "Clique em 'Salvar' para aplicar todas as alterações feitas nas configurações da caixa de correio.",
+                    "imagem": "/assets/img/exchange_configuracao_caixa/step6.png"
+                }
+            ]
+        },
+        {
+            "id": 22,
+            "nome": "Configurar Permissões de Caixa de Correio do Usuário no Exchange",
+            "descricao": "Este manual orienta a equipe de atendimento remoto N1 a configurar as permissões de acesso da caixa de correio para os usuários do MDS.",
+            "passo_passo": [
+                {
+                    "passo": 1,
+                    "titulo": "Acessar o Centro de Administração do Exchange",
+                    "descricao": "Entre no Centro de Administração do Exchange através do link: [Centro de Administração do Exchange](https://webmail.mds.gov.br/owa/auth/logon.aspx?replaceCurrent=1&url=https%3a%2f%2fwebmail.mds.gov.br%2fecp%2f).",
+                    "imagem": "/assets/img/exchange_permissoes_caixa/step1.png"
+                },
+                {
+                    "passo": 2,
+                    "titulo": "Selecionar a Caixa de Correio",
+                    "descricao": "No painel esquerdo, clique em 'Destinatários' e depois em 'Caixa de Correio'. Localize a caixa de correio do usuário que você deseja configurar.",
+                    "imagem": "/assets/img/exchange_permissoes_caixa/step2.png"
+                },
+                {
+                    "passo": 3,
+                    "titulo": "Editar Permissões",
+                    "descricao": "Clique na caixa de correio e selecione 'Editar'. Isso permitirá que você configure as permissões de acesso.",
+                    "imagem": "/assets/img/exchange_permissoes_caixa/step3.png"
+                },
+                {
+                    "passo": 4,
+                    "titulo": "Adicionar Delegados",
+                    "descricao": "Na aba de permissões, clique em 'Adicionar' para incluir usuários que terão acesso como delegados da caixa de correio.",
+                    "imagem": "/assets/img/exchange_permissoes_caixa/step4.png"
+                },
+                {
+                    "passo": 5,
+                    "titulo": "Definir Níveis de Permissão",
+                    "descricao": "Selecione os níveis de permissão para os delegados, como acessar, ler e enviar e-mails em nome do proprietário da caixa.",
+                    "imagem": "/assets/img/exchange_permissoes_caixa/step5.png"
+                },
+                {
+                    "passo": 6,
+                    "titulo": "Salvar Configurações",
+                    "descricao": "Depois de definir as permissões, clique em 'Salvar' para aplicar as alterações.",
+                    "imagem": "/assets/img/exchange_permissoes_caixa/step6.png"
+                }
+            ]
+        },
+        {
+            "id": 23,
+            "nome": "Criar e Configurar Caixa de Correio do Usuário no Exchange",
+            "descricao": "Este manual orienta a equipe de atendimento remoto N1 a criar e configurar as caixas de correio dos usuários no MDS.",
+            "passo_passo": [
+                {
+                    "passo": 1,
+                    "titulo": "Acessar o Centro de Administração do Exchange",
+                    "descricao": "Entre no Centro de Administração do Exchange através do link: [Centro de Administração do Exchange](https://webmail.mds.gov.br/owa/auth/logon.aspx?replaceCurrent=1&url=https%3a%2f%2fwebmail.mds.gov.br%2fecp%2f).",
+                    "imagem": "/assets/img/exchange_criar_configurar_caixa/step1.png"
+                },
+                {
+                    "passo": 2,
+                    "titulo": "Ir para Destinatários",
+                    "descricao": "No painel esquerdo, clique em 'Destinatários' e depois em 'Caixa de Correio'.",
+                    "imagem": "/assets/img/exchange_criar_configurar_caixa/step2.png"
+                },
+                {
+                    "passo": 3,
+                    "titulo": "Criar Nova Caixa de Correio",
+                    "descricao": "Clique no botão '+' e escolha 'Caixa de Correio do Usuário' para iniciar o processo de criação.",
+                    "imagem": "/assets/img/exchange_criar_configurar_caixa/step3.png"
+                },
+                {
+                    "passo": 4,
+                    "titulo": "Selecionar Usuário",
+                    "descricao": "Busque e selecione o usuário para o qual deseja criar a caixa de correio.",
+                    "imagem": "/assets/img/exchange_criar_configurar_caixa/step4.png"
+                },
+                {
+                    "passo": 5,
+                    "titulo": "Configurar Opções da Caixa de Correio",
+                    "descricao": "Após criar a caixa, clique em 'Editar' para ajustar as configurações, como recuperação, limites de armazenamento, e delegados.",
+                    "imagem": "/assets/img/exchange_criar_configurar_caixa/step5.png"
+                },
+                {
+                    "passo": 6,
+                    "titulo": "Salvar as Configurações",
+                    "descricao": "Clique em 'Salvar' para aplicar todas as alterações feitas na configuração da caixa de correio.",
+                    "imagem": "/assets/img/exchange_criar_configurar_caixa/step6.png"
+                }
+            ]
+        },
+        {
+            "id": 24,
+            "nome": "Desbloquear Senha de Usuários no Active Directory",
+            "descricao": "Este procedimento orienta a equipe de atendimento remoto N1 a desbloquear a senha dos usuários no AD - MDS.",
+            "passo_passo": [
+                {
+                    "passo": 1,
+                    "titulo": "Abrir Conexão de Área de Trabalho Remota",
+                    "descricao": "Conecte-se ao servidor usando a seguinte IP: 10.222.11.65.",
+                    "imagem": "/assets/img/ad_desbloquear_senha/step1.png"
+                },
+                {
+                    "passo": 2,
+                    "titulo": "Pesquisar Active Directory Users and Computers",
+                    "descricao": "No menu iniciar, pesquise por 'Active Directory Users and Computers'.",
+                    "imagem": "/assets/img/ad_desbloquear_senha/step2.png"
+                },
+                {
+                    "passo": 3,
+                    "titulo": "Localizar o Usuário",
+                    "descricao": "Pesquise pelo nome do usuário que precisa ter a senha desbloqueada.",
+                    "imagem": "/assets/img/ad_desbloquear_senha/step3.png"
+                },
+                {
+                    "passo": 4,
+                    "titulo": "Desbloquear Conta",
+                    "descricao": "Dê um duplo clique no nome do usuário. Na aba 'Account', marque a caixa 'Unlock account'.",
+                    "imagem": "/assets/img/ad_desbloquear_senha/step4.png"
+                }
+            ]
+        },
+        {
+            "id": 25,
+            "nome": "Resetar Senha de Usuários no Active Directory",
+            "descricao": "Este procedimento orienta a equipe de atendimento remoto N1 a resetar a senha dos usuários no AD - MDS.",
+            "passo_passo": [
+                {
+                    "passo": 1,
+                    "titulo": "Abrir Conexão de Área de Trabalho Remota",
+                    "descricao": "Conecte-se ao servidor usando a seguinte IP: 10.222.11.65.",
+                    "imagem": "/assets/img/ad_resetar_senha/step1.png"
+                },
+                {
+                    "passo": 2,
+                    "titulo": "Pesquisar Active Directory Users and Computers",
+                    "descricao": "No menu iniciar, pesquise por 'Active Directory Users and Computers'.",
+                    "imagem": "/assets/img/ad_resetar_senha/step2.png"
+                },
+                {
+                    "passo": 3,
+                    "titulo": "Localizar o Usuário",
+                    "descricao": "Pesquise pelo nome do usuário cuja senha precisa ser resetada.",
+                    "imagem": "/assets/img/ad_resetar_senha/step3.png"
+                },
+                {
+                    "passo": 4,
+                    "titulo": "Resetar Senha",
+                    "descricao": "Clique com o botão direito do mouse no nome do usuário e selecione 'RESET PASSWORD'.",
+                    "imagem": "/assets/img/ad_resetar_senha/step4.png"
+                },
+                {
+                    "passo": 5,
+                    "titulo": "Inserir Senha Padrão",
+                    "descricao": "Insira a senha padrão: 'mds@123456' para usuários do MDS ou 'mesp@123456' para usuários do esporte. A nova senha deve começar com letra maiúscula, conter 10 caracteres, números e caracteres especiais, e não pode conter o nome do usuário.",
+                    "imagem": "/assets/img/ad_resetar_senha/step5.png"
+                }
+            ]
+        },
+        {
+            "id": 26,
+            "nome": "Configurar Impressora/Scanner",
+            "descricao": "Este documento tem o objetivo de explicar como fazer a configuração de impressoras e scanners nas máquinas dos usuários do contrato MDS.",
+            "passo_passo": [
+                {
+                    "passo": 1,
+                    "titulo": "Pesquisar Conexão de Área de Trabalho Remota",
+                    "descricao": "Em seu computador, pesquise por 'conexão de Área de trabalho remota' e aperte Enter.",
+                    "imagem": "/assets/img/configurar_impressora/step1.png"
+                },
+                {
+                    "passo": 2,
+                    "titulo": "Conectar ao Computador",
+                    "descricao": "Preencha com IP: 10.222.11.65 e clique em conectar.",
+                    "imagem": "/assets/img/configurar_impressora/step2.png"
+                },
+                {
+                    "passo": 3,
+                    "titulo": "Tela de Segurança do Windows",
+                    "descricao": "Digite o domínio MDS\\ seguido de seu usuário e senha e clique em 'OK' para acessar a Máquina virtual.",
+                    "imagem": "/assets/img/configurar_impressora/step3.png"
+                },
+                {
+                    "passo": 4,
+                    "titulo": "Selecionar REMOTECONTROL",
+                    "descricao": "Clique na opção que aparecerá na área de trabalho 'REMOTECONTROL'.",
+                    "imagem": "/assets/img/configurar_impressora/step4.png"
+                },
+                {
+                    "passo": 5,
+                    "titulo": "Abrir a Conexão Remota",
+                    "descricao": "A tela irá abrir e você terá acesso ao computador do usuário.",
+                    "imagem": "/assets/img/configurar_impressora/step5.png"
+                },
+                {
+                    "passo": 6,
+                    "titulo": "Conectar à Máquina do Usuário",
+                    "descricao": "Clique em 'FILE', depois em 'CONNECT', insira o IP da máquina do usuário e clique em 'OK'.",
+                    "imagem": "/assets/img/configurar_impressora/step6.png"
+                },
+                {
+                    "passo": 7,
+                    "titulo": "Aceitar Conexão Remota",
+                    "descricao": "Quando o usuário aceitar a conexão remota, você terá acesso ao computador dele.",
+                    "imagem": "/assets/img/configurar_impressora/step7.png"
+                },
+                {
+                    "passo": 8,
+                    "titulo": "Pesquisar Impressoras",
+                    "descricao": "No computador do usuário, clique na opção 'PESQUISAR' onde tem a lupa.",
+                    "imagem": "/assets/img/configurar_impressora/step8.png"
+                },
+                {
+                    "passo": 9,
+                    "titulo": "Inserir o Comando",
+                    "descricao": "Cole o comando '\\wiimppd001.mds.net' na aba de pesquisa.",
+                    "imagem": "/assets/img/configurar_impressora/step9.png"
+                },
+                {
+                    "passo": 10,
+                    "titulo": "Selecionar Impressora",
+                    "descricao": "Clique no nome da impressora que o usuário informou e clique com o botão direito em 'CONECTAR...'.",
+                    "imagem": "/assets/img/configurar_impressora/step10.png"
+                },
+                {
+                    "passo": 11,
+                    "titulo": "Instalar Driver",
+                    "descricao": "Clique em 'INSTALAR DRIVER' para concluir a instalação da impressora.",
+                    "imagem": "/assets/img/configurar_impressora/step11.png"
+                },
+                {
+                    "passo": 12,
+                    "titulo": "Abrir Painel de Controle",
+                    "descricao": "Pesquise 'PAINEL DE CONTROLE' na lupa de pesquisa.",
+                    "imagem": "/assets/img/configurar_impressora/step12.png"
+                },
+                {
+                    "passo": 13,
+                    "titulo": "Exibir Impressoras e Dispositivos",
+                    "descricao": "Clique na opção 'EXIBIR IMPRESSORAS E DISPOSITIVOS'.",
+                    "imagem": "/assets/img/configurar_impressora/step13.png"
+                },
+                {
+                    "passo": 14,
+                    "titulo": "Definir Impressora Padrão",
+                    "descricao": "Clique com o botão direito na impressora conectada e selecione 'DEFINIR COMO IMPRESSORA PADRÃO'.",
+                    "imagem": "/assets/img/configurar_impressora/step14.png"
+                },
+                {
+                    "passo": 15,
+                    "titulo": "Verificar Impressora Padrão",
+                    "descricao": "Quando a impressora tiver o símbolo do 'certo verde', ela estará como impressora padrão.",
+                    "imagem": "/assets/img/configurar_impressora/step15.png"
+                },
+                {
+                    "passo": 16,
+                    "titulo": "Abrir Word",
+                    "descricao": "Abra o aplicativo do WORD e clique em 'DOCUMENTO EM BRANCO'.",
+                    "imagem": "/assets/img/configurar_impressora/step16.png"
+                },
+                {
+                    "passo": 17,
+                    "titulo": "Criar Página de Teste",
+                    "descricao": "Escreva 'TESTE' na página em branco.",
+                    "imagem": "/assets/img/configurar_impressora/step17.png"
+                },
+                {
+                    "passo": 18,
+                    "titulo": "Imprimir Página de Teste",
+                    "descricao": "Clique em 'CTRL + P' para abrir a janela de impressão.",
+                    "imagem": "/assets/img/configurar_impressora/step18.png"
+                },
+                {
+                    "passo": 19,
+                    "titulo": "Selecionar Impressora",
+                    "descricao": "Verifique se a impressora correta está selecionada na opção 'DESTINO'.",
+                    "imagem": "/assets/img/configurar_impressora/step19.png"
+                },
+                {
+                    "passo": 20,
+                    "titulo": "Imprimir",
+                    "descricao": "Clique em 'IMPRIMIR' e verifique com o usuário se a página 'teste' foi impressa.",
+                    "imagem": "/assets/img/configurar_impressora/step20.png"
+                }
+            ]
+        },
+        {
+            "id": 27,
+            "nome": "Desativar Usuário no AD e Exchange",
+            "descricao": "Este documento orienta a equipe de suporte na desativação de usuários do Active Directory e Exchange.",
+            "passo_passo": [
+                {
+                    "passo": 1,
+                    "titulo": "Localizar o Usuário no AD",
+                    "descricao": "Abra o Active Directory e localize o usuário descrito na solicitação.",
+                    "imagem": "/assets/img/desativar_usuario/step1.png"
+                },
+                {
+                    "passo": 2,
+                    "titulo": "Desabilitar Conta",
+                    "descricao": "Clique com o botão direito do mouse sobre o nome do usuário e selecione 'DESABILITAR CONTA'.",
+                    "imagem": "/assets/img/desativar_usuario/step2.png"
+                },
+                {
+                    "passo": 3,
+                    "titulo": "Mover Usuário Desabilitado",
+                    "descricao": "Clique com o botão direito no nome do usuário desabilitado e selecione 'Mover'.",
+                    "imagem": "/assets/img/desativar_usuario/step3.png"
+                },
+                {
+                    "passo": 4,
+                    "titulo": "Selecionar a OU Desativados",
+                    "descricao": "Na tela que aparecer, selecione 'DESATIVADOS', vá na pasta 'USUÁRIOS' e clique em OK.",
+                    "imagem": "/assets/img/desativar_usuario/step4.png"
+                },
+                {
+                    "passo": 5,
+                    "titulo": "Ocultar Caixa de Correio no Exchange",
+                    "descricao": "No Exchange, não é possível desativar caixas de correio, apenas ocultá-las do catálogo de endereços.",
+                    "imagem": "/assets/img/desativar_usuario/step5.png"
+                },
+                {
+                    "passo": 6,
+                    "titulo": "Acessar o Centro de Administração do Exchange",
+                    "descricao": "Abra o Centro de Administração do Exchange, clique em 'destinatários', depois na aba 'caixas de correio' e pesquise o usuário.",
+                    "imagem": "/assets/img/desativar_usuario/step6.png"
+                },
+                {
+                    "passo": 7,
+                    "titulo": "Ocultar das Listas de Endereços",
+                    "descricao": "Dê um duplo clique no nome do usuário, marque a opção 'Ocultar das listas de endereços' e clique em 'Salvar'.",
+                    "imagem": "/assets/img/desativar_usuario/step7.png"
+                }
+            ]
+        }
+    ]
+}
