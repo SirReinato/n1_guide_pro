@@ -23,12 +23,29 @@ export const theme = {
         titulos: "Aldrich",
         paragrafos: "Almarai",
     },
+    fontSize: {
+        titulos: {
+            gg: "3rem",
+            mm: "2.5rem",
+            pp: "2.2rem",
+        },
+        titulosSecundarios: {
+            gg: "2rem",
+            mm: "1.8rem",
+            pp: "1.6rem",
+        },
+        paragrafos: {
+            gg: "1.5rem",
+            mm: "1.125rem",
+            pp: "1rem",
+        },
+    },
 };
 
 // Titulos e paragrafos
 
 export const TitulosPrincipaisStl = styled.h1`
-    font-size: 3rem;
+    font-size: ${theme.fontSize.titulos.gg};
     font-family: ${theme.fontsFamily.titulos};
     font-weight: 400;
     font-style: normal;
@@ -48,7 +65,7 @@ export const TitulosPrincipaisStl = styled.h1`
     }
 `;
 export const TitulosSecundariosStl = styled.h2`
-    font-size: 2rem;
+    font-size: ${theme.fontSize.titulosSecundarios.gg};
     font-family: ${theme.fontsFamily.titulos};
     font-weight: 400;
     text-align: ${(props) => (props.$primary ? "center" : "start")};
@@ -70,7 +87,10 @@ export const TitulosSecundariosStl = styled.h2`
     }
 `;
 export const ParagrafosStl = styled.p`
-    font-size: 1.5rem;
+    font-size: ${(props) =>
+        props.$gg
+            ? theme.fontSize.paragrafos.gg
+            : theme.fontSize.paragrafos.mm};
     font-family: ${theme.fontsFamily.paragrafos};
     font-weight: 400;
     font-style: normal;
