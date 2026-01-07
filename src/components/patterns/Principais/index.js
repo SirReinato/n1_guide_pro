@@ -27,7 +27,7 @@ const PrincipaisConteinerStl = styled.div`
     padding: 16px 12%;
     flex-direction: column;
     gap: 32px;
-    background: linear-gradient(to right, #a7d4eb, #f5f7f9);
+    background: linear-gradient(to right, #a7d4eb, #8daccaff);
     @media (min-width: 1401px) {
         padding: 64px 16%;
     }

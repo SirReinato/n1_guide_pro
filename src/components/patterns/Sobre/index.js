@@ -29,7 +29,7 @@ const ConteinerSobreStl = styled.div`
     justify-content: space-between;
     align-items: center;
     padding: 32px 12%;
-    background: linear-gradient(to right, #fefaf4, #e3edf4, #bad5e5, #9fc8e0);
+    background: linear-gradient(to right, #8299aaff, #9cbdcfff);
     @media (min-width: 1401px) {
         padding: 16px 16%;
         .imgSobre {
