@@ -70,7 +70,7 @@ export const TitulosSecundariosStl = styled.h2`
     }
 `;
 export const ParagrafosStl = styled.p`
-    font-size: 1.125rem;
+    font-size: 1.5rem;
     font-family: ${theme.fontsFamily.paragrafos};
     font-weight: 400;
     font-style: normal;

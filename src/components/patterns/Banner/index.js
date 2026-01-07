@@ -9,10 +9,10 @@ export default function Banner() {
     return (
         <ConteinerBannerStl>
             <div className="textBanner">
-                <TitulosPrincipaisStl $primary>
+                <TitulosPrincipaisStl>
                     N1 GuidePro: Simplificando o Suporte Técnico
                 </TitulosPrincipaisStl>
-                <ParagrafosStl>
+                <ParagrafosStl $primary>
                     Acesse tudo o que sua equipe precisa para realizar
                     instalações, configurações e atendimentos com precisão e
                     rapidez.
@@ -33,8 +33,8 @@ const ConteinerBannerStl = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border: 2px solid ${theme.colors.azulMaisClaro.escuro};
-    background: ${theme.colors.azul.claro};
+    background: ${(props) =>
+        props.$primary ? theme.colors.azul.claro : theme.colors.azul.escuro};
     .textBanner {
         display: flex;
         flex-direction: column;
