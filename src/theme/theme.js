@@ -32,8 +32,8 @@ export const TitulosPrincipaisStl = styled.h1`
     font-family: ${theme.fontsFamily.titulos};
     font-weight: 400;
     font-style: normal;
-    /* color: ${theme.colors.azul.escuro}; */
-    color: ${theme.colors.clara.claro};
+    color: ${(props) =>
+        props.$primary ? theme.colors.azul.escuro : theme.colors.clara.claro};
     @media (min-width: 1401px) {
     }
     @media (min-width: 768px) and (max-width: 1200px) {

@@ -1,14 +1,18 @@
-import { ParagrafosStl, TitulosPrincipaisStl } from "../../../theme/theme";
+import {
+    ParagrafosStl,
+    theme,
+    TitulosPrincipaisStl,
+} from "../../../theme/theme";
 import styled from "styled-components";
 
 export default function Banner() {
     return (
         <ConteinerBannerStl>
             <div className="textBanner">
-                <TitulosPrincipaisStl>
+                <TitulosPrincipaisStl $primary>
                     N1 GuidePro: Simplificando o Suporte Técnico
                 </TitulosPrincipaisStl>
-                <ParagrafosStl $primary>
+                <ParagrafosStl>
                     Acesse tudo o que sua equipe precisa para realizar
                     instalações, configurações e atendimentos com precisão e
                     rapidez.
@@ -29,6 +33,8 @@ const ConteinerBannerStl = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border: 2px solid ${theme.colors.azulMaisClaro.escuro};
+    background: ${theme.colors.azul.claro};
     .textBanner {
         display: flex;
         flex-direction: column;
