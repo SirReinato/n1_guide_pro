@@ -94,7 +94,7 @@ export const ParagrafosStl = styled.p`
     font-family: ${theme.fontsFamily.paragrafos};
     font-weight: 400;
     font-style: normal;
-    line-height: 22px;
+    line-height: 28px;
     color: ${(props) =>
         props.$primary
             ? `${theme.colors.azulMaisClaro.medio}`

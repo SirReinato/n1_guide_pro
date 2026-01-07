@@ -6,8 +6,10 @@ export default function CardManuais({ nome, descricao, path }) {
     return (
         <CardManuaisStl>
             <Link href={`/posts/${path}`}>
-                <TitulosSecundariosStl>{nome}</TitulosSecundariosStl>
-                <ParagrafosStl>{descricao}</ParagrafosStl>
+                <AjustesCard>
+                    <TitulosSecundariosStl>{nome}</TitulosSecundariosStl>
+                    <ParagrafosStl>{descricao}</ParagrafosStl>
+                </AjustesCard>
             </Link>
         </CardManuaisStl>
     );
@@ -19,7 +21,6 @@ const CardManuaisStl = styled.article`
     display: flex;
     flex-direction: column;
     padding: 8px;
-    gap: 8px;
     border-radius: 8px;
     background: ${theme.colors.azulMaisClaro.claro};
     box-shadow: 0 4px 8px rgba(155, 148, 148, 0.1),
@@ -42,4 +43,10 @@ const CardManuaisStl = styled.article`
     @media (max-width: 480px) {
         width: 100%;
     }
+`;
+
+const AjustesCard = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 `;

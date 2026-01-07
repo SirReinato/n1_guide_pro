@@ -7,7 +7,9 @@ export default function PassoAPasso({ titulo, paragrafo, passo, img }) {
             <SubTituloPassoStl>
                 {passo} - {titulo}
             </SubTituloPassoStl>
-            <ParagrafosStl $primary>{paragrafo}</ParagrafosStl>
+            <ParagrafosStl $primary $gg>
+                {paragrafo}
+            </ParagrafosStl>
             <img className="passoImg" src={img} alt={titulo} />
         </ConteinerPassoStl>
     );
@@ -18,6 +20,7 @@ const ConteinerPassoStl = styled.div`
     display: flex;
     align-items: start;
     flex-direction: column;
+    gap: 16px;
     padding: 16px 8px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
