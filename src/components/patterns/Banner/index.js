@@ -4,18 +4,24 @@ import {
     TitulosPrincipaisStl,
 } from "../../../theme/theme";
 import styled from "styled-components";
+import { HelpCircle } from "react-feather";
 
 export default function Banner() {
     return (
         <ConteinerBannerStl>
             <div className="textBanner">
+                <CentralSuporteStl>
+                    <HelpCircle size={18} style={{ marginRight: "8px" }} />
+                    Central de Suporte N1 - Guia Interno
+                </CentralSuporteStl>
+                <TitulosPrincipaisStl>N1 GuidePro</TitulosPrincipaisStl>
                 <TitulosPrincipaisStl>
-                    N1 GuidePro: Simplificando o Suporte Técnico
+                    Simplificando o Suporte Técnico
                 </TitulosPrincipaisStl>
                 <ParagrafosStl $primary>
-                    Acesse tudo o que sua equipe precisa para realizar
-                    instalações, configurações e atendimentos com precisão e
-                    rapidez.
+                    Acesse manuais práticos, flucos de atendimetno e
+                    procedimetnos padronizados para o dia a dia do suporte
+                    técnico.
                 </ParagrafosStl>
             </div>
             <img
@@ -64,4 +70,15 @@ const ConteinerBannerStl = styled.div`
         .ImaBanner {
         }
     }
+`;
+
+const CentralSuporteStl = styled.span`
+    font-size: ${theme.fontSize.paragrafos.mm};
+    font-family: ${theme.fontsFamily.paragrafos};
+    color: ${theme.colors.azul.escuro};
+    background: ${theme.colors.azulMaisClaro.claro};
+    padding: 8px 16px;
+    font-weight: bold;
+    border-radius: 16px;
+    width: fit-content;
 `;
