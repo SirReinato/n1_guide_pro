@@ -7,10 +7,10 @@ export default function PassoAPasso({ titulo, paragrafo, passo, img }) {
             <SubTituloPassoStl>
                 {passo} - {titulo}
             </SubTituloPassoStl>
-            <ParagrafosStl $primary $gg>
+            <DescricaoPassoStl $primary $gg>
                 {paragrafo}
-            </ParagrafosStl>
-            <img className="passoImg" src={img} alt={titulo} />
+            </DescricaoPassoStl>
+            {img?.trim() && <img className="passoImg" src={img} alt={titulo} />}
         </ConteinerPassoStl>
     );
 }
@@ -27,7 +27,6 @@ const ConteinerPassoStl = styled.div`
     .passoImg {
         max-width: 100%;
         padding: 8px 0;
-        /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */
     }
 `;
 
@@ -37,4 +36,9 @@ const SubTituloPassoStl = styled.h3`
     margin-bottom: 12px;
     font-family: ${theme.fontsFamily.titulos};
     color: ${theme.colors.clara.escuro};
+`;
+
+const DescricaoPassoStl = styled(ParagrafosStl)`
+    white-space: pre-line;
+    line-height: 32px;
 `;
