@@ -1,3 +1,2 @@
-const { default: HomeScreen } = require("../src/screens/HomeScreen");
-
+import HomeScreen from "../src/screens/HomeScreen";
 export default HomeScreen;

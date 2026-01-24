@@ -1,36 +1,31 @@
 import instalacoes from "../../instalacao.json";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
+import styled from "styled-components";
 import {
     TitulosPrincipaisStl,
     TitulosSecundariosStl,
     theme,
 } from "../../src/theme/theme";
 import Banner from "../../src/components/patterns/Banner";
-import styled from "styled-components";
 import PassoAPasso from "../../src/components/passo_a_passo";
 
-const todosOsItens = [
-    ...instalacoes.Instalacões,
-    ...instalacoes.Outlook,
-    ...instalacoes.Vpn,
-    ...instalacoes.Configurações,
-    ...instalacoes["Criando-User"],
-];
+const todosOsItens = Object.values(instalacoes).flat();
+
 export async function getStaticPaths() {
-    const paths = todosOsItens.map((dados) => {
-        return { params: { id: `${dados.id}` } };
-    });
+    const paths = todosOsItens.map((item) => ({
+        params: { id: String(item.id) },
+    }));
+
     return {
-        paths: paths,
+        paths,
         fallback: false,
     };
 }
 
 export async function getStaticProps({ params }) {
-    const id = parseInt(params.id);
+    const id = Number(params.id);
 
-    const post = todosOsItens.find((postAtual) => postAtual.id === id);
+    const post = todosOsItens.find((item) => item.id === id);
 
     if (!post) {
         return { notFound: true };
@@ -38,7 +33,6 @@ export async function getStaticProps({ params }) {
 
     return {
         props: {
-            id: post.id,
             nome: post.nome,
             descricao: post.descricao,
             passo_a_passo: post.passo_passo,
@@ -47,34 +41,30 @@ export async function getStaticProps({ params }) {
 }
 
 export default function Post({ nome, descricao, passo_a_passo }) {
-    const router = useRouter();
-    if (router.isFallback) {
-        return "Essa página não existe";
-    }
-
     return (
         <>
             <ConteinerPostStl>
                 <TitulosPrincipaisStl>{nome}</TitulosPrincipaisStl>
+
                 <TitulosSecundariosStl $primary>
                     {descricao}
                 </TitulosSecundariosStl>
 
-                {passo_a_passo.map((dados) => {
-                    return (
-                        <PassoAPasso
-                            paragrafo={dados.descricao}
-                            titulo={dados.titulo}
-                            passo={dados.passo}
-                            img={dados.imagem ? dados.imagem : null}
-                            key={dados.passo + 1}
-                        />
-                    );
-                })}
-                <Link href={"/"}>
+                {passo_a_passo.map((dados) => (
+                    <PassoAPasso
+                        key={`${dados.passo}-${dados.titulo}`}
+                        paragrafo={dados.descricao}
+                        titulo={dados.titulo}
+                        passo={dados.passo}
+                        img={dados.imagem || null}
+                    />
+                ))}
+
+                <Link href="/">
                     <BtnVoltarSrl>Voltar para a página inicial</BtnVoltarSrl>
                 </Link>
             </ConteinerPostStl>
+
             <Banner />
         </>
     );

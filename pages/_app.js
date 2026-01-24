@@ -8,8 +8,8 @@ import Footer from "../src/components/patterns/Footer";
 function MyApp({ Component, pageProps }) {
     return (
         <>
+            <GlobalStyle />
             <ConteinerGeral>
-                <GlobalStyle />
                 <Header />
                 <Component {...pageProps} />
                 <Footer />
