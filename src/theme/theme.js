@@ -11,6 +11,7 @@ export const theme = {
             escuro: "#448CB6",
             medio: "#6CA4C5",
             claro: "#9AC3DB",
+            muitoClaro: "#b3d4e7ff",
         },
         clara: {
             escuro: "#DCC3A8",

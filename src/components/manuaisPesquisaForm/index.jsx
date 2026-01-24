@@ -38,4 +38,9 @@ const ButtonManuaisPesquisaFormStl = styled.button`
     color: ${theme.colors.clara.claro};
     background: ${theme.colors.azulMaisClaro.escuro};
     border-radius: 0 8px 8px 0;
+    cursor: pointer;
+    &:hover {
+        background: ${theme.colors.clara.bgGeral};
+        color: ${theme.colors.azulMaisClaro.claro};
+    }
 `;
