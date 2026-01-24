@@ -5,6 +5,7 @@ import {
 } from "../../../theme/theme";
 import styled from "styled-components";
 import { HelpCircle } from "react-feather";
+import ManuaisPesquisaForm from "../../manuaisPesquisaForm";
 
 export default function Banner() {
     return (
@@ -25,6 +26,7 @@ export default function Banner() {
                     procedimetnos padronizados para o dia a dia do suporte
                     técnico.
                 </ParagrafosStl>
+                <ManuaisPesquisaForm />
             </div>
             <img
                 className="ImaBanner"
