@@ -11,7 +11,7 @@ export default function HomeScreen() {
         <ConteinerGeral>
             <Banner />
             <MainConteinerStl>
-                <Principais />
+                {/* <Principais /> */}
                 <ComoFunciona />
                 <Manuais />
             </MainConteinerStl>

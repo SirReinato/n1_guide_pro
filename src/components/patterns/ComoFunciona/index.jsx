@@ -12,10 +12,11 @@ export default function ComoFunciona() {
                 {comoFunciona.map((item) => {
                     return (
                         <ListaDeItens
-                            $primary
+                            $spaceBetween
                             key={item.id}
                             nome={item.nome}
                             descricao={item.descricao}
+                            icon={item.icon}
                         />
                     );
                 })}
@@ -27,15 +28,15 @@ export default function ComoFunciona() {
 const ComoFuncionaContainerStl = styled.div`
     width: 100%;
     display: flex;
-    padding: 32px 12%;
+    padding: 16px 12%;
     flex-direction: column;
     gap: 16px;
     background: linear-gradient(
-        ${theme.colors.azul.escuro},
-        ${theme.colors.azulMaisClaro.muitoClaro}
+        ${theme.colors.azulMaisClaro.muitoClaro},
+        ${theme.colors.azulMaisClaro.claro}
     );
     @media (min-width: 1401px) {
-        padding: 64px 16%;
+        padding: 32px 16%;
     }
     @media (min-width: 768px) and (max-width: 1200px) {
         padding: 32px 6%;
@@ -52,7 +53,7 @@ const TituloComoFuncionaStl = styled.h2`
     font-size: ${theme.fontSize.titulosSecundarios.gg};
     font-family: ${theme.fontsFamily.titulos};
     font-weight: 400;
-    color: ${theme.colors.clara.medio};
+    color: ${theme.colors.azul.medio};
 `;
 
 const CardsComoFuncionaStl = styled.div`
@@ -66,16 +67,19 @@ const comoFunciona = [
     {
         id: 1,
         nome: "Busque o problema",
+        icon: "Search",
         descricao: "Use a busca ou navegue pelas categorias",
     },
     {
         id: 2,
         nome: "Siga o manual",
+        icon: "BookOpen",
         descricao: "Tutoriais objetivos, com prints e validações",
     },
     {
         id: 3,
         nome: "Resolva com confiança",
+        icon: "CheckCircle",
         descricao: "Procedimentos padronizados e testados",
     },
 ];
