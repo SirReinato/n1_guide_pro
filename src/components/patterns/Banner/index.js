@@ -12,7 +12,9 @@ export default function Banner() {
             <div className="textBanner">
                 <CentralSuporteStl>
                     <HelpCircle size={18} style={{ marginRight: "8px" }} />
-                    Central de Suporte N1 - Guia Interno
+                    <CentralSuporteTextStl>
+                        Central de Suporte N1 - Guia Interno
+                    </CentralSuporteTextStl>
                 </CentralSuporteStl>
                 <TitulosPrincipaisStl>N1 GuidePro</TitulosPrincipaisStl>
                 <TitulosPrincipaisStl>
@@ -78,7 +80,11 @@ const CentralSuporteStl = styled.span`
     color: ${theme.colors.azul.escuro};
     background: ${theme.colors.azulMaisClaro.claro};
     padding: 8px 16px;
-    font-weight: bold;
     border-radius: 16px;
     width: fit-content;
+`;
+const CentralSuporteTextStl = styled.span`
+    font-size: ${theme.fontSize.paragrafos.mm};
+    letter-spacing: 0.1em;
+    font-weight: bolder;
 `;
