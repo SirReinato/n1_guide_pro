@@ -1,9 +1,9 @@
 import { ParagrafosStl, theme } from "../../theme/theme";
 import styled from "styled-components";
 
-export default function ListaDeItens({ nome, descricao }) {
+export default function ListaDeItens({ nome, descricao, ...props }) {
     return (
-        <ListaDeItensStl>
+        <ListaDeItensStl {...props}>
             <TituloListaStl>{nome}</TituloListaStl>
             <DescricaoListaStl>{descricao}</DescricaoListaStl>
         </ListaDeItensStl>
@@ -19,7 +19,10 @@ const ListaDeItensStl = styled.li`
     justify-content: start;
     align-items: center;
     flex-direction: column;
-    background: ${theme.colors.azul.escuro};
+    background: ${(props) =>
+        props.$primary
+            ? `${theme.colors.azulMaisClaro.escuro}`
+            : `${theme.colors.azul.escuro}`};
     padding: 16px;
     gap: 16px;
 `;

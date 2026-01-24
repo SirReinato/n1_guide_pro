@@ -1,4 +1,5 @@
 import Banner from "../../components/patterns/Banner";
+import ComoFunciona from "../../components/patterns/ComoFunciona";
 import Manuais from "../../components/patterns/Manuais";
 import Principais from "../../components/patterns/Principais";
 import Sobre from "../../components/patterns/Sobre";
@@ -11,6 +12,7 @@ export default function HomeScreen() {
             <Banner />
             <MainConteinerStl>
                 <Principais />
+                <ComoFunciona />
                 <Manuais />
             </MainConteinerStl>
             <Sobre />

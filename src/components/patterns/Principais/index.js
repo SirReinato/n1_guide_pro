@@ -7,7 +7,7 @@ export default function Principais() {
         <PrincipaisConteinerStl>
             <TitulosSecundariosStl>Principais Problemas</TitulosSecundariosStl>
             <ListaPrincipaisStl>
-                {aListaPrincipais.map((dados, index) => {
+                {aListaPrincipais.map((dados) => {
                     return (
                         <ListaDeItens
                             nome={dados.nome}
