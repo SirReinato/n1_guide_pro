@@ -66,9 +66,11 @@ const ConteinerDosManuais = styled.div`
 
 const ConteinerManualDuplo = styled.div`
     width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 32px;
-    margin-bottom: 32px;
+    align-items: stretch;
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+    }
 `;

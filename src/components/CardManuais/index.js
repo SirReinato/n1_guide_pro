@@ -1,52 +1,82 @@
-import { ParagrafosStl, theme, TitulosSecundariosStl } from "../../theme/theme";
 import styled from "styled-components";
 import Link from "next/link";
+import { ParagrafosStl, theme, TitulosSecundariosStl } from "../../theme/theme";
+import { FileText } from "react-feather";
 
 export default function CardManuais({ nome, descricao, path }) {
     return (
-        <CardManuaisStl>
-            <Link href={`/posts/${path}`}>
-                <AjustesCard>
-                    <TitulosSecundariosStl>{nome}</TitulosSecundariosStl>
-                    <ParagrafosStl>{descricao}</ParagrafosStl>
-                </AjustesCard>
-            </Link>
-        </CardManuaisStl>
+        <Link href={`/posts/${path}`} passHref>
+            <CardManuaisStl>
+                <IconeStl>
+                    <FileText size={24} />
+                </IconeStl>
+                <ConteudoStl>
+                    <TituloStl>{nome}</TituloStl>
+                    <DescricaoStl>{descricao}</DescricaoStl>
+                    <TagStl>Manual Técnico</TagStl>
+                </ConteudoStl>
+            </CardManuaisStl>
+        </Link>
     );
 }
 
 const CardManuaisStl = styled.article`
-    width: 42%;
-    min-height: 129px;
+    width: 100%;
+    min-height: 160px;
+    height: 100%;
     display: flex;
-    flex-direction: column;
-    padding: 8px;
-    border-radius: 8px;
-    background: ${theme.colors.azulMaisClaro.claro};
-    box-shadow: 0 4px 8px rgba(155, 148, 148, 0.1),
-        0 6px 20px rgba(247, 238, 238, 0.1);
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    border-radius: 12px;
+    background: ${theme.colors.azulMaisClaro.muitoClaro};
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
 
     &:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+        transform: translateY(-4px);
+        box-shadow: 0 10px 16px rgba(0, 0, 0, 0.25);
     }
-    @media (min-width: 1401px) {
-        width: 48%;
-    }
-    @media (min-width: 768px) and (max-width: 1400px) {
-        width: 48%;
-    }
-    @media (min-width: 481px) and (max-width: 767px) {
-    }
-    @media (max-width: 480px) {
-        width: 100%;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+        align-items: flex-start;
     }
 `;
 
-const AjustesCard = styled.div`
+const IconeStl = styled.div`
+    background: ${theme.colors.azul.escuro};
+    color: ${theme.colors.clara.medio};
+    padding: 12px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
+
+const ConteudoStl = styled.div`
     display: flex;
     flex-direction: column;
     gap: 8px;
+`;
+
+const TituloStl = styled(TitulosSecundariosStl)`
+    font-size: ${theme.fontSize.titulosSecundarios.mm};
+    color: ${theme.colors.azul.escuro};
+`;
+
+const DescricaoStl = styled(ParagrafosStl)`
+    font-size: ${theme.fontSize.paragrafos.pp};
+    color: ${theme.colors.azul.medio};
+`;
+
+const TagStl = styled.span`
+    font-size: 0.875rem;
+    font-weight: bold;
+    color: ${theme.colors.azulMaisClaro.muitoClaro};
+    background: ${theme.colors.azulMaisClaro.escuro};
+    padding: 4px 8px;
+    border-radius: 6px;
+    width: fit-content;
 `;
