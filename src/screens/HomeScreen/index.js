@@ -5,8 +5,13 @@ import ModalBuscar from "../../components/patterns/ModalBuscar";
 import Sobre from "../../components/patterns/Sobre";
 import { ConteinerGeral } from "../../theme/theme";
 import styled from "styled-components";
+import dynamic from "next/dynamic";
 
 export default function HomeScreen({ instalacoesPorCategoria, todosOsItens }) {
+    const ModalBuscar = dynamic(
+        () => import("../../components/patterns/ModalBuscar"),
+        { ssr: false }
+    );
     return (
         <ConteinerGeral>
             <ModalBuscar />

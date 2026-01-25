@@ -1,16 +1,30 @@
 import styled from "styled-components";
 import { ParagrafosStl, theme } from "../../theme/theme";
+import { useState } from "react";
 
 export default function PassoAPasso({ titulo, paragrafo, passo, img }) {
+    const [imgErro, setImgErro] = useState(false);
+
+    const mostrarImagem = img?.trim() && !imgErro;
+
     return (
         <ConteinerPassoStl>
             <SubTituloPassoStl>
                 {passo} - {titulo}
             </SubTituloPassoStl>
+
             <DescricaoPassoStl $primary $gg>
                 {paragrafo}
             </DescricaoPassoStl>
-            {img?.trim() && <img className="passoImg" src={img} alt={titulo} />}
+
+            {mostrarImagem && (
+                <img
+                    className="passoImg"
+                    src={img}
+                    alt={titulo}
+                    onError={() => setImgErro(true)}
+                />
+            )}
         </ConteinerPassoStl>
     );
 }
