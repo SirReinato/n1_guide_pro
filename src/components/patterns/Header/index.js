@@ -79,7 +79,7 @@ const ConteinerHeaderStl = styled.header`
     @media (max-width: 480px) {
         flex-direction: column;
         gap: 8px;
-        padding: 16px 2%;
+        padding: 8px 2%;
         .logosHeader {
             width: 100%;
         }
@@ -123,6 +123,7 @@ const MenuNavStl = styled.nav`
             flex-wrap: wrap;
             justify-content: space-between;
             gap: 32px;
+            display: none;
         }
     }
 `;

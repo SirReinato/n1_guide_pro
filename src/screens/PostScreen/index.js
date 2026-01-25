@@ -56,6 +56,7 @@ const ConteinerPostStl = styled.div`
         padding: 16px 10%;
     }
     @media (max-width: 480px) {
+        width: 100%;
         padding: 32px 2%;
         flex-direction: column;
     }

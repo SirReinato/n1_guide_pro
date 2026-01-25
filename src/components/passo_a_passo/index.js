@@ -35,6 +35,8 @@ const ConteinerPassoStl = styled.div`
     align-items: start;
     flex-direction: column;
     gap: 16px;
+    box-sizing: border-box;
+    flex-wrap: wrap;
     padding: 16px 8px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -55,4 +57,7 @@ const SubTituloPassoStl = styled.h3`
 const DescricaoPassoStl = styled(ParagrafosStl)`
     white-space: pre-line;
     line-height: 32px;
+    @media (max-width: 480px) {
+        font-size: 0.9rem;
+    }
 `;

@@ -60,7 +60,7 @@ export const TitulosPrincipaisStl = styled.h1`
     @media (min-width: 481px) and (max-width: 767px) {
     }
     @media (max-width: 480px) {
-        font-size: 2.6rem;
+        font-size: 2rem;
         text-align: center;
         align-items: start;
     }
@@ -83,7 +83,7 @@ export const TitulosSecundariosStl = styled.h2`
     @media (min-width: 481px) and (max-width: 767px) {
     }
     @media (max-width: 480px) {
-        font-size: 1.6rem;
+        font-size: 1.2rem;
         text-align: center;
     }
 `;
@@ -108,6 +108,7 @@ export const ParagrafosStl = styled.p`
     @media (min-width: 481px) and (max-width: 767px) {
     }
     @media (max-width: 480px) {
+        font-size: 0.9rem;
         text-align: center;
     }
 `;
