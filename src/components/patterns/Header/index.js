@@ -1,10 +1,10 @@
-import InputPesquisa from "../../../components/InputPesquisa";
 import ItensMenu from "../../../components/ItensMenu";
 import { ConteinerGeral } from "../../../theme/theme";
 import Link from "next/link";
 import styled from "styled-components";
 import instalacoes from "../../../data/instalacao.json";
 import slugify from "../../../utils/slogify";
+import LetreiroHeader from "../../../components/LetreiroHeader";
 
 export default function Header() {
     const itensDoMenu = Object.keys(instalacoes);
@@ -19,7 +19,9 @@ export default function Header() {
                         alt="Logo do site"
                     />
                 </Link>
-                <InputPesquisa placeholder={"Pesquise aqui"} />
+                {/* vou colcoar algo aqui */}
+                <LetreiroHeader />
+
                 <Link href={"https://github.com/SirReinato"} target="_blank">
                     <img
                         className="logosHeader mobile"
