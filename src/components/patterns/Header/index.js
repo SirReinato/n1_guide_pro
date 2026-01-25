@@ -5,10 +5,12 @@ import styled from "styled-components";
 import instalacoes from "../../../data/instalacao.json";
 import slugify from "../../../utils/slogify";
 import LetreiroHeader from "../../../components/LetreiroHeader";
+import { useRouter } from "next/router";
 
 export default function Header() {
     const itensDoMenu = Object.keys(instalacoes);
-
+    const router = useRouter();
+    const isHomePage = router.pathname === "/";
     return (
         <ConteinerGeral $primary>
             <ConteinerHeaderStl>
@@ -34,9 +36,15 @@ export default function Header() {
                 <ul className="conteinerMenu">
                     {itensDoMenu.map((nome) => (
                         <li key={nome}>
-                            <Link href={`/#${slugify(nome)}`}>
-                                <ItensMenu>{nome}</ItensMenu>
-                            </Link>
+                            {isHomePage ? (
+                                <a href={`#${slugify(nome)}`}>
+                                    <ItensMenu>{nome}</ItensMenu>
+                                </a>
+                            ) : (
+                                <Link href={`/#${slugify(nome)}`}>
+                                    <ItensMenu>{nome}</ItensMenu>
+                                </Link>
+                            )}
                         </li>
                     ))}
                 </ul>

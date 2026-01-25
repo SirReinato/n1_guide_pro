@@ -12,7 +12,7 @@ export default function ItensMenu({ children }) {
     );
 }
 
-const ItensMenuStl = styled.li`
+const ItensMenuStl = styled.span`
     .itens {
         font-size: 0.875rem;
         color: ${theme.colors.azul.escuro};
