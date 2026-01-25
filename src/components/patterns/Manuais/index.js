@@ -1,7 +1,8 @@
 import CardManuais from "../../../components/CardManuais";
 import styled from "styled-components";
-import instalacoes from "../../../../instalacao.json";
+import instalacoes from "../../../data/instalacao.json";
 import { TitulosPrincipaisStl } from "../../../theme/theme";
+import slugify from "../../../utils/slogify";
 
 export default function Manuais() {
     const titulos = Object.keys(instalacoes);
@@ -9,7 +10,7 @@ export default function Manuais() {
         <ManuaisStl>
             {titulos.map((dados) => {
                 return (
-                    <ConteinerDosManuais>
+                    <ConteinerDosManuais key={dados} id={slugify(dados)}>
                         <TitulosPrincipaisStl key={dados}>
                             {dados}
                         </TitulosPrincipaisStl>
@@ -62,6 +63,7 @@ const ConteinerDosManuais = styled.div`
     flex-direction: column;
     align-items: center;
     gap: 32px;
+    scroll-margin-top: 140px;
 `;
 
 const ConteinerManualDuplo = styled.div`

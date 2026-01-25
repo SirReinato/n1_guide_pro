@@ -101,6 +101,10 @@ export default function GlobalStyle() {
             a {
                 text-decoration: none;
             }
+            html {
+                scroll-behavior: smooth;
+            }
+
             article,
             aside,
             details,

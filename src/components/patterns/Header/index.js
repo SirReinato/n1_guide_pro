@@ -3,8 +3,12 @@ import ItensMenu from "../../../components/ItensMenu";
 import { ConteinerGeral } from "../../../theme/theme";
 import Link from "next/link";
 import styled from "styled-components";
+import instalacoes from "../../../data/instalacao.json";
+import slugify from "../../../utils/slogify";
 
 export default function Header() {
+    const itensDoMenu = Object.keys(instalacoes);
+
     return (
         <ConteinerGeral $primary>
             <ConteinerHeaderStl>
@@ -26,9 +30,13 @@ export default function Header() {
             </ConteinerHeaderStl>
             <MenuNavStl>
                 <ul className="conteinerMenu">
-                    {itensDoMenu.map((dados) => {
-                        return <ItensMenu key={dados + 1}>{dados}</ItensMenu>;
-                    })}
+                    {itensDoMenu.map((nome) => (
+                        <li key={nome}>
+                            <Link href={`/#${slugify(nome)}`}>
+                                <ItensMenu>{nome}</ItensMenu>
+                            </Link>
+                        </li>
+                    ))}
                 </ul>
             </MenuNavStl>
         </ConteinerGeral>
@@ -108,14 +116,3 @@ const MenuNavStl = styled.nav`
         }
     }
 `;
-
-const itensDoMenu = [
-    "Instalações",
-    "SerproID",
-    "Outlook",
-    "Mapeamento",
-    "Torres De Serviços",
-    "Erros Comuns",
-    "Portfólios",
-    "Varonis",
-];
