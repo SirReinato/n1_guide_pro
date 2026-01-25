@@ -1,35 +1,68 @@
 import CardManuais from "../../../components/CardManuais";
 import styled from "styled-components";
 import instalacoes from "../../../data/instalacao.json";
-import { TitulosPrincipaisStl } from "../../../theme/theme";
+import { theme, TitulosPrincipaisStl } from "../../../theme/theme";
 import slugify from "../../../utils/slogify";
+import { useBusca } from "../../../context/BuscaContext";
+import { getTodosOsItens } from "../../../data/instalacoes.service";
 
 export default function Manuais() {
+    const { busca } = useBusca();
+    const todosOsItens = getTodosOsItens();
+
+    const itensFiltrados = todosOsItens.filter(
+        (item) =>
+            item.nome.toLowerCase().includes(busca.toLowerCase()) ||
+            item.descricao.toLowerCase().includes(busca.toLowerCase())
+    );
+
     const titulos = Object.keys(instalacoes);
+
     return (
         <ManuaisStl>
-            {titulos.map((dados) => {
-                return (
-                    <ConteinerDosManuais key={dados} id={slugify(dados)}>
-                        <TitulosPrincipaisStl key={dados}>
-                            {dados}
-                        </TitulosPrincipaisStl>
-
+            {busca ? (
+                <>
+                    {itensFiltrados.length === 0 ? (
+                        <ManualNaoEncontradoStl>
+                            Nenhum manual encontrado
+                        </ManualNaoEncontradoStl>
+                    ) : (
                         <ConteinerManualDuplo>
-                            {instalacoes[dados].map((dados) => {
-                                return (
-                                    <CardManuais
-                                        path={dados.id}
-                                        key={dados.id}
-                                        nome={dados.nome}
-                                        descricao={dados.descricao}
-                                    />
-                                );
-                            })}
+                            {itensFiltrados.map((dados) => (
+                                <CardManuais
+                                    key={dados.id}
+                                    path={dados.id}
+                                    nome={dados.nome}
+                                    descricao={dados.descricao}
+                                />
+                            ))}
                         </ConteinerManualDuplo>
-                    </ConteinerDosManuais>
-                );
-            })}
+                    )}
+                </>
+            ) : (
+                titulos.map((dados) => {
+                    return (
+                        <ConteinerDosManuais key={dados} id={slugify(dados)}>
+                            <TitulosPrincipaisStl key={dados}>
+                                {dados}
+                            </TitulosPrincipaisStl>
+
+                            <ConteinerManualDuplo>
+                                {instalacoes[dados].map((dados) => {
+                                    return (
+                                        <CardManuais
+                                            path={dados.id}
+                                            key={dados.id}
+                                            nome={dados.nome}
+                                            descricao={dados.descricao}
+                                        />
+                                    );
+                                })}
+                            </ConteinerManualDuplo>
+                        </ConteinerDosManuais>
+                    );
+                })
+            )}
         </ManuaisStl>
     );
 }
@@ -75,4 +108,11 @@ const ConteinerManualDuplo = styled.div`
     @media (max-width: 768px) {
         grid-template-columns: 1fr;
     }
+`;
+
+const ManualNaoEncontradoStl = styled.p`
+    font-size: ${theme.fontSize.titulosSecundarios.mm};
+    font-family: ${theme.fontsFamily.titulos};
+    color: ${theme.colors.azulMaisClaro.medio};
+    text-align: center;
 `;
