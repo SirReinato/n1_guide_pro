@@ -1,14 +1,14 @@
 import CardManuais from "../../../components/CardManuais";
 import styled from "styled-components";
-import instalacoes from "../../../data/instalacao.json";
 import { theme, TitulosPrincipaisStl } from "../../../theme/theme";
 import slugify from "../../../utils/slogify";
 import { useBusca } from "../../../context/BuscaContext";
-import { getTodosOsItens } from "../../../data/instalacoes.service";
 
-export default function Manuais() {
+export default function Manuais({
+    instalacoesPorCategoria = {},
+    todosOsItens = [],
+}) {
     const { busca } = useBusca();
-    const todosOsItens = getTodosOsItens();
 
     const itensFiltrados = todosOsItens.filter(
         (item) =>
@@ -16,7 +16,7 @@ export default function Manuais() {
             item.descricao.toLowerCase().includes(busca.toLowerCase())
     );
 
-    const titulos = Object.keys(instalacoes);
+    const titulos = Object.keys(instalacoesPorCategoria);
 
     return (
         <ManuaisStl>
@@ -40,28 +40,22 @@ export default function Manuais() {
                     )}
                 </>
             ) : (
-                titulos.map((dados) => {
-                    return (
-                        <ConteinerDosManuais key={dados} id={slugify(dados)}>
-                            <TitulosPrincipaisStl key={dados}>
-                                {dados}
-                            </TitulosPrincipaisStl>
+                titulos.map((titulo) => (
+                    <ConteinerDosManuais key={titulo} id={slugify(titulo)}>
+                        <TitulosPrincipaisStl>{titulo}</TitulosPrincipaisStl>
 
-                            <ConteinerManualDuplo>
-                                {instalacoes[dados].map((dados) => {
-                                    return (
-                                        <CardManuais
-                                            path={dados.id}
-                                            key={dados.id}
-                                            nome={dados.nome}
-                                            descricao={dados.descricao}
-                                        />
-                                    );
-                                })}
-                            </ConteinerManualDuplo>
-                        </ConteinerDosManuais>
-                    );
-                })
+                        <ConteinerManualDuplo>
+                            {instalacoesPorCategoria[titulo].map((dados) => (
+                                <CardManuais
+                                    key={dados.id}
+                                    path={dados.id}
+                                    nome={dados.nome}
+                                    descricao={dados.descricao}
+                                />
+                            ))}
+                        </ConteinerManualDuplo>
+                    </ConteinerDosManuais>
+                ))
             )}
         </ManuaisStl>
     );

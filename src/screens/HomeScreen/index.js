@@ -2,21 +2,26 @@ import Banner from "../../components/patterns/Banner";
 import ComoFunciona from "../../components/patterns/ComoFunciona";
 import Manuais from "../../components/patterns/Manuais";
 import ModalBuscar from "../../components/patterns/ModalBuscar";
-import Principais from "../../components/patterns/Principais";
 import Sobre from "../../components/patterns/Sobre";
 import { ConteinerGeral } from "../../theme/theme";
 import styled from "styled-components";
 
-export default function HomeScreen() {
+export default function HomeScreen({ instalacoesPorCategoria, todosOsItens }) {
     return (
         <ConteinerGeral>
             <ModalBuscar />
+
             <Banner />
+
             <MainConteinerStl>
-                {/* <Principais /> */}
                 <ComoFunciona />
-                <Manuais />
+
+                <Manuais
+                    instalacoesPorCategoria={instalacoesPorCategoria}
+                    todosOsItens={todosOsItens}
+                />
             </MainConteinerStl>
+
             <Sobre />
         </ConteinerGeral>
     );
