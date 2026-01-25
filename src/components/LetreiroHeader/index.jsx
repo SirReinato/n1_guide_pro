@@ -4,26 +4,31 @@ import { theme } from "../../theme/theme";
 export default function LetreiroHeader() {
     return (
         <LetreiroWrapper>
-            <Texto>
-                📘 Consulte os manuais antes de abrir chamado • ⚠️ Procedimentos
-                de VPN atualizados • 🛠️ Base interna N1 GuidePro
-            </Texto>
+            <LetreiroTrack>
+                <Texto>
+                    📘 Consulte os manuais antes de abrir chamado • ⚠️
+                    Procedimentos de VPN atualizados • 🛠️ Base interna N1
+                    GuidePro •
+                </Texto>
+                <Texto>
+                    📘 Consulte os manuais antes de abrir chamado • ⚠️
+                    Procedimentos de VPN atualizados • 🛠️ Base interna N1
+                    GuidePro •
+                </Texto>
+            </LetreiroTrack>
         </LetreiroWrapper>
     );
 }
-
 const animacao = keyframes`
-    0% {
-        transform: translateX(100%);
+    from {
+        transform: translateX(0);
     }
-    100% {
-        transform: translateX(-100%);
+    to {
+        transform: translateX(-50%);
     }
 `;
-
 const LetreiroWrapper = styled.div`
     overflow: hidden;
-    white-space: nowrap;
     width: 100%;
     max-width: 420px;
 
@@ -36,10 +41,19 @@ const LetreiroWrapper = styled.div`
     }
 `;
 
-const Texto = styled.div`
-    display: inline-block;
-    padding-left: 100%;
-    animation: ${animacao} 25s linear infinite;
+const LetreiroTrack = styled.div`
+    display: flex;
+    width: max-content;
+    animation: ${animacao} 15s linear infinite;
+
+    &:hover {
+        animation-play-state: paused;
+    }
+`;
+
+const Texto = styled.span`
+    white-space: nowrap;
+    padding-right: 32px;
 
     font-size: ${theme.fontSize.paragrafos.pp};
     font-family: ${theme.fontsFamily.paragrafos};
