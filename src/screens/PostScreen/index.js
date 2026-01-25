@@ -21,7 +21,9 @@ export default function PostScreen({ nome, descricao, passo_a_passo }) {
                 {passo_a_passo.map((dados) => (
                     <PassoAPasso
                         key={`${dados.passo}-${dados.titulo}`}
-                        {...dados}
+                        passo={dados.passo}
+                        titulo={dados.titulo}
+                        paragrafo={dados.descricao}
                         img={dados.imagem || null}
                     />
                 ))}

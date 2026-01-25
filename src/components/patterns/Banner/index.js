@@ -52,7 +52,7 @@ const ConteinerBannerStl = styled.div`
         width: 50%;
     }
     @media (min-width: 1401px) {
-        padding: 16px 16%;
+        padding: 32px 16%;
     }
     @media (min-width: 768px) and (max-width: 1200px) {
         padding: 16px 6%;
