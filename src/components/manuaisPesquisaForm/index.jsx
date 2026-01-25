@@ -1,15 +1,25 @@
 import styled from "styled-components";
 import { theme } from "../../theme/theme";
+import { useBusca } from "../../context/BuscaContext";
 
 export default function ManuaisPesquisaForm() {
+    const { busca, setBusca } = useBusca();
+
+    function handleSubmit(event) {
+        event.preventDefault();
+        console.log("Pesquisar por:", busca);
+    }
+
     return (
         <ConteinerManuaisPesquisaFormStl>
-            <form action="">
+            <form onSubmit={handleSubmit}>
                 <InputManuaisPesquisaFormStl
                     type="text"
                     placeholder="Pesquisar sólução..."
+                    value={busca}
+                    onChange={(e) => setBusca(e.target.value)}
                 />
-                <ButtonManuaisPesquisaFormStl type="">
+                <ButtonManuaisPesquisaFormStl type="submit">
                     Pesquisar
                 </ButtonManuaisPesquisaFormStl>
             </form>
