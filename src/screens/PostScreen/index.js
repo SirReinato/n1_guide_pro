@@ -27,12 +27,10 @@ export default function PostScreen({ nome, descricao, passo_a_passo }) {
                         img={dados.imagem || null}
                     />
                 ))}
-
-                <Link href="/">
-                    <BtnVoltarSrl>Voltar para a página inicial</BtnVoltarSrl>
-                </Link>
             </ConteinerPostStl>
-
+            <Link href="/">
+                <BotaoFlutuante>← Home</BotaoFlutuante>
+            </Link>
             <Banner />
         </>
     );
@@ -63,20 +61,35 @@ const ConteinerPostStl = styled.div`
     }
 `;
 
-const BtnVoltarSrl = styled.button`
-    width: fit-content;
-    display: flex;
-    align-items: center;
-    padding: 8px 16px;
-    border-radius: 8px;
-    gap: 8px;
+const BotaoFlutuante = styled.button`
+    position: fixed;
+    right: 24px;
+    bottom: 64px;
+    z-index: 1000;
+
+    padding: 12px 20px;
+    border-radius: 999px;
     border: none;
+
     font-size: ${theme.fontSize.paragrafos.mm};
     font-family: ${theme.fontsFamily.paragrafos};
+
     color: ${theme.colors.azul.escuro};
     background: ${theme.colors.azulMaisClaro.claro};
+
     cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+
+    transition: all 0.2s ease;
+
     &:hover {
         background: ${theme.colors.azulMaisClaro.medio};
+        transform: translateY(-2px);
+    }
+
+    @media (max-width: 480px) {
+        right: 16px;
+        bottom: 16px;
+        padding: 10px 16px;
     }
 `;
