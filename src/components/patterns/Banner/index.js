@@ -22,8 +22,8 @@ export default function Banner() {
                     Simplificando o Suporte Técnico
                 </TitulosPrincipaisStl>
                 <ParagrafosStl $primary>
-                    Acesse manuais práticos, flucos de atendimetno e
-                    procedimetnos padronizados para o dia a dia do suporte
+                    Acesse manuais práticos, fluxos de atendimento e
+                    procedimentos padronizados para o dia a dia do suporte
                     técnico.
                 </ParagrafosStl>
                 <ManuaisPesquisaForm />
