@@ -514,6 +514,49 @@
                     "imagem": "/assets/img/serproID/step6.png"
                 }
             ]
+        },
+        {
+            "id": 46,
+            "nome": "Instalação de Certificado para Correção de Erro no Fortnite",
+            "descricao": "Este manual orienta como instalar manualmente o certificado necessário para corrigir erros de execução do Fortnite, utilizando acesso remoto ao disco C do usuário e configurando corretamente o repositório de certificados.",
+            "passo_passo": [
+                {
+                    "passo": 1,
+                    "titulo": "Localizar Arquivo de Certificado",
+                    "descricao": "O arquivo de certificado estará disponível na pasta de aplicações: \\\\mds.net\\mds\\se\\dti\\CGSS\\SUPORTE\\APLICACOES\\00-Aplicações atuais (TheBestTeam)\\certificadoFortnite. Copie-o para o disco C do usuário acessando via Executar: \\\\ip-do-usuario\\c$.",
+                    "imagem": "/assets/img/certificadoFortnite/step1.png"
+                },
+                {
+                    "passo": 2,
+                    "titulo": "Acessar a Máquina do Usuário",
+                    "descricao": "Após acessar o diretório remoto, localize o arquivo de certificado no disco C do usuário.",
+                    "imagem": "/assets/img/certificadoFortnite/step2.png"
+                },
+                {
+                    "passo": 3,
+                    "titulo": "Executar Instalação",
+                    "descricao": "Dê dois cliques sobre o arquivo de certificado para abrir o assistente de instalação.",
+                    "imagem": "/assets/img/certificadoFortnite/step3.png"
+                },
+                {
+                    "passo": 4,
+                    "titulo": "Selecionar Local de Instalação",
+                    "descricao": "Escolha a opção 'Máquina Local'. O sistema exibirá uma mensagem perguntando se deseja permitir a execução pelo processo de host do Windows (rundll32). Clique em 'Sim'.",
+                    "imagem": "/assets/img/certificadoFortnite/step4.png"
+                },
+                {
+                    "passo": 5,
+                    "titulo": "Definir Repositório de Certificados",
+                    "descricao": "Selecione 'Colocar todos os certificados no repositório a seguir'. Clique em 'Procurar' e escolha 'Autoridades de Certificação Raiz Confiáveis'.",
+                    "imagem": "/assets/img/certificadoFortnite/step5.png"
+                },
+                {
+                    "passo": 6,
+                    "titulo": "Finalizar Instalação",
+                    "descricao": "Clique em 'Avançar', depois novamente em 'Avançar' e por fim em 'Concluir'. O certificado será instalado corretamente e o erro do Fortnite será resolvido.",
+                    "imagem": "/assets/img/certificadoFortnite/step6.png"
+                }
+            ]
         }
     ],
     "Outlook": [
@@ -711,6 +754,104 @@
                     "titulo": "Proteger com Senha (Opcional)",
                     "descricao": "Se desejar, insira uma senha para proteger o arquivo PST. Clique em 'OK' para iniciar a exportação.",
                     "imagem": "/assets/img/outlook_backup/step6.png"
+                }
+            ]
+        },
+        {
+            "id": 41,
+            "nome": "Importar Arquivo PST no Outlook",
+            "descricao": "Este manual detalha os passos para importar um arquivo de dados .PST existente para o Outlook, permitindo recuperar e acessar e-mails de backup.",
+            "passo_passo": [
+                {
+                    "passo": 1,
+                    "titulo": "Localizar Arquivo PST",
+                    "descricao": "Solicite ao usuário a localização do arquivo .PST (ex.: pen drive, HD externo). Copie o arquivo para o diretório padrão do Outlook: C:\\Users\\usuario\\Documents\\Arquivos do Outlook.",
+                    "imagem": "/assets/img/outlookImportarPST/step1.png"
+                },
+                {
+                    "passo": 2,
+                    "titulo": "Abrir Outlook e Configurações de Conta",
+                    "descricao": "Abra o Outlook. Vá até a aba 'Arquivo' > 'Informações' > 'Configurações de Conta' > 'Configurações de Conta'.",
+                    "imagem": "/assets/img/outlookImportarPST/step2.png"
+                },
+                {
+                    "passo": 3,
+                    "titulo": "Adicionar Arquivo de Dados",
+                    "descricao": "Na aba 'Arquivos de Dados', clique em 'Adicionar'.",
+                    "imagem": "/assets/img/outlookImportarPST/step3.png"
+                },
+                {
+                    "passo": 4,
+                    "titulo": "Selecionar Arquivo PST",
+                    "descricao": "Selecione o arquivo .PST salvo no diretório padrão do Outlook e clique em 'OK'.",
+                    "imagem": "/assets/img/outlookImportarPST/step4.png"
+                },
+                {
+                    "passo": 5,
+                    "titulo": "Confirmar Importação",
+                    "descricao": "O arquivo PST aparecerá na página inicial do Outlook, no painel lateral esquerdo, abaixo da caixa de e-mail existente.",
+                    "imagem": "/assets/img/outlookImportarPST/step5.png"
+                },
+                {
+                    "passo": 6,
+                    "titulo": "Finalizar Processo",
+                    "descricao": "Verifique se as pastas e e-mails do backup foram carregados corretamente. O processo está concluído.",
+                    "imagem": "/assets/img/outlookImportarPST/step6.png"
+                }
+            ]
+        },
+        {
+            "id": 40,
+            "nome": "Configuração de Assinatura no Outlook",
+            "descricao": "Este manual orienta como criar e configurar uma assinatura padrão de e-mails no Outlook, seguindo o padrão institucional do Ministério do Esporte.",
+            "passo_passo": [
+                {
+                    "passo": 1,
+                    "titulo": "Inserir Assinatura como Imagem",
+                    "descricao": "No corpo do e-mail, insira a imagem da assinatura institucional utilizando a opção 'Inserir > Imagens'.",
+                    "imagem": "/assets/img/outlookAssinatura/step1.png"
+                },
+                {
+                    "passo": 2,
+                    "titulo": "Configurar Layout da Imagem",
+                    "descricao": "Após inserir a imagem, em 'Opções de Layout' selecione 'Atrás do texto'.",
+                    "imagem": "/assets/img/outlookAssinatura/step2.png"
+                },
+                {
+                    "passo": 3,
+                    "titulo": "Adicionar Informações do Usuário",
+                    "descricao": "Digite Nome, Sobrenome, Cargo, Unidade de Lotação, e-mail e telefone. Utilize fonte Arial Bold na cor #3253a0 para nome e cargo, e Arial Regular na cor #000000 para telefone.",
+                    "imagem": "/assets/img/outlookAssinatura/step3.png"
+                },
+                {
+                    "passo": 4,
+                    "titulo": "Ajustar Recuo",
+                    "descricao": "Selecione o texto e aumente o recuo uma vez para alinhar corretamente a assinatura.",
+                    "imagem": "/assets/img/outlookAssinatura/step4.png"
+                },
+                {
+                    "passo": 5,
+                    "titulo": "Copiar Assinatura",
+                    "descricao": "Selecione imagem e texto da assinatura e copie utilizando Ctrl+C.",
+                    "imagem": "/assets/img/outlookAssinatura/step5.png"
+                },
+                {
+                    "passo": 6,
+                    "titulo": "Criar Nova Assinatura",
+                    "descricao": "No Outlook, vá em 'Assinaturas' e selecione 'Novo'. Dê um nome à assinatura e cole (Ctrl+V) no campo 'Editar assinatura'.",
+                    "imagem": "/assets/img/outlookAssinatura/step6.png"
+                },
+                {
+                    "passo": 7,
+                    "titulo": "Definir como Padrão",
+                    "descricao": "Marque a assinatura criada como padrão para 'Novas mensagens' e 'Respostas/encaminhamentos'.",
+                    "imagem": "/assets/img/outlookAssinatura/step7.png"
+                },
+                {
+                    "passo": 8,
+                    "titulo": "Finalizar Configuração",
+                    "descricao": "Clique em 'OK'. Sua nova assinatura estará disponível automaticamente em todos os e-mails enviados.",
+                    "imagem": "/assets/img/outlookAssinatura/step8.png"
                 }
             ]
         }
@@ -1105,6 +1246,110 @@
                     "titulo": "Verificar o Status de Ativação",
                     "descricao": "Na página de ativação, confirme que o Windows está ativado. A mensagem 'Windows está ativado' será exibida.",
                     "imagem": "/assets/img/windows_ativacao/step5.png"
+                }
+            ]
+        },
+        {
+            "id": 42,
+            "nome": "Configuração do Microsoft Authenticator",
+            "descricao": "Este manual apresenta o passo a passo para configurar a autenticação multifator (MFA) utilizando o aplicativo Microsoft Authenticator, garantindo maior segurança no acesso às contas corporativas.",
+            "passo_passo": [
+                {
+                    "passo": 1,
+                    "titulo": "Acessar Office.com",
+                    "descricao": "Abra o navegador em modo anônimo e acesse www.office.com. Faça login com seu e-mail e senha corporativa. Clique em 'Avançar' para iniciar a configuração do MFA até chegar na tela de leitura do QR Code.",
+                    "imagem": "/assets/img/authenticator/step1.png"
+                },
+                {
+                    "passo": 2,
+                    "titulo": "Instalar o Aplicativo",
+                    "descricao": "No dispositivo móvel, baixe e instale o Microsoft Authenticator:\n- iOS: App Store\n- Android: Google Play Store",
+                    "imagem": "/assets/img/authenticator/step2.png"
+                },
+                {
+                    "passo": 3,
+                    "titulo": "Adicionar Conta no Aplicativo",
+                    "descricao": "Abra o Microsoft Authenticator no celular. Toque em '+' para adicionar conta. Selecione 'Conta corporativa ou de estudante'. Escaneie o QR Code exibido no computador. A conta será adicionada automaticamente.",
+                    "imagem": "/assets/img/authenticator/step3.png"
+                },
+                {
+                    "passo": 4,
+                    "titulo": "Configuração Manual (se necessário)",
+                    "descricao": "Caso não seja possível escanear o QR Code, insira manualmente os dados fornecidos:\n- Código: informado na tela\n- URI: fornecido pelo sistema\nApós inserir, o aplicativo exibirá um código de seis dígitos.",
+                    "imagem": "/assets/img/authenticator/step4.png"
+                },
+                {
+                    "passo": 5,
+                    "titulo": "Testar Configuração",
+                    "descricao": "No navegador, clique em 'Concluído'. O sistema enviará uma notificação ou mostrará um código de verificação. Aprove a solicitação no aplicativo ou insira o código gerado.",
+                    "imagem": "/assets/img/authenticator/step5.png"
+                },
+                {
+                    "passo": 6,
+                    "titulo": "Conclusão",
+                    "descricao": "Configuração finalizada. Em futuros logins, será solicitado que aprove a entrada via Microsoft Authenticator.",
+                    "imagem": "/assets/img/authenticator/step6.png"
+                },
+                {
+                    "passo": 7,
+                    "titulo": "Suporte Técnico",
+                    "descricao": "Em caso de dificuldades, entre em contato com a equipe de suporte:\n- Ramal: 2030-1500\n- E-mail: atendimentosti@mds.gov.br",
+                    "imagem": "/assets/img/authenticator/step7.png"
+                }
+            ]
+        },
+        {
+            "id": 44,
+            "nome": "Criação de Formulário no SEI",
+            "descricao": "Este manual orienta como criar um formulário no SEI (Sistema Eletrônico de Informações), incluindo a escolha do tipo de processo, definição de acesso e geração do documento.",
+            "passo_passo": [
+                {
+                    "passo": 1,
+                    "titulo": "Iniciar Processo",
+                    "descricao": "No SEI, clique em 'Iniciar Processo' e escolha o tipo de processo desejado.",
+                    "imagem": "/assets/img/seiFormulario/step1.png"
+                },
+                {
+                    "passo": 2,
+                    "titulo": "Selecionar Tipo de Processo",
+                    "descricao": "Selecione 'Informática: E-mail' como tipo de processo.",
+                    "imagem": "/assets/img/seiFormulario/step2.png"
+                },
+                {
+                    "passo": 3,
+                    "titulo": "Definir Nível de Acesso",
+                    "descricao": "Defina o nível de acesso como 'Restrito' e selecione 'Informação Pessoal'. Clique em 'Salvar'.",
+                    "imagem": "/assets/img/seiFormulario/step3.png"
+                },
+                {
+                    "passo": 4,
+                    "titulo": "Gerar Novo Documento",
+                    "descricao": "Após salvar, o processo será criado. Clique em 'Gerar novo documento'.",
+                    "imagem": "/assets/img/seiFormulario/step4.png"
+                },
+                {
+                    "passo": 5,
+                    "titulo": "Escolher Tipo de Documento",
+                    "descricao": "Selecione 'Formulário de Cadastramento de Usuários na Rede'. Caso não apareça, clique em '+' e digite o nome do formulário.",
+                    "imagem": "/assets/img/seiFormulario/step5.png"
+                },
+                {
+                    "passo": 6,
+                    "titulo": "Confirmar Dados",
+                    "descricao": "Selecione 'Confirmar dados' para gerar o formulário e habilitar o preenchimento.",
+                    "imagem": "/assets/img/seiFormulario/step6.png"
+                },
+                {
+                    "passo": 7,
+                    "titulo": "Solicitação de Licenças Office 365",
+                    "descricao": "No formulário, há a opção de solicitar licenças do Microsoft 365. Marque apenas se houver necessidade. O uso das licenças é monitorado e será revogado após 40 dias sem utilização.",
+                    "imagem": "/assets/img/seiFormulario/step7.png"
+                },
+                {
+                    "passo": 8,
+                    "titulo": "Finalizar",
+                    "descricao": "Após confirmar os dados e preencher o formulário, o processo estará concluído e pronto para tramitação.",
+                    "imagem": "/assets/img/seiFormulario/step8.png"
                 }
             ]
         }
@@ -1780,6 +2025,43 @@
                     "titulo": "Finalizar Mapeamento",
                     "descricao": "Clique em 'Concluir' para validar o mapeamento da pasta HYDRA.",
                     "imagem": "/assets/img/mapeamentoEsporte/step5.png"
+                }
+            ]
+        },
+        {
+            "id": 45,
+            "nome": "Verificar Última Atualização de Senha do Usuário",
+            "descricao": "Este manual orienta como verificar a última troca de senha de um usuário e outras informações de conta utilizando o comando 'net user' no CMD.",
+            "passo_passo": [
+                {
+                    "passo": 1,
+                    "titulo": "Abrir o CMD",
+                    "descricao": "Na máquina virtual (VM), abra o Prompt de Comando. Clique em Iniciar, digite 'cmd' e pressione Enter.",
+                    "imagem": "/assets/img/netUser/step1.png"
+                },
+                {
+                    "passo": 2,
+                    "titulo": "Executar Comando",
+                    "descricao": "Digite o comando:\nnet user /domain login-do-usuario\nSubstitua 'login-do-usuario' pelo nome de login da conta que deseja verificar.",
+                    "imagem": "/assets/img/netUser/step2.png"
+                },
+                {
+                    "passo": 3,
+                    "titulo": "Visualizar Informações",
+                    "descricao": "Após executar o comando, serão exibidas informações da conta, incluindo:\n- Última troca de senha\n- Data de expiração da senha\n- Grupos dos quais o usuário faz parte\n- Políticas aplicadas",
+                    "imagem": "/assets/img/netUser/step3.png"
+                },
+                {
+                    "passo": 4,
+                    "titulo": "Interpretar Resultado",
+                    "descricao": "Verifique a linha 'Última alteração de senha' para saber quando ocorreu a última atualização. Confira também os grupos listados para entender os acessos do usuário.",
+                    "imagem": "/assets/img/netUser/step4.png"
+                },
+                {
+                    "passo": 5,
+                    "titulo": "Encerrar",
+                    "descricao": "Após coletar as informações necessárias, feche o CMD ou prossiga com outras verificações conforme necessidade.",
+                    "imagem": "/assets/img/netUser/step5.png"
                 }
             ]
         }
