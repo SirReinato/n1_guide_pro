@@ -5,6 +5,7 @@ import { ConteinerGeral } from "../src/theme/theme";
 import Header from "../src/components/patterns/Header";
 import Footer from "../src/components/patterns/Footer";
 import { BuscaProvider } from "../src/context/BuscaContext";
+import { Analytics } from "@vercel/analytics/next";
 
 function MyApp({ Component, pageProps }) {
     return (
@@ -14,6 +15,7 @@ function MyApp({ Component, pageProps }) {
                 <Header />
                 <Component {...pageProps} />
                 <Footer />
+                <Analytics />
             </ConteinerGeral>
         </BuscaProvider>
     );
