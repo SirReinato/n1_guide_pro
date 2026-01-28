@@ -416,9 +416,144 @@
                     "imagem": "/assets/img/windows_instalacao/step7.png"
                 }
             ]
+        },
+        {
+            "id": 32,
+            "nome": "Instalação do Sispro",
+            "descricao": "Este manual apresenta o passo a passo para instalar o Sispro, incluindo configuração do Java, ajustes de segurança e execução do aplicativo.",
+            "passo_passo": [
+                {
+                    "passo": 1,
+                    "titulo": "Verificar Instalação do Java",
+                    "descricao": "No menu Iniciar, vá em Painel de Controle > Java para confirmar se o Java está instalado.",
+                    "imagem": "/assets/img/sispro/step1.png"
+                },
+                {
+                    "passo": 2,
+                    "titulo": "Instalar Versão Correta do Java",
+                    "descricao": "O Sispro funciona apenas com as versões 6.24 ou 6.25 do Java. Caso tenha outra versão instalada, desinstale-a e instale uma dessas versões específicas.",
+                    "imagem": "/assets/img/sispro/step2.png"
+                },
+                {
+                    "passo": 3,
+                    "titulo": "Configurar Segurança no Java",
+                    "descricao": "Abra o Java no Painel de Controle. Vá até a aba 'Segurança'. Ative o conteúdo Java para aplicativos de browser e Web Start e selecione o nível de segurança 'Muito Alta'.",
+                    "imagem": "/assets/img/sispro/step3.png"
+                },
+                {
+                    "passo": 4,
+                    "titulo": "Adicionar Site à Lista de Exceções",
+                    "descricao": "Na aba Segurança, clique em 'Editar Lista de Sites'. Adicione o link: http://cesispropd01:8080/sispro/SisPro.jnlp. Confirme a advertência de segurança clicando em 'Continuar'.",
+                    "imagem": "/assets/img/sispro/step4.png"
+                },
+                {
+                    "passo": 5,
+                    "titulo": "Abrir o Link de Instalação",
+                    "descricao": "Abra o navegador e cole o link http://cesispropd01:8080/sispro/SisPro.jnlp para iniciar a instalação.",
+                    "imagem": "/assets/img/sispro/step5.png"
+                },
+                {
+                    "passo": 6,
+                    "titulo": "Configurar Atualização do Java",
+                    "descricao": "Na janela 'Java Update Necessário', selecione 'Não perguntar outra vez até que a próxima atualização esteja disponível' e clique em 'Mais Tarde'.",
+                    "imagem": "/assets/img/sispro/step6.png"
+                },
+                {
+                    "passo": 7,
+                    "titulo": "Aceitar Risco e Executar Aplicativo",
+                    "descricao": "Na advertência de segurança, marque 'Eu aceito o risco e desejo executar este aplicativo' e clique em 'Executar'.",
+                    "imagem": "/assets/img/sispro/step7.png"
+                },
+                {
+                    "passo": 8,
+                    "titulo": "Finalizar Instalação",
+                    "descricao": "Após executar o aplicativo, a instalação será concluída com sucesso. Insira suas credenciais para acessar o Sispro.",
+                    "imagem": "/assets/img/sispro/step8.png"
+                }
+            ]
+        },
+        {
+            "id": 33,
+            "nome": "Instalação e Resolução de Problemas do Serpro ID",
+            "descricao": "Este manual auxilia na instalação inicial do Serpro ID e na resolução de erros comuns, como bloqueio por antivírus.",
+            "passo_passo": [
+                {
+                    "passo": 1,
+                    "titulo": "Verificar Certificado",
+                    "descricao": "Confirme se o certificado digital utilizado é do tipo A1 em nuvem. Caso seja, prossiga com a instalação.",
+                    "imagem": "/assets/img/serproID/step1.png"
+                },
+                {
+                    "passo": 2,
+                    "titulo": "Instalar o Serpro ID",
+                    "descricao": "Acesse https://serproid.serpro.gov.br/downloads/ e baixe a primeira opção disponível. Execute a instalação normalmente (Next, Next, Next).",
+                    "imagem": "/assets/img/serproID/step2.png"
+                },
+                {
+                    "passo": 3,
+                    "titulo": "Configurar no Desktop",
+                    "descricao": "Após instalar, abra o aplicativo Desktop e escaneie o QR Code para habilitar o computador para uso.",
+                    "imagem": "/assets/img/serproID/step3.png"
+                },
+                {
+                    "passo": 4,
+                    "titulo": "Validar Acesso em Ferramentas do Governo",
+                    "descricao": "Acesse uma ferramenta do governo que exija autenticação, como https://cav.receita.fazenda.gov.br/autenticacao/login. Entre com gov.br e selecione seu certificado digital. O sistema enviará um PIN para o celular. Após validar, o acesso será concluído com sucesso.",
+                    "imagem": "/assets/img/serproID/step4.png"
+                },
+                {
+                    "passo": 5,
+                    "titulo": "Atualização do Serpro ID",
+                    "descricao": "Caso o aplicativo já esteja instalado e solicite atualização, baixe novamente pelo site oficial e execute a instalação.",
+                    "imagem": "/assets/img/serproID/step5.png"
+                },
+                {
+                    "passo": 6,
+                    "titulo": "Erro: Antivírus bloqueando a assinatura",
+                    "descricao": "Se aparecer a mensagem de antivírus bloqueando a assinatura:\n1. Acesse https://serproid.serpro.gov.br/downloads/.\n2. Faça a instalação novamente.\n3. Se o problema persistir, desinstale temporariamente o antivírus e repita a instalação.",
+                    "imagem": "/assets/img/serproID/step6.png"
+                }
+            ]
         }
     ],
     "Outlook": [
+        {
+            "id": 30,
+            "nome": "Correção do Erro 7ita9 no Microsoft 365",
+            "descricao": "Este manual apresenta as etapas recomendadas para corrigir o erro '7ita9', que pode ocorrer em aplicativos do Microsoft 365 como Outlook, Word, Excel e outros. O problema está relacionado a componentes de autenticação e cache de identidade do Windows.",
+            "passo_passo": [
+                {
+                    "passo": 1,
+                    "titulo": "Entender a Descrição do Erro",
+                    "descricao": "O erro '7ita9' ocorre ao iniciar aplicativos Microsoft 365, impedindo login ou sincronização correta das credenciais. Está relacionado a falhas nos componentes de autenticação e cache de identidade.",
+                    "imagem": "/assets/img/outlookErro7ita9/step1.png"
+                },
+                {
+                    "passo": 2,
+                    "titulo": "Excluir Pastas de Cache de Identidade",
+                    "descricao": "1. Pressione Windows + R e digite %localappdata%\\Microsoft.\n2. Localize e exclua as pastas 'IdentityCache' e 'OneAuth'.\n3. Reinicie o computador e teste novamente o acesso ao aplicativo Office.",
+                    "imagem": "/assets/img/outlookErro7ita9/step2.png"
+                },
+                {
+                    "passo": 3,
+                    "titulo": "Re-registrar Componentes AAD Broker Plugin e Cloud Experience Host",
+                    "descricao": "1. Abra o 'Windows PowerShell (Admin)'.\n2. Execute os comandos:\n   Add-AppxPackage -Register \"$env:windir\\SystemApps\\Microsoft.AAD.BrokerPlugin_cw5n1h2txyewy\\Appxmanifest.xml\" -DisableDevelopmentMode -ForceApplicationShutdown\n   Add-AppxPackage -Register \"$env:windir\\SystemApps\\Microsoft.Windows.CloudExperienceHost_cw5n1h2txyewy\\Appxmanifest.xml\" -DisableDevelopmentMode -ForceApplicationShutdown\n3. Esses comandos reconstroem os componentes de autenticação do Windows.",
+                    "imagem": "/assets/img/outlookErro7ita9/step3.png"
+                },
+                {
+                    "passo": 4,
+                    "titulo": "Excluir Pacotes Corrompidos",
+                    "descricao": "1. Pressione Windows + R e digite %localappdata%\\Packages.\n2. Exclua as pastas 'Microsoft.AAD.BrokerPlugin_cw5n1h2txyewy' e 'Microsoft.Windows.CloudExperienceHost_cw5n1h2txyewy', se existirem.\n3. Reinicie o computador e abra novamente o aplicativo afetado.",
+                    "imagem": "/assets/img/outlookErro7ita9/step4.png"
+                },
+                {
+                    "passo": 5,
+                    "titulo": "Observações Finais",
+                    "descricao": "Se o erro persistir:\n- Verifique atualizações pendentes do Windows e Office.\n- Confirme que a conta corporativa está configurada no Azure AD.\n- Execute a ferramenta de reparo rápido do Microsoft 365 pelo Painel de Controle.",
+                    "imagem": "/assets/img/outlookErro7ita9/step5.png"
+                }
+            ]
+        },
         {
             "id": 15,
             "nome": "Outlook - Adicionar uma Nova Caixa de Correio",
@@ -580,6 +715,76 @@
             ]
         }
     ],
+    "OneDrive": [
+        {
+            "id": 28,
+            "nome": "Reativação do OneDrive via Regedit",
+            "descricao": "Este manual descreve o procedimento para reativar o OneDrive no Windows utilizando o Editor do Registro (regedit). Alterações incorretas podem afetar o funcionamento do sistema, portanto siga com atenção.",
+            "passo_passo": [
+                {
+                    "passo": 1,
+                    "titulo": "Abrir o Editor do Registro",
+                    "descricao": "Clique no menu Iniciar, digite 'regedit', clique com o botão direito em 'Editor do Registro' e selecione 'Executar como administrador'.",
+                    "imagem": "/assets/img/onedrive/step1.png"
+                },
+                {
+                    "passo": 2,
+                    "titulo": "Navegar até a chave do OneDrive",
+                    "descricao": "No Editor do Registro, vá até o caminho: HKEY_LOCAL_MACHINE\\Software\\Policies\\Microsoft\\Windows\\OneDrive.",
+                    "imagem": "/assets/img/onedrive/step2.png"
+                },
+                {
+                    "passo": 3,
+                    "titulo": "Alterar o valor da chave",
+                    "descricao": "Localize o valor chamado 'DisableFileSyncNGSC'. Clique duas vezes sobre ele, altere o valor de '1' para '0' e clique em OK para salvar.",
+                    "imagem": "/assets/img/onedrive/step3.png"
+                },
+                {
+                    "passo": 4,
+                    "titulo": "Finalizar e Reiniciar",
+                    "descricao": "Feche o Editor do Registro e reinicie o computador para aplicar as mudanças.",
+                    "imagem": "/assets/img/onedrive/step4.png"
+                },
+                {
+                    "passo": 5,
+                    "titulo": "Verificar Políticas de Grupo",
+                    "descricao": "Se após reiniciar o valor voltar para '1', isso indica que uma Política de Grupo (GPO) está impondo a configuração. Nesse caso, entre em contato com o administrador de rede para verificar a política aplicada.",
+                    "imagem": "/assets/img/onedrive/step5.png"
+                }
+            ]
+        },
+        {
+            "id": 29,
+            "nome": "OneDrive - Sincronizar Pastas Específicas",
+            "descricao": "Este manual ensina como selecionar e sincronizar pastas específicas do OneDrive no seu computador.",
+            "passo_passo": [
+                {
+                    "passo": 1,
+                    "titulo": "Abrir Configurações do OneDrive",
+                    "descricao": "1. Clique com o botão direito no ícone do OneDrive na bandeja do sistema (canto inferior direito). \n2. Selecione 'Configurações'.",
+                    "imagem": "/assets/img/onedrive_sincronizacao/step1.png"
+                },
+                {
+                    "passo": 2,
+                    "titulo": "Acessar a Aba de Conta",
+                    "descricao": "Na janela de configurações, clique na aba 'Conta'.",
+                    "imagem": "/assets/img/onedrive_sincronizacao/step2.png"
+                },
+                {
+                    "passo": 3,
+                    "titulo": "Selecionar Pastas para Sincronização",
+                    "descricao": "Clique no botão 'Escolher pastas'. Na nova janela, marque ou desmarque as pastas que deseja sincronizar com o seu computador. Clique em 'OK' para confirmar.",
+                    "imagem": "/assets/img/onedrive_sincronizacao/step3.png"
+                },
+                {
+                    "passo": 4,
+                    "titulo": "Finalizar Configuração",
+                    "descricao": "Clique em 'OK' na janela de configurações para salvar as alterações. O OneDrive começará a sincronizar apenas as pastas selecionadas.",
+                    "imagem": "/assets/img/onedrive_sincronizacao/step4.png"
+                }
+            ]
+        }
+    ],
     "Vpn": [
         {
             "id": 12,
@@ -691,9 +896,144 @@
                     "imagem": "/assets/img/vpn_macos/step5.png"
                 }
             ]
+        },
+        {
+            "id": 34,
+            "nome": "Configuração da VPN CIDADANIA",
+            "descricao": "Este manual apresenta o passo a passo para configurar corretamente a VPN CIDADANIA no Windows, garantindo acesso seguro aos sistemas corporativos sem comprometer a velocidade da internet.",
+            "passo_passo": [
+                {
+                    "passo": 1,
+                    "titulo": "Acessar Configurações de Rede",
+                    "descricao": "1. Abra o Menu Iniciar e clique em Configurações.\n2. Vá até 'Rede e Internet'.\n3. No menu lateral, selecione 'VPN'.\n4. Clique em 'Adicionar uma conexão VPN'.",
+                    "imagem": "/assets/img/vpnCidadania/step1.png"
+                },
+                {
+                    "passo": 2,
+                    "titulo": "Criar Conexão VPN",
+                    "descricao": "Preencha os campos:\n- Provedor de VPN: Windows.\n- Nome da conexão: VPN CIDADANIA.\n- Endereço do servidor: fornecido pelo TI.\n- Tipo de VPN: Automático ou L2TP/IPSec.\n- Tipo de login: Nome de usuário e senha.\n- Usuário: seu login corporativo.",
+                    "imagem": "/assets/img/vpnCidadania/step2.png"
+                },
+                {
+                    "passo": 3,
+                    "titulo": "Configurar Adaptador de Rede",
+                    "descricao": "1. Na tela de VPN, clique em 'Alterar opções de adaptador'.\n2. Localize 'VPN CIDADANIA'.\n3. Clique com o botão direito e selecione 'Propriedades'.\n4. Na aba Rede, selecione 'Protocolo IP versão 4 (TCP/IPv4)' e clique em Propriedades.",
+                    "imagem": "/assets/img/vpnCidadania/step3.png"
+                },
+                {
+                    "passo": 4,
+                    "titulo": "Otimização Crítica - Gateway Padrão",
+                    "descricao": "1. Nas propriedades do IPv4, clique em 'Avançado'.\n2. Desmarque a opção 'Usar gateway padrão na rede remota'.\n3. Clique em OK para salvar.\nEssa configuração evita bloqueios de internet e melhora a performance.",
+                    "imagem": "/assets/img/vpnCidadania/step4.png"
+                },
+                {
+                    "passo": 5,
+                    "titulo": "Conectar e Testar",
+                    "descricao": "1. Volte ao menu VPN.\n2. Selecione 'VPN CIDADANIA'.\n3. Clique em 'Conectar'.\n4. Teste conectividade: acesse sistemas internos, navegue em sites externos e monitore estabilidade da conexão.",
+                    "imagem": "/assets/img/vpnCidadania/step5.png"
+                },
+                {
+                    "passo": 6,
+                    "titulo": "Conclusão e Dicas de Uso",
+                    "descricao": "Após configurar, a VPN estará pronta para uso.\n- Conecte antes de acessar sistemas internos.\n- Verifique o status pelo ícone da bandeja.\n- Desconecte ao sair para economizar recursos.\n- Em caso de problemas, contate o suporte de TI.",
+                    "imagem": "/assets/img/vpnCidadania/step6.png"
+                }
+            ]
+        },
+        {
+            "id": 35,
+            "nome": "Configuração da Área de Trabalho Remota",
+            "descricao": "Este manual apresenta o passo a passo para habilitar e utilizar a Área de Trabalho Remota no Windows, permitindo acesso remoto seguro ao computador.",
+            "passo_passo": [
+                {
+                    "passo": 1,
+                    "titulo": "Acessar Configurações do Sistema",
+                    "descricao": "Clique no menu Iniciar, digite 'Configurações' e abra o aplicativo. Em seguida, vá até 'Sistema'.",
+                    "imagem": "/assets/img/remoteDesktop/step1.png"
+                },
+                {
+                    "passo": 2,
+                    "titulo": "Habilitar Área de Trabalho Remota",
+                    "descricao": "No menu lateral, selecione 'Área de Trabalho Remota'. Ative a opção 'Habilitar Área de Trabalho Remota'. Confirme a escolha quando solicitado.",
+                    "imagem": "/assets/img/remoteDesktop/step2.png"
+                },
+                {
+                    "passo": 3,
+                    "titulo": "Configurar Permissões de Usuário",
+                    "descricao": "Clique em 'Selecionar usuários que podem se conectar remotamente'. Adicione os usuários autorizados a acessar o computador via RDP.",
+                    "imagem": "/assets/img/remoteDesktop/step3.png"
+                },
+                {
+                    "passo": 4,
+                    "titulo": "Verificar Firewall",
+                    "descricao": "Certifique-se de que o Firewall do Windows permite conexões de Área de Trabalho Remota. Vá em 'Configurações avançadas' do Firewall e confirme que a regra de RDP está habilitada.",
+                    "imagem": "/assets/img/remoteDesktop/step4.png"
+                },
+                {
+                    "passo": 5,
+                    "titulo": "Obter Endereço IP ou Nome do Computador",
+                    "descricao": "No menu Iniciar, digite 'cmd' e abra o Prompt de Comando. Digite 'ipconfig' para visualizar o endereço IP ou use o nome do computador para conexão.",
+                    "imagem": "/assets/img/remoteDesktop/step5.png"
+                },
+                {
+                    "passo": 6,
+                    "titulo": "Conectar via Cliente RDP",
+                    "descricao": "No computador remoto, abra o aplicativo 'Conexão de Área de Trabalho Remota'. Digite o IP ou nome do computador, insira suas credenciais e clique em 'Conectar'.",
+                    "imagem": "/assets/img/remoteDesktop/step6.png"
+                },
+                {
+                    "passo": 7,
+                    "titulo": "Conclusão",
+                    "descricao": "Após seguir os passos, a Área de Trabalho Remota estará configurada e pronta para uso. Utilize sempre conexões seguras e mantenha o sistema atualizado.",
+                    "imagem": "/assets/img/remoteDesktop/step7.png"
+                }
+            ]
         }
     ],
     "Configurações": [
+        {
+            "id": 31,
+            "nome": "Limpeza lógica, Otimização e Reparos do Sistema",
+            "descricao": "Este manual descreve em detalhes como executar etapas de otimização e reparo da estação de trabalho, organizadas do procedimento mais rápido ao mais demorado. Inclui limpeza de disco, ajustes de desempenho, desfragmentação, verificação de integridade e reparos profundos.",
+            "passo_passo": [
+                {
+                    "passo": 1,
+                    "titulo": "Limpeza de Disco",
+                    "descricao": "1. Pressione Windows + R.\n2. Digite 'cleanmgr' e pressione Enter.\n3. Selecione a unidade C: e clique em OK.\n4. Marque as opções desejadas (principalmente arquivos temporários).\n5. Clique em OK -> Excluir arquivos.",
+                    "imagem": "/assets/img/otimizacaoReparos/step1.png"
+                },
+                {
+                    "passo": 2,
+                    "titulo": "Ajuste de Configurações Avançadas para Melhor Desempenho",
+                    "descricao": "1. Clique com o botão direito em 'Este Computador' e selecione 'Propriedades'.\n2. Clique em 'Configurações avançadas do sistema'.\n3. Na aba 'Avançado', clique em 'Configurações' (em Desempenho).\n4. Marque 'Ajustar para obter um melhor desempenho'.\n5. Clique em Aplicar e depois em OK.",
+                    "imagem": "/assets/img/otimizacaoReparos/step2.png"
+                },
+                {
+                    "passo": 3,
+                    "titulo": "Desfragmentação e Otimização da Unidade",
+                    "descricao": "1. Pressione Windows + S e pesquise 'Desfragmentar e otimizar unidades'.\n2. Abra o aplicativo.\n3. Selecione o disco C:.\n4. Clique em 'Otimizar'.\n5. Aguarde o término da operação.",
+                    "imagem": "/assets/img/otimizacaoReparos/step3.png"
+                },
+                {
+                    "passo": 4,
+                    "titulo": "Verificação de Integridade com SFC /scannow",
+                    "descricao": "1. Clique no menu Iniciar e digite 'cmd'.\n2. Clique com o botão direito em 'Prompt de Comando' e escolha 'Executar como administrador'.\n3. Digite o comando: sfc /scannow.\n4. Aguarde a verificação (pode levar vários minutos).\n5. Reinicie o computador se solicitado.",
+                    "imagem": "/assets/img/otimizacaoReparos/step4.png"
+                },
+                {
+                    "passo": 5,
+                    "titulo": "Reparos Profundos com DISM /RestoreHealth",
+                    "descricao": "1. Abra novamente o Prompt de Comando como Administrador.\n2. Digite o comando: DISM /Online /Cleanup-Image /RestoreHealth.\n3. Aguarde a conclusão (10 a 40 minutos).\n4. Após finalizar, recomenda-se rodar o sfc /scannow novamente.\n5. Reinicie a máquina ao final.",
+                    "imagem": "/assets/img/otimizacaoReparos/step5.png"
+                },
+                {
+                    "passo": 6,
+                    "titulo": "Conclusão",
+                    "descricao": "Seguindo todos os passos, você realiza uma limpeza lógica completa, melhora o desempenho, corrige falhas do sistema e aumenta a estabilidade geral do Windows.",
+                    "imagem": "/assets/img/otimizacaoReparos/step6.png"
+                }
+            ]
+        },
         {
             "id": 3,
             "nome": "Acesso ao HOD SIAPE",
@@ -1238,6 +1578,208 @@
                     "titulo": "Ocultar das Listas de Endereços",
                     "descricao": "Dê um duplo clique no nome do usuário, marque a opção 'Ocultar das listas de endereços' e clique em 'Salvar'.",
                     "imagem": "/assets/img/desativar_usuario/step7.png"
+                }
+            ]
+        },
+        {
+            "id": 36,
+            "nome": "Uso do Varonis para Identificação de Bloqueios de Conta",
+            "descricao": "Este manual orienta como utilizar o Varonis para identificar eventos de bloqueio de contas de rede, localizar o dispositivo de origem e aplicar medidas corretivas.",
+            "passo_passo": [
+                {
+                    "passo": 1,
+                    "titulo": "Acessar a Ferramenta Varonis",
+                    "descricao": "Abra a URL https://wivaronispd01.mds.net/DatAdvantage/. Caso apareça mensagem de certificado, aceite os riscos e continue. Faça login com usuário e senha de rede.",
+                    "imagem": "/assets/img/varonis/step1.png"
+                },
+                {
+                    "passo": 2,
+                    "titulo": "Navegar até Analytics",
+                    "descricao": "Após autenticar-se, clique na aba 'Analytics' na barra superior da ferramenta.",
+                    "imagem": "/assets/img/varonis/step2.png"
+                },
+                {
+                    "passo": 3,
+                    "titulo": "Selecionar Servidores",
+                    "descricao": "Em 'Events', clique em 'All Servers'. No campo 'SELECT SERVERS', mantenha selecionado apenas 'Directory Services' e clique em 'Apply'.",
+                    "imagem": "/assets/img/varonis/step3.png"
+                },
+                {
+                    "passo": 4,
+                    "titulo": "Aplicar Filtros de Evento",
+                    "descricao": "Clique em 'Search for Filters and Values'. Em 'Event Type', selecione 'User Locked Out' e clique em 'Search'. Outros filtros podem ser aplicados conforme necessidade.",
+                    "imagem": "/assets/img/varonis/step4.png"
+                },
+                {
+                    "passo": 5,
+                    "titulo": "Visualizar Resultados",
+                    "descricao": "Serão exibidos os bloqueios do último dia. Utilize a visualização de atributos para detalhar os eventos.",
+                    "imagem": "/assets/img/varonis/step5.png"
+                },
+                {
+                    "passo": 6,
+                    "titulo": "Identificar Usuário e Dispositivo",
+                    "descricao": "Em 'ATTRIBUTE SELECTION', selecione 'Event From Device' e clique em 'Apply'. O usuário bloqueado aparece na coluna 'Object Name (Event On)' e o dispositivo de origem em 'Device Name'.",
+                    "imagem": "/assets/img/varonis/step6.png"
+                },
+                {
+                    "passo": 7,
+                    "titulo": "Ações Corretivas",
+                    "descricao": "Caso identifique bloqueios recorrentes, recomenda-se:\n- Limpar senhas salvas em navegadores.\n- Atualizar senhas em aplicativos Microsoft (Teams, OneDrive, Outlook).\n- Atualizar senhas em aplicativos que usam autenticação de rede.\n- Atualizar perfis de conexão Wi-Fi e VPN.\n- Excluir credenciais salvas no Gerenciador de Credenciais do Windows.\n- Encerrar sessões abertas em servidores e estações de trabalho.\n- Verificar tarefas automatizadas que possam estar usando credenciais antigas.",
+                    "imagem": "/assets/img/varonis/step7.png"
+                },
+                {
+                    "passo": 8,
+                    "titulo": "Conclusão",
+                    "descricao": "O Varonis permite identificar a origem dos bloqueios, mas a análise detalhada deve ser feita em conjunto pela equipe de TI e pelo usuário para localizar a causa exata.",
+                    "imagem": "/assets/img/varonis/step8.png"
+                }
+            ]
+        },
+        {
+            "id": 37,
+            "nome": "Migração de Caixa de Correio de Usuários",
+            "descricao": "Este manual orienta a equipe de atendimento remoto N1 na migração de caixas de correio dos usuários para o Exchange Online. A migração só pode ser realizada se o usuário possuir licença do Office 365. É importante verificar se será necessário exportar o PST antes, pois os e-mails antigos são excluídos durante o processo.",
+            "passo_passo": [
+                {
+                    "passo": 1,
+                    "titulo": "Acessar Centro de Administração do Exchange",
+                    "descricao": "Entre no link https://admin.exchange.microsoft.com/#/ e faça login com suas credenciais administrativas.",
+                    "imagem": "/assets/img/migracaoCaixaCorreio/step1.png"
+                },
+                {
+                    "passo": 2,
+                    "titulo": "Ir para Migração",
+                    "descricao": "No menu lateral, selecione 'Migração' para iniciar o processo.",
+                    "imagem": "/assets/img/migracaoCaixaCorreio/step2.png"
+                },
+                {
+                    "passo": 3,
+                    "titulo": "Adicionar Lote de Migração",
+                    "descricao": "Clique em 'Adicionar lote de migração'.",
+                    "imagem": "/assets/img/migracaoCaixaCorreio/step3.png"
+                },
+                {
+                    "passo": 4,
+                    "titulo": "Definir Nome e Caminho",
+                    "descricao": "Insira um nome para identificar o usuário ou grupo de usuários. Selecione 'Migração para Exchange Online'.",
+                    "imagem": "/assets/img/migracaoCaixaCorreio/step4.png"
+                },
+                {
+                    "passo": 5,
+                    "titulo": "Selecionar Tipo de Migração",
+                    "descricao": "Escolha 'Migração de movimentação remota'. Essa opção migra caixas de correio de um Exchange local para o Exchange Online.",
+                    "imagem": "/assets/img/migracaoCaixaCorreio/step5.png"
+                },
+                {
+                    "passo": 6,
+                    "titulo": "Selecionar Endpoint",
+                    "descricao": "Selecione o ponto de extremidade 'Hybrid Migration Endpoint'. Caso não exista, crie um novo conforme instruções do TI.",
+                    "imagem": "/assets/img/migracaoCaixaCorreio/step6.png"
+                },
+                {
+                    "passo": 7,
+                    "titulo": "Adicionar Usuários",
+                    "descricao": "Pesquise o nome do usuário. Se não encontrar, significa que já foi migrado. Caso apareça apenas uma sequência de números em vez do nome, encaminhe o chamado para o 3º nível.",
+                    "imagem": "/assets/img/migracaoCaixaCorreio/step7.png"
+                },
+                {
+                    "passo": 8,
+                    "titulo": "Definir Domínio de Destino",
+                    "descricao": "Selecione o domínio de entrega de destino 'mdsgov.mail.onmicrosoft.com'.",
+                    "imagem": "/assets/img/migracaoCaixaCorreio/step8.png"
+                },
+                {
+                    "passo": 9,
+                    "titulo": "Configurar Conclusão Automática",
+                    "descricao": "Selecione a opção 'Concluir o lote de migração automaticamente'. Isso garante que a ferramenta finalize o processo sem intervenção manual.",
+                    "imagem": "/assets/img/migracaoCaixaCorreio/step9.png"
+                },
+                {
+                    "passo": 10,
+                    "titulo": "Finalizar Migração",
+                    "descricao": "Após salvar, o lote será processado em algumas horas. Um relatório será enviado aos destinatários definidos. Verifique se a migração foi concluída com sucesso.",
+                    "imagem": "/assets/img/migracaoCaixaCorreio/step10.png"
+                }
+            ]
+        },
+        {
+            "id": 38,
+            "nome": "Mapeamento de Pastas no Computador do Usuário",
+            "descricao": "Este manual orienta a equipe de suporte remoto e presencial no mapeamento de pastas de rede no computador do usuário.",
+            "passo_passo": [
+                {
+                    "passo": 1,
+                    "titulo": "Abrir Computador",
+                    "descricao": "Clique no menu Iniciar e selecione 'Computador'.",
+                    "imagem": "/assets/img/mapeamentoPastas/step1.png"
+                },
+                {
+                    "passo": 2,
+                    "titulo": "Selecionar Mapear Unidade de Rede",
+                    "descricao": "Na janela do Computador, clique em 'Mapear unidade de rede'.",
+                    "imagem": "/assets/img/mapeamentoPastas/step2.png"
+                },
+                {
+                    "passo": 3,
+                    "titulo": "Inserir Caminho da Pasta",
+                    "descricao": "Na janela de mapeamento, insira o caminho completo da pasta de rede (exemplo: \\\\mds.net\\mds\\SE\\DT\\CGSS\\SUPORTE). Selecione a letra da unidade e marque 'Reconectar-se durante o logon'.",
+                    "imagem": "/assets/img/mapeamentoPastas/step3.png"
+                },
+                {
+                    "passo": 4,
+                    "titulo": "Concluir Mapeamento",
+                    "descricao": "Clique em 'Concluir' para validar o mapeamento da pasta.",
+                    "imagem": "/assets/img/mapeamentoPastas/step4.png"
+                },
+                {
+                    "passo": 5,
+                    "titulo": "Criar Atalho",
+                    "descricao": "Com o botão direito sobre o mapeamento criado, selecione 'Criar atalho' para facilitar o acesso.",
+                    "imagem": "/assets/img/mapeamentoPastas/step5.png"
+                },
+                {
+                    "passo": 6,
+                    "titulo": "Registrar Chamado",
+                    "descricao": "Após concluir, registre o chamado no sistema CITSMART conforme procedimento padrão.",
+                    "imagem": "/assets/img/mapeamentoPastas/step6.png"
+                }
+            ]
+        },
+        {
+            "id": 39,
+            "nome": "Mapeamento da Pasta HYDRA (Esporte)",
+            "descricao": "Este manual orienta o mapeamento da pasta HYDRA para usuários da divisão de esporte, utilizando credenciais específicas.",
+            "passo_passo": [
+                {
+                    "passo": 1,
+                    "titulo": "Abrir Computador",
+                    "descricao": "Clique no menu Iniciar e selecione 'Computador'.",
+                    "imagem": "/assets/img/mapeamentoEsporte/step1.png"
+                },
+                {
+                    "passo": 2,
+                    "titulo": "Selecionar Mapear Unidade de Rede",
+                    "descricao": "Na janela do Computador, clique em 'Mapear unidade de rede'.",
+                    "imagem": "/assets/img/mapeamentoEsporte/step2.png"
+                },
+                {
+                    "passo": 3,
+                    "titulo": "Inserir Caminho da Pasta",
+                    "descricao": "Digite o caminho da pasta: \\\\172.18.3.6\\DIVISAO_do_Esporte.",
+                    "imagem": "/assets/img/mapeamentoEsporte/step3.png"
+                },
+                {
+                    "passo": 4,
+                    "titulo": "Conectar com Usuário Diferente",
+                    "descricao": "Marque a opção 'Conectar usando credenciais diferentes'. Insira:\n- Usuário: esporte\\nome_de_usuario\n- Senha: senha do esporte.",
+                    "imagem": "/assets/img/mapeamentoEsporte/step4.png"
+                },
+                {
+                    "passo": 5,
+                    "titulo": "Finalizar Mapeamento",
+                    "descricao": "Clique em 'Concluir' para validar o mapeamento da pasta HYDRA.",
+                    "imagem": "/assets/img/mapeamentoEsporte/step5.png"
                 }
             ]
         }
