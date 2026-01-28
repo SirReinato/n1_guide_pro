@@ -6,7 +6,7 @@ export default function Sobre() {
         <ConteinerSobreStl>
             <img
                 className="imgSobre"
-                src="/assets/img/n1.png"
+                src="/assets/img/N1.png"
                 alt="Banner do site, um homem negro de terno segurando um notebook, atras varios itens tecnologicos"
             />
             <ConteinerTextSobreStl>
