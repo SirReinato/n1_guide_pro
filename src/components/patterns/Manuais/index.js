@@ -13,7 +13,7 @@ export default function Manuais({
     const itensFiltrados = todosOsItens.filter(
         (item) =>
             item.nome.toLowerCase().includes(busca.toLowerCase()) ||
-            item.descricao.toLowerCase().includes(busca.toLowerCase())
+            item.descricao.toLowerCase().includes(busca.toLowerCase()),
     );
 
     const titulos = Object.keys(instalacoesPorCategoria);
@@ -99,7 +99,7 @@ const ConteinerManualDuplo = styled.div`
     grid-template-columns: repeat(2, 1fr);
     gap: 32px;
     align-items: stretch;
-    @media (max-width: 768px) {
+    @media (max-width: 481px) {
         grid-template-columns: 1fr;
     }
 `;

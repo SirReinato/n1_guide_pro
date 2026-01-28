@@ -55,12 +55,13 @@ export const TitulosPrincipaisStl = styled.h1`
     @media (min-width: 1401px) {
     }
     @media (min-width: 768px) and (max-width: 1200px) {
-        font-size: 2.2rem;
+        font-size: ${theme.fontSize.titulos.mm};
+        text-align: center;
     }
     @media (min-width: 481px) and (max-width: 767px) {
     }
     @media (max-width: 480px) {
-        font-size: 2rem;
+        font-size: ${theme.fontSize.titulosSecundarios.mm};
         text-align: center;
         align-items: start;
     }
@@ -78,7 +79,8 @@ export const TitulosSecundariosStl = styled.h2`
     @media (min-width: 1401px) {
     }
     @media (min-width: 768px) and (max-width: 1200) {
-        font-size: 1.8rem;
+        font-size: ${theme.fontSize.paragrafos.mm};
+        font-weight: 200;
     }
     @media (min-width: 481px) and (max-width: 767px) {
     }

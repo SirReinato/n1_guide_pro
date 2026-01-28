@@ -31,6 +31,9 @@ const ConteinerManuaisPesquisaFormStl = styled.div`
     display: flex;
     flex-direction: column;
     width: fit-content;
+    @media (max-width: 480px) {
+        margin: 0 auto;
+    }
 `;
 const InputManuaisPesquisaFormStl = styled.input`
     border: none;
@@ -39,6 +42,15 @@ const InputManuaisPesquisaFormStl = styled.input`
     font-family: ${theme.fontsFamily.paragrafos};
     color: ${theme.colors.azul.escuro};
     border-radius: 8px 0 0 8px;
+    @media (min-width: 1401px) {
+    }
+    @media (min-width: 768px) and (max-width: 1200px) {
+        width: 63%;
+    }
+    @media (min-width: 481px) and (max-width: 767px) {
+    }
+    @media (max-width: 480px) {
+    }
 `;
 const ButtonManuaisPesquisaFormStl = styled.button`
     border: none;

@@ -35,10 +35,6 @@ const LetreiroWrapper = styled.div`
     background: ${theme.colors.azulMaisClaro.claro};
     border-radius: 8px;
     padding: 8px 0;
-
-    @media (max-width: 768px) {
-        max-width: 100%;
-    }
 `;
 
 const LetreiroTrack = styled.div`

@@ -84,9 +84,24 @@ const CentralSuporteStl = styled.span`
     padding: 8px 16px;
     border-radius: 16px;
     width: fit-content;
+    align-items: center;
+    display: flex;
+    @media (max-width: 480px) {
+        margin: 0 auto;
+    }
 `;
 const CentralSuporteTextStl = styled.span`
     font-size: ${theme.fontSize.paragrafos.mm};
     letter-spacing: 0.1em;
     font-weight: bolder;
+    @media (min-width: 1401px) {
+    }
+    @media (min-width: 768px) and (max-width: 1200px) {
+        font-size: 0.76rem;
+    }
+    @media (min-width: 481px) and (max-width: 767px) {
+    }
+    @media (max-width: 480px) {
+        font-size: ${theme.fontSize.paragrafos.pp};
+    }
 `;
