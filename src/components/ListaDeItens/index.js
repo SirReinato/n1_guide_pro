@@ -42,8 +42,18 @@ const ListaDeItensStl = styled.li`
         props.$primary
             ? `${theme.colors.azulMaisClaro.escuro}`
             : `${theme.colors.azul.escuro}`};
+
     padding: 16px;
     gap: 16px;
+    @media (min-width: 1401px) {
+    }
+    @media (min-width: 768px) and (max-width: 1200px) {
+        min-width: 0;
+    }
+    @media (min-width: 481px) and (max-width: 767px) {
+    }
+    @media (max-width: 480px) {
+    }
 `;
 const ContainerListaIconTituloStl = styled.div`
     width: 100%;
@@ -62,6 +72,15 @@ const TituloListaStl = styled.h3`
     font-weight: 500;
     color: ${theme.colors.clara.medio};
     margin-bottom: 8px;
+    @media (min-width: 1401px) {
+    }
+    @media (min-width: 768px) and (max-width: 1200px) {
+        font-size: ${theme.fontSize.paragrafos.gg};
+    }
+    @media (min-width: 481px) and (max-width: 767px) {
+    }
+    @media (max-width: 480px) {
+    }
 `;
 const DescricaoListaStl = styled.p`
     font-size: ${theme.fontSize.paragrafos.pp};

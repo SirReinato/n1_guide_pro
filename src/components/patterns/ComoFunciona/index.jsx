@@ -45,7 +45,7 @@ const ComoFuncionaContainerStl = styled.div`
         padding: 16px 10%;
     }
     @media (max-width: 480px) {
-        padding: 16px 2%;
+        display: none;
     }
 `;
 
@@ -61,6 +61,14 @@ const CardsComoFuncionaStl = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    @media (min-width: 1401px) {
+    }
+    @media (min-width: 768px) and (max-width: 1200px) {
+    }
+    @media (min-width: 481px) and (max-width: 767px) {
+    }
+    @media (max-width: 480px) {
+    }
 `;
 
 const comoFunciona = [
