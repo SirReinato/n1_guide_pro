@@ -1,20 +1,20 @@
 import styled, { keyframes } from "styled-components";
 import { theme } from "../../theme/theme";
+import instalacoes from "../../data/instalacao.json";
 
 export default function LetreiroHeader() {
+    const OsItens = Object.keys(instalacoes);
+
     return (
         <LetreiroWrapper>
             <LetreiroTrack>
-                <Texto>
-                    📘 Consulte os manuais antes de abrir chamado • ⚠️
-                    Procedimentos de VPN atualizados • 🛠️ Base interna N1
-                    GuidePro •
-                </Texto>
-                <Texto>
-                    📘 Consulte os manuais antes de abrir chamado • ⚠️
-                    Procedimentos de VPN atualizados • 🛠️ Base interna N1
-                    GuidePro •
-                </Texto>
+                <Texto>🛠️ Base interna N1 GuidePro •</Texto>
+
+                {OsItens.map((nome) => (
+                    <li key={nome}>
+                        <Texto>{nome}</Texto>
+                    </li>
+                ))}
             </LetreiroTrack>
         </LetreiroWrapper>
     );
