@@ -1356,6 +1356,274 @@
     ],
     "Criando-User": [
         {
+            "id": 47,
+            "nome": "Criação de Usuário - Modo Completo",
+            "descricao": "Este manual apresenta o processo completo de criação de um novo usuário, incluindo cadastro no AD, configuração de caixa de correio, atribuição de licença, migração para Office 365, e concessão de acessos adicionais conforme solicitado.",
+            "passo_passo": [
+                {
+                    "passo": 1,
+                    "titulo": "Verificar Existência do Perfil",
+                    "descricao": "Pesquise pelo nome completo do usuário no Active Directory.\n\nSe o perfil já existir ou estiver desativado, não crie um novo.\n\nConceda apenas os acessos necessários.",
+                    "imagem": "/assets/img/criacaoUsuarioCompleto/step1.png"
+                },
+                {
+                    "passo": 2,
+                    "titulo": "Criar Usuário na OU Correta",
+                    "descricao": "Escolha a OU correta:\n- Cidadania\n- Esporte\n- Temporário\n\nDefina se o usuário é servidor ou terceirizado.",
+                    "imagem": "/assets/img/criacaoUsuarioCompleto/step2.png"
+                },
+                {
+                    "passo": 3,
+                    "titulo": "Inserir Nome e Sobrenome",
+                    "descricao": "Insira o primeiro nome e o sobrenome.\n\nO padrão de login é 'primeiro-último nome'.\n\nExemplo: Douglas Vieira de Araújo → douglas.araujo.",
+                    "imagem": "/assets/img/criacaoUsuarioCompleto/step3.png"
+                },
+                {
+                    "passo": 4,
+                    "titulo": "Definir Sufixo e Senha",
+                    "descricao": "Altere o sufixo para o domínio correto.\n\nDefina a senha padrão:\n- MDS: mds@123456\n- Esporte: mesp@123456",
+                    "imagem": "/assets/img/criacaoUsuarioCompleto/step4.png"
+                },
+
+                {
+                    "passo": 5,
+                    "titulo": "Acessar Exchange Admin Center",
+                    "descricao": "Acesse o link: https://webmail.mds.gov.br/ecp/",
+                    "imagem": "/assets/img/criacaoUsuarioCompleto/step5-1.png"
+                },
+                {
+                    "passo": 6,
+                    "titulo": "Abrir Destinatários",
+                    "descricao": "No painel esquerdo, clique em 'Destinatários'.",
+                    "imagem": "/assets/img/criacaoUsuarioCompleto/step5-2.png"
+                },
+                {
+                    "passo": 7,
+                    "titulo": "Selecionar Caixa de Correio",
+                    "descricao": "Dentro de 'Destinatários', clique em 'Caixa de Correio'.",
+                    "imagem": "/assets/img/criacaoUsuarioCompleto/step5-3.png"
+                },
+                {
+                    "passo": 8,
+                    "titulo": "Iniciar Criação",
+                    "descricao": "Clique no botão '+' e selecione 'Caixa de Correio do Usuário'.",
+                    "imagem": "/assets/img/criacaoUsuarioCompleto/step5-4.png"
+                },
+                {
+                    "passo": 9,
+                    "titulo": "Procurar Usuário",
+                    "descricao": "Clique em 'Procurar' e selecione o usuário recém-criado no AD.",
+                    "imagem": "/assets/img/criacaoUsuarioCompleto/step5-5.png"
+                },
+                {
+                    "passo": 10,
+                    "titulo": "Finalizar Criação da Caixa",
+                    "descricao": "Confirme os dados e finalize a criação da caixa de correio.",
+                    "imagem": "/assets/img/criacaoUsuarioCompleto/step5-6.png"
+                },
+
+                {
+                    "passo": 11,
+                    "titulo": "Acessar Microsoft Entra",
+                    "descricao": "Acesse: https://entra.microsoft.com/",
+                    "imagem": "/assets/img/criacaoUsuarioCompleto/step6-1.png"
+                },
+                {
+                    "passo": 12,
+                    "titulo": "Pesquisar Usuário",
+                    "descricao": "Digite o login do usuário.\n\nAtenção: a sincronização do AD para o Entra pode demorar até 30 minutos.",
+                    "imagem": "/assets/img/criacaoUsuarioCompleto/step6-2.png"
+                },
+                {
+                    "passo": 13,
+                    "titulo": "Abrir Perfil",
+                    "descricao": "Clique no nome da pessoa para abrir o perfil.",
+                    "imagem": "/assets/img/criacaoUsuarioCompleto/step6-3.png"
+                },
+                {
+                    "passo": 14,
+                    "titulo": "Adicionar Associação",
+                    "descricao": "Vá até 'Grupos'. Clique em 'Adicionar associações'. Selecione 'GU-OFFICE-E3'.",
+                    "imagem": "/assets/img/criacaoUsuarioCompleto/step6-4.png"
+                },
+
+                {
+                    "passo": 15,
+                    "titulo": "Acessar Migração",
+                    "descricao": "Acesse: https://admin.cloud.microsoft/exchange#/migrationbatch",
+                    "imagem": "/assets/img/criacaoUsuarioCompleto/step7-1.png"
+                },
+                {
+                    "passo": 16,
+                    "titulo": "Adicionar Lote",
+                    "descricao": "Clique em 'Adicionar lote de migração'.",
+                    "imagem": "/assets/img/criacaoUsuarioCompleto/step7-2.png"
+                },
+                {
+                    "passo": 17,
+                    "titulo": "Informar Usuário",
+                    "descricao": "Digite o nome completo ou login do usuário e clique em 'Próximo'.",
+                    "imagem": "/assets/img/criacaoUsuarioCompleto/step7-3.png"
+                },
+                {
+                    "passo": 18,
+                    "titulo": "Selecionar Tipo de Migração",
+                    "descricao": "Escolha 'Migração de movimentação remota'. Clique em 'Próximo'.",
+                    "imagem": "/assets/img/criacaoUsuarioCompleto/step7-4.png"
+                },
+                {
+                    "passo": 19,
+                    "titulo": "Definir Endpoint",
+                    "descricao": "Selecione 'Hybrid migration endpoint - EW...' e clique em 'Próximo'.",
+                    "imagem": "/assets/img/criacaoUsuarioCompleto/step7-5.png"
+                },
+                {
+                    "passo": 20,
+                    "titulo": "Adicionar Usuário Manualmente",
+                    "descricao": "Escolha 'Adicionar usuários manualmente'. Digite o login do usuário.",
+                    "imagem": "/assets/img/criacaoUsuarioCompleto/step7-6.png"
+                },
+                {
+                    "passo": 21,
+                    "titulo": "Definir Domínio de Destino",
+                    "descricao": "Selecione: mdsgov.mail.onmicrosoft.com.",
+                    "imagem": "/assets/img/criacaoUsuarioCompleto/step7-7.png"
+                },
+                {
+                    "passo": 22,
+                    "titulo": "Finalizar Migração",
+                    "descricao": "Escolha 'Concluir automaticamente'. Clique em 'Salvar'.",
+                    "imagem": "/assets/img/criacaoUsuarioCompleto/step7-8.png"
+                },
+
+                {
+                    "passo": 23,
+                    "titulo": "Acessar Mailboxes",
+                    "descricao": "Acesse: https://admin.cloud.microsoft/exchange#/mailboxes",
+                    "imagem": "/assets/img/criacaoUsuarioCompleto/step8-1.png"
+                },
+                {
+                    "passo": 24,
+                    "titulo": "Pesquisar Caixa",
+                    "descricao": "Digite o nome da caixa de correio desejada.",
+                    "imagem": "/assets/img/criacaoUsuarioCompleto/step8-2.png"
+                },
+                {
+                    "passo": 25,
+                    "titulo": "Abrir Delegação",
+                    "descricao": "Clique em 'Delegação'.",
+                    "imagem": "/assets/img/criacaoUsuarioCompleto/step8-3.png"
+                },
+                {
+                    "passo": 26,
+                    "titulo": "Adicionar Permissões",
+                    "descricao": "Edite 'Enviar como' e 'Ler e gerenciar'. Adicione o login do usuário. Clique em salvar.",
+                    "imagem": "/assets/img/criacaoUsuarioCompleto/step8-4.png"
+                },
+
+                {
+                    "passo": 27,
+                    "titulo": "Localizar Grupo",
+                    "descricao": "No AD, pesquise quem assinou o formulário. Abra 'Member Of'.",
+                    "imagem": "/assets/img/criacaoUsuarioCompleto/step9-1.png"
+                },
+                {
+                    "passo": 28,
+                    "titulo": "Adicionar Usuário",
+                    "descricao": "Clique em 'Members'. Adicione o usuário. Clique em 'Check Names', 'OK', 'Apply' e 'OK'.",
+                    "imagem": "/assets/img/criacaoUsuarioCompleto/step9-2.png"
+                },
+                {
+                    "passo": 29,
+                    "titulo": "Pesquisar por GLB",
+                    "descricao": "No campo de pesquisa do AD, digite 'GLB'.\n\nA maioria das pastas começa com esse prefixo.",
+                    "imagem": "/assets/img/criacaoUsuarioCompleto/step9-3.png"
+                },
+                {
+                    "passo": 30,
+                    "titulo": "Filtrar Resultados",
+                    "descricao": "Clique em 'View' > 'Filter'.\n\nIsso abrirá um campo de pesquisa adicional.",
+                    "imagem": "/assets/img/criacaoUsuarioCompleto/step9-4.png"
+                },
+                {
+                    "passo": 31,
+                    "titulo": "Selecionar Pasta",
+                    "descricao": "Digite o nome da pasta ou setor.\n\nSelecione o grupo correspondente.",
+                    "imagem": "/assets/img/criacaoUsuarioCompleto/step9-5.png"
+                },
+                {
+                    "passo": 32,
+                    "titulo": "Adicionar Usuário à Pasta",
+                    "descricao": "Abra 'Members'.\n\nAdicione o usuário.\n\nConfirme com 'Check Names', 'OK', 'Apply' e 'OK'.",
+                    "imagem": "/assets/img/criacaoUsuarioCompleto/step9-6.png"
+                },
+
+                {
+                    "passo": 33,
+                    "titulo": "Solicitar Aprovação",
+                    "descricao": "Antes de conceder acesso à VPN, é obrigatório enviar para aprovação.\n\nSomente após retorno positivo prossiga.",
+                    "imagem": "/assets/img/criacaoUsuarioCompleto/step10-1.png"
+                },
+                {
+                    "passo": 34,
+                    "titulo": "Localizar Grupos de VPN",
+                    "descricao": "No AD, pesquise os grupos:\n- GLB-SEG_VPN_USERS\n- GLB-SEG-USER_REMOTE_DESKTOP",
+                    "imagem": "/assets/img/criacaoUsuarioCompleto/step10-2.png"
+                },
+                {
+                    "passo": 35,
+                    "titulo": "Adicionar Usuário à VPN",
+                    "descricao": "Abra 'Members' dos grupos de VPN.\n\nAdicione o usuário.\n\nConfirme com 'Check Names', 'OK', 'Apply' e 'OK'.",
+                    "imagem": "/assets/img/criacaoUsuarioCompleto/step10-3.png"
+                },
+
+                {
+                    "passo": 36,
+                    "titulo": "Acessar Exchange ECP",
+                    "descricao": "Acesse: https://webmail.mds.gov.br/ecp/?exsvurl=1&p=Mailboxes",
+                    "imagem": "/assets/img/criacaoUsuarioCompleto/step11-1.png"
+                },
+                {
+                    "passo": 37,
+                    "titulo": "Abrir Grupos",
+                    "descricao": "No menu lateral, clique em 'Grupos'.",
+                    "imagem": "/assets/img/criacaoUsuarioCompleto/step11-2.png"
+                },
+                {
+                    "passo": 38,
+                    "titulo": "Pesquisar Grupo",
+                    "descricao": "Use a lupa para pesquisar o grupo desejado.\n\nClique no nome do grupo.",
+                    "imagem": "/assets/img/criacaoUsuarioCompleto/step11-3.png"
+                },
+                {
+                    "passo": 39,
+                    "titulo": "Abrir Associação",
+                    "descricao": "Dentro do grupo, clique em 'Associação'.",
+                    "imagem": "/assets/img/criacaoUsuarioCompleto/step11-4.png"
+                },
+                {
+                    "passo": 40,
+                    "titulo": "Adicionar Usuário",
+                    "descricao": "Clique em '+'.\n\nPesquise o nome do usuário.\n\nDê dois cliques para adicionar.\n\nClique em 'OK'.",
+                    "imagem": "/assets/img/criacaoUsuarioCompleto/step11-5.png"
+                },
+                {
+                    "passo": 41,
+                    "titulo": "Salvar Alterações",
+                    "descricao": "Clique em 'Salvar' para confirmar a inclusão do usuário na lista de distribuição.",
+                    "imagem": "/assets/img/criacaoUsuarioCompleto/step11-6.png"
+                },
+
+                {
+                    "passo": 42,
+                    "titulo": "Finalização",
+                    "descricao": "Com todos os passos concluídos,\n\nO usuário está totalmente configurado com os acessos e recursos solicitados.",
+                    "imagem": "/assets/img/criacaoUsuarioCompleto/step12.png"
+                }
+            ]
+        },
+
+        {
             "id": 19,
             "nome": "Criar Usuários no Active Directory",
             "descricao": "Este manual orienta a equipe de atendimento remoto N1 a criar usuários de rede no Active Directory do Ministério da Cidadania.",
