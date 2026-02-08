@@ -52,10 +52,7 @@ class MyDocument extends Document {
                         href="https://fonts.googleapis.com/css2?family=Aldrich&family=Almarai:wght@300;400;700;800&display=swap"
                         rel="stylesheet"
                     />
-                    <link
-                        rel="icon"
-                        href="/public/assets/favicon_io/favicon.ico"
-                    />
+                    <link rel="icon" href="/assets/favicon_io/favicon.ico" />
                 </Head>
                 <body>
                     <Main />
