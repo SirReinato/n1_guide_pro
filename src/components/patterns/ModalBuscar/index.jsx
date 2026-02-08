@@ -16,7 +16,7 @@ export default function ModalBuscar() {
     const todosOsItens = Object.values(instalacoes).flat();
 
     const filtrados = todosOsItens.filter((item) =>
-        item.nome.toLowerCase().includes(busca.toLowerCase())
+        item.nome.toLowerCase().includes(busca.toLowerCase()),
     );
 
     return (
@@ -59,6 +59,10 @@ const ModalContainerStl = styled.aside`
     z-index: 9999;
     display: flex;
     flex-direction: column;
+
+    @media (max-width: 480px) {
+        width: 80%;
+    }
 `;
 
 const ModalHeaderStl = styled.div`
