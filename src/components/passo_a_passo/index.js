@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { ParagrafosStl, theme } from "../../theme/theme";
 import { useState } from "react";
+import RichText from "../RichText/RichText";
 
 export default function PassoAPasso({ titulo, paragrafo, passo, img }) {
     const [imgErro, setImgErro] = useState(false);
@@ -13,8 +14,8 @@ export default function PassoAPasso({ titulo, paragrafo, passo, img }) {
                 {passo} - {titulo}
             </SubTituloPassoStl>
 
-            <DescricaoPassoStl $primary $gg>
-                {paragrafo}
+            <DescricaoPassoStl as={"div"} $primary $gg>
+                <RichText text={paragrafo} />
             </DescricaoPassoStl>
 
             {mostrarImagem && (
@@ -51,7 +52,7 @@ const SubTituloPassoStl = styled.h3`
     font-weight: bold;
     margin-bottom: 12px;
     font-family: ${theme.fontsFamily.titulos};
-    color: ${theme.colors.clara.escuro};
+    color: ${theme.colors.clara.medio};
 `;
 
 const DescricaoPassoStl = styled(ParagrafosStl)`
