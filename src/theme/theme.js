@@ -56,7 +56,7 @@ export const TitulosPrincipaisStl = styled.h1`
     }
     @media (min-width: 768px) and (max-width: 1200px) {
         font-size: ${theme.fontSize.titulos.mm};
-        text-align: center;
+        /* text-align: center; */
     }
     @media (min-width: 481px) and (max-width: 767px) {
     }
