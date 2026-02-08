@@ -60,5 +60,6 @@ const DescricaoPassoStl = styled(ParagrafosStl)`
     line-height: 32px;
     @media (max-width: 480px) {
         font-size: 0.9rem;
+        box-sizing: border-box;
     }
 `;

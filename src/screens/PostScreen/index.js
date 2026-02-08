@@ -41,6 +41,7 @@ const ConteinerPostStl = styled.div`
     display: flex;
     align-items: center;
     flex-direction: column;
+    box-sizing: border-box;
     padding: 32px 2%;
     margin: 64px 0;
     gap: 32px;

@@ -68,6 +68,8 @@ export default function RichText({ text }) {
 
 const Wrapper = styled.div`
     display: flex;
+    flex-wrap: wrap;
+    box-sizing: border-box;
     flex-direction: column;
     gap: 12px;
 `;
@@ -76,7 +78,7 @@ const Texto = styled.p`
     line-height: 32px;
     font-size: ${theme.fontSize.paragrafos.m};
     font-family: ${theme.fontsFamily.paragrafos};
-    color: ${theme.colors.azul.claro};
+    color: ${theme.colors.clara.claro};
 `;
 
 const Espaco = styled.div`
@@ -101,7 +103,12 @@ const InlineCode = styled.code`
     font-size: 0.95em;
 
     background: rgba(255, 255, 255, 0.08);
-    color: #7dd3fc; /* azul claro que combina com sua paleta */
-
+    color: ${theme.colors.azulMaisClaro.claro};
     margin: 0 2px;
+
+    display: inline-block;
+    max-width: 100%;
+    word-break: break-all;
+    overflow-wrap: anywhere;
+    white-space: pre-wrap;
 `;

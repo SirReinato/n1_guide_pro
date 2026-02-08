@@ -50,6 +50,7 @@ const InputManuaisPesquisaFormStl = styled.input`
     @media (min-width: 481px) and (max-width: 767px) {
     }
     @media (max-width: 480px) {
+        width: 68%;
     }
 `;
 const ButtonManuaisPesquisaFormStl = styled.button`

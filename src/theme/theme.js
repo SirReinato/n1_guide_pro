@@ -38,7 +38,7 @@ export const theme = {
         paragrafos: {
             gg: "1.5rem",
             mm: "1.125rem",
-            pp: "1rem",
+            pp: "0.89rem",
         },
     },
 };
@@ -61,7 +61,7 @@ export const TitulosPrincipaisStl = styled.h1`
     @media (min-width: 481px) and (max-width: 767px) {
     }
     @media (max-width: 480px) {
-        font-size: ${theme.fontSize.titulosSecundarios.mm};
+        font-size: ${theme.fontSize.titulosSecundarios.pp};
         text-align: center;
         align-items: start;
     }
@@ -101,7 +101,7 @@ export const ParagrafosStl = styled.p`
     color: ${(props) =>
         props.$primary
             ? `${theme.colors.azulMaisClaro.medio}`
-            : `${theme.colors.azul.escuro}`};
+            : `${theme.colors.clara.claro}`};
     @media (min-width: 1401px) {
     }
     @media (min-width: 768px) and (max-width: 1200) {
