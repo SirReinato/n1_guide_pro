@@ -1189,7 +1189,7 @@
                 {
                     "passo": 2,
                     "titulo": "Executar o Comando Winget",
-                    "descricao": "Digite o comando: winget upgrade --all --silent --accept-package-agreements e pressione Enter.",
+                    "descricao": "Digite o comando: 'winget upgrade --all --silent --accept-package-agreements' e pressione Enter.",
                     "imagem": "/assets/img/wingetUpgrade/step2.png"
                 },
                 {
