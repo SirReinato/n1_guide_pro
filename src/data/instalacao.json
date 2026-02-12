@@ -1176,6 +1176,55 @@
             ]
         },
         {
+            "id": 49,
+            "nome": "Atualizar Todos os Aplicativos com Winget",
+            "descricao": "Este manual orienta como utilizar o comando do Windows Package Manager (winget) para atualizar todos os aplicativos instalados no sistema de forma silenciosa e automatizada, aceitando os termos de licença dos pacotes sem intervenção do usuário.",
+            "passo_passo": [
+                {
+                    "passo": 1,
+                    "titulo": "Abrir o Prompt de Comando ou PowerShell",
+                    "descricao": "Pressione Win + R, digite 'cmd' ou 'powershell' e pressione Enter para abrir o terminal.",
+                    "imagem": "/assets/img/wingetUpgrade/step1.png"
+                },
+                {
+                    "passo": 2,
+                    "titulo": "Executar o Comando Winget",
+                    "descricao": "Digite o comando: winget upgrade --all --silent --accept-package-agreements e pressione Enter.",
+                    "imagem": "/assets/img/wingetUpgrade/step2.png"
+                },
+                {
+                    "passo": 3,
+                    "titulo": "Função do Parâmetro --all",
+                    "descricao": "O parâmetro '--all' instrui o Winget a verificar todos os aplicativos instalados e atualizar cada um que possua uma versão mais recente disponível.",
+                    "imagem": "/assets/img/wingetUpgrade/step3.png"
+                },
+                {
+                    "passo": 4,
+                    "titulo": "Função do Parâmetro --silent",
+                    "descricao": "O parâmetro '--silent' executa as atualizações sem exibir janelas de confirmação ou interação, ideal para automação e ambientes corporativos.",
+                    "imagem": "/assets/img/wingetUpgrade/step4.png"
+                },
+                {
+                    "passo": 5,
+                    "titulo": "Função do Parâmetro --accept-package-agreements",
+                    "descricao": "Este parâmetro aceita automaticamente os termos de licença dos pacotes, evitando que o processo seja interrompido por solicitações de confirmação.",
+                    "imagem": "/assets/img/wingetUpgrade/step5.png"
+                },
+                {
+                    "passo": 6,
+                    "titulo": "Finalizar Atualização",
+                    "descricao": "Após a execução, todos os aplicativos compatíveis serão atualizados. Reinicie o computador se algum software exigir para aplicar as mudanças.",
+                    "imagem": "/assets/img/wingetUpgrade/step6.png"
+                },
+                {
+                    "passo": 7,
+                    "titulo": "Observação Importante",
+                    "descricao": "Este comando é útil para manter o sistema atualizado com mínima intervenção, mas pode consumir mais recursos temporariamente durante a execução. Ideal para administradores e usuários avançados.",
+                    "imagem": "/assets/img/wingetUpgrade/step7.png"
+                }
+            ]
+        },
+        {
             "id": 3,
             "nome": "Acesso ao HOD SIAPE",
             "descricao": "Este manual contém as instruções para acessar o HOD SIAPE por meio do SIAPENET Órgão.",
