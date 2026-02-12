@@ -1352,6 +1352,49 @@
                     "imagem": "/assets/img/seiFormulario/step8.png"
                 }
             ]
+        },
+        {
+            "id": 48,
+            "nome": "Ativar Segundos no Relógio do Windows via Registro",
+            "descricao": "Este manual orienta como ativar a exibição de segundos no relógio da barra de tarefas do Windows utilizando o Editor de Registro, caso a opção não esteja disponível nas configurações padrão.",
+            "passo_passo": [
+                {
+                    "passo": 1,
+                    "titulo": "Abrir o Editor de Registro",
+                    "descricao": "Pressione as teclas Win + R, digite 'regedit' e pressione Enter para abrir o Editor de Registro do Windows.",
+                    "imagem": "/assets/img/segundosRelogio/step1.png"
+                },
+                {
+                    "passo": 2,
+                    "titulo": "Navegar até a Chave Correta",
+                    "descricao": "No Editor de Registro, navegue até: HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced.",
+                    "imagem": "/assets/img/segundosRelogio/step2.png"
+                },
+                {
+                    "passo": 3,
+                    "titulo": "Criar Novo Valor DWORD",
+                    "descricao": "No painel direito, clique com o botão direito, selecione 'Novo' > 'Valor DWORD (32 bits)' e nomeie como: ShowSecondsInSystemClock.",
+                    "imagem": "/assets/img/segundosRelogio/step3.png"
+                },
+                {
+                    "passo": 4,
+                    "titulo": "Definir Valor",
+                    "descricao": "Defina o valor para 1 para mostrar os segundos no relógio (ou 0 para ocultar).",
+                    "imagem": "/assets/img/segundosRelogio/step4.png"
+                },
+                {
+                    "passo": 5,
+                    "titulo": "Aplicar Alterações",
+                    "descricao": "Reinicie o computador ou reinicie o processo do Windows Explorer para que a alteração tenha efeito.",
+                    "imagem": "/assets/img/segundosRelogio/step5.png"
+                },
+                {
+                    "passo": 6,
+                    "titulo": "Observação Importante",
+                    "descricao": "O próprio Windows alerta que ativar segundos pode aumentar ligeiramente o consumo de energia, pois o relógio precisa atualizar a cada segundo.",
+                    "imagem": "/assets/img/segundosRelogio/step6.png"
+                }
+            ]
         }
     ],
     "Criando-User": [
@@ -1384,7 +1427,6 @@
                     "descricao": "Altere o sufixo para o domínio correto.\n\nDefina a senha padrão:\n- MDS: mds@123456\n- Esporte: mesp@123456",
                     "imagem": "/assets/img/criacaoUsuarioCompleto/step4.png"
                 },
-
                 {
                     "passo": 5,
                     "titulo": "Acessar Exchange Admin Center",
@@ -1421,7 +1463,6 @@
                     "descricao": "Confirme os dados e finalize a criação da caixa de correio.",
                     "imagem": "/assets/img/criacaoUsuarioCompleto/step5-6.png"
                 },
-
                 {
                     "passo": 11,
                     "titulo": "Acessar Microsoft Entra",
@@ -1446,7 +1487,6 @@
                     "descricao": "Vá até 'Grupos'. Clique em 'Adicionar associações'. Selecione 'GU-OFFICE-E3'.",
                     "imagem": "/assets/img/criacaoUsuarioCompleto/step6-4.png"
                 },
-
                 {
                     "passo": 15,
                     "titulo": "Acessar Migração",
@@ -1495,7 +1535,6 @@
                     "descricao": "Escolha 'Concluir automaticamente'. Clique em 'Salvar'.",
                     "imagem": "/assets/img/criacaoUsuarioCompleto/step7-8.png"
                 },
-
                 {
                     "passo": 23,
                     "titulo": "Acessar Mailboxes",
@@ -1520,7 +1559,6 @@
                     "descricao": "Edite 'Enviar como' e 'Ler e gerenciar'. Adicione o login do usuário. Clique em salvar.",
                     "imagem": "/assets/img/criacaoUsuarioCompleto/step8-4.png"
                 },
-
                 {
                     "passo": 27,
                     "titulo": "Localizar Grupo",
@@ -1557,7 +1595,6 @@
                     "descricao": "Abra 'Members'.\n\nAdicione o usuário.\n\nConfirme com 'Check Names', 'OK', 'Apply' e 'OK'.",
                     "imagem": "/assets/img/criacaoUsuarioCompleto/step9-6.png"
                 },
-
                 {
                     "passo": 33,
                     "titulo": "Solicitar Aprovação",
@@ -1576,7 +1613,6 @@
                     "descricao": "Abra 'Members' dos grupos de VPN.\n\nAdicione o usuário.\n\nConfirme com 'Check Names', 'OK', 'Apply' e 'OK'.",
                     "imagem": "/assets/img/criacaoUsuarioCompleto/step10-3.png"
                 },
-
                 {
                     "passo": 36,
                     "titulo": "Acessar Exchange ECP",
@@ -1613,7 +1649,6 @@
                     "descricao": "Clique em 'Salvar' para confirmar a inclusão do usuário na lista de distribuição.",
                     "imagem": "/assets/img/criacaoUsuarioCompleto/step11-6.png"
                 },
-
                 {
                     "passo": 42,
                     "titulo": "Finalização",
@@ -1622,7 +1657,6 @@
                 }
             ]
         },
-
         {
             "id": 19,
             "nome": "Criar Usuários no Active Directory",
