@@ -871,7 +871,7 @@
                 {
                     "passo": 2,
                     "titulo": "Navegar até a chave do OneDrive",
-                    "descricao": "No Editor do Registro, vá até o caminho: HKEY_LOCAL_MACHINE\\Software\\Policies\\Microsoft\\Windows\\OneDrive.",
+                    "descricao": "No Editor do Registro, vá até o caminho: 'HKEY_LOCAL_MACHINE\\Software\\Policies\\Microsoft\\Windows\\OneDrive' .",
                     "imagem": "/assets/img/onedrive/step2.png"
                 },
                 {
@@ -1416,7 +1416,7 @@
                 {
                     "passo": 2,
                     "titulo": "Navegar até a Chave Correta",
-                    "descricao": "No Editor de Registro, navegue até: HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced.",
+                    "descricao": "No Editor de Registro, navegue até: 'HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced' .",
                     "imagem": "/assets/img/segundosRelogio/step2.png"
                 },
                 {
