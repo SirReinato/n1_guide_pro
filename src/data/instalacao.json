@@ -1478,7 +1478,7 @@
                 },
                 {
                     "passo": 5,
-                    "titulo": "Acessar Exchange Admin Center",
+                    "titulo": "Criar caixa de correio do usuário - Acessar Exchange Admin Center",
                     "descricao": "Acesse o link: https://webmail.mds.gov.br/ecp/",
                     "imagem": "/assets/img/criacaoUsuarioCompleto/step5-1.png"
                 },
@@ -1538,7 +1538,7 @@
                 },
                 {
                     "passo": 15,
-                    "titulo": "Acessar Migração",
+                    "titulo": "Migração de conta para o office 365 - Acessar Migração",
                     "descricao": "Acesse: https://admin.cloud.microsoft/exchange#/migrationbatch",
                     "imagem": "/assets/img/criacaoUsuarioCompleto/step7-1.png"
                 },
@@ -1592,7 +1592,7 @@
                 },
                 {
                     "passo": 24,
-                    "titulo": "Pesquisar Caixa",
+                    "titulo": "Cadastro de usuário na Caixa Corporativa - Pesquisar Caixa",
                     "descricao": "Digite o nome da caixa de correio desejada.",
                     "imagem": "/assets/img/criacaoUsuarioCompleto/step8-2.png"
                 },
@@ -1622,7 +1622,7 @@
                 },
                 {
                     "passo": 29,
-                    "titulo": "Pesquisar por GLB",
+                    "titulo": "Cadastro de usuário na Pasta Corporativa - Pesquisar por GLB",
                     "descricao": "No campo de pesquisa do AD, digite 'GLB'.\n\nA maioria das pastas começa com esse prefixo.",
                     "imagem": "/assets/img/criacaoUsuarioCompleto/step9-3.png"
                 },
@@ -1646,7 +1646,7 @@
                 },
                 {
                     "passo": 33,
-                    "titulo": "Solicitar Aprovação",
+                    "titulo": "Conceder acesso à VPN (somente mediante justificativa) - Solicitar Aprovação",
                     "descricao": "Antes de conceder acesso à VPN, é obrigatório enviar para aprovação.\n\nSomente após retorno positivo prossiga.",
                     "imagem": "/assets/img/criacaoUsuarioCompleto/step10-1.png"
                 },
@@ -1664,7 +1664,7 @@
                 },
                 {
                     "passo": 36,
-                    "titulo": "Acessar Exchange ECP",
+                    "titulo": "Conceder Acesso à Lista de Distribuição - Acessar Exchange ECP",
                     "descricao": "Acesse: https://webmail.mds.gov.br/ecp/?exsvurl=1&p=Mailboxes",
                     "imagem": "/assets/img/criacaoUsuarioCompleto/step11-1.png"
                 },
