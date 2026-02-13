@@ -11,6 +11,7 @@ export default function HomeScreen({ instalacoesPorCategoria, todosOsItens }) {
         () => import("../../components/patterns/ModalBuscar"),
         { ssr: false },
     );
+    
     return (
         <ConteinerGeral>
             <ModalBuscar />
