@@ -1225,6 +1225,49 @@
             ]
         },
         {
+            "id": 50,
+            "nome": "Configurações de boot na BIOS",
+            "descricao": "Este manual orienta como acessar e configurar a BIOS do computador para alterar o modo de boot para UEFI e desativar o Secure Boot.",
+            "passo_passo": [
+                {
+                    "passo": 1,
+                    "titulo": "Acesse a BIOS do seu computador",
+                    "descricao": "Geralmente, pressione a tecla Del, F2, F12 ou outra tecla específica logo no início do ligar do computador, antes do sistema operacional carregar.",
+                    "imagem": "/assets/img/configuracoes_bios/step1.png"
+                },
+                {
+                    "passo": 2,
+                    "titulo": "Navegar até a opção 'Change Boot Mode Settings'",
+                    "descricao": "Use as setas do teclado para encontrar essa opção no menu da BIOS.",
+                    "imagem": "/assets/img/configuracoes_bios/step2.png"
+                },
+                {
+                    "passo": 3,
+                    "titulo": "Alterar para UEFI Boot Mode",
+                    "descricao": "Selecione a opção Boot Mode e escolha UEFI Boot Mode.",
+                    "imagem": "/assets/img/configuracoes_bios/step3.png"
+                },
+                {
+                    "passo": 4,
+                    "titulo": "Desligar Secure Boot",
+                    "descricao": "Localize a opção Secure Boot. Selecione essa opção e coloque como OFF.",
+                    "imagem": "/assets/img/configuracoes_bios/step4.png"
+                },
+                {
+                    "passo": 5,
+                    "titulo": "Confirmar as alterações",
+                    "descricao": "Quando aparecer a mensagem: 'Do you wish to proceed', selecione Yes.",
+                    "imagem": "/assets/img/configuracoes_bios/step5.png"
+                },
+                {
+                    "passo": 6,
+                    "titulo": "Aplicar as mudanças",
+                    "descricao": "Na tela final de confirmação, selecione Apply the changes ou Salvar e Sair (Save and Exit).",
+                    "imagem": "/assets/img/configuracoes_bios/step6.png"
+                }
+            ]
+        },
+        {
             "id": 3,
             "nome": "Acesso ao HOD SIAPE",
             "descricao": "Este manual contém as instruções para acessar o HOD SIAPE por meio do SIAPENET Órgão.",
