@@ -1487,6 +1487,73 @@
                     "imagem": "/assets/img/segundosRelogio/step6.png"
                 }
             ]
+        },
+        {
+            "id": 51,
+            "nome": "Automação de Atendimento Inteligente - Banco ByteBank",
+            "descricao": "Este manual orienta a construção de um fluxo no MAKE para classificar e responder e-mails de clientes automaticamente utilizando IA Grok, Excel e Outlook.",
+            "passo_passo": [
+                {
+                    "passo": 1,
+                    "titulo": "Criar Cenário no MAKE",
+                    "descricao": "Acesse a sessão 'My Team' e clique em 'Create a New Scenario'. No centro da tela, adicione o módulo 'Microsoft 365 email (Outlook)' com a função 'Search Message' para capturar o último e-mail recebido.",
+                    "imagem": "/assets/img/automacao_bytebank/step1.png"
+                },
+                {
+                    "passo": 2,
+                    "titulo": "Converter HTML para Texto",
+                    "descricao": "Adicione o módulo 'TextParser' com a função 'HTML to Text'. Conecte-o ao Outlook e mapeie a variável 'Body: Content' para que a IA consiga ler o conteúdo sem códigos de formatação.",
+                    "imagem": "/assets/img/automacao_bytebank/step2.png"
+                },
+                {
+                    "passo": 3,
+                    "titulo": "Classificar E-mail com Grok",
+                    "descricao": "Adicione o módulo Grok ('Create a JSON Chat Completion') usando o modelo Llama 3.3. Configure o prompt para identificar se a mensagem é uma 'dúvida' ou 'não dúvida', limitando a resposta a 50 tokens.",
+                    "imagem": "/assets/img/automacao_bytebank/step3.png"
+                },
+                {
+                    "passo": 4,
+                    "titulo": "Configurar Rotas e Filtros",
+                    "descricao": "Adicione um 'Router'. Crie um caminho para 'não dúvida' (movendo o e-mail para a pasta 'Outras mensagens') e outro para 'dúvida', que seguirá para a consulta ao FAQ.",
+                    "imagem": "/assets/img/automacao_bytebank/step4.png"
+                },
+                {
+                    "passo": 5,
+                    "titulo": "Consultar Planilha de FAQ",
+                    "descricao": "No caminho das dúvidas, adicione o módulo Excel 'List Worksheet Rows'. Selecione a planilha 'Perguntas Frequentes ByteBank' para coletar todas as perguntas e respostas cadastradas.",
+                    "imagem": "/assets/img/automacao_bytebank/step5.png"
+                },
+                {
+                    "passo": 6,
+                    "titulo": "Agregar Dados do FAQ",
+                    "descricao": "Utilize a ferramenta 'Text Aggregator' (ícone vermelho de Tools) para unir as linhas do Excel em um único bloco de texto, separando perguntas e respostas por quebras de linha.",
+                    "imagem": "/assets/img/automacao_bytebank/step6.png"
+                },
+                {
+                    "passo": 7,
+                    "titulo": "Verificar se a Dúvida está no FAQ",
+                    "descricao": "Insira um novo módulo Grok para comparar a dúvida do cliente com o FAQ agregado. A IA deve classificar entre 'dúvida FAQ' (respondível) ou 'dúvida-time C' (suporte humano).",
+                    "imagem": "/assets/img/automacao_bytebank/step7.png"
+                },
+                {
+                    "passo": 8,
+                    "titulo": "Gerar Resposta Automática",
+                    "descricao": "Para casos de 'dúvida FAQ', adicione um Grok para redigir uma resposta cordial em formato HTML, baseando-se estritamente nas informações da cartilha do banco.",
+                    "imagem": "/assets/img/automacao_bytebank/step8.png"
+                },
+                {
+                    "passo": 9,
+                    "titulo": "Criar Rascunho no Outlook",
+                    "descricao": "Adicione o módulo Outlook 'Create Address Message' para gerar um rascunho com a resposta da IA. Mapeie o destinatário original e adicione o prefixo 'RE:' ao assunto.",
+                    "imagem": "/assets/img/automacao_bytebank/step9.png"
+                },
+                {
+                    "passo": 10,
+                    "titulo": "Organizar e Agendar",
+                    "descricao": "Finalize movendo o e-mail original para a pasta 'Dúvida - FAQ'. Configure o agendamento do cenário (ex: a cada 15 minutos) para execução automática.",
+                    "imagem": "/assets/img/automacao_bytebank/step10.png"
+                }
+            ]
         }
     ],
     "Criando-User": [
