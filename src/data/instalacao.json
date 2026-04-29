@@ -94,7 +94,7 @@
                 {
                     "passo": 1,
                     "titulo": "Baixar o Cliente PW3270",
-                    "descricao": "Faça o download do arquivo 'pw3270-4.0-2-setup' no servidor: \\\\mds.net\\mds\\se\\DTI\\CGSS\\SUPORTE\\APLICACOES\\Sipas Novo. Após o download, execute o arquivo.",
+                    "descricao": "Faça o download do arquivo 'pw3270-4.0-2-setup' no servidor de aplicações do MDS. Após o download, execute o arquivo.",
                     "imagem": "/assets/img/pw3270/step1.png"
                 },
                 {
@@ -136,7 +136,7 @@
                 {
                     "passo": 8,
                     "titulo": "Configurar o Servidor",
-                    "descricao": "Na janela 'Selecionar Servidor', informe os seguintes dados: Endereço do servidor: 172.16.32.142; Porta: 1023.",
+                    "descricao": "Na janela 'Selecionar Servidor', informe os seguintes dados: Endereço do servidor: vai está nas aplicações na pasta do app; Porta: mesma coisa.",
                     "imagem": "/assets/img/pw3270/step8.png"
                 },
                 {
@@ -179,7 +179,7 @@
                 {
                     "passo": 4,
                     "titulo": "Criar um Atalho para o SISPOAD",
-                    "descricao": "1. Clique com o botão direito na área de trabalho e selecione 'Novo' > 'Atalho'. \n2. No campo 'Digite o local do item', cole o seguinte link: \\\\wisispoadpd01\\sispoad\\Sispoad - Novo Atalho.lnk. \n3. Clique em 'Avançar' e depois em 'Concluir'.",
+                    "descricao": "1. Clique com o botão direito na área de trabalho e selecione 'Novo' > 'Atalho'. \n2. No campo 'Digite o local do item', cole o seguinte link: \\\\[servidor encontra-se na pasta dentro das aplicações]\\sispoad\\Sispoad - Novo Atalho.lnk. \n3. Clique em 'Avançar' e depois em 'Concluir'.",
                     "imagem": "/assets/img/sispoad/step4.png"
                 }
             ]
@@ -229,7 +229,7 @@
                 {
                     "passo": 2,
                     "titulo": "Acessar o Servidor de Arquivos",
-                    "descricao": "Acesse o servidor de arquivos pelo caminho '\\\\mds.net\\mds\\SE\\DTI\\CGSS\\SUPORTE\\APLICACOES\\QlikView' e escolha a versão desejada para instalação.",
+                    "descricao": "Acesse o servidor de arquivos pelo caminho '\\Servidor padrão das aplicações e escolha a versão desejada para instalação.",
                     "imagem": "/assets/img/instalacao_qlikview/step2.png"
                 },
                 {
@@ -247,7 +247,7 @@
                 {
                     "passo": 5,
                     "titulo": "Habilitar Licença de Desenvolvedor",
-                    "descricao": "Após a resposta da CGBD, abra o QlikView, clique em 'Arquivo', escolha 'Abrir no Servidor', insira o nome do servidor (qvp://wiqlikviewpd02), conecte-se utilizando a identidade de rede e valide a licença.",
+                    "descricao": "Após a resposta da CGBD, abra o QlikView, clique em 'Arquivo', escolha 'Abrir no Servidor', insira o nome do servidor (qvp://[servidor encontra-se na pasta dentro das aplicações]), conecte-se utilizando a identidade de rede e valide a licença.",
                     "imagem": "/assets/img/instalacao_qlikview/step5.png"
                 },
                 {
@@ -272,7 +272,7 @@
                 {
                     "passo": 2,
                     "titulo": "Baixar os Pacotes Oracle",
-                    "descricao": "Faça o download dos pacotes 'Basic Package' e 'ODBC Package' na versão 18.5.0.0.0 do site da Oracle ou no diretório '\\\\mds.net\\mds\\SE\\DTI\\CGSS\\SUPORTE\\APLICACOES\\Oracle\\Oracle_18.5'.",
+                    "descricao": "Faça o download dos pacotes 'Basic Package' e 'ODBC Package' na versão 18.5.0.0.0 do site da Oracle ou no diretório '\\Padrão das aplicações'.",
                     "imagem": "/assets/img/instalacao_oracle/step2.png"
                 },
                 {
@@ -443,13 +443,13 @@
                 {
                     "passo": 4,
                     "titulo": "Adicionar Site à Lista de Exceções",
-                    "descricao": "Na aba Segurança, clique em 'Editar Lista de Sites'. Adicione o link: http://cesispropd01:8080/sispro/SisPro.jnlp. Confirme a advertência de segurança clicando em 'Continuar'.",
+                    "descricao": "Na aba Segurança, clique em 'Editar Lista de Sites'. Adicione o link: O link padrão estará na pasta das aplicações. Confirme a advertência de segurança clicando em 'Continuar'.",
                     "imagem": "/assets/img/sispro/step4.png"
                 },
                 {
                     "passo": 5,
                     "titulo": "Abrir o Link de Instalação",
-                    "descricao": "Abra o navegador e cole o link http://cesispropd01:8080/sispro/SisPro.jnlp para iniciar a instalação.",
+                    "descricao": "Abra o navegador e cole o link: O link padrão estara na pasta das aplicações",
                     "imagem": "/assets/img/sispro/step5.png"
                 },
                 {
@@ -523,7 +523,7 @@
                 {
                     "passo": 1,
                     "titulo": "Localizar Arquivo de Certificado",
-                    "descricao": "O arquivo de certificado estará disponível na pasta de aplicações: \\\\mds.net\\mds\\se\\dti\\CGSS\\SUPORTE\\APLICACOES\\00-Aplicações atuais (TheBestTeam)\\certificadoFortnite. Copie-o para o disco C do usuário acessando via Executar: \\\\ip-do-usuario\\c$.",
+                    "descricao": "O arquivo de certificado estará disponível na pasta de aplicações: \\Servidor padrão das aplicações -00-Aplicações atuais (TheBestTeam)\\certificadoFortnite. Copie-o para o disco C do usuário acessando via Executar: \\\\[ip-do-usuario]\\c$.",
                     "imagem": "/assets/img/certificadoFortnite/step1.png"
                 },
                 {
@@ -1583,7 +1583,7 @@
                 {
                     "passo": 4,
                     "titulo": "Definir Sufixo e Senha",
-                    "descricao": "Altere o sufixo para o domínio correto.\n\nDefina a senha padrão:\n- MDS: mds@123456\n- Esporte: mesp@123456",
+                    "descricao": "Altere o sufixo para o domínio correto.\n\nDefina a senha padrão:\n- MDS\n- Esporte",
                     "imagem": "/assets/img/criacaoUsuarioCompleto/step4.png"
                 },
                 {
@@ -1643,7 +1643,7 @@
                 {
                     "passo": 14,
                     "titulo": "Adicionar Associação",
-                    "descricao": "Vá até 'Grupos'. Clique em 'Adicionar associações'. Selecione 'GU-OFFICE-E3'.",
+                    "descricao": "Vá até 'Grupos'. Clique em 'Adicionar associações'. Selecione '[GRUPO_LICENÇA]'.",
                     "imagem": "/assets/img/criacaoUsuarioCompleto/step6-4.png"
                 },
                 {
@@ -1763,7 +1763,7 @@
                 {
                     "passo": 34,
                     "titulo": "Localizar Grupos de VPN",
-                    "descricao": "No AD, pesquise os grupos:\n- GLB-SEG_VPN_USERS\n- GLB-SEG-USER_REMOTE_DESKTOP",
+                    "descricao": "No AD, pesquise os grupos de acesso a VPN:\n- [GRUPO_VPN]\n- [GRUPO_VPN]",
                     "imagem": "/assets/img/criacaoUsuarioCompleto/step10-2.png"
                 },
                 {
@@ -1824,7 +1824,7 @@
                 {
                     "passo": 19,
                     "titulo": "Abrir Conexão de Área de Trabalho Remota",
-                    "descricao": "Conecte-se ao IP 10.222.11.65 para acessar o Active Directory.",
+                    "descricao": "Conecte-se ao IP para acessar o Active Directory.",
                     "imagem": "/assets/img/ad_criacao_usuario/step1.png"
                 },
                 {
@@ -1854,7 +1854,7 @@
                 {
                     "passo": 6,
                     "titulo": "Definir Sufixo e Senha",
-                    "descricao": "Altere o sufixo para o domínio correto e defina a senha padrão: mds@123456 para usuários do MDS ou mesp@123456 para usuários do Esporte.",
+                    "descricao": "Altere o sufixo para o domínio correto e defina a senha padrão  para usuários do MDS ou para usuários do Esporte.",
                     "imagem": "/assets/img/ad_criacao_usuario/step6.png"
                 },
                 {
@@ -2051,7 +2051,7 @@
                 {
                     "passo": 1,
                     "titulo": "Abrir Conexão de Área de Trabalho Remota",
-                    "descricao": "Conecte-se ao servidor usando a seguinte IP: 10.222.11.65.",
+                    "descricao": "Conecte-se ao servidor usando o IP padrão",
                     "imagem": "/assets/img/ad_desbloquear_senha/step1.png"
                 },
                 {
@@ -2082,7 +2082,7 @@
                 {
                     "passo": 1,
                     "titulo": "Abrir Conexão de Área de Trabalho Remota",
-                    "descricao": "Conecte-se ao servidor usando a seguinte IP: 10.222.11.65.",
+                    "descricao": "Conecte-se ao servidor usando o IP padrão",
                     "imagem": "/assets/img/ad_resetar_senha/step1.png"
                 },
                 {
@@ -2106,7 +2106,7 @@
                 {
                     "passo": 5,
                     "titulo": "Inserir Senha Padrão",
-                    "descricao": "Insira a senha padrão: 'mds@123456' para usuários do MDS ou 'mesp@123456' para usuários do esporte. A nova senha deve começar com letra maiúscula, conter 10 caracteres, números e caracteres especiais, e não pode conter o nome do usuário.",
+                    "descricao": "Insira a senha padrão para usuários do MDS ou para usuários do esporte. A nova senha deve começar com letra maiúscula, conter 10 caracteres, números e caracteres especiais, e não pode conter o nome do usuário.",
                     "imagem": "/assets/img/ad_resetar_senha/step5.png"
                 }
             ]
@@ -2125,7 +2125,7 @@
                 {
                     "passo": 2,
                     "titulo": "Conectar ao Computador",
-                    "descricao": "Preencha com IP: 10.222.11.65 e clique em conectar.",
+                    "descricao": "Preencha usando o IP padrão e clique em conectar.",
                     "imagem": "/assets/img/configurar_impressora/step2.png"
                 },
                 {
@@ -2167,7 +2167,7 @@
                 {
                     "passo": 9,
                     "titulo": "Inserir o Comando",
-                    "descricao": "Cole o comando '\\wiimppd001.mds.net' na aba de pesquisa.",
+                    "descricao": "Cole o comando '\\Ip-da-aplicação' na aba de pesquisa.",
                     "imagem": "/assets/img/configurar_impressora/step9.png"
                 },
                 {
@@ -2429,7 +2429,7 @@
                 {
                     "passo": 3,
                     "titulo": "Inserir Caminho da Pasta",
-                    "descricao": "Na janela de mapeamento, insira o caminho completo da pasta de rede (exemplo: \\\\mds.net\\mds\\SE\\DT\\CGSS\\SUPORTE). Selecione a letra da unidade e marque 'Reconectar-se durante o logon'.",
+                    "descricao": "Na janela de mapeamento, insira o caminho completo da pasta de rede (exemplo: \\\\servidorPadrão do MDS\\SE\\DT\\CGSS\\SUPORTE). Selecione a letra da unidade e marque 'Reconectar-se durante o logon'.",
                     "imagem": "/assets/img/mapeamentoPastas/step3.png"
                 },
                 {
@@ -2472,7 +2472,7 @@
                 {
                     "passo": 3,
                     "titulo": "Inserir Caminho da Pasta",
-                    "descricao": "Digite o caminho da pasta: \\\\172.18.3.6\\DIVISAO_do_Esporte.",
+                    "descricao": "Digite o caminho da pasta: \\\\ip ou nomeDoServidor\\DIVISAO_do_Esporte.",
                     "imagem": "/assets/img/mapeamentoEsporte/step3.png"
                 },
                 {
