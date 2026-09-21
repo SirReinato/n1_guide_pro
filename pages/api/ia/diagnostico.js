@@ -82,11 +82,21 @@ export default async function handler(req, res) {
     let manuaisDisponiveis = [];
     try {
         if (supabase) {
-            const { data } = await supabase
+            let { data, error } = await supabase
                 .from("manuais")
-                .select("id, nome, descricao");
+                .select("id, nome, descricao")
+                .eq("aprovado", true);
+
+            if (error && error.message?.includes("aprovado")) {
+                const fallback = await supabase
+                    .from("manuais")
+                    .select("id, nome, descricao");
+                data = fallback.data;
+            }
+
             manuaisDisponiveis = data || [];
         } else {
+
             manuaisDisponiveis = Object.values(instalacoesLocal)
                 .flat()
                 .map(({ id, nome, descricao }) => ({ id, nome, descricao }));

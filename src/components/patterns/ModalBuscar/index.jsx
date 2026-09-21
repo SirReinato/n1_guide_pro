@@ -1,7 +1,5 @@
 import styled from "styled-components";
 import { useBusca } from "../../../context/BuscaContext";
-// TODO: substituir por dados vindos de prop/context após migração completa para Supabase
-import instalacoes from "../../../data/instalacao.json";
 import CardManuais from "../../CardManuais";
 import {
     ParagrafosStl,
@@ -10,15 +8,15 @@ import {
 } from "../../../theme/theme";
 
 export default function ModalBuscar() {
-    const { busca, setBusca } = useBusca();
+    const { busca, setBusca, todosOsItens = [] } = useBusca();
 
     if (!busca) return null;
 
-    const todosOsItens = Object.values(instalacoes).flat();
-
     const filtrados = todosOsItens.filter((item) =>
-        item.nome.toLowerCase().includes(busca.toLowerCase()),
+        item.nome.toLowerCase().includes(busca.toLowerCase()) ||
+        (item.descricao && item.descricao.toLowerCase().includes(busca.toLowerCase()))
     );
+
 
     return (
         <ModalContainerStl>

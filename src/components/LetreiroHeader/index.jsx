@@ -1,16 +1,31 @@
+import { useState, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 import { theme } from "../../theme/theme";
 import instalacoes from "../../data/instalacao.json";
 
 export default function LetreiroHeader() {
-    const OsItens = Object.keys(instalacoes);
+    const [itens, setItens] = useState(Object.keys(instalacoes));
+
+    useEffect(() => {
+        fetch("/api/manuais")
+            .then((res) => res.json())
+            .then((data) => {
+                if (Array.isArray(data) && data.length > 0) {
+                    const cats = Array.from(
+                        new Set(data.map((m) => m.categorias?.nome || "Outros"))
+                    );
+                    if (cats.length > 0) setItens(cats);
+                }
+            })
+            .catch(() => {});
+    }, []);
 
     return (
         <LetreiroWrapper>
             <LetreiroTrack>
                 <Texto>🛠️ Base interna N1 GuidePro •</Texto>
 
-                {OsItens.map((nome) => (
+                {itens.map((nome) => (
                     <li key={nome}>
                         <Texto>{nome}</Texto>
                     </li>
@@ -19,6 +34,7 @@ export default function LetreiroHeader() {
         </LetreiroWrapper>
     );
 }
+
 const animacao = keyframes`
     from {
         transform: translateX(0);

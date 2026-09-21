@@ -5,15 +5,26 @@ export default async function handler(req, res) {
     if (req.method === "GET") {
         // Lista todos os manuais (id, nome, descricao)
         if (supabase) {
-            const { data, error } = await supabase
+            let { data, error } = await supabase
                 .from("manuais")
                 .select("id, nome, descricao, categorias(nome)")
+                .eq("aprovado", true)
                 .order("id");
+
+            if (error && error.message?.includes("aprovado")) {
+                const fallback = await supabase
+                    .from("manuais")
+                    .select("id, nome, descricao, categorias(nome)")
+                    .order("id");
+                data = fallback.data;
+                error = fallback.error;
+            }
 
             if (!error && data && data.length > 0) {
                 return res.status(200).json(data);
             }
         }
+
 
         // Fallback local
         const todos = Object.values(instalacoesLocal).flat();

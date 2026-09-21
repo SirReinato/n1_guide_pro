@@ -3,7 +3,7 @@ import {
     getInstalacoesPorCategoria,
     getTodosOsItens,
 } from "../src/service/instalacoesService";
-export async function getStaticProps() {
+export async function getServerSideProps() {
     const instalacoesPorCategoria = await getInstalacoesPorCategoria();
     const todosOsItens = await getTodosOsItens();
 
@@ -14,6 +14,7 @@ export async function getStaticProps() {
         },
     };
 }
+
 
 export default function Home(props) {
     return <HomeScreen {...props} />;
