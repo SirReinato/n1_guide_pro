@@ -121,39 +121,50 @@ export default async function handler(req, res) {
 O usuário relatou a seguinte situação:
 ${textoEntradaUsuario}
 
-Manuais técnicos disponíveis no sistema:
+Manuais técnicos disponíveis no sistema da empresa:
 ${manuaisTexto}
 
-Analise a situação e responda EXCLUSIVAMENTE com um JSON válido, sem markdown, sem explicação fora do JSON.
+Analise a situação com extremo cuidado técnico. Responda EXCLUSIVAMENTE com um JSON válido, sem markdown, sem texto fora do JSON.
 
-DIRETRIZES DE RESPOSTA:
+DIRETRIZES CRÍTICAS PARA ESCOLHA DO TIPO DE RESPOSTA:
 
-1. Se a descrição for VAGA, CURTA ou FALTAR CONTEXTO (ex: "erro no antivirus", "não abre", "travou", "tela azul", "problema no pc", "outlook", etc.):
+1. QUANDO É UMA DÚVIDA VAGA/CURTA (ex: "erro no antivirus", "não abre", "tela azul", "problema no pc"):
+- O usuário não deu detalhes suficientes do erro ou do programa.
+- Retorne:
 {
   "tipo": "manuais_encontrados",
   "precisaMaisDetalhes": true,
-  "perguntaClarificacao": "<pergunta amigável e direta pedindo o detalhe que falta, ex: 'Qual o programa específico ou qual mensagem de erro aparece?'>",
-  "sugestoesRapidas": ["<opção curta 1>", "<opção curta 2>", "<opção curta 3>"],
-  "manuais": [{ "id": <número>, "relevancia": "<breve explicação de como pode ajudar ou se for uma solução preventiva relacionada>" }]
+  "perguntaClarificacao": "<pergunta direta e amigável pedindo o detalhe do erro>",
+  "sugestoesRapidas": ["<opção 1>", "<opção 2>", "<opção 3>"],
+  "manuais": [{ "id": <número>, "relevancia": "<por que este manual pode ter relação preventiva ou preliminar>" }]
 }
-(Observação: Se houver qualquer manual mesmo que com relação parcial ou preventiva ao termo citado, inclua-o em "manuais" para que o usuário já possa conferir. Se não houver nenhum, retorne "manuais": [])
+(Observação: Se houver qualquer manual mesmo que com relação parcial, inclua-o em "manuais" para que o usuário já possa conferir. Se não houver nenhum, retorne "manuais": [])
 
-2. Se a descrição for ESPECÍFICA e algum manual do sistema resolver:
+2. QUANDO EXISTE UM MANUAL EXATO E ESPECÍFICO PARA AQUELE ASSUNTO:
+- ATENÇÃO: Só escolha esta opção se o manual da lista for DIRETAMENTE SOBRE o programa ou assunto que o usuário precisa (ex: o usuário quer instalar ou consertar o Serpro ID e existe o manual do Serpro ID).
+- Se o usuário perguntou sobre antivírus genérico, erro no Windows, tela azul ou software sem manual dedicado, NÃO use esta opção!
+- Retorne:
 {
   "tipo": "manuais_encontrados",
   "precisaMaisDetalhes": false,
-  "manuais": [{ "id": <número>, "relevancia": "<breve explicação>" }]
+  "manuais": [{ "id": <número>, "relevancia": "<explicação de como o manual resolve exatamente o problema>" }]
 }
 
-3. Se a descrição for ESPECÍFICA e NENHUM manual resolver (necessário passo a passo):
+3. QUANDO É UM PROBLEMA TÉCNICO SEM MANUAL ESPECÍFICO DIRETO (OU QUANDO O USUÁRIO JÁ REFINOU / CLICOU NUMA OPÇÃO):
+- Se não houver manual 100% específico para o problema relatado, VOCÊ DEVE GERAR UM PASSO A PASSO TÉCNICO N1 PRÁTICO de testes e resolução!
+- Se houver algum manual parcialmente relacionado no sistema, você pode incluí-lo em "manuaisRelacionados" como referência complementar, mas DEVE GERAR O PASSO A PASSO!
+- Retorne:
 {
   "tipo": "passo_a_passo",
   "precisaMaisDetalhes": false,
-  "sugestaoNome": "<nome curto para este manual>",
-  "sugestaoDescricao": "<descrição em uma frase>",
+  "sugestaoNome": "<nome técnico claro para este procedimento>",
+  "sugestaoDescricao": "<resumo do que este procedimento testa e resolve>",
   "passos": [
-    { "titulo": "<título do passo>", "descricao": "<instrução clara e detalhada>" }
-  ]
+    { "titulo": "<passo 1: teste ou diagnóstico inicial>", "descricao": "<instrução detalhada>" },
+    { "titulo": "<passo 2: ação corretiva>", "descricao": "<instrução detalhada>" },
+    { "titulo": "<passo 3: teste de validação>", "descricao": "<como testar se funcionou>" }
+  ],
+  "manuaisRelacionados": [{ "id": <número>, "relevancia": "<relação complementar, se houver>" }]
 }
 
 Regras:
@@ -180,9 +191,19 @@ Regras:
             return res.status(502).json({ error: "Resposta da IA em formato inválido" });
         }
 
-        // Se encontrou manuais, enriquece com nome e descricao completos
+        // Se encontrou manuais diretos, enriquece com nome e descricao completos
         if (resposta.tipo === "manuais_encontrados" && Array.isArray(resposta.manuais)) {
             resposta.manuais = resposta.manuais
+                .map((m) => {
+                    const manual = manuaisDisponiveis.find((md) => md.id === m.id);
+                    return manual ? { ...manual, relevancia: m.relevancia } : null;
+                })
+                .filter(Boolean);
+        }
+
+        // Se gerou passo a passo e trouxe manuais complementares, enriquece também
+        if (resposta.tipo === "passo_a_passo" && Array.isArray(resposta.manuaisRelacionados)) {
+            resposta.manuaisRelacionados = resposta.manuaisRelacionados
                 .map((m) => {
                     const manual = manuaisDisponiveis.find((md) => md.id === m.id);
                     return manual ? { ...manual, relevancia: m.relevancia } : null;

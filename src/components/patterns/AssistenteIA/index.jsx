@@ -1,4 +1,4 @@
-﻿import { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 import { MessageCircle, X, Send, Loader, CheckCircle, AlertCircle, FileText, ArrowLeft, Zap, HelpCircle } from "react-feather";
 import { theme } from "../../../theme/theme";
@@ -359,6 +359,30 @@ export default function AssistenteIA() {
                                         </PassoConteudoStl>
                                     </PassoStl>
                                 ))}
+
+                                {/* Manuais de apoio/relacionados ao passo a passo */}
+                                {resultado.manuaisRelacionados && resultado.manuaisRelacionados.length > 0 && (
+                                    <div style={{ marginTop: "14px", marginBottom: "8px" }}>
+                                        <ResultadoTituloStl style={{ fontSize: "0.85rem" }}>
+                                            <FileText size={15} color={theme.colors.azulMaisClaro.claro} />
+                                            Manuais do site que também podem ajudar:
+                                        </ResultadoTituloStl>
+                                        {resultado.manuaisRelacionados.map((m) => (
+                                            <CardResultadoStl key={m.id} style={{ marginTop: "6px" }}>
+                                                <Link href={`/posts/${m.id}`} onClick={fechar}>
+                                                    <CardResultadoInternoStl>
+                                                        <FileText size={15} />
+                                                        <div>
+                                                            <CardNomeStl>{m.nome}</CardNomeStl>
+                                                            <CardRelevanciaStl>{m.relevancia}</CardRelevanciaStl>
+                                                        </div>
+                                                    </CardResultadoInternoStl>
+                                                </Link>
+                                            </CardResultadoStl>
+                                        ))}
+                                    </div>
+                                )}
+
                                 {erro && <ErroStl><AlertCircle size={14} /> {erro}</ErroStl>}
                                 <BotaoSalvarStl onClick={salvarManual}>
                                     <FileText size={16} />
