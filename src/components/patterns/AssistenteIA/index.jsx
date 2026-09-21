@@ -1,9 +1,8 @@
-import { useState, useEffect } from "react";
+﻿import { useState, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
-import { MessageCircle, X, Send, Loader, CheckCircle, AlertCircle, FileText, ArrowLeft, Zap } from "react-feather";
+import { MessageCircle, X, Send, Loader, CheckCircle, AlertCircle, FileText, ArrowLeft, Zap, HelpCircle } from "react-feather";
 import { theme } from "../../../theme/theme";
 import Link from "next/link";
-
 
 const ESTADOS = {
     FECHADO: "fechado",
@@ -32,32 +31,14 @@ const CURIOSIDADES = [
     "O código-fonte do voo Apollo 11 que levou o homem à Lua continha piadas e comentários bem-humorados escritos pelos engenheiros da NASA.",
     "A tecla 'Ctrl + Alt + Del' foi criada por David Bradley como um atalho temporário de testes e nunca deveria ter sido lançada ao público.",
     "Um raio possui energia suficiente para torrar mais de 100.000 fatias de pão de uma única vez.",
-    "A internet inteira pesa aproximadamente o mesmo que um morango médio (cerca de 50 gramas de elétrons em movimento).",
-    "O primeiro e-mail da história foi enviado por Ray Tomlinson em 1971 — e ele mesmo não se lembra do conteúdo exato da mensagem.",
-    "O símbolo '@' foi escolhido para os endereços de e-mail simplesmente porque era um caractere pouco usado e não aparecia em nomes de pessoas.",
-    "O primeiro computador a vencer um campeão mundial de xadrez foi o Deep Blue da IBM, em 1997 — mas ele precisava de uma sala inteira para funcionar.",
-    "A palavra 'robô' nasceu de uma peça de teatro tcheca de 1920, na qual máquinas se rebelavam contra seus criadores humanos.",
-    "Existem mais combinações possíveis no xadrez do que átomos no universo observável.",
-    "O primeiro filme a usar efeitos digitais em larga escala foi 'Tron' (1982), mas os produtores foram recusados pela Disney por achar o resultado 'bom demais para ser verdade'.",
-    "A linguagem de programação Python não recebeu esse nome por causa da cobra, mas sim como homenagem ao grupo humorístico Monty Python.",
-    "O primeiro bug de software 'clássico' levou semanas para ser encontrado em 1945 e era um inseto real — da mesma forma que a mariposa do Mark II.",
-    "Um único raio pode alcançar temperaturas de cerca de 30.000 °C, cinco vezes mais quente que a superfície do Sol.",
-    "O primeiro pendrive USB chegou ao mercado em 2000, com capacidade de apenas 8 MB — hoje um cartão microSD cabe mais de 100.000 vezes isso.",
-    "A câmera do telefone foi inventada em 1997 e o primeiro aparelho com ela tirava fotos de apenas 0,11 megapixel.",
-    "O primeiro video-game caseiro lançado comercialmente foi o Magnavox Odyssey (1972), que não tinha som e usava cartuchos 'falsos' — apenas para dar sensação de variedade.",
-    "O termo 'Wi-Fi' não significa nada — foi criado por uma agência de marketing para ser mais fácil de lembrar do que o nome técnico original.",
-    "O primeiro tweet da história foi publicado por Jack Dorsey em 2006 e dizia apenas 'just setting up my twttr'.",
-    "A escala de cores RGB usada em toda tela digital pode criar mais de 16 milhões de cores diferentes — mas o olho humano distingue apenas cerca de 10 milhões.",
-    "O primeiro computador portátil, o Osborne 1 (1981), pesava cerca de 11 kg e precisava ser ligado a uma tomada — sua 'bateria' era um mito publicitário.",
-    "O código que faz o relógio de um computador continuar contando depois de 2038 pode causar um novo 'bug do milênio', apelidado de 'Problema do Ano 2038'.",
-    "A primeira mulher a programar foi Ada Lovelace, em 1843 — mais de um século antes de existir o primeiro computador eletrônico.",
-    "O primeiro site da história ainda está no ar desde 1991 e explicava apenas o que era a 'World Wide Web'.",
-    "A quantidade de dados gerados pela humanidade nos últimos dois anos é maior do que toda a informação produzida nos 2.000 anos anteriores."
+    "A internet inteira pesa aproximadamente o mesmo que um morango médio (cerca de 50 gramas de elétrons em movimento)."
 ];
 
 export default function AssistenteIA() {
     const [estado, setEstado] = useState(ESTADOS.FECHADO);
     const [problema, setProblema] = useState("");
+    const [problemaOriginal, setProblemaOriginal] = useState("");
+    const [detalheExtra, setDetalheExtra] = useState("");
     const [resultado, setResultado] = useState(null);
     const [erro, setErro] = useState(null);
     const [curiosidadeIndex, setCuriosidadeIndex] = useState(0);
@@ -92,6 +73,8 @@ export default function AssistenteIA() {
     function fechar() {
         setEstado(ESTADOS.FECHADO);
         setProblema("");
+        setProblemaOriginal("");
+        setDetalheExtra("");
         setResultado(null);
         setErro(null);
     }
@@ -103,9 +86,10 @@ export default function AssistenteIA() {
     }
 
     async function enviar(e) {
-        e.preventDefault();
+        if (e) e.preventDefault();
         if (!problema.trim()) return;
 
+        setProblemaOriginal(problema.trim());
         setEstado(ESTADOS.CARREGANDO);
         setErro(null);
 
@@ -113,7 +97,7 @@ export default function AssistenteIA() {
             const res = await fetch("/api/ia/diagnostico", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ problema }),
+                body: JSON.stringify({ problema: problema.trim() }),
             });
 
             const data = await res.json();
@@ -132,6 +116,41 @@ export default function AssistenteIA() {
         }
     }
 
+    async function handleRefinar(textoAdicional) {
+        const texto = (textoAdicional || detalheExtra).trim();
+        if (!texto) return;
+
+        setEstado(ESTADOS.CARREGANDO);
+        setErro(null);
+
+        try {
+            const res = await fetch("/api/ia/diagnostico", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    problema: texto,
+                    contextoAnterior: problemaOriginal || problema,
+                }),
+            });
+
+            const data = await res.json();
+
+            if (!res.ok) {
+                setErro(data.error || "Erro ao refinar a consulta");
+                setEstado(ESTADOS.RESULTADO);
+                return;
+            }
+
+            setResultado(data);
+            setDetalheExtra("");
+            setProblemaOriginal((prev) => `${prev} • ${texto}`);
+            setEstado(ESTADOS.RESULTADO);
+        } catch {
+            setErro("Erro de conexão ao refinar. Tente novamente.");
+            setEstado(ESTADOS.RESULTADO);
+        }
+    }
+
     async function salvarManual() {
         if (!resultado || resultado.tipo !== "passo_a_passo") return;
 
@@ -143,7 +162,7 @@ export default function AssistenteIA() {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     nome: resultado.sugestaoNome,
-                    descricao: resultado.sugestaoDescricao || problema,
+                    descricao: resultado.sugestaoDescricao || problemaOriginal || problema,
                     categoria: "Gerados por IA",
                     passos: resultado.passos,
                 }),
@@ -231,63 +250,139 @@ export default function AssistenteIA() {
                                 <span>Curiosidade enquanto espera:</span>
                             </div>
                             <p className="curiosidadeTexto">
-
                                 "{CURIOSIDADES[curiosidadeIndex]}"
                             </p>
                         </CuriosidadeBoxStl>
                     </CarregandoBlocoStl>
                 )}
 
-                {/* Estado: RESULTADO — manuais encontrados */}
-                {estado === ESTADOS.RESULTADO && resultado?.tipo === "manuais_encontrados" && (
+                {/* Estado: RESULTADO */}
+                {estado === ESTADOS.RESULTADO && resultado && (
                     <ResultadoStl>
-                        <ResultadoTituloStl>
-                            <CheckCircle size={18} color={theme.colors.azulMaisClaro.escuro} />
-                            Manuais relacionados encontrados!
-                        </ResultadoTituloStl>
-                        <ResultadoDescStl>
-                            Encontrei {resultado.manuais.length} manual(is) no sistema que pode(m) ajudar:
-                        </ResultadoDescStl>
-                        {resultado.manuais.map((m) => (
-                            <CardResultadoStl key={m.id}>
-                                <Link href={`/posts/${m.id}`} onClick={fechar}>
-                                    <CardResultadoInternoStl>
-                                        <FileText size={16} />
-                                        <div>
-                                            <CardNomeStl>{m.nome}</CardNomeStl>
-                                            <CardRelevanciaStl>{m.relevancia}</CardRelevanciaStl>
-                                        </div>
-                                    </CardResultadoInternoStl>
-                                </Link>
-                            </CardResultadoStl>
-                        ))}
-                    </ResultadoStl>
-                )}
+                        {/* 1. CARD DE CLARIFICAÇÃO (quando for vago ou faltar detalhe) */}
+                        {resultado.precisaMaisDetalhes && (
+                            <CardClarificacaoStl>
+                                <ClarificacaoHeaderStl>
+                                    <HelpCircle size={18} />
+                                    <span>Explique um pouco melhor o erro</span>
+                                </ClarificacaoHeaderStl>
 
-                {/* Estado: RESULTADO — passo a passo gerado */}
-                {estado === ESTADOS.RESULTADO && resultado?.tipo === "passo_a_passo" && (
-                    <ResultadoStl>
-                        <ResultadoTituloStl>
-                            <CheckCircle size={18} color={theme.colors.azulMaisClaro.escuro} />
-                            Passo a passo gerado pela IA
-                        </ResultadoTituloStl>
-                        <ResultadoDescStl>
-                            Não havia um manual pronto, então gerei este guia técnico para resolver a situação:
-                        </ResultadoDescStl>
-                        {resultado.passos.map((p, i) => (
-                            <PassoStl key={i}>
-                                <PassoNumeroStl>{i + 1}</PassoNumeroStl>
-                                <PassoConteudoStl>
-                                    <PassoTituloStl>{p.titulo}</PassoTituloStl>
-                                    <PassoDescStl>{p.descricao}</PassoDescStl>
-                                </PassoConteudoStl>
-                            </PassoStl>
-                        ))}
-                        {erro && <ErroStl><AlertCircle size={14} /> {erro}</ErroStl>}
-                        <BotaoSalvarStl onClick={salvarManual}>
-                            <FileText size={16} />
-                            Salvar como Manual no Site
-                        </BotaoSalvarStl>
+                                <ClarificacaoPerguntaStl>
+                                    {resultado.perguntaClarificacao || "Pode me fornecer mais detalhes sobre o que está acontecendo?"}
+                                </ClarificacaoPerguntaStl>
+
+                                {/* Perguntas guiadas / Chips rápidos */}
+                                {resultado.sugestoesRapidas && resultado.sugestoesRapidas.length > 0 && (
+                                    <ChipsContainerStl>
+                                        <span className="chipsLabel">Selecione uma opção rápida:</span>
+                                        <div className="chipsList">
+                                            {resultado.sugestoesRapidas.map((sugestao, idx) => (
+                                                <ChipBotaoStl
+                                                    key={idx}
+                                                    type="button"
+                                                    onClick={() => handleRefinar(sugestao)}
+                                                >
+                                                    {sugestao}
+                                                </ChipBotaoStl>
+                                            ))}
+                                        </div>
+                                    </ChipsContainerStl>
+                                )}
+
+                                {/* Campo aberto para detalhar livremente */}
+                                <FormRefinamentoStl onSubmit={(e) => { e.preventDefault(); handleRefinar(); }}>
+                                    <InputRefinamentoStl
+                                        type="text"
+                                        placeholder="Ou digite aqui detalhes adicionais..."
+                                        value={detalheExtra}
+                                        onChange={(e) => setDetalheExtra(e.target.value)}
+                                    />
+                                    <BotaoEnviarRefinamentoStl
+                                        type="submit"
+                                        disabled={!detalheExtra.trim()}
+                                        title="Enviar detalhes"
+                                    >
+                                        <Send size={15} />
+                                    </BotaoEnviarRefinamentoStl>
+                                </FormRefinamentoStl>
+                            </CardClarificacaoStl>
+                        )}
+
+                        {/* 2. MANUAIS RELACIONADOS ENCONTRADOS */}
+                        {resultado.manuais && resultado.manuais.length > 0 && (
+                            <>
+                                <ResultadoTituloStl>
+                                    <CheckCircle size={18} color={theme.colors.azulMaisClaro.escuro} />
+                                    {resultado.precisaMaisDetalhes
+                                        ? "Enquanto isso, veja se algum destes manuais ajuda:"
+                                        : "Manuais relacionados encontrados!"}
+                                </ResultadoTituloStl>
+
+                                {!resultado.precisaMaisDetalhes && (
+                                    <ResultadoDescStl>
+                                        Encontrei {resultado.manuais.length} manual(is) no sistema que pode(m) ajudar:
+                                    </ResultadoDescStl>
+                                )}
+
+                                {resultado.manuais.map((m) => (
+                                    <CardResultadoStl key={m.id}>
+                                        <Link href={`/posts/${m.id}`} onClick={fechar}>
+                                            <CardResultadoInternoStl>
+                                                <FileText size={16} />
+                                                <div>
+                                                    <CardNomeStl>{m.nome}</CardNomeStl>
+                                                    <CardRelevanciaStl>{m.relevancia}</CardRelevanciaStl>
+                                                </div>
+                                            </CardResultadoInternoStl>
+                                        </Link>
+                                    </CardResultadoStl>
+                                ))}
+                            </>
+                        )}
+
+                        {/* 3. PASSO A PASSO GERADO PELA IA */}
+                        {resultado.tipo === "passo_a_passo" && resultado.passos && (
+                            <>
+                                <ResultadoTituloStl>
+                                    <CheckCircle size={18} color={theme.colors.azulMaisClaro.escuro} />
+                                    Passo a passo gerado pela IA
+                                </ResultadoTituloStl>
+                                <ResultadoDescStl>
+                                    {resultado.sugestaoDescricao || "Siga este procedimento para tentar resolver o problema:"}
+                                </ResultadoDescStl>
+                                {resultado.passos.map((p, i) => (
+                                    <PassoStl key={i}>
+                                        <PassoNumeroStl>{i + 1}</PassoNumeroStl>
+                                        <PassoConteudoStl>
+                                            <PassoTituloStl>{p.titulo}</PassoTituloStl>
+                                            <PassoDescStl>{p.descricao}</PassoDescStl>
+                                        </PassoConteudoStl>
+                                    </PassoStl>
+                                ))}
+                                {erro && <ErroStl><AlertCircle size={14} /> {erro}</ErroStl>}
+                                <BotaoSalvarStl onClick={salvarManual}>
+                                    <FileText size={16} />
+                                    Salvar como Manual no Site
+                                </BotaoSalvarStl>
+                            </>
+                        )}
+
+                        {/* Botão de refinamento discreto (quando a IA não marcou como vago, mas o usuário quer refinar) */}
+                        {!resultado.precisaMaisDetalhes && (
+                            <BotaoRefinarDiscretoStl
+                                type="button"
+                                onClick={() => {
+                                    setResultado((prev) => ({
+                                        ...prev,
+                                        precisaMaisDetalhes: true,
+                                        perguntaClarificacao: "Não era exatamente isso? Explique um pouco melhor o que está acontecendo:",
+                                        sugestoesRapidas: []
+                                    }));
+                                }}
+                            >
+                                <HelpCircle size={14} /> Não era bem isso? Detalhar melhor o erro
+                            </BotaoRefinarDiscretoStl>
+                        )}
                     </ResultadoStl>
                 )}
 
@@ -364,8 +459,8 @@ const PainelStl = styled.aside`
     bottom: 28px;
     right: 28px;
     z-index: 9999;
-    width: 420px;
-    max-height: 82vh;
+    width: 440px;
+    max-height: 84vh;
     display: flex;
     flex-direction: column;
     background: ${theme.colors.azul.medio};
@@ -558,7 +653,8 @@ const ResultadoTituloStl = styled.h3`
     gap: 8px;
     color: ${theme.colors.clara.medio};
     font-family: ${theme.fontsFamily.titulos};
-    font-size: 1rem;
+    font-size: 0.95rem;
+    margin-top: 4px;
 `;
 
 const ResultadoDescStl = styled.p`
@@ -571,8 +667,12 @@ const CardResultadoStl = styled.div`
     background: ${theme.colors.azul.escuro};
     border-radius: 10px;
     padding: 12px;
-    transition: transform 0.2s;
-    &:hover { transform: translateX(4px); }
+    transition: transform 0.2s, border-color 0.2s;
+    border: 1px solid transparent;
+    &:hover { 
+        transform: translateX(4px);
+        border-color: ${theme.colors.azulMaisClaro.escuro};
+    }
 `;
 
 const CardResultadoInternoStl = styled.div`
@@ -593,7 +693,140 @@ const CardRelevanciaStl = styled.p`
     font-family: ${theme.fontsFamily.paragrafos};
     font-size: 0.8rem;
     color: ${theme.colors.azulMaisClaro.medio};
+    line-height: 1.4;
 `;
+
+// ─── Componentes de Clarificação & Refinamento ───────────────────────────────
+
+const CardClarificacaoStl = styled.div`
+    background: rgba(30, 58, 95, 0.6);
+    border: 1px solid ${theme.colors.azulMaisClaro.escuro};
+    border-radius: 12px;
+    padding: 14px;
+    margin-bottom: 8px;
+    box-sizing: border-box;
+`;
+
+const ClarificacaoHeaderStl = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #f59e0b;
+    font-size: 0.88rem;
+    font-weight: bold;
+    font-family: ${theme.fontsFamily.titulos};
+    margin-bottom: 8px;
+`;
+
+const ClarificacaoPerguntaStl = styled.p`
+    color: ${theme.colors.clara.medio};
+    font-family: ${theme.fontsFamily.paragrafos};
+    font-size: 0.88rem;
+    line-height: 1.45;
+    margin-bottom: 12px;
+`;
+
+const ChipsContainerStl = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 12px;
+
+    .chipsLabel {
+        font-size: 0.75rem;
+        color: ${theme.colors.azulMaisClaro.claro};
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+    }
+
+    .chipsList {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+`;
+
+const ChipBotaoStl = styled.button`
+    background: ${theme.colors.azul.escuro};
+    border: 1px solid ${theme.colors.azulMaisClaro.escuro};
+    color: ${theme.colors.clara.medio};
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-family: ${theme.fontsFamily.paragrafos};
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+        background: ${theme.colors.azulMaisClaro.escuro};
+        color: #fff;
+        transform: translateY(-1px);
+    }
+`;
+
+const FormRefinamentoStl = styled.form`
+    display: flex;
+    align-items: center;
+    gap: 8px;
+`;
+
+const InputRefinamentoStl = styled.input`
+    flex: 1;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid ${theme.colors.azulMaisClaro.escuro};
+    background: ${theme.colors.azul.escuro};
+    color: ${theme.colors.clara.medio};
+    font-size: 0.85rem;
+    box-sizing: border-box;
+
+    &:focus {
+        outline: none;
+        border-color: ${theme.colors.azulMaisClaro.claro};
+    }
+`;
+
+const BotaoEnviarRefinamentoStl = styled.button`
+    padding: 10px 14px;
+    background: ${theme.colors.azulMaisClaro.escuro};
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+
+    &:hover:not(:disabled) {
+        background: ${theme.colors.azulMaisClaro.medio};
+    }
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+`;
+
+const BotaoRefinarDiscretoStl = styled.button`
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: none;
+    border: none;
+    color: ${theme.colors.azulMaisClaro.claro};
+    font-size: 0.82rem;
+    cursor: pointer;
+    margin-top: 8px;
+    padding: 4px 0;
+    transition: color 0.2s;
+
+    &:hover {
+        color: ${theme.colors.clara.medio};
+        text-decoration: underline;
+    }
+`;
+
+// ─── Passo a Passo & Finais ──────────────────────────────────────────────────
 
 const PassoStl = styled.div`
     display: flex;

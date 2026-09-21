@@ -68,7 +68,7 @@ export default async function handler(req, res) {
         return res.status(405).json({ error: "Apenas POST é permitido" });
     }
 
-    const { problema } = req.body;
+    const { problema, contextoAnterior } = req.body;
 
     if (!problema?.trim()) {
         return res.status(400).json({ error: "Descreva o problema" });
@@ -78,7 +78,7 @@ export default async function handler(req, res) {
         return res.status(503).json({ error: "Gemini API não configurada" });
     }
 
-    // Busca lista de manuais disponíveis
+    // Busca lista de manuais disponíveis (apenas os aprovados)
     let manuaisDisponiveis = [];
     try {
         if (supabase) {
@@ -96,7 +96,6 @@ export default async function handler(req, res) {
 
             manuaisDisponiveis = data || [];
         } else {
-
             manuaisDisponiveis = Object.values(instalacoesLocal)
                 .flat()
                 .map(({ id, nome, descricao }) => ({ id, nome, descricao }));
@@ -112,25 +111,44 @@ export default async function handler(req, res) {
         .map((m) => `- ID ${m.id}: "${m.nome}" — ${m.descricao}`)
         .join("\n");
 
+    let textoEntradaUsuario = `"${problema.trim()}"`;
+    if (contextoAnterior && contextoAnterior.trim()) {
+        textoEntradaUsuario = `Problema inicial: "${contextoAnterior.trim()}"\nInformações adicionais do usuário para refinar: "${problema.trim()}"`;
+    }
+
     const prompt = `Você é um assistente técnico de suporte N1 (help desk) especializado em TI corporativa.
 
-O usuário está com o seguinte problema:
-"${problema}"
+O usuário relatou a seguinte situação:
+${textoEntradaUsuario}
 
 Manuais técnicos disponíveis no sistema:
 ${manuaisTexto}
 
-Analise o problema e responda EXCLUSIVAMENTE com um JSON válido, sem nenhum texto adicional, sem markdown, sem explicação fora do JSON.
+Analise a situação e responda EXCLUSIVAMENTE com um JSON válido, sem markdown, sem explicação fora do JSON.
 
-Se algum dos manuais acima for relevante para resolver o problema, responda:
+DIRETRIZES DE RESPOSTA:
+
+1. Se a descrição for VAGA, CURTA ou FALTAR CONTEXTO (ex: "erro no antivirus", "não abre", "travou", "tela azul", "problema no pc", "outlook", etc.):
 {
   "tipo": "manuais_encontrados",
-  "manuais": [{ "id": <número>, "relevancia": "<breve explicação de por que este manual ajuda>" }]
+  "precisaMaisDetalhes": true,
+  "perguntaClarificacao": "<pergunta amigável e direta pedindo o detalhe que falta, ex: 'Qual o programa específico ou qual mensagem de erro aparece?'>",
+  "sugestoesRapidas": ["<opção curta 1>", "<opção curta 2>", "<opção curta 3>"],
+  "manuais": [{ "id": <número>, "relevancia": "<breve explicação de como pode ajudar ou se for uma solução preventiva relacionada>" }]
+}
+(Observação: Se houver qualquer manual mesmo que com relação parcial ou preventiva ao termo citado, inclua-o em "manuais" para que o usuário já possa conferir. Se não houver nenhum, retorne "manuais": [])
+
+2. Se a descrição for ESPECÍFICA e algum manual do sistema resolver:
+{
+  "tipo": "manuais_encontrados",
+  "precisaMaisDetalhes": false,
+  "manuais": [{ "id": <número>, "relevancia": "<breve explicação>" }]
 }
 
-Se NENHUM manual for relevante, gere um passo a passo para resolver o problema e responda:
+3. Se a descrição for ESPECÍFICA e NENHUM manual resolver (necessário passo a passo):
 {
   "tipo": "passo_a_passo",
+  "precisaMaisDetalhes": false,
   "sugestaoNome": "<nome curto para este manual>",
   "sugestaoDescricao": "<descrição em uma frase>",
   "passos": [
@@ -140,9 +158,10 @@ Se NENHUM manual for relevante, gere um passo a passo para resolver o problema e
 
 Regras:
 - Use linguagem clara e técnica, em português brasileiro.
-- Passo a passo deve ter entre 3 e 8 passos.
-- Se houver múltiplos manuais relevantes, liste apenas os 3 mais relevantes.
+- Sugestões rápidas devem ter no máximo 4 palavras cada.
+- Se houver múltiplos manuais relevantes, liste no máximo os 3 mais próximos.
 - Responda SOMENTE o JSON, nada mais.`;
+
 
     try {
         const textoBruto = await chamarGemini(prompt);
