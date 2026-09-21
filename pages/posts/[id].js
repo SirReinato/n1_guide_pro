@@ -7,8 +7,9 @@ import {
 export async function getStaticPaths() {
     return {
         paths: await getAllPostIds(),
-        fallback: false,
+        fallback: "blocking",
     };
+
 }
 
 export async function getStaticProps({ params }) {
