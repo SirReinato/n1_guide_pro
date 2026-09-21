@@ -2,8 +2,27 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import Head from "next/head";
 import Link from "next/link";
-import { theme, TitulosPrincipaisStl } from "../src/theme/theme";
-import { Check, Trash2, ArrowLeft, Lock, LogOut, ChevronDown, ChevronUp, FileText, AlertCircle, RefreshCw } from "react-feather";
+import { theme } from "../src/theme/theme";
+import {
+    Check,
+    Trash2,
+    ArrowLeft,
+    Lock,
+    LogOut,
+    ChevronDown,
+    ChevronUp,
+    FileText,
+    AlertCircle,
+    RefreshCw,
+    Edit2,
+    BarChart2,
+    ThumbsUp,
+    ThumbsDown,
+    Eye,
+    Plus,
+    X,
+    HelpCircle,
+} from "react-feather";
 
 export default function AdminPage() {
     const [token, setToken] = useState(null);
@@ -12,16 +31,19 @@ export default function AdminPage() {
     const [carregandoLogin, setCarregandoLogin] = useState(false);
 
     // Estados do painel
+    const [abaAtiva, setAbaAtiva] = useState("pendentes"); // 'pendentes' | 'aprovados' | 'dashboard'
     const [manuaisPendentes, setManuaisPendentes] = useState([]);
     const [manuaisAprovados, setManuaisAprovados] = useState([]);
+    const [logsConsultas, setLogsConsultas] = useState([]);
     const [carregandoDados, setCarregandoDados] = useState(false);
     const [erroPainel, setErroPainel] = useState("");
     const [sucessoMensagem, setSucessoMensagem] = useState("");
     const [passosExpandidos, setPassosExpandidos] = useState({});
     const [precisaCriarColuna, setPrecisaCriarColuna] = useState(false);
 
-    // Carrega token salvo
-
+    // Estado do modal de edição
+    const [manualEditando, setManualEditando] = useState(null);
+    const [salvandoEdicao, setSalvandoEdicao] = useState(false);
 
     useEffect(() => {
         const savedToken = localStorage.getItem("n1_admin_token");
@@ -30,7 +52,6 @@ export default function AdminPage() {
         }
     }, []);
 
-    // Busca dados quando autenticado
     useEffect(() => {
         if (token) {
             carregarManuais();
@@ -71,6 +92,7 @@ export default function AdminPage() {
         setToken(null);
         setManuaisPendentes([]);
         setManuaisAprovados([]);
+        setLogsConsultas([]);
     }
 
     async function carregarManuais() {
@@ -95,6 +117,7 @@ export default function AdminPage() {
 
             setManuaisPendentes(data.pendentes || []);
             setManuaisAprovados(data.aprovados || []);
+            setLogsConsultas(data.logsConsultas || []);
             setPrecisaCriarColuna(Boolean(data.precisaCriarColuna));
         } catch (err) {
             setErroPainel("Erro ao carregar dados do banco");
@@ -102,7 +125,6 @@ export default function AdminPage() {
             setCarregandoDados(false);
         }
     }
-
 
     async function aprovarManual(id) {
         setErroPainel("");
@@ -158,6 +180,107 @@ export default function AdminPage() {
         setPassosExpandidos((prev) => ({ ...prev, [id]: !prev[id] }));
     }
 
+    // ─── Funções de Edição ───────────────────────────────────────────────────
+
+    function abrirEdicao(manual) {
+        setManualEditando({
+            id: manual.id,
+            nome: manual.nome,
+            descricao: manual.descricao || "",
+            aprovado: manual.aprovado,
+            passos: (manual.passos || []).map((p, idx) => ({
+                passo: idx + 1,
+                titulo: p.titulo || "",
+                descricao: p.descricao || "",
+            })),
+        });
+    }
+
+    function fecharEdicao() {
+        setManualEditando(null);
+    }
+
+    function adicionarPasso() {
+        if (!manualEditando) return;
+        setManualEditando((prev) => ({
+            ...prev,
+            passos: [
+                ...prev.passos,
+                { passo: prev.passos.length + 1, titulo: "", descricao: "" },
+            ],
+        }));
+    }
+
+    function removerPasso(index) {
+        if (!manualEditando) return;
+        setManualEditando((prev) => ({
+            ...prev,
+            passos: prev.passos.filter((_, i) => i !== index),
+        }));
+    }
+
+    function atualizarPasso(index, campo, valor) {
+        if (!manualEditando) return;
+        setManualEditando((prev) => {
+            const novosPassos = [...prev.passos];
+            novosPassos[index] = { ...novosPassos[index], [campo]: valor };
+            return { ...prev, passos: novosPassos };
+        });
+    }
+
+    async function salvarEdicao(aprovarJunto) {
+        if (!manualEditando) return;
+        setSalvandoEdicao(true);
+
+        try {
+            const res = await fetch("/api/admin/manuais", {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify({
+                    id: manualEditando.id,
+                    nome: manualEditando.nome,
+                    descricao: manualEditando.descricao,
+                    passos: manualEditando.passos,
+                    aprovado: aprovarJunto !== undefined ? aprovarJunto : manualEditando.aprovado,
+                }),
+            });
+
+            if (!res.ok) {
+                const data = await res.json();
+                alert(data.error || "Erro ao salvar alterações");
+                return;
+            }
+
+            setSucessoMensagem(
+                `Manual #${manualEditando.id} atualizado ${aprovarJunto ? "e publicado " : ""}com sucesso!`
+            );
+            setTimeout(() => setSucessoMensagem(""), 4000);
+            fecharEdicao();
+            carregarManuais();
+        } catch (err) {
+            alert("Erro de conexão ao salvar.");
+        } finally {
+            setSalvandoEdicao(false);
+        }
+    }
+
+    // ─── Métricas do Dashboard ───────────────────────────────────────────────
+
+    const totalManuais = manuaisAprovados.length + manuaisPendentes.length;
+    const totalConsultas = logsConsultas.length;
+    const consultasSemManual = logsConsultas.filter((l) => !l.encontrou_manual);
+    const totalVotosPositivos = manuaisAprovados.reduce((acc, m) => acc + (m.votos_positivos || 0), 0);
+    const totalVotosNegativos = manuaisAprovados.reduce((acc, m) => acc + (m.votos_negativos || 0), 0);
+    const totalVotos = totalVotosPositivos + totalVotosNegativos;
+    const taxaSatisfacao = totalVotos > 0 ? Math.round((totalVotosPositivos / totalVotos) * 100) : 100;
+
+    const manuaisMaisAcessados = [...manuaisAprovados]
+        .sort((a, b) => ((b.visualizacoes || 0) + (b.votos_positivos || 0)) - ((a.visualizacoes || 0) + (a.votos_positivos || 0)))
+        .slice(0, 5);
+
     // Tela de Login
     if (!token) {
         return (
@@ -171,7 +294,7 @@ export default function AdminPage() {
                     </IconeLockStl>
                     <TituloLoginStl>Painel de Moderação</TituloLoginStl>
                     <SubtituloLoginStl>
-                        Área de moderação e aprovação de manuais do SirReinato
+                        Área de moderação, edição e métricas do SirReinato
                     </SubtituloLoginStl>
 
                     <form onSubmit={handleLogin}>
@@ -200,11 +323,10 @@ export default function AdminPage() {
         );
     }
 
-    // Painel de Moderação
     return (
         <ContainerPainelStl>
             <Head>
-                <title>Moderação de Manuais - N1 GuidePro</title>
+                <title>Painel de Gestão e Moderação - N1 GuidePro</title>
             </Head>
 
             <HeaderPainelStl>
@@ -215,7 +337,7 @@ export default function AdminPage() {
                         </BotaoVoltarTopoStl>
                     </Link>
                     <div>
-                        <TituloPainelStl>Painel de Moderação</TituloPainelStl>
+                        <TituloPainelStl>Painel de Moderação & Gestão</TituloPainelStl>
                         <SubtituloPainelStl>N1 GuidePro • Moderador: SirReinato</SubtituloPainelStl>
                     </div>
                 </HeaderEsquerdaStl>
@@ -229,6 +351,37 @@ export default function AdminPage() {
                     </BotaoSairStl>
                 </HeaderDireitaStl>
             </HeaderPainelStl>
+
+            {/* Barra de Navegação por Abas */}
+            <AbasNavegacaoStl>
+                <BotaoAbaStl
+                    $ativa={abaAtiva === "pendentes"}
+                    onClick={() => setAbaAtiva("pendentes")}
+                >
+                    <FileText size={16} />
+                    <span>Aguardando Aprovação</span>
+                    <BadgeAbaStl $alerta={manuaisPendentes.length > 0}>
+                        {manuaisPendentes.length}
+                    </BadgeAbaStl>
+                </BotaoAbaStl>
+
+                <BotaoAbaStl
+                    $ativa={abaAtiva === "aprovados"}
+                    onClick={() => setAbaAtiva("aprovados")}
+                >
+                    <Check size={16} />
+                    <span>Publicados no Site</span>
+                    <BadgeAbaStl>{manuaisAprovados.length}</BadgeAbaStl>
+                </BotaoAbaStl>
+
+                <BotaoAbaStl
+                    $ativa={abaAtiva === "dashboard"}
+                    onClick={() => setAbaAtiva("dashboard")}
+                >
+                    <BarChart2 size={16} />
+                    <span>Dashboard N1 & Métricas</span>
+                </BotaoAbaStl>
+            </AbasNavegacaoStl>
 
             <CorpoPainelStl>
                 {sucessoMensagem && (
@@ -249,90 +402,330 @@ export default function AdminPage() {
                             <AlertCircle size={22} />
                         </div>
                         <div>
-                            <h4>Ação rápida recomendada no Supabase</h4>
+                            <h4>Configuração rápida recomendada no Supabase</h4>
                             <p>
-                                Para ativar a moderação no banco, execute este comando no <strong>SQL Editor</strong> do Supabase:
+                                Para habilitar as métricas e avaliações completas, execute este comando no <strong>SQL Editor</strong> do Supabase:
                             </p>
-                            <code>ALTER TABLE manuais ADD COLUMN IF NOT EXISTS aprovado BOOLEAN NOT NULL DEFAULT TRUE;</code>
+                            <code>
+                                ALTER TABLE manuais ADD COLUMN IF NOT EXISTS aprovado BOOLEAN NOT NULL DEFAULT TRUE;
+                                ALTER TABLE manuais ADD COLUMN IF NOT EXISTS visualizacoes INTEGER DEFAULT 0;
+                                ALTER TABLE manuais ADD COLUMN IF NOT EXISTS votos_positivos INTEGER DEFAULT 0;
+                                ALTER TABLE manuais ADD COLUMN IF NOT EXISTS votos_negativos INTEGER DEFAULT 0;
+                                CREATE TABLE IF NOT EXISTS logs_consultas (id BIGSERIAL PRIMARY KEY, termo TEXT NOT NULL, origem TEXT NOT NULL, encontrou_manual BOOLEAN DEFAULT FALSE, criado_em TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()));
+                            </code>
                         </div>
                     </DicaSqlStl>
                 )}
 
-                {/* Seção de Manuais Pendentes */}
-                <SecaoTituloStl>
+                {/* ─── ABA 1: PENDENTES DE MODERAÇÃO ─── */}
+                {abaAtiva === "pendentes" && (
+                    <>
+                        <SecaoTituloStl>
+                            Manuais Gerados pela IA Aguardando Sua Aprovação
+                            <BadgePendentesStl>{manuaisPendentes.length}</BadgePendentesStl>
+                        </SecaoTituloStl>
 
-                    Manuais Aguardando Aprovação
-                    <BadgePendentesStl>{manuaisPendentes.length}</BadgePendentesStl>
-                </SecaoTituloStl>
+                        {carregandoDados ? (
+                            <CarregandoTextoStl>Carregando manuais pendentes...</CarregandoTextoStl>
+                        ) : manuaisPendentes.length === 0 ? (
+                            <VazioCardStl>
+                                <Check size={36} color={theme.colors.azulMaisClaro.claro} />
+                                <h3>Tudo em dia!</h3>
+                                <p>Nenhum manual aguardando aprovação no momento.</p>
+                            </VazioCardStl>
+                        ) : (
+                            <ListaCardsStl>
+                                {manuaisPendentes.map((m) => (
+                                    <CardManualModerarStl key={m.id}>
+                                        <CardHeaderModerarStl>
+                                            <div>
+                                                <CardIdTagStl>#{m.id}</CardIdTagStl>
+                                                <CardTituloModerarStl>{m.nome}</CardTituloModerarStl>
+                                                <CardDescricaoModerarStl>{m.descricao}</CardDescricaoModerarStl>
+                                            </div>
 
-                {carregandoDados ? (
-                    <CarregandoTextoStl>Carregando manuais...</CarregandoTextoStl>
-                ) : manuaisPendentes.length === 0 ? (
-                    <VazioCardStl>
-                        <Check size={36} color={theme.colors.azulMaisClaro.claro} />
-                        <h3>Tudo em dia!</h3>
-                        <p>Nenhum manual aguardando aprovação no momento.</p>
-                    </VazioCardStl>
-                ) : (
-                    <ListaCardsStl>
-                        {manuaisPendentes.map((m) => (
-                            <CardManualModerarStl key={m.id}>
-                                <CardHeaderModerarStl>
-                                    <div>
-                                        <CardIdTagStl>#{m.id}</CardIdTagStl>
-                                        <CardTituloModerarStl>{m.nome}</CardTituloModerarStl>
-                                        <CardDescricaoModerarStl>{m.descricao}</CardDescricaoModerarStl>
-                                    </div>
+                                            <CardAcoesStl>
+                                                <BotaoEditarStl onClick={() => abrirEdicao(m)} title="Editar título, descrição ou passos antes de aprovar">
+                                                    <Edit2 size={15} /> Editar
+                                                </BotaoEditarStl>
+                                                <BotaoAprovarStl onClick={() => aprovarManual(m.id)}>
+                                                    <Check size={15} /> Aprovar e Publicar
+                                                </BotaoAprovarStl>
+                                                <BotaoExcluirStl onClick={() => excluirManual(m.id, m.nome)}>
+                                                    <Trash2 size={15} /> Recusar
+                                                </BotaoExcluirStl>
+                                            </CardAcoesStl>
+                                        </CardHeaderModerarStl>
 
-                                    <CardAcoesStl>
-                                        <BotaoAprovarStl onClick={() => aprovarManual(m.id)}>
-                                            <Check size={16} /> Aprovar e Publicar
-                                        </BotaoAprovarStl>
-                                        <BotaoExcluirStl onClick={() => excluirManual(m.id, m.nome)}>
-                                            <Trash2 size={16} /> Recusar
-                                        </BotaoExcluirStl>
-                                    </CardAcoesStl>
-                                </CardHeaderModerarStl>
+                                        {/* Passos Expandíveis */}
+                                        <TogglePassosBotaoStl onClick={() => togglePassos(m.id)}>
+                                            <FileText size={14} />
+                                            <span>{m.passos?.length || 0} passos detalhados</span>
+                                            {passosExpandidos[m.id] ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+                                        </TogglePassosBotaoStl>
 
-                                {/* Passos Expandíveis */}
-                                <TogglePassosBotaoStl onClick={() => togglePassos(m.id)}>
-                                    <FileText size={14} />
-                                    <span>{m.passos?.length || 0} passos detalhados</span>
-                                    {passosExpandidos[m.id] ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
-                                </TogglePassosBotaoStl>
-
-                                {passosExpandidos[m.id] && (
-                                    <PassosContainerStl>
-                                        {(m.passos || []).map((p) => (
-                                            <PassoItemStl key={p.passo}>
-                                                <strong>Passo {p.passo}: {p.titulo}</strong>
-                                                <p>{p.descricao}</p>
-                                            </PassoItemStl>
-                                        ))}
-                                    </PassosContainerStl>
-                                )}
-                            </CardManualModerarStl>
-                        ))}
-                    </ListaCardsStl>
+                                        {passosExpandidos[m.id] && (
+                                            <PassosContainerStl>
+                                                {(m.passos || []).map((p) => (
+                                                    <PassoItemStl key={p.passo}>
+                                                        <strong>Passo {p.passo}: {p.titulo}</strong>
+                                                        <p>{p.descricao}</p>
+                                                    </PassoItemStl>
+                                                ))}
+                                            </PassosContainerStl>
+                                        )}
+                                    </CardManualModerarStl>
+                                ))}
+                            </ListaCardsStl>
+                        )}
+                    </>
                 )}
 
-                {/* Seção Informativa de Manuais Já Aprovados */}
-                <SecaoTituloSecundariaStl>
-                    Manuais Já Publicados no Site ({manuaisAprovados.length})
-                </SecaoTituloSecundariaStl>
-                <TabelaPublicadosStl>
-                    {manuaisAprovados.slice(0, 10).map((m) => (
-                        <LinhaPublicadoStl key={m.id}>
-                            <span className="id">#{m.id}</span>
-                            <span className="nome">{m.nome}</span>
-                            <span className="origem">{m.gerado_por_ia ? "🤖 Gerado por IA" : "📋 Padrão"}</span>
-                            <Link href={`/posts/${m.id}`} target="_blank" className="link">
-                                Ver no site →
-                            </Link>
-                        </LinhaPublicadoStl>
-                    ))}
-                </TabelaPublicadosStl>
+                {/* ─── ABA 2: APROVADOS / PUBLICADOS ─── */}
+                {abaAtiva === "aprovados" && (
+                    <>
+                        <SecaoTituloStl>
+                            Manuais Publicados no Site ({manuaisAprovados.length})
+                        </SecaoTituloStl>
+
+                        <TabelaPublicadosStl>
+                            {manuaisAprovados.map((m) => (
+                                <LinhaPublicadoStl key={m.id}>
+                                    <span className="id">#{m.id}</span>
+                                    <div className="infoPrincipal">
+                                        <span className="nome">{m.nome}</span>
+                                        <span className="origem">{m.gerado_por_ia ? "🤖 Gerado por IA" : "📋 Padrão"}</span>
+                                    </div>
+
+                                    <div className="metricasManual">
+                                        <span title="Visualizações"><Eye size={13} /> {m.visualizacoes || 0}</span>
+                                        <span title="Votos Positivos" className="votoPos"><ThumbsUp size={13} /> {m.votos_positivos || 0}</span>
+                                        <span title="Votos Negativos" className="votoNeg"><ThumbsDown size={13} /> {m.votos_negativos || 0}</span>
+                                    </div>
+
+                                    <div className="acoesLinha">
+                                        <BotaoEditarPequenoStl onClick={() => abrirEdicao(m)} title="Editar manual">
+                                            <Edit2 size={14} /> Editar
+                                        </BotaoEditarPequenoStl>
+                                        <Link href={`/posts/${m.id}`} target="_blank" className="link">
+                                            Ver no site →
+                                        </Link>
+                                    </div>
+                                </LinhaPublicadoStl>
+                            ))}
+                        </TabelaPublicadosStl>
+                    </>
+                )}
+
+                {/* ─── ABA 3: DASHBOARD & MÉTRICAS ─── */}
+                {abaAtiva === "dashboard" && (
+                    <DashboardContainerStl>
+                        <SecaoTituloStl>
+                            <BarChart2 size={20} /> Visão Geral & Métricas Operacionais N1
+                        </SecaoTituloStl>
+
+                        {/* Cards de Resumo */}
+                        <GridCardsResumoStl>
+                            <CardKpiStl>
+                                <div className="kpiIcone"><FileText size={24} /></div>
+                                <div className="kpiValor">{totalManuais}</div>
+                                <div className="kpiLabel">Total de Manuais</div>
+                            </CardKpiStl>
+
+                            <CardKpiStl>
+                                <div className="kpiIcone" style={{ color: "#38bdf8" }}><HelpCircle size={24} /></div>
+                                <div className="kpiValor">{totalConsultas}</div>
+                                <div className="kpiLabel">Consultas à IA</div>
+                            </CardKpiStl>
+
+                            <CardKpiStl>
+                                <div className="kpiIcone" style={{ color: "#f59e0b" }}><AlertCircle size={24} /></div>
+                                <div className="kpiValor">{manuaisPendentes.length}</div>
+                                <div className="kpiLabel">Pendentes de Moderação</div>
+                            </CardKpiStl>
+
+                            <CardKpiStl>
+                                <div className="kpiIcone" style={{ color: "#10b981" }}><ThumbsUp size={24} /></div>
+                                <div className="kpiValor">{taxaSatisfacao}%</div>
+                                <div className="kpiLabel">Taxa de Resolução Útil</div>
+                            </CardKpiStl>
+                        </GridCardsResumoStl>
+
+                        {/* Grid de Tabelas Analíticas */}
+                        <GridDashboardDuploStl>
+                            {/* Ranking de Manuais Mais Procurados */}
+                            <BoxAnaliticoStl>
+                                <div className="boxHeader">
+                                    <ThumbsUp size={16} color="#10b981" />
+                                    <h4>Manuais Mais Acessados / Curtidos</h4>
+                                </div>
+                                <div className="boxCorpo">
+                                    {manuaisMaisAcessados.map((m, idx) => (
+                                        <LinhaRankingStl key={m.id}>
+                                            <span className="posicao">#{idx + 1}</span>
+                                            <div className="tituloRanking">
+                                                <Link href={`/posts/${m.id}`} target="_blank">
+                                                    {m.nome}
+                                                </Link>
+                                            </div>
+                                            <div className="dadosRanking">
+                                                <span><Eye size={12} /> {m.visualizacoes || 0}</span>
+                                                <span style={{ color: "#10b981" }}><ThumbsUp size={12} /> {m.votos_positivos || 0}</span>
+                                            </div>
+                                        </LinhaRankingStl>
+                                    ))}
+                                </div>
+                            </BoxAnaliticoStl>
+
+                            {/* Oportunidades: Dúvidas sem manual */}
+                            <BoxAnaliticoStl>
+                                <div className="boxHeader">
+                                    <AlertCircle size={16} color="#f59e0b" />
+                                    <h4>Dúvidas Sem Manual Correspondente (Oportunidades)</h4>
+                                </div>
+                                <div className="boxCorpo">
+                                    {consultasSemManual.length === 0 ? (
+                                        <p className="vazioTexto">Nenhum termo sem resposta registrado até o momento.</p>
+                                    ) : (
+                                        consultasSemManual.slice(0, 6).map((log) => (
+                                            <LinhaOportunidadeStl key={log.id}>
+                                                <span className="termo">"{log.termo}"</span>
+                                                <span className="data">{new Date(log.criado_em).toLocaleDateString("pt-BR")}</span>
+                                            </LinhaOportunidadeStl>
+                                        ))
+                                    )}
+                                </div>
+                            </BoxAnaliticoStl>
+                        </GridDashboardDuploStl>
+
+                        {/* Histórico Geral de Perguntas Recentes */}
+                        <BoxAnaliticoStl style={{ marginTop: "20px" }}>
+                            <div className="boxHeader">
+                                <HelpCircle size={16} color="#38bdf8" />
+                                <h4>Últimas Dúvidas Perguntadas à IA pelos Usuários</h4>
+                            </div>
+                            <div className="boxCorpo">
+                                {logsConsultas.length === 0 ? (
+                                    <p className="vazioTexto">As perguntas feitas no Assistente IA começarão a ser listadas aqui conforme o uso.</p>
+                                ) : (
+                                    logsConsultas.slice(0, 10).map((log) => (
+                                        <LinhaLogStl key={log.id}>
+                                            <span className="origemBadge">{log.origem === "ia" ? "IA" : "Busca"}</span>
+                                            <span className="textoLog">{log.termo}</span>
+                                            <span className="statusManual">{log.encontrou_manual ? "✅ Resolvido" : "⚠️ Sem manual direto"}</span>
+                                        </LinhaLogStl>
+                                    ))
+                                )}
+                            </div>
+                        </BoxAnaliticoStl>
+                    </DashboardContainerStl>
+                )}
             </CorpoPainelStl>
+
+            {/* ─── MODAL DE EDIÇÃO DE MANUAL ─── */}
+            {manualEditando && (
+                <ModalOverlayStl onClick={fecharEdicao}>
+                    <ModalCardEdicaoStl onClick={(e) => e.stopPropagation()}>
+                        <ModalHeaderEdicaoStl>
+                            <div className="modalTitulo">
+                                <Edit2 size={20} />
+                                <h3>Editar Manual #{manualEditando.id}</h3>
+                            </div>
+                            <button onClick={fecharEdicao} className="botaoFechar">
+                                <X size={20} />
+                            </button>
+                        </ModalHeaderEdicaoStl>
+
+                        <ModalCorpoEdicaoStl>
+                            <CampoFormStl>
+                                <label>Título do Procedimento:</label>
+                                <input
+                                    type="text"
+                                    value={manualEditando.nome}
+                                    onChange={(e) =>
+                                        setManualEditando((prev) => ({ ...prev, nome: e.target.value }))
+                                    }
+                                />
+                            </CampoFormStl>
+
+                            <CampoFormStl>
+                                <label>Descrição / Objetivo:</label>
+                                <textarea
+                                    rows={2}
+                                    value={manualEditando.descricao}
+                                    onChange={(e) =>
+                                        setManualEditando((prev) => ({ ...prev, descricao: e.target.value }))
+                                    }
+                                />
+                            </CampoFormStl>
+
+                            <SecaoPassosEdicaoStl>
+                                <div className="passosHeader">
+                                    <h4>Passos do Procedimento ({manualEditando.passos?.length || 0})</h4>
+                                    <BotaoAddPassoStl type="button" onClick={adicionarPasso}>
+                                        <Plus size={15} /> Adicionar Passo
+                                    </BotaoAddPassoStl>
+                                </div>
+
+                                {manualEditando.passos?.map((p, idx) => (
+                                    <CardPassoEdicaoStl key={idx}>
+                                        <div className="passoTop">
+                                            <span className="passoNum">Passo {idx + 1}</span>
+                                            <button
+                                                type="button"
+                                                onClick={() => removerPasso(idx)}
+                                                className="btnRemover"
+                                                title="Remover este passo"
+                                            >
+                                                <Trash2 size={14} />
+                                            </button>
+                                        </div>
+
+                                        <input
+                                            type="text"
+                                            placeholder="Título do Passo..."
+                                            value={p.titulo}
+                                            onChange={(e) => atualizarPasso(idx, "titulo", e.target.value)}
+                                        />
+
+                                        <textarea
+                                            rows={3}
+                                            placeholder="Instruções detalhadas..."
+                                            value={p.descricao}
+                                            onChange={(e) => atualizarPasso(idx, "descricao", e.target.value)}
+                                        />
+                                    </CardPassoEdicaoStl>
+                                ))}
+                            </SecaoPassosEdicaoStl>
+                        </ModalCorpoEdicaoStl>
+
+                        <ModalFooterEdicaoStl>
+                            <BotaoCancelarEdicaoStl type="button" onClick={fecharEdicao}>
+                                Cancelar
+                            </BotaoCancelarEdicaoStl>
+
+                            <BotaoSalvarRascunhoStl
+                                type="button"
+                                disabled={salvandoEdicao}
+                                onClick={() => salvarEdicao(manualEditando.aprovado)}
+                            >
+                                {salvandoEdicao ? "Salvando..." : "Salvar Alterações"}
+                            </BotaoSalvarRascunhoStl>
+
+                            {!manualEditando.aprovado && (
+                                <BotaoSalvarAprovarStl
+                                    type="button"
+                                    disabled={salvandoEdicao}
+                                    onClick={() => salvarEdicao(true)}
+                                >
+                                    <Check size={16} />
+                                    {salvandoEdicao ? "Aprovando..." : "Salvar e Publicar"}
+                                </BotaoSalvarAprovarStl>
+                            )}
+                        </ModalFooterEdicaoStl>
+                    </ModalCardEdicaoStl>
+                </ModalOverlayStl>
+            )}
         </ContainerPainelStl>
     );
 }
@@ -419,18 +812,29 @@ const BotaoEntrarStl = styled.button`
         background: ${theme.colors.azulMaisClaro.medio};
     }
     &:disabled {
-        opacity: 0.6;
+        opacity: 0.5;
         cursor: not-allowed;
     }
+`;
+
+const ErroMensagemStl = styled.p`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    color: #ef4444;
+    font-size: 0.9rem;
+    margin-bottom: 16px;
 `;
 
 const VoltarLinkStl = styled(Link)`
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    margin-top: 24px;
     color: ${theme.colors.azulMaisClaro.claro};
     font-size: 0.9rem;
+    margin-top: 24px;
+    text-decoration: none;
     transition: color 0.2s;
 
     &:hover {
@@ -438,32 +842,20 @@ const VoltarLinkStl = styled(Link)`
     }
 `;
 
-const ErroMensagemStl = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    color: #f87171;
-    font-size: 0.9rem;
-    margin-bottom: 14px;
-`;
-
-// Painel Logado
 const ContainerPainelStl = styled.div`
     min-height: 100vh;
-    width: 100%;
     background: ${theme.colors.clara.bgGeral};
+    padding-bottom: 60px;
 `;
 
 const HeaderPainelStl = styled.header`
-    width: 100%;
-    padding: 18px 8%;
-    background: ${theme.colors.azul.escuro};
+    background: ${theme.colors.azul.medio};
+    border-bottom: 1px solid ${theme.colors.azulMaisClaro.escuro};
+    padding: 20px 32px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    box-sizing: border-box;
-    border-bottom: 1px solid ${theme.colors.azul.medio};
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 `;
 
 const HeaderEsquerdaStl = styled.div`
@@ -473,8 +865,8 @@ const HeaderEsquerdaStl = styled.div`
 `;
 
 const BotaoVoltarTopoStl = styled.button`
-    background: ${theme.colors.azul.medio};
-    border: none;
+    background: ${theme.colors.azul.escuro};
+    border: 1px solid ${theme.colors.azulMaisClaro.escuro};
     color: ${theme.colors.clara.medio};
     width: 38px;
     height: 38px;
@@ -483,8 +875,12 @@ const BotaoVoltarTopoStl = styled.button`
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: background 0.2s;
-    &:hover { background: ${theme.colors.azulMaisClaro.escuro}; }
+    transition: all 0.2s;
+
+    &:hover {
+        background: ${theme.colors.azulMaisClaro.escuro};
+        color: #fff;
+    }
 `;
 
 const TituloPainelStl = styled.h1`
@@ -494,8 +890,9 @@ const TituloPainelStl = styled.h1`
 `;
 
 const SubtituloPainelStl = styled.p`
-    font-size: 0.85rem;
-    color: ${theme.colors.azulMaisClaro.medio};
+    font-size: 0.82rem;
+    color: ${theme.colors.azulMaisClaro.claro};
+    font-family: ${theme.fontsFamily.paragrafos};
 `;
 
 const HeaderDireitaStl = styled.div`
@@ -505,132 +902,126 @@ const HeaderDireitaStl = styled.div`
 `;
 
 const BotaoIconeAcaoStl = styled.button`
-    background: ${theme.colors.azul.medio};
-    border: none;
+    background: ${theme.colors.azul.escuro};
+    border: 1px solid ${theme.colors.azulMaisClaro.escuro};
     color: ${theme.colors.clara.medio};
-    padding: 8px 12px;
+    padding: 9px 12px;
     border-radius: 8px;
-    cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 6px;
-    transition: background 0.2s;
-    &:hover { background: ${theme.colors.azulMaisClaro.escuro}; }
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+        background: ${theme.colors.azulMaisClaro.escuro};
+    }
 `;
 
 const BotaoSairStl = styled.button`
     background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: ${theme.colors.clara.medio};
-    padding: 8px 14px;
+    border: 1px solid #ef4444;
+    color: #ef4444;
+    padding: 8px 16px;
     border-radius: 8px;
-    cursor: pointer;
     display: flex;
     align-items: center;
     gap: 6px;
-    font-size: 0.9rem;
+    font-family: ${theme.fontsFamily.paragrafos};
+    font-size: 0.85rem;
+    cursor: pointer;
     transition: all 0.2s;
-    &:hover { background: #dc2626; border-color: #dc2626; }
+
+    &:hover {
+        background: #ef4444;
+        color: #fff;
+    }
+`;
+
+const AbasNavegacaoStl = styled.nav`
+    display: flex;
+    gap: 8px;
+    padding: 16px 32px 0;
+    max-width: 1100px;
+    margin: 0 auto;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+`;
+
+const BotaoAbaStl = styled.button`
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background: ${(props) => (props.$ativa ? theme.colors.azul.medio : "transparent")};
+    border: none;
+    border-bottom: 3px solid ${(props) => (props.$ativa ? theme.colors.azulMaisClaro.escuro : "transparent")};
+    color: ${(props) => (props.$ativa ? "#fff" : theme.colors.azulMaisClaro.claro)};
+    font-family: ${theme.fontsFamily.paragrafos};
+    font-size: 0.95rem;
+    font-weight: ${(props) => (props.$ativa ? "bold" : "normal")};
+    cursor: pointer;
+    border-radius: 8px 8px 0 0;
+    transition: all 0.2s;
+
+    &:hover {
+        color: #fff;
+        background: ${theme.colors.azul.medio};
+    }
+`;
+
+const BadgeAbaStl = styled.span`
+    background: ${(props) => (props.$alerta ? "#f59e0b" : theme.colors.azul.escuro)};
+    color: ${(props) => (props.$alerta ? "#000" : theme.colors.clara.medio)};
+    font-weight: bold;
+    font-size: 0.75rem;
+    padding: 2px 7px;
+    border-radius: 999px;
 `;
 
 const CorpoPainelStl = styled.main`
-    padding: 36px 8%;
-    max-width: 1200px;
-    margin: 0 auto;
-    box-sizing: border-box;
+    max-width: 1100px;
+    margin: 24px auto 0;
+    padding: 0 32px;
 `;
 
 const SecaoTituloStl = styled.h2`
     font-family: ${theme.fontsFamily.titulos};
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     color: ${theme.colors.clara.medio};
     display: flex;
     align-items: center;
-    gap: 12px;
-    margin-bottom: 24px;
-`;
-
-const SecaoTituloSecundariaStl = styled(SecaoTituloStl)`
-    margin-top: 48px;
-    font-size: 1.15rem;
-    color: ${theme.colors.azulMaisClaro.claro};
+    gap: 10px;
+    margin-bottom: 16px;
 `;
 
 const BadgePendentesStl = styled.span`
     background: #f59e0b;
-    color: #111;
-    font-family: ${theme.fontsFamily.paragrafos};
-    font-size: 0.85rem;
+    color: #000;
+    font-size: 0.78rem;
     font-weight: bold;
-    padding: 2px 10px;
+    padding: 3px 8px;
     border-radius: 999px;
-`;
-
-const AlertaSucessoStl = styled.div`
-    background: #065f46;
-    color: #ecfdf5;
-    padding: 12px 16px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 24px;
-`;
-
-const AlertaErroStl = styled.div`
-    background: #991b1b;
-    color: #fef2f2;
-    padding: 12px 16px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 24px;
-`;
-
-const VazioCardStl = styled.div`
-    background: ${theme.colors.azul.medio};
-    border-radius: 12px;
-    padding: 48px;
-    text-align: center;
-    color: ${theme.colors.clara.medio};
-
-    h3 {
-        font-family: ${theme.fontsFamily.titulos};
-        font-size: 1.2rem;
-        margin: 12px 0 6px;
-    }
-    p {
-        color: ${theme.colors.azulMaisClaro.claro};
-        font-size: 0.95rem;
-    }
-`;
-
-const CarregandoTextoStl = styled.p`
-    color: ${theme.colors.azulMaisClaro.claro};
-    font-size: 1rem;
-    text-align: center;
-    padding: 30px;
 `;
 
 const ListaCardsStl = styled.div`
     display: flex;
     flex-direction: column;
     gap: 16px;
+    margin-bottom: 40px;
 `;
 
-const CardManualModerarStl = styled.article`
+const CardManualModerarStl = styled.div`
     background: ${theme.colors.azul.medio};
-    border-radius: 14px;
+    border: 1px solid ${theme.colors.azulMaisClaro.escuro};
+    border-radius: 12px;
     padding: 20px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 `;
 
 const CardHeaderModerarStl = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    gap: 16px;
+    gap: 20px;
 
     @media (max-width: 768px) {
         flex-direction: column;
@@ -638,189 +1029,733 @@ const CardHeaderModerarStl = styled.div`
 `;
 
 const CardIdTagStl = styled.span`
-    background: ${theme.colors.azul.escuro};
+    font-size: 0.75rem;
     color: ${theme.colors.azulMaisClaro.claro};
-    font-size: 0.8rem;
-    font-weight: bold;
-    padding: 2px 8px;
+    background: ${theme.colors.azul.escuro};
+    padding: 2px 6px;
     border-radius: 4px;
-    display: inline-block;
-    margin-bottom: 6px;
+    font-weight: bold;
 `;
 
 const CardTituloModerarStl = styled.h3`
     font-family: ${theme.fontsFamily.titulos};
-    font-size: 1.2rem;
+    font-size: 1.15rem;
     color: ${theme.colors.clara.medio};
-    margin-bottom: 6px;
+    margin: 6px 0 4px;
 `;
 
 const CardDescricaoModerarStl = styled.p`
+    font-family: ${theme.fontsFamily.paragrafos};
+    font-size: 0.88rem;
     color: ${theme.colors.azulMaisClaro.claro};
-    font-size: 0.95rem;
     line-height: 1.4;
 `;
 
 const CardAcoesStl = styled.div`
     display: flex;
-    gap: 10px;
+    align-items: center;
+    gap: 8px;
     flex-shrink: 0;
 
     @media (max-width: 768px) {
         width: 100%;
-        justify-content: flex-end;
+    }
+`;
+
+const BotaoEditarStl = styled.button`
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 14px;
+    border-radius: 8px;
+    border: 1px solid ${theme.colors.azulMaisClaro.escuro};
+    background: ${theme.colors.azul.escuro};
+    color: ${theme.colors.clara.medio};
+    font-family: ${theme.fontsFamily.paragrafos};
+    font-size: 0.85rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+        background: ${theme.colors.azulMaisClaro.escuro};
+        color: #fff;
     }
 `;
 
 const BotaoAprovarStl = styled.button`
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding: 10px 18px;
+    padding: 9px 16px;
     border-radius: 8px;
     border: none;
-    background: #059669;
+    background: #10b981;
     color: #fff;
+    font-family: ${theme.fontsFamily.paragrafos};
+    font-size: 0.85rem;
     font-weight: bold;
-    font-size: 0.9rem;
     cursor: pointer;
-    transition: background 0.2s;
-    &:hover { background: #10b981; }
+    transition: all 0.2s;
+
+    &:hover {
+        background: #059669;
+        transform: translateY(-1px);
+    }
 `;
 
 const BotaoExcluirStl = styled.button`
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding: 10px 16px;
+    padding: 9px 14px;
     border-radius: 8px;
-    border: 1px solid rgba(239, 68, 68, 0.4);
-    background: rgba(239, 68, 68, 0.1);
-    color: #f87171;
-    font-size: 0.9rem;
+    border: 1px solid #ef4444;
+    background: transparent;
+    color: #ef4444;
+    font-family: ${theme.fontsFamily.paragrafos};
+    font-size: 0.85rem;
     cursor: pointer;
     transition: all 0.2s;
-    &:hover { background: #dc2626; color: #fff; border-color: #dc2626; }
+
+    &:hover {
+        background: #ef4444;
+        color: #fff;
+    }
 `;
 
 const TogglePassosBotaoStl = styled.button`
     background: none;
     border: none;
     color: ${theme.colors.azulMaisClaro.claro};
+    font-size: 0.85rem;
     display: flex;
     align-items: center;
-    gap: 8px;
-    font-size: 0.85rem;
-    margin-top: 14px;
+    gap: 6px;
     cursor: pointer;
-    padding: 4px 0;
-    &:hover { color: ${theme.colors.clara.medio}; }
+    margin-top: 14px;
+    padding: 0;
+    transition: color 0.2s;
+
+    &:hover {
+        color: ${theme.colors.clara.medio};
+    }
 `;
 
 const PassosContainerStl = styled.div`
     margin-top: 14px;
+    border-top: 1px dashed rgba(255, 255, 255, 0.1);
     padding-top: 14px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
 `;
 
 const PassoItemStl = styled.div`
     background: ${theme.colors.azul.escuro};
     padding: 10px 14px;
     border-radius: 8px;
-    color: ${theme.colors.clara.medio};
-    font-size: 0.9rem;
+    font-size: 0.85rem;
 
     strong {
-        color: ${theme.colors.azulMaisClaro.claro};
+        color: ${theme.colors.clara.medio};
         display: block;
-        margin-bottom: 4px;
+        margin-bottom: 2px;
     }
+
     p {
-        color: #d1d5db;
-        line-height: 1.4;
+        color: ${theme.colors.azulMaisClaro.claro};
+        margin: 0;
     }
 `;
 
 const TabelaPublicadosStl = styled.div`
-    background: ${theme.colors.azul.escuro};
+    background: ${theme.colors.azul.medio};
     border-radius: 12px;
+    border: 1px solid ${theme.colors.azulMaisClaro.escuro};
     overflow: hidden;
-    margin-top: 12px;
 `;
 
 const LinhaPublicadoStl = styled.div`
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 12px 18px;
+    padding: 14px 20px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    gap: 16px;
     font-size: 0.9rem;
-    color: ${theme.colors.clara.medio};
+
+    &:last-child {
+        border-bottom: none;
+    }
 
     .id {
-        color: ${theme.colors.azulMaisClaro.medio};
+        color: ${theme.colors.azulMaisClaro.claro};
         font-weight: bold;
-        width: 60px;
+        width: 40px;
     }
-    .nome {
+
+    .infoPrincipal {
         flex: 1;
-        padding: 0 16px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
     }
+
+    .nome {
+        color: ${theme.colors.clara.medio};
+        font-weight: 500;
+    }
+
     .origem {
+        font-size: 0.75rem;
+        background: ${theme.colors.azul.escuro};
+        color: ${theme.colors.azulMaisClaro.claro};
+        padding: 2px 8px;
+        border-radius: 999px;
+    }
+
+    .metricasManual {
+        display: flex;
+        align-items: center;
+        gap: 12px;
         font-size: 0.8rem;
         color: ${theme.colors.azulMaisClaro.claro};
-        padding: 0 16px;
+
+        span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .votoPos { color: #10b981; }
+        .votoNeg { color: #ef4444; }
     }
+
+    .acoesLinha {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
     .link {
         color: ${theme.colors.azulMaisClaro.claro};
         text-decoration: none;
         font-size: 0.85rem;
-        &:hover { text-decoration: underline; }
+        transition: color 0.2s;
+
+        &:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
     }
 `;
 
-const DicaSqlStl = styled.div`
-    background: rgba(245, 158, 11, 0.12);
-    border: 1px solid rgba(245, 158, 11, 0.35);
-    border-radius: 12px;
-    padding: 16px 20px;
+const BotaoEditarPequenoStl = styled.button`
+    background: none;
+    border: 1px solid ${theme.colors.azulMaisClaro.escuro};
+    color: ${theme.colors.clara.medio};
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.8rem;
     display: flex;
-    align-items: flex-start;
-    gap: 16px;
-    margin-bottom: 28px;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+        background: ${theme.colors.azulMaisClaro.escuro};
+        color: #fff;
+    }
+`;
+
+const VazioCardStl = styled.div`
+    background: ${theme.colors.azul.medio};
+    border-radius: 12px;
+    padding: 48px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
     color: ${theme.colors.clara.medio};
 
-    .dicaIcone {
-        color: #f59e0b;
-        margin-top: 2px;
-    }
+    h3 { font-family: ${theme.fontsFamily.titulos}; font-size: 1.2rem; }
+    p { font-size: 0.9rem; color: ${theme.colors.azulMaisClaro.claro}; }
+`;
 
-    h4 {
-        font-family: ${theme.fontsFamily.titulos};
-        font-size: 1rem;
-        color: #f59e0b;
-        margin-bottom: 6px;
-    }
+const CarregandoTextoStl = styled.p`
+    text-align: center;
+    color: ${theme.colors.azulMaisClaro.claro};
+    padding: 30px;
+`;
 
-    p {
-        font-size: 0.88rem;
-        color: ${theme.colors.azulMaisClaro.claro};
-        margin-bottom: 8px;
-        line-height: 1.4;
-    }
+const AlertaSucessoStl = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #065f46;
+    border: 1px solid #10b981;
+    color: #ecfdf5;
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+`;
 
+const AlertaErroStl = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #7f1d1d;
+    border: 1px solid #ef4444;
+    color: #fef2f2;
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+`;
+
+const DicaSqlStl = styled.div`
+    display: flex;
+    gap: 14px;
+    background: rgba(245, 158, 11, 0.1);
+    border: 1px solid #f59e0b;
+    padding: 16px;
+    border-radius: 10px;
+    margin-bottom: 24px;
+    color: ${theme.colors.clara.medio};
+
+    .dicaIcone { color: #f59e0b; flex-shrink: 0; }
+    h4 { margin: 0 0 6px; font-size: 0.95rem; color: #f59e0b; }
+    p { margin: 0 0 10px; font-size: 0.85rem; }
     code {
         display: block;
         background: ${theme.colors.azul.escuro};
         padding: 8px 12px;
         border-radius: 6px;
-        font-family: monospace;
-        font-size: 0.85rem;
-        color: #34d399;
-        overflow-x: auto;
+        font-size: 0.8rem;
+        color: #38bdf8;
+        word-break: break-all;
     }
 `;
 
+// ─── Styled Components do Dashboard ──────────────────────────────────────────
+
+const DashboardContainerStl = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+`;
+
+const GridCardsResumoStl = styled.div`
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+
+    @media (max-width: 900px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    @media (max-width: 480px) {
+        grid-template-columns: 1fr;
+    }
+`;
+
+const CardKpiStl = styled.div`
+    background: ${theme.colors.azul.medio};
+    border: 1px solid ${theme.colors.azulMaisClaro.escuro};
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    .kpiIcone {
+        color: ${theme.colors.azulMaisClaro.claro};
+        margin-bottom: 4px;
+    }
+
+    .kpiValor {
+        font-family: ${theme.fontsFamily.titulos};
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: ${theme.colors.clara.medio};
+    }
+
+    .kpiLabel {
+        font-size: 0.82rem;
+        color: ${theme.colors.azulMaisClaro.claro};
+        font-family: ${theme.fontsFamily.paragrafos};
+    }
+`;
+
+const GridDashboardDuploStl = styled.div`
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+
+    @media (max-width: 800px) {
+        grid-template-columns: 1fr;
+    }
+`;
+
+const BoxAnaliticoStl = styled.div`
+    background: ${theme.colors.azul.medio};
+    border: 1px solid ${theme.colors.azulMaisClaro.escuro};
+    border-radius: 12px;
+    overflow: hidden;
+
+    .boxHeader {
+        padding: 14px 18px;
+        background: ${theme.colors.azul.escuro};
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        h4 {
+            font-family: ${theme.fontsFamily.titulos};
+            font-size: 0.95rem;
+            color: ${theme.colors.clara.medio};
+            margin: 0;
+        }
+    }
+
+    .boxCorpo {
+        padding: 12px 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .vazioTexto {
+        font-size: 0.85rem;
+        color: ${theme.colors.azulMaisClaro.claro};
+        font-style: italic;
+        padding: 8px 0;
+    }
+`;
+
+const LinhaRankingStl = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    font-size: 0.85rem;
+
+    &:last-child { border-bottom: none; }
+
+    .posicao {
+        font-weight: bold;
+        color: ${theme.colors.azulMaisClaro.claro};
+        width: 24px;
+    }
+
+    .tituloRanking {
+        flex: 1;
+        a {
+            color: ${theme.colors.clara.medio};
+            text-decoration: none;
+            &:hover { text-decoration: underline; color: #fff; }
+        }
+    }
+
+    .dadosRanking {
+        display: flex;
+        gap: 12px;
+        font-size: 0.8rem;
+        color: ${theme.colors.azulMaisClaro.claro};
+        span { display: flex; align-items: center; gap: 4px; }
+    }
+`;
+
+const LinhaOportunidadeStl = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    font-size: 0.85rem;
+
+    &:last-child { border-bottom: none; }
+
+    .termo { color: #f59e0b; font-weight: 500; }
+    .data { color: ${theme.colors.azulMaisClaro.claro}; font-size: 0.78rem; }
+`;
+
+const LinhaLogStl = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    font-size: 0.85rem;
+
+    &:last-child { border-bottom: none; }
+
+    .origemBadge {
+        background: ${theme.colors.azul.escuro};
+        color: ${theme.colors.azulMaisClaro.claro};
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 0.72rem;
+        font-weight: bold;
+    }
+
+    .textoLog {
+        flex: 1;
+        color: ${theme.colors.clara.medio};
+    }
+
+    .statusManual {
+        font-size: 0.78rem;
+        color: ${theme.colors.azulMaisClaro.claro};
+    }
+`;
+
+// ─── Styled Components do Modal de Edição ─────────────────────────────────────
+
+const ModalOverlayStl = styled.div`
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+`;
+
+const ModalCardEdicaoStl = styled.div`
+    background: ${theme.colors.azul.medio};
+    border: 1px solid ${theme.colors.azulMaisClaro.escuro};
+    border-radius: 16px;
+    width: 100%;
+    max-width: 720px;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+`;
+
+const ModalHeaderEdicaoStl = styled.div`
+    padding: 18px 24px;
+    background: ${theme.colors.azul.escuro};
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .modalTitulo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: ${theme.colors.clara.medio};
+
+        h3 {
+            margin: 0;
+            font-family: ${theme.fontsFamily.titulos};
+            font-size: 1.2rem;
+        }
+    }
+
+    .botaoFechar {
+        background: none;
+        border: none;
+        color: ${theme.colors.azulMaisClaro.claro};
+        cursor: pointer;
+        &:hover { color: #fff; }
+    }
+`;
+
+const ModalCorpoEdicaoStl = styled.div`
+    padding: 24px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+`;
+
+const CampoFormStl = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    label {
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: ${theme.colors.azulMaisClaro.claro};
+    }
+
+    input, textarea {
+        background: ${theme.colors.azul.escuro};
+        border: 1px solid ${theme.colors.azulMaisClaro.escuro};
+        border-radius: 8px;
+        padding: 10px 14px;
+        color: ${theme.colors.clara.medio};
+        font-family: ${theme.fontsFamily.paragrafos};
+        font-size: 0.9rem;
+        box-sizing: border-box;
+
+        &:focus {
+            outline: none;
+            border-color: ${theme.colors.azulMaisClaro.claro};
+        }
+    }
+`;
+
+const SecaoPassosEdicaoStl = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 6px;
+
+    .passosHeader {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        h4 {
+            margin: 0;
+            font-family: ${theme.fontsFamily.titulos};
+            font-size: 0.95rem;
+            color: ${theme.colors.clara.medio};
+        }
+    }
+`;
+
+const BotaoAddPassoStl = styled.button`
+    background: ${theme.colors.azul.escuro};
+    border: 1px solid ${theme.colors.azulMaisClaro.escuro};
+    color: ${theme.colors.clara.medio};
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+        background: ${theme.colors.azulMaisClaro.escuro};
+        color: #fff;
+    }
+`;
+
+const CardPassoEdicaoStl = styled.div`
+    background: rgba(14, 28, 48, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    .passoTop {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .passoNum {
+            font-weight: bold;
+            font-size: 0.82rem;
+            color: #38bdf8;
+        }
+
+        .btnRemover {
+            background: none;
+            border: none;
+            color: #ef4444;
+            cursor: pointer;
+            padding: 2px;
+            &:hover { opacity: 0.8; }
+        }
+    }
+
+    input {
+        background: ${theme.colors.azul.escuro};
+        border: 1px solid ${theme.colors.azulMaisClaro.escuro};
+        border-radius: 6px;
+        padding: 8px 12px;
+        color: ${theme.colors.clara.medio};
+        font-size: 0.85rem;
+        &:focus { outline: none; border-color: ${theme.colors.azulMaisClaro.claro}; }
+    }
+
+    textarea {
+        background: ${theme.colors.azul.escuro};
+        border: 1px solid ${theme.colors.azulMaisClaro.escuro};
+        border-radius: 6px;
+        padding: 8px 12px;
+        color: ${theme.colors.clara.medio};
+        font-size: 0.82rem;
+        font-family: ${theme.fontsFamily.paragrafos};
+        &:focus { outline: none; border-color: ${theme.colors.azulMaisClaro.claro}; }
+    }
+`;
+
+const ModalFooterEdicaoStl = styled.div`
+    padding: 16px 24px;
+    background: ${theme.colors.azul.escuro};
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+`;
+
+const BotaoCancelarEdicaoStl = styled.button`
+    background: transparent;
+    border: 1px solid ${theme.colors.azulMaisClaro.escuro};
+    color: ${theme.colors.clara.medio};
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 0.88rem;
+    cursor: pointer;
+    &:hover { background: rgba(255, 255, 255, 0.06); }
+`;
+
+const BotaoSalvarRascunhoStl = styled.button`
+    background: ${theme.colors.azulMaisClaro.escuro};
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 0.88rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+
+    &:hover:not(:disabled) {
+        background: ${theme.colors.azulMaisClaro.medio};
+    }
+    &:disabled { opacity: 0.5; cursor: not-allowed; }
+`;
+
+const BotaoSalvarAprovarStl = styled.button`
+    background: #10b981;
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 0.88rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    transition: background 0.2s;
+
+    &:hover:not(:disabled) {
+        background: #059669;
+    }
+    &:disabled { opacity: 0.5; cursor: not-allowed; }
+`;

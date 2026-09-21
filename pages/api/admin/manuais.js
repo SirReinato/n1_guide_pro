@@ -19,28 +19,36 @@ export default async function handler(req, res) {
         return res.status(503).json({ error: "Banco de dados não configurado." });
     }
 
-    // 2. GET: Lista manuais pendentes de aprovação
+    // 2. GET: Lista manuais pendentes de aprovação e métricas
     if (req.method === "GET") {
         try {
-            // Tenta buscar com a coluna aprovado
+            // Tenta buscar com a coluna aprovado e métricas
             let { data, error } = await adminClient
                 .from("manuais")
-                .select("id, nome, descricao, gerado_por_ia, aprovado, criado_em, categorias(nome), passos(passo, titulo, descricao, imagem)")
+                .select("id, nome, descricao, gerado_por_ia, aprovado, criado_em, visualizacoes, votos_positivos, votos_negativos, categorias(nome), passos(passo, titulo, descricao, imagem)")
                 .order("id", { ascending: false });
 
-            // Se a coluna aprovado ainda não foi criada no Supabase, busca sem ela
+            // Se a coluna aprovado ou métricas ainda não foram criadas no Supabase, busca formato básico
             let precisaCriarColuna = false;
-            if (error && error.message?.includes("aprovado")) {
+            if (error) {
                 precisaCriarColuna = true;
                 const fallback = await adminClient
                     .from("manuais")
                     .select("id, nome, descricao, gerado_por_ia, criado_em, categorias(nome), passos(passo, titulo, descricao, imagem)")
                     .order("id", { ascending: false });
                 data = (fallback.data || []).map((m) => ({ ...m, aprovado: !m.gerado_por_ia }));
-                error = fallback.error;
             }
 
-            if (error) return res.status(500).json({ error: error.message });
+            // Busca logs de telemetria para o Dashboard N1
+            let logsConsultas = [];
+            try {
+                const { data: logs } = await adminClient
+                    .from("logs_consultas")
+                    .select("*")
+                    .order("id", { ascending: false })
+                    .limit(100);
+                logsConsultas = logs || [];
+            } catch (_) {}
 
             const pendentes = (data || []).filter((m) => m.aprovado === false);
             const aprovados = (data || []).filter((m) => m.aprovado !== false);
@@ -48,7 +56,8 @@ export default async function handler(req, res) {
             return res.status(200).json({
                 pendentes,
                 aprovados,
-                total: data.length,
+                total: data?.length || 0,
+                logsConsultas,
                 precisaCriarColuna,
             });
         } catch (err) {
@@ -57,35 +66,56 @@ export default async function handler(req, res) {
     }
 
 
-    // 3. PUT: Aprova ou edita um manual
+    // 3. PUT: Aprova ou edita um manual e seus passos
     if (req.method === "PUT") {
-        const { id, aprovado = true, nome, descricao } = req.body;
+        const { id, aprovado, nome, descricao, passos } = req.body;
 
         if (!id) {
             return res.status(400).json({ error: "ID do manual é obrigatório" });
         }
 
         try {
-            const updates = { aprovado: Boolean(aprovado) };
+            const updates = {};
+            if (aprovado !== undefined) updates.aprovado = Boolean(aprovado);
             if (nome) updates.nome = nome;
             if (descricao !== undefined) updates.descricao = descricao;
 
-            const { data, error } = await adminClient
-                .from("manuais")
-                .update(updates)
-                .eq("id", Number(id))
-                .select()
-                .single();
+            if (Object.keys(updates).length > 0) {
+                const { error } = await adminClient
+                    .from("manuais")
+                    .update(updates)
+                    .eq("id", Number(id));
 
-            if (error) {
-                if (error.message?.includes("aprovado")) {
+                if (error && error.message?.includes("aprovado")) {
                     return res.status(400).json({
-                        error: "A coluna 'aprovado' ainda não foi criada no Supabase. Execute o comando no SQL Editor: ALTER TABLE manuais ADD COLUMN IF NOT EXISTS aprovado BOOLEAN NOT NULL DEFAULT TRUE;"
+                        error: "A coluna 'aprovado' ainda não foi criada no Supabase."
                     });
                 }
-                return res.status(500).json({ error: error.message });
             }
-            return res.status(200).json({ success: true, manual: data });
+
+            // Se passos foram fornecidos para edição
+            if (Array.isArray(passos)) {
+                // Remove passos anteriores do manual
+                await adminClient
+                    .from("passos")
+                    .delete()
+                    .eq("manual_id", Number(id));
+
+                // Insere os passos atualizados com ordenação
+                if (passos.length > 0) {
+                    const passosParaInserir = passos.map((p, idx) => ({
+                        manual_id: Number(id),
+                        passo: idx + 1,
+                        titulo: p.titulo || `Passo ${idx + 1}`,
+                        descricao: p.descricao || "",
+                        imagem: p.imagem || null,
+                    }));
+
+                    await adminClient.from("passos").insert(passosParaInserir);
+                }
+            }
+
+            return res.status(200).json({ success: true });
 
         } catch (err) {
             return res.status(500).json({ error: err.message });
