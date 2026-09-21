@@ -7,6 +7,18 @@ import Footer from "../src/components/patterns/Footer";
 import { BuscaProvider } from "../src/context/BuscaContext";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import dynamic from "next/dynamic";
+
+// AssistenteIA e Aviso carregados apenas no cliente (usam browser state)
+const AssistenteIA = dynamic(
+    () => import("../src/components/patterns/AssistenteIA"),
+    { ssr: false },
+);
+
+const AvisoNovidadeIA = dynamic(
+    () => import("../src/components/patterns/AvisoNovidadeIA"),
+    { ssr: false },
+);
 
 function MyApp({ Component, pageProps }) {
     return (
@@ -16,6 +28,8 @@ function MyApp({ Component, pageProps }) {
                 <Header />
                 <Component {...pageProps} />
                 <Footer />
+                <AvisoNovidadeIA />
+                <AssistenteIA />
                 <Analytics />
                 <SpeedInsights />
             </ConteinerGeral>
@@ -23,4 +37,6 @@ function MyApp({ Component, pageProps }) {
     );
 }
 
+
 export default MyApp;
+
