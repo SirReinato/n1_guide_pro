@@ -9,12 +9,13 @@ import Banner from "../../components/patterns/Banner";
 import PassoAPasso from "../../components/passo_a_passo";
 import dynamic from "next/dynamic";
 
+// dynamic() fora do componente para evitar recriação a cada render
+const ModalBuscar = dynamic(
+    () => import("../../components/patterns/ModalBuscar"),
+    { ssr: false },
+);
 
 export default function PostScreen({ nome, descricao, passo_a_passo }) {
-    const ModalBuscar = dynamic(
-        () => import("../../components/patterns/ModalBuscar"),
-        { ssr: false },
-    );
     return (
         <>
             <ConteinerPostStl>

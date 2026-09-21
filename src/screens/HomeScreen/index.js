@@ -6,12 +6,13 @@ import { ConteinerGeral } from "../../theme/theme";
 import styled from "styled-components";
 import dynamic from "next/dynamic";
 
+// dynamic() fora do componente para evitar recriação a cada render
+const ModalBuscar = dynamic(
+    () => import("../../components/patterns/ModalBuscar"),
+    { ssr: false },
+);
+
 export default function HomeScreen({ instalacoesPorCategoria, todosOsItens }) {
-    const ModalBuscar = dynamic(
-        () => import("../../components/patterns/ModalBuscar"),
-        { ssr: false },
-    );
-    
     return (
         <ConteinerGeral>
             <ModalBuscar />
@@ -38,3 +39,4 @@ const MainConteinerStl = styled.main`
     align-items: center;
     flex-direction: column;
 `;
+

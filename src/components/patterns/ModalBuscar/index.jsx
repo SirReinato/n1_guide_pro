@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useBusca } from "../../../context/BuscaContext";
+// TODO: substituir por dados vindos de prop/context após migração completa para Supabase
 import instalacoes from "../../../data/instalacao.json";
 import CardManuais from "../../CardManuais";
 import {

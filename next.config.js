@@ -2,7 +2,8 @@
  * @type {import('next').NextConfig}
  */
 const nextConfig = {
-    output: "export",
+    // output: "export" removido para habilitar API Routes (Supabase + Gemini IA)
+    // O deploy na Vercel continua funcionando normalmente no modo dinâmico.
 
     // Optional: Change links `/me` -> `/me/` and emit `/me.html` -> `/me/index.html`
     // trailingSlash: true,

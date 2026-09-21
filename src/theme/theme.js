@@ -78,7 +78,7 @@ export const TitulosSecundariosStl = styled.h2`
             : `${theme.colors.azul.escuro}`};
     @media (min-width: 1401px) {
     }
-    @media (min-width: 768px) and (max-width: 1200) {
+    @media (min-width: 768px) and (max-width: 1200px) {
         font-size: ${theme.fontSize.paragrafos.mm};
         font-weight: 200;
     }
@@ -104,7 +104,7 @@ export const ParagrafosStl = styled.p`
             : `${theme.colors.clara.claro}`};
     @media (min-width: 1401px) {
     }
-    @media (min-width: 768px) and (max-width: 1200) {
+    @media (min-width: 768px) and (max-width: 1200px) {
         font-size: 1rem;
     }
     @media (min-width: 481px) and (max-width: 767px) {
@@ -125,7 +125,7 @@ export const ConteinerGeral = styled.div`
         props.$primary
             ? `${theme.colors.azulMaisClaro.escuro}`
             : `${theme.colors.clara.bgGeral}`};
-    @media (min-width: 1200) {
+    @media (min-width: 1200px) {
     }
     @media (min-width: 432px) and (max-width: 780px) {
     }
