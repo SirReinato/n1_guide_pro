@@ -308,21 +308,13 @@ export default function AssistenteIA() {
                             </CardClarificacaoStl>
                         )}
 
-                        {/* 2. MANUAIS RELACIONADOS ENCONTRADOS */}
-                        {resultado.manuais && resultado.manuais.length > 0 && (
+                        {/* 2. MANUAIS PREVENTIVOS (durante a clarificação) */}
+                        {resultado.precisaMaisDetalhes && resultado.manuais && resultado.manuais.length > 0 && (
                             <>
                                 <ResultadoTituloStl>
                                     <CheckCircle size={18} color={theme.colors.azulMaisClaro.escuro} />
-                                    {resultado.precisaMaisDetalhes
-                                        ? "Enquanto isso, veja se algum destes manuais ajuda:"
-                                        : "Manuais relacionados encontrados!"}
+                                    Enquanto isso, veja se algum destes manuais ajuda:
                                 </ResultadoTituloStl>
-
-                                {!resultado.precisaMaisDetalhes && (
-                                    <ResultadoDescStl>
-                                        Encontrei {resultado.manuais.length} manual(is) no sistema que pode(m) ajudar:
-                                    </ResultadoDescStl>
-                                )}
 
                                 {resultado.manuais.map((m) => (
                                     <CardResultadoStl key={m.id}>

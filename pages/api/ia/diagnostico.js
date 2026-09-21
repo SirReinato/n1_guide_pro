@@ -121,56 +121,48 @@ export default async function handler(req, res) {
 O usuário relatou a seguinte situação:
 ${textoEntradaUsuario}
 
-Manuais técnicos disponíveis no sistema da empresa:
+Manuais técnicos cadastrados no sistema da empresa:
 ${manuaisTexto}
 
 Analise a situação com extremo cuidado técnico. Responda EXCLUSIVAMENTE com um JSON válido, sem markdown, sem texto fora do JSON.
 
-DIRETRIZES CRÍTICAS PARA ESCOLHA DO TIPO DE RESPOSTA:
+DIRETRIZES DE RESPOSTA:
 
-1. QUANDO É UMA DÚVIDA VAGA/CURTA (ex: "erro no antivirus", "não abre", "tela azul", "problema no pc"):
-- O usuário não deu detalhes suficientes do erro ou do programa.
-- Retorne:
+1. QUANDO A PERGUNTA FOR VAGA, CURTA OU FALTAR CONTEXTO (ex: "erro no antivirus", "não abre", "travou", "tela azul", "problema no pc"):
+- O usuário deu pouca informação para que possamos fornecer uma solução exata imediatamente.
+- Peça mais detalhes, forneça sugestões rápidas e, se algum manual tiver relação preventiva, liste em "manuais":
 {
-  "tipo": "manuais_encontrados",
+  "tipo": "clarificacao",
   "precisaMaisDetalhes": true,
-  "perguntaClarificacao": "<pergunta direta e amigável pedindo o detalhe do erro>",
-  "sugestoesRapidas": ["<opção 1>", "<opção 2>", "<opção 3>"],
-  "manuais": [{ "id": <número>, "relevancia": "<por que este manual pode ter relação preventiva ou preliminar>" }]
-}
-(Observação: Se houver qualquer manual mesmo que com relação parcial, inclua-o em "manuais" para que o usuário já possa conferir. Se não houver nenhum, retorne "manuais": [])
-
-2. QUANDO EXISTE UM MANUAL EXATO E ESPECÍFICO PARA AQUELE ASSUNTO:
-- ATENÇÃO: Só escolha esta opção se o manual da lista for DIRETAMENTE SOBRE o programa ou assunto que o usuário precisa (ex: o usuário quer instalar ou consertar o Serpro ID e existe o manual do Serpro ID).
-- Se o usuário perguntou sobre antivírus genérico, erro no Windows, tela azul ou software sem manual dedicado, NÃO use esta opção!
-- Retorne:
-{
-  "tipo": "manuais_encontrados",
-  "precisaMaisDetalhes": false,
-  "manuais": [{ "id": <número>, "relevancia": "<explicação de como o manual resolve exatamente o problema>" }]
+  "perguntaClarificacao": "<pergunta amigável e direta pedindo o detalhe do erro>",
+  "sugestoesRapidas": ["<opção curta 1>", "<opção curta 2>", "<opção curta 3>"],
+  "manuais": [{ "id": <número>, "relevancia": "<breve explicação de como pode ajudar preventivamente>" }]
 }
 
-3. QUANDO É UM PROBLEMA TÉCNICO SEM MANUAL ESPECÍFICO DIRETO (OU QUANDO O USUÁRIO JÁ REFINOU / CLICOU NUMA OPÇÃO):
-- Se não houver manual 100% específico para o problema relatado, VOCÊ DEVE GERAR UM PASSO A PASSO TÉCNICO N1 PRÁTICO de testes e resolução!
-- Se houver algum manual parcialmente relacionado no sistema, você pode incluí-lo em "manuaisRelacionados" como referência complementar, mas DEVE GERAR O PASSO A PASSO!
-- Retorne:
+2. QUANDO O USUÁRIO FORNECER UM PROBLEMA ESPECÍFICO (OU CLICAR EM UMA SUGESTÃO / REFINAR A CONSULTA):
+- REGRA FUNDAMENTAL: VOCÊ DEVE OBRIGATORIAMENTE GERAR UM PASSO A PASSO TÉCNICO N1 PRÁTICO E COMPLETO ("passos"). Nunca devolva apenas links de manuais sem o passo a passo.
+- O usuário precisa de instruções de ação claras e imediatas na tela.
+- Se algum manual da empresa tratar do mesmo assunto ou for útil como apoio, liste-o em "manuaisRelacionados" (com ID e relevância).
+- Estrutura:
 {
   "tipo": "passo_a_passo",
   "precisaMaisDetalhes": false,
   "sugestaoNome": "<nome técnico claro para este procedimento>",
-  "sugestaoDescricao": "<resumo do que este procedimento testa e resolve>",
+  "sugestaoDescricao": "<resumo do diagnóstico e objetivo do procedimento>",
   "passos": [
-    { "titulo": "<passo 1: teste ou diagnóstico inicial>", "descricao": "<instrução detalhada>" },
-    { "titulo": "<passo 2: ação corretiva>", "descricao": "<instrução detalhada>" },
-    { "titulo": "<passo 3: teste de validação>", "descricao": "<como testar se funcionou>" }
+    { "titulo": "<Passo 1: Teste/Diagnóstico inicial>", "descricao": "<orientação detalhada de N1>" },
+    { "titulo": "<Passo 2: Ação corretiva>", "descricao": "<orientação detalhada de N1>" },
+    { "titulo": "<Passo 3: Validação/Teste final>", "descricao": "<como testar e confirmar a resolução>" }
   ],
-  "manuaisRelacionados": [{ "id": <número>, "relevancia": "<relação complementar, se houver>" }]
+  "manuaisRelacionados": [
+    { "id": <número>, "relevancia": "<por que este manual da empresa é o documento oficial ou de apoio>" }
+  ]
 }
 
 Regras:
 - Use linguagem clara e técnica, em português brasileiro.
 - Sugestões rápidas devem ter no máximo 4 palavras cada.
-- Se houver múltiplos manuais relevantes, liste no máximo os 3 mais próximos.
+- No passo a passo, forneça de 3 a 5 passos práticos e objetivos.
 - Responda SOMENTE o JSON, nada mais.`;
 
 
@@ -191,24 +183,31 @@ Regras:
             return res.status(502).json({ error: "Resposta da IA em formato inválido" });
         }
 
-        // Se encontrou manuais diretos, enriquece com nome e descricao completos
-        if (resposta.tipo === "manuais_encontrados" && Array.isArray(resposta.manuais)) {
-            resposta.manuais = resposta.manuais
-                .map((m) => {
-                    const manual = manuaisDisponiveis.find((md) => md.id === m.id);
-                    return manual ? { ...manual, relevancia: m.relevancia } : null;
-                })
-                .filter(Boolean);
-        }
+        // Se a resposta pede mais detalhes (clarificação)
+        if (resposta.precisaMaisDetalhes) {
+            resposta.tipo = "clarificacao";
+            if (Array.isArray(resposta.manuais)) {
+                resposta.manuais = resposta.manuais
+                    .map((m) => {
+                        const manual = manuaisDisponiveis.find((md) => md.id === m.id);
+                        return manual ? { ...manual, relevancia: m.relevancia } : null;
+                    })
+                    .filter(Boolean);
+            }
+        } else {
+            // Se não precisa de mais detalhes, deve ser passo a passo
+            resposta.tipo = "passo_a_passo";
 
-        // Se gerou passo a passo e trouxe manuais complementares, enriquece também
-        if (resposta.tipo === "passo_a_passo" && Array.isArray(resposta.manuaisRelacionados)) {
-            resposta.manuaisRelacionados = resposta.manuaisRelacionados
-                .map((m) => {
-                    const manual = manuaisDisponiveis.find((md) => md.id === m.id);
-                    return manual ? { ...manual, relevancia: m.relevancia } : null;
-                })
-                .filter(Boolean);
+            // Se o Gemini colocou manuais na chave 'manuais' em vez de 'manuaisRelacionados', unifica
+            const listaRelacionados = resposta.manuaisRelacionados || resposta.manuais || [];
+            if (Array.isArray(listaRelacionados)) {
+                resposta.manuaisRelacionados = listaRelacionados
+                    .map((m) => {
+                        const manual = manuaisDisponiveis.find((md) => md.id === m.id);
+                        return manual ? { ...manual, relevancia: m.relevancia } : null;
+                    })
+                    .filter(Boolean);
+            }
         }
 
         return res.status(200).json(resposta);
