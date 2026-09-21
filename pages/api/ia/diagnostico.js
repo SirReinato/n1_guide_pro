@@ -210,6 +210,25 @@ Regras:
             }
         }
 
+        // Registra telemetria de consulta para o Dashboard N1 de forma assíncrona e segura
+        if (supabase) {
+            try {
+                const encontrou = Boolean(
+                    (resposta.manuaisRelacionados && resposta.manuaisRelacionados.length > 0) ||
+                    (resposta.manuais && resposta.manuais.length > 0)
+                );
+                supabase
+                    .from("logs_consultas")
+                    .insert({
+                        termo: problema.trim(),
+                        origem: "ia",
+                        encontrou_manual: encontrou,
+                    })
+                    .then(() => {})
+                    .catch(() => {});
+            } catch (_) {}
+        }
+
         return res.status(200).json(resposta);
     } catch (err) {
         console.error("Erro interno:", err);

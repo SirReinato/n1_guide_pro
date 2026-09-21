@@ -21,6 +21,7 @@ export async function getStaticProps({ params }) {
 
     return {
         props: {
+            id: params.id,
             nome: post.nome,
             descricao: post.descricao,
             passo_a_passo: post.passo_passo,
