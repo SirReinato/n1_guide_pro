@@ -25,6 +25,7 @@ export async function getStaticProps({ params }) {
             descricao: post.descricao,
             passo_a_passo: post.passo_passo,
         },
+        revalidate: 60,
     };
 }
 
