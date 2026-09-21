@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
-import { MessageCircle, X, Send, Loader, CheckCircle, AlertCircle, FileText, ArrowLeft, Zap, HelpCircle } from "react-feather";
+import { MessageCircle, X, Send, Loader, CheckCircle, AlertCircle, FileText, ArrowLeft, Zap, HelpCircle, Copy, Check } from "react-feather";
 import { theme } from "../../../theme/theme";
 import Link from "next/link";
 
@@ -42,16 +42,49 @@ export default function AssistenteIA() {
     const [resultado, setResultado] = useState(null);
     const [erro, setErro] = useState(null);
     const [curiosidadeIndex, setCuriosidadeIndex] = useState(0);
+    const [copiadoProcedimento, setCopiadoProcedimento] = useState(false);
 
-    // Abre o assistente ao receber evento global (ex: do pop-up de novidade)
+    // Abre o assistente ao receber evento global (ex: do pop-up de novidade) ou fecha no Esc
     useEffect(() => {
         function handleAbrirEvento() {
             setEstado(ESTADOS.INPUT);
             setErro(null);
         }
+        function handleKeyDown(e) {
+            if (e.key === "Escape" && estado !== ESTADOS.FECHADO) {
+                fechar();
+            }
+        }
         window.addEventListener("n1:abrir-ia", handleAbrirEvento);
-        return () => window.removeEventListener("n1:abrir-ia", handleAbrirEvento);
-    }, []);
+        window.addEventListener("keydown", handleKeyDown);
+        return () => {
+            window.removeEventListener("n1:abrir-ia", handleAbrirEvento);
+            window.removeEventListener("keydown", handleKeyDown);
+        };
+    }, [estado]);
+
+    function copiarProcedimento() {
+        if (!resultado?.passos) return;
+        let texto = `=========================================\n`;
+        texto += `📋 PROCEDIMENTO N1: ${resultado.sugestaoNome || "Procedimento de Suporte"}\n`;
+        if (resultado.sugestaoDescricao) texto += `Objetivo: ${resultado.sugestaoDescricao}\n`;
+        texto += `=========================================\n\n`;
+
+        resultado.passos.forEach((p, idx) => {
+            texto += `Passo ${idx + 1}: ${p.titulo}\n`;
+            if (p.descricao) texto += `${p.descricao}\n\n`;
+        });
+
+        texto += `-----------------------------------------\n`;
+        texto += `Base de Conhecimento: N1 Guide Pro\n`;
+
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(texto.trim()).then(() => {
+                setCopiadoProcedimento(true);
+                setTimeout(() => setCopiadoProcedimento(false), 2500);
+            });
+        }
+    }
 
     // Rotaciona curiosidades aleatórias a cada 10 segundos durante o loading
     useEffect(() => {
@@ -376,10 +409,18 @@ export default function AssistenteIA() {
                                 )}
 
                                 {erro && <ErroStl><AlertCircle size={14} /> {erro}</ErroStl>}
-                                <BotaoSalvarStl onClick={salvarManual}>
-                                    <FileText size={16} />
-                                    Salvar como Manual no Site
-                                </BotaoSalvarStl>
+
+                                <AcoesResultadoStl>
+                                    <BotaoCopiarIaStl type="button" onClick={copiarProcedimento} title="Copiar para área de transferência formatado para chamado">
+                                        {copiadoProcedimento ? <Check size={16} color="#10b981" /> : <Copy size={16} />}
+                                        {copiadoProcedimento ? "Copiado! ✅" : "Copiar para o Chamado"}
+                                    </BotaoCopiarIaStl>
+
+                                    <BotaoSalvarStl onClick={salvarManual}>
+                                        <FileText size={16} />
+                                        Salvar no Site
+                                    </BotaoSalvarStl>
+                                </AcoesResultadoStl>
                             </>
                         )}
 
@@ -926,4 +967,38 @@ const BotaoSecundarioStl = styled.button`
     cursor: pointer;
     transition: background 0.2s;
     &:hover { background: rgba(255,255,255,0.08); }
+`;
+
+const AcoesResultadoStl = styled.div`
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+
+    @media (max-width: 480px) {
+        flex-direction: column;
+    }
+`;
+
+const BotaoCopiarIaStl = styled.button`
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px 14px;
+    background: ${theme.colors.azul.escuro};
+    border: 1px solid ${theme.colors.azulMaisClaro.escuro};
+    border-radius: 8px;
+    color: ${theme.colors.clara.medio};
+    font-family: ${theme.fontsFamily.paragrafos};
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: ${theme.colors.azulMaisClaro.claro};
+        color: #fff;
+    }
 `;

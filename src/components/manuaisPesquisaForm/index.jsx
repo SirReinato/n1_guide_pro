@@ -14,8 +14,9 @@ export default function ManuaisPesquisaForm() {
         <ConteinerManuaisPesquisaFormStl>
             <form onSubmit={handleSubmit}>
                 <InputManuaisPesquisaFormStl
+                    id="input-busca-principal"
                     type="text"
-                    placeholder="Pesquisar solução..."
+                    placeholder="Pesquisar solução... (Ctrl + K)"
                     value={busca}
                     onChange={(e) => setBusca(e.target.value)}
                 />
