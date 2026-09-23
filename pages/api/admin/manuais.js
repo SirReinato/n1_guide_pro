@@ -1,10 +1,5 @@
-import { createClient } from "@supabase/supabase-js";
 import { verifyAdminToken } from "../../../src/lib/adminAuth";
-
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-// Usa a chave de serviço para ter privilégios totais de moderação
-const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-const adminClient = supabaseUrl && serviceKey ? createClient(supabaseUrl, serviceKey) : null;
+import { adminClient } from "../../../src/lib/supabaseAdmin";
 
 export default async function handler(req, res) {
     // 1. Validação do Token do Admin

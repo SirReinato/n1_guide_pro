@@ -10,6 +10,7 @@
 
 import instalacoesLocal from "../../../src/data/instalacao.json";
 import { supabase } from "../../../src/lib/supabase";
+import { adminClient, registrarLogConsulta } from "../../../src/lib/supabaseAdmin";
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 const BASE_URL = "https://generativelanguage.googleapis.com/v1beta/models";
@@ -80,15 +81,16 @@ export default async function handler(req, res) {
 
     // Busca lista de manuais disponíveis (apenas os aprovados)
     let manuaisDisponiveis = [];
+    const dbClient = adminClient || supabase;
     try {
-        if (supabase) {
-            let { data, error } = await supabase
+        if (dbClient) {
+            let { data, error } = await dbClient
                 .from("manuais")
                 .select("id, nome, descricao")
                 .eq("aprovado", true);
 
             if (error && error.message?.includes("aprovado")) {
-                const fallback = await supabase
+                const fallback = await dbClient
                     .from("manuais")
                     .select("id, nome, descricao");
                 data = fallback.data;
@@ -210,24 +212,18 @@ Regras:
             }
         }
 
-        // Registra telemetria de consulta para o Dashboard N1 de forma assíncrona e segura
-        if (supabase) {
-            try {
-                const encontrou = Boolean(
-                    (resposta.manuaisRelacionados && resposta.manuaisRelacionados.length > 0) ||
-                    (resposta.manuais && resposta.manuais.length > 0)
-                );
-                supabase
-                    .from("logs_consultas")
-                    .insert({
-                        termo: problema.trim(),
-                        origem: "ia",
-                        encontrou_manual: encontrou,
-                    })
-                    .then(() => {})
-                    .catch(() => {});
-            } catch (_) {}
-        }
+        // Registra telemetria para o Dashboard N1 mantendo apenas os 10 mais recentes (economia de banco)
+        try {
+            const encontrou = Boolean(
+                (resposta.manuaisRelacionados && resposta.manuaisRelacionados.length > 0) ||
+                (resposta.manuais && resposta.manuais.length > 0)
+            );
+            await registrarLogConsulta({
+                termo: problema,
+                origem: "ia",
+                encontrouManual: encontrou,
+            });
+        } catch (_) {}
 
         return res.status(200).json(resposta);
     } catch (err) {

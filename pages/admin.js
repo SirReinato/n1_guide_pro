@@ -410,8 +410,8 @@ export default function AdminPage() {
                                 ALTER TABLE manuais ADD COLUMN IF NOT EXISTS aprovado BOOLEAN NOT NULL DEFAULT TRUE;
                                 ALTER TABLE manuais ADD COLUMN IF NOT EXISTS visualizacoes INTEGER DEFAULT 0;
                                 ALTER TABLE manuais ADD COLUMN IF NOT EXISTS votos_positivos INTEGER DEFAULT 0;
-                                ALTER TABLE manuais ADD COLUMN IF NOT EXISTS votos_negativos INTEGER DEFAULT 0;
                                 CREATE TABLE IF NOT EXISTS logs_consultas (id BIGSERIAL PRIMARY KEY, termo TEXT NOT NULL, origem TEXT NOT NULL, encontrou_manual BOOLEAN DEFAULT FALSE, criado_em TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()));
+                                ALTER TABLE logs_consultas DISABLE ROW LEVEL SECURITY;
                             </code>
                         </div>
                     </DicaSqlStl>

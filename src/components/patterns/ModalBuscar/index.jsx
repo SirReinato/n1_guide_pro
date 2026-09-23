@@ -12,6 +12,7 @@ import { Search } from "react-feather";
 export default function ModalBuscar() {
     const { busca, setBusca, modalAberto, setModalAberto, todosOsItens = [] } = useBusca();
     const inputRef = useRef(null);
+    const ultimoTermoRegistrado = useRef("");
 
     useEffect(() => {
         if (modalAberto || busca) {
@@ -19,14 +20,30 @@ export default function ModalBuscar() {
         }
     }, [modalAberto, busca]);
 
-    if (!busca && !modalAberto) return null;
-
     const filtrados = busca.trim()
         ? todosOsItens.filter((item) =>
             item.nome.toLowerCase().includes(busca.toLowerCase()) ||
             (item.descricao && item.descricao.toLowerCase().includes(busca.toLowerCase()))
         )
         : todosOsItens.slice(0, 10); // Sugere os primeiros se o input estiver vazio
+
+    // Registra telemetria de termos buscados que não possuem manual correspondente (oportunidades)
+    useEffect(() => {
+        const termo = busca.trim();
+        if (termo.length >= 3 && filtrados.length === 0 && termo !== ultimoTermoRegistrado.current) {
+            const timer = setTimeout(() => {
+                ultimoTermoRegistrado.current = termo;
+                fetch("/api/telemetria/busca", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ termo }),
+                }).catch(() => {});
+            }, 1500);
+            return () => clearTimeout(timer);
+        }
+    }, [busca, filtrados.length]);
+
+    if (!busca && !modalAberto) return null;
 
     function fechar() {
         setBusca("");
