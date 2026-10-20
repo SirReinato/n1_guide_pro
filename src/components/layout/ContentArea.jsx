@@ -8,18 +8,21 @@ export default function ContentArea({ children }) {
 const ConteudoStl = styled.main`
     width: 100%;
     min-width: 0;
+    flex: 1;
     margin-left: 280px;
     padding: 24px 12%;
     overflow-y: auto;
     background: transparent;
     min-height: calc(100vh - 80px);
+    box-sizing: border-box;
     transition: margin-left 0.25s ease, padding 0.25s ease;
 
-    /* Quando a sidebar está colapsada (desktop) */
+    /* Quando a sidebar está colapsada (desktop, largura média) */
     @media (min-width: 769px) and (max-width: 1024px) {
         margin-left: 220px;
     }
 
+    /* Quando a sidebar está colapsada (desktop, larga) */
     @media (min-width: 1025px) {
         margin-left: 72px;
     }
@@ -34,5 +37,6 @@ const ConteudoStl = styled.main`
         margin-left: 0;
         padding: 16px 4%;
         min-height: auto;
+        flex: none;
     }
 `;

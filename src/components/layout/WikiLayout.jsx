@@ -25,9 +25,11 @@ const LayoutStl = styled.div`
 const GridStl = styled.div`
     display: flex;
     flex: 1;
+    width: 100%;
     min-height: calc(100vh - 80px);
 
     @media (max-width: 768px) {
         flex-direction: column;
+        min-height: auto;
     }
 `;
