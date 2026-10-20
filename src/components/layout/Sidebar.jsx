@@ -4,14 +4,98 @@ import Link from "next/link";
 import slugify from "../../utils/slogify";
 import styled from "styled-components";
 import { theme } from "../../theme/theme";
-import { Menu, X, BookOpen, ChevronRight, ChevronLeft } from "react-feather";
+import {
+    Menu,
+    X,
+    BookOpen,
+    ChevronRight,
+    ChevronLeft,
+    FileText,
+} from "react-feather";
 
 export default function Sidebar({ colapsado, onToggleColapsado }) {
     const { categorias, categoriaAtiva, setCategoriaAtiva, carregando } =
         useMenu();
     const [aberto, setAberto] = useState(false);
+    const [expandidas, setExpandidas] = useState({});
 
     const nomes = Object.keys(categorias || {});
+
+    /* Categoria: marca como ativa, expande e rola até a section */
+    const handleCategoriaClick = (e, nome) => {
+        e.preventDefault();
+        setCategoriaAtiva(nome);
+        setExpandidas((prev) => ({ ...prev, [nome]: true }));
+        setTimeout(() => {
+            const el = document.getElementById(slugify(nome));
+            if (el) el.scrollIntoView({ behavior: "smooth" });
+        }, 120);
+    };
+
+    const renderMenu = (isDrawer) => {
+        const compacto = colapsado && !isDrawer;
+        return (
+            <NavStl>
+                {carregando ? (
+                    <CarregandoStl>Carregando módulos...</CarregandoStl>
+                ) : nomes.length === 0 ? (
+                    <VazioStl>Nenhum módulo encontrado</VazioStl>
+                ) : (
+                    nomes.map((nome) => {
+                        const itens = categorias[nome] || [];
+                        const expandida = expandidas[nome] && !compacto;
+                        const ativa = categoriaAtiva === nome;
+                        return (
+                            <GrupoStl key={nome}>
+                                <CategoriaStl
+                                    $ativo={ativa}
+                                    $compacto={compacto}
+                                    onClick={(e) => {
+                                        if (compacto) {
+                                            setCategoriaAtiva(nome);
+                                        } else {
+                                            handleCategoriaClick(e, nome);
+                                        }
+                                    }}
+                                >
+                                    {compacto ? (
+                                        <span title={nome}>
+                                            <BookOpen size={16} />
+                                        </span>
+                                    ) : (
+                                        <>
+                                            <span>{nome}</span>
+                                            <SetaStl $expandida={expandida}>
+                                                <ChevronRight size={12} />
+                                            </SetaStl>
+                                        </>
+                                    )}
+                                </CategoriaStl>
+
+                                {expandida && (
+                                    <SubListaStl>
+                                        {itens.map((item) => (
+                                            <ItemStl key={item.id}>
+                                                <Link
+                                                    href={`/posts/${item.id}`}
+                                                    passHref
+                                                >
+                                                    <ItemLink>
+                                                        <FileText size={12} />
+                                                        <span>{item.nome}</span>
+                                                    </ItemLink>
+                                                </Link>
+                                            </ItemStl>
+                                        ))}
+                                    </SubListaStl>
+                                )}
+                            </GrupoStl>
+                        );
+                    })
+                )}
+            </NavStl>
+        );
+    };
 
     return (
         <>
@@ -24,7 +108,6 @@ export default function Sidebar({ colapsado, onToggleColapsado }) {
             <SidebarStl $colapsado={colapsado}>
                 <BtnRetrairStl
                     onClick={onToggleColapsado}
-                    $colapsado={colapsado}
                     title={colapsado ? "Expandir menu" : "Retrair menu"}
                 >
                     {colapsado ? (
@@ -41,38 +124,7 @@ export default function Sidebar({ colapsado, onToggleColapsado }) {
                     </LogoStl>
                 </SidebarHeaderStl>
 
-                <NavStl>
-                    {carregando ? (
-                        <CarregandoStl>Carregando módulos...</CarregandoStl>
-                    ) : nomes.length === 0 ? (
-                        <VazioStl>Nenhum módulo encontrado</VazioStl>
-                    ) : (
-                        nomes.map((nome) => {
-                            const ativo = categoriaAtiva === nome;
-                            const id = slugify(nome);
-                            return (
-                                <ItemStl
-                                    key={nome}
-                                    $ativo={ativo}
-                                    $colapsado={colapsado}
-                                    onClick={() => setCategoriaAtiva(nome)}
-                                >
-                                    <Link href={`#${id}`} passHref>
-                                        <ItemLink
-                                            $ativo={ativo}
-                                            $colapsado={colapsado}
-                                        >
-                                            {!colapsado && (
-                                                <ChevronRight size={14} />
-                                            )}
-                                            {!colapsado && nome}
-                                        </ItemLink>
-                                    </Link>
-                                </ItemStl>
-                            );
-                        })
-                    )}
-                </NavStl>
+                {renderMenu(false)}
             </SidebarStl>
 
             {/* Drawer mobile */}
@@ -89,28 +141,7 @@ export default function Sidebar({ colapsado, onToggleColapsado }) {
                                 <X size={20} />
                             </BtnFechar>
                         </DrawerHeaderStl>
-                        <NavStl>
-                            {nomes.map((nome) => {
-                                const ativo = categoriaAtiva === nome;
-                                return (
-                                    <ItemStl
-                                        key={nome}
-                                        $ativo={ativo}
-                                        onClick={() => {
-                                            setCategoriaAtiva(nome);
-                                            setAberto(false);
-                                        }}
-                                    >
-                                        <Link href={`#${slugify(nome)}`} passHref>
-                                            <ItemLink $ativo={ativo}>
-                                                <ChevronRight size={14} />
-                                                {nome}
-                                            </ItemLink>
-                                        </Link>
-                                    </ItemStl>
-                                );
-                            })}
-                        </NavStl>
+                        {renderMenu(true)}
                     </DrawerStl>
                 </>
             )}
@@ -118,7 +149,7 @@ export default function Sidebar({ colapsado, onToggleColapsado }) {
     );
 }
 
-/* Sidebar sticky no fluxo — gruda ao rolar, sem margin-left manual no conteúdo */
+/* Sidebar sticky no fluxo — gruda ao rolar */
 const SidebarStl = styled.aside`
     display: none;
     width: 280px;
@@ -173,7 +204,6 @@ const SidebarHeaderStl = styled.div`
     align-items: center;
     padding: 20px 16px;
     border-bottom: 1px solid ${theme.colors.azul.medio};
-    transition: padding 0.25s ease;
 
     ${(props) =>
         props.$colapsado &&
@@ -193,47 +223,72 @@ const LogoStl = styled.div`
     color: ${theme.colors.clara.claro};
     white-space: nowrap;
     overflow: hidden;
-    transition: opacity 0.2s ease;
 
     ${(props) =>
         props.$colapsado &&
         `
-        span {
-            display: none;
-        }
+        span { display: none; }
     `}
 `;
 
 const NavStl = styled.nav`
-    padding: 16px 0;
+    padding: 8px 0 24px;
     overflow-y: auto;
 `;
 
-const ItemStl = styled.div`
+const GrupoStl = styled.div``;
+
+const CategoriaStl = styled.a`
     display: flex;
     align-items: center;
+    justify-content: ${(props) => (props.$compacto ? "center" : "space-between")};
+    gap: 8px;
+    width: 100%;
     padding: 10px 18px;
     cursor: pointer;
     border-left: 3px solid transparent;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
     background: ${(props) =>
         props.$ativo ? theme.colors.azulMaisClaro.escuro : "transparent"};
     color: ${theme.colors.clara.claro};
     font-family: ${theme.fontsFamily.paragrafos};
-    font-size: 0.9rem;
-    transition: background 0.2s ease, padding 0.25s ease;
+    font-size: 0.85rem;
+    font-weight: ${(props) => (props.$ativo ? "700" : "600")};
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: background 0.2s ease;
     white-space: nowrap;
     overflow: hidden;
 
     &:hover {
         background: ${theme.colors.azul.medio};
+        text-decoration: none;
     }
 
     ${(props) =>
-        props.$colapsado &&
+        props.$compacto &&
         `
-        padding: 10px 12px;
-        justify-content: center;
+        padding: 12px 8px;
     `}
+`;
+
+const SetaStl = styled.span`
+    display: flex;
+    align-items: center;
+    transition: transform 0.25s ease;
+    opacity: 0.7;
+    transform: ${(props) => (props.$expandida ? "rotate(90deg)" : "rotate(0)")};
+`;
+
+const SubListaStl = styled.div`
+    max-height: 420px;
+    overflow-y: auto;
+    background: rgba(0, 0, 0, 0.18);
+`;
+
+const ItemStl = styled.div`
+    display: flex;
+    align-items: center;
 `;
 
 const ItemLink = styled.a`
@@ -241,21 +296,26 @@ const ItemLink = styled.a`
     align-items: center;
     gap: 8px;
     width: 100%;
-    color: inherit;
+    padding: 8px 18px 8px 34px;
+    color: ${theme.colors.clara.claro};
+    font-family: ${theme.fontsFamily.paragrafos};
+    font-size: 0.82rem;
+    font-weight: 400;
     text-decoration: none;
-    font-weight: ${(props) => (props.$ativo ? "700" : "400")};
+    opacity: 0.85;
+    transition: background 0.2s ease, opacity 0.2s ease;
 
     &:hover {
+        background: ${theme.colors.azul.medio};
+        opacity: 1;
         text-decoration: none;
-        opacity: 0.9;
     }
 
-    ${(props) =>
-        props.$colapsado &&
-        `
-        justify-content: center;
-        gap: 4px;
-    `}
+    span {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 `;
 
 const CarregandoStl = styled.div`
@@ -314,6 +374,7 @@ const DrawerStl = styled.aside`
     box-shadow: 4px 0 12px rgba(0, 0, 0, 0.35);
     display: flex;
     flex-direction: column;
+    overflow-y: auto;
     animation: slideIn 0.25s ease;
 
     @keyframes slideIn {

@@ -3,12 +3,14 @@ import styled from "styled-components";
 import { theme, TitulosPrincipaisStl } from "../../../theme/theme";
 import slugify from "../../../utils/slogify";
 import { useBusca } from "../../../context/BuscaContext";
+import { useMenu } from "../../../context/MenuContext";
 
 export default function Manuais({
     instalacoesPorCategoria = {},
     todosOsItens = [],
 }) {
     const { busca } = useBusca();
+    const { categoriaAtiva } = useMenu();
 
     const itensFiltrados = todosOsItens.filter(
         (item) =>
@@ -16,47 +18,58 @@ export default function Manuais({
             item.descricao.toLowerCase().includes(busca.toLowerCase()),
     );
 
-    const titulos = Object.keys(instalacoesPorCategoria);
+    /* Home limpa: sem busca e sem categoria selecionada na sidebar */
+    if (!busca && !categoriaAtiva) return null;
+
+    /* Busca ativa: exibe cards filtrados */
+    if (busca) {
+        return (
+            <ManuaisStl>
+                {itensFiltrados.length === 0 ? (
+                    <ManualNaoEncontradoStl>
+                        Nenhum manual encontrado
+                    </ManualNaoEncontradoStl>
+                ) : (
+                    <ConteinerManualDuplo>
+                        {itensFiltrados.map((dados) => (
+                            <CardManuais
+                                key={dados.id}
+                                path={dados.id}
+                                nome={dados.nome}
+                                descricao={dados.descricao}
+                            />
+                        ))}
+                    </ConteinerManualDuplo>
+                )}
+            </ManuaisStl>
+        );
+    }
+
+    /* Categoria ativa: exibe apenas a section correspondente */
+    const itens = instalacoesPorCategoria[categoriaAtiva] || [];
 
     return (
         <ManuaisStl>
-            {busca ? (
-                <>
-                    {itensFiltrados.length === 0 ? (
-                        <ManualNaoEncontradoStl>
-                            Nenhum manual encontrado
-                        </ManualNaoEncontradoStl>
-                    ) : (
-                        <ConteinerManualDuplo>
-                            {itensFiltrados.map((dados) => (
-                                <CardManuais
-                                    key={dados.id}
-                                    path={dados.id}
-                                    nome={dados.nome}
-                                    descricao={dados.descricao}
-                                />
-                            ))}
-                        </ConteinerManualDuplo>
-                    )}
-                </>
-            ) : (
-                titulos.map((titulo) => (
-                    <ConteinerDosManuais key={titulo} id={slugify(titulo)}>
-                        <TitulosPrincipaisStl>{titulo}</TitulosPrincipaisStl>
+            <ConteinerDosManuais id={slugify(categoriaAtiva)}>
+                <TitulosPrincipaisStl>{categoriaAtiva}</TitulosPrincipaisStl>
 
-                        <ConteinerManualDuplo>
-                            {instalacoesPorCategoria[titulo].map((dados) => (
-                                <CardManuais
-                                    key={dados.id}
-                                    path={dados.id}
-                                    nome={dados.nome}
-                                    descricao={dados.descricao}
-                                />
-                            ))}
-                        </ConteinerManualDuplo>
-                    </ConteinerDosManuais>
-                ))
-            )}
+                {itens.length === 0 ? (
+                    <ManualNaoEncontradoStl>
+                        Nenhum manual nesta categoria
+                    </ManualNaoEncontradoStl>
+                ) : (
+                    <ConteinerManualDuplo>
+                        {itens.map((dados) => (
+                            <CardManuais
+                                key={dados.id}
+                                path={dados.id}
+                                nome={dados.nome}
+                                descricao={dados.descricao}
+                            />
+                        ))}
+                    </ConteinerManualDuplo>
+                )}
+            </ConteinerDosManuais>
         </ManuaisStl>
     );
 }
@@ -65,21 +78,12 @@ const ManuaisStl = styled.section`
     width: 100%;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     flex-wrap: wrap;
     gap: 16px;
-    padding: 64px 12%;
-    @media (min-width: 1401px) {
-        padding: 64px 16%;
-    }
-    @media (min-width: 768px) and (max-width: 1200px) {
-        padding: 16px 6%;
-    }
-    @media (min-width: 481px) and (max-width: 767px) {
-        padding: 16px 10%;
-    }
+    padding: 32px 0 0;
+
     @media (max-width: 480px) {
-        padding: 32px 2%;
         flex-direction: column;
     }
 `;
@@ -90,7 +94,7 @@ const ConteinerDosManuais = styled.div`
     flex-direction: column;
     align-items: center;
     gap: 32px;
-    scroll-margin-top: 140px;
+    scroll-margin-top: 100px;
 `;
 
 const ConteinerManualDuplo = styled.div`
