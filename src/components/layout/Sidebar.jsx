@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useMenu } from "../../context/MenuContext";
 import Link from "next/link";
-import slugify from "../../utils/slogify";
 import styled from "styled-components";
 import { theme } from "../../theme/theme";
 import {
@@ -21,15 +20,11 @@ export default function Sidebar({ colapsado, onToggleColapsado }) {
 
     const nomes = Object.keys(categorias || {});
 
-    /* Categoria: marca como ativa, expande e rola até a section */
+    /* Categoria: marca como ativa e expande/colapsa os manuais filhos */
     const handleCategoriaClick = (e, nome) => {
         e.preventDefault();
         setCategoriaAtiva(nome);
-        setExpandidas((prev) => ({ ...prev, [nome]: true }));
-        setTimeout(() => {
-            const el = document.getElementById(slugify(nome));
-            if (el) el.scrollIntoView({ behavior: "smooth" });
-        }, 120);
+        setExpandidas((prev) => ({ ...prev, [nome]: !prev[nome] }));
     };
 
     const renderMenu = (isDrawer) => {

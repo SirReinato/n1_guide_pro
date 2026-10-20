@@ -28,25 +28,33 @@ const ConteinerSobreStl = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 32px 12%;
-    background: linear-gradient(to right, #8299aaff, #9cbdcfff);
+    padding: 48px 12%;
+    background: linear-gradient(
+        to bottom,
+        rgba(130, 153, 170, 0) 0%,
+        rgba(130, 153, 170, 0.55) 8%,
+        rgba(130, 153, 170, 1) 22%,
+        rgba(156, 189, 207, 1) 78%,
+        rgba(156, 189, 207, 0.55) 92%,
+        rgba(156, 189, 207, 0) 100%
+    );
     @media (min-width: 1401px) {
-        padding: 16px 16%;
+        padding: 56px 16%;
         .imgSobre {
             width: 40%;
         }
     }
     @media (min-width: 768px) and (max-width: 1200px) {
-        padding: 16px 6%;
+        padding: 56px 6%;
         .imgSobre {
             width: 46%;
         }
     }
     @media (min-width: 481px) and (max-width: 767px) {
-        padding: 16px 10%;
+        padding: 40px 10%;
     }
     @media (max-width: 480px) {
-        padding: 16px 2%;
+        padding: 40px 2%;
         width: 100%;
         display: flex;
         flex-direction: column-reverse;

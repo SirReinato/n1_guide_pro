@@ -28,21 +28,26 @@ export default function ComoFunciona() {
 const ComoFuncionaContainerStl = styled.div`
     width: 100%;
     display: flex;
-    padding: 16px 12%;
+    padding: 48px 12%;
     flex-direction: column;
     gap: 16px;
     background: linear-gradient(
-        ${theme.colors.azulMaisClaro.muitoClaro},
-        ${theme.colors.azulMaisClaro.claro}
+        to bottom,
+        rgba(179, 212, 231, 0) 0%,
+        rgba(179, 212, 231, 0.55) 8%,
+        rgba(179, 212, 231, 1) 22%,
+        rgba(154, 195, 219, 1) 78%,
+        rgba(154, 195, 219, 0.55) 92%,
+        rgba(154, 195, 219, 0) 100%
     );
     @media (min-width: 1401px) {
-        padding: 32px 16%;
+        padding: 56px 16%;
     }
     @media (min-width: 768px) and (max-width: 1200px) {
-        padding: 32px 6%;
+        padding: 56px 6%;
     }
     @media (min-width: 481px) and (max-width: 767px) {
-        padding: 16px 10%;
+        padding: 40px 10%;
     }
     @media (max-width: 480px) {
         display: none;

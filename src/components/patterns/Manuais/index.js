@@ -1,16 +1,13 @@
 import CardManuais from "../../../components/CardManuais";
 import styled from "styled-components";
-import { theme, TitulosPrincipaisStl } from "../../../theme/theme";
-import slugify from "../../../utils/slogify";
+import { theme } from "../../../theme/theme";
 import { useBusca } from "../../../context/BuscaContext";
-import { useMenu } from "../../../context/MenuContext";
 
-export default function Manuais({
-    instalacoesPorCategoria = {},
-    todosOsItens = [],
-}) {
+export default function Manuais({ instalacoesPorCategoria = {}, todosOsItens = [] }) {
     const { busca } = useBusca();
-    const { categoriaAtiva } = useMenu();
+
+    /* A section de manuais só aparece quando o usuário pesquisa */
+    if (!busca) return null;
 
     const itensFiltrados = todosOsItens.filter(
         (item) =>
@@ -18,58 +15,24 @@ export default function Manuais({
             item.descricao.toLowerCase().includes(busca.toLowerCase()),
     );
 
-    /* Home limpa: sem busca e sem categoria selecionada na sidebar */
-    if (!busca && !categoriaAtiva) return null;
-
-    /* Busca ativa: exibe cards filtrados */
-    if (busca) {
-        return (
-            <ManuaisStl>
+    return (
+        <ManuaisStl>
+            <ConteinerManualDuplo>
                 {itensFiltrados.length === 0 ? (
                     <ManualNaoEncontradoStl>
                         Nenhum manual encontrado
                     </ManualNaoEncontradoStl>
                 ) : (
-                    <ConteinerManualDuplo>
-                        {itensFiltrados.map((dados) => (
-                            <CardManuais
-                                key={dados.id}
-                                path={dados.id}
-                                nome={dados.nome}
-                                descricao={dados.descricao}
-                            />
-                        ))}
-                    </ConteinerManualDuplo>
+                    itensFiltrados.map((dados) => (
+                        <CardManuais
+                            key={dados.id}
+                            path={dados.id}
+                            nome={dados.nome}
+                            descricao={dados.descricao}
+                        />
+                    ))
                 )}
-            </ManuaisStl>
-        );
-    }
-
-    /* Categoria ativa: exibe apenas a section correspondente */
-    const itens = instalacoesPorCategoria[categoriaAtiva] || [];
-
-    return (
-        <ManuaisStl>
-            <ConteinerDosManuais id={slugify(categoriaAtiva)}>
-                <TitulosPrincipaisStl>{categoriaAtiva}</TitulosPrincipaisStl>
-
-                {itens.length === 0 ? (
-                    <ManualNaoEncontradoStl>
-                        Nenhum manual nesta categoria
-                    </ManualNaoEncontradoStl>
-                ) : (
-                    <ConteinerManualDuplo>
-                        {itens.map((dados) => (
-                            <CardManuais
-                                key={dados.id}
-                                path={dados.id}
-                                nome={dados.nome}
-                                descricao={dados.descricao}
-                            />
-                        ))}
-                    </ConteinerManualDuplo>
-                )}
-            </ConteinerDosManuais>
+            </ConteinerManualDuplo>
         </ManuaisStl>
     );
 }
@@ -88,15 +51,6 @@ const ManuaisStl = styled.section`
     }
 `;
 
-const ConteinerDosManuais = styled.div`
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 32px;
-    scroll-margin-top: 100px;
-`;
-
 const ConteinerManualDuplo = styled.div`
     width: 100%;
     display: grid;
@@ -109,6 +63,7 @@ const ConteinerManualDuplo = styled.div`
 `;
 
 const ManualNaoEncontradoStl = styled.p`
+    grid-column: 1 / -1;
     font-size: ${theme.fontSize.titulosSecundarios.mm};
     font-family: ${theme.fontsFamily.titulos};
     color: ${theme.colors.azulMaisClaro.medio};
