@@ -6,11 +6,10 @@ import styled from "styled-components";
 import { theme } from "../../theme/theme";
 import { Menu, X, BookOpen, ChevronRight, ChevronLeft } from "react-feather";
 
-export default function Sidebar() {
+export default function Sidebar({ colapsado, onToggleColapsado }) {
     const { categorias, categoriaAtiva, setCategoriaAtiva, carregando } =
         useMenu();
     const [aberto, setAberto] = useState(false);
-    const [colapsado, setColapsado] = useState(false);
 
     const nomes = Object.keys(categorias || {});
 
@@ -23,7 +22,8 @@ export default function Sidebar() {
 
             {/* Botão retrair/colapsar (desktop) */}
             <BtnRetrair
-                onClick={() => setColapsado((prev) => !prev)}
+                onClick={onToggleColapsado}
+                $colapsado={colapsado}
                 title={colapsado ? "Expandir menu" : "Retrair menu"}
             >
                 {colapsado ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
@@ -151,7 +151,7 @@ const BtnRetrair = styled.button`
     cursor: pointer;
     z-index: 25;
     margin: 8px 8px 8px 0;
-    transition: background 0.2s ease;
+    transition: background 0.2s ease, left 0.25s ease;
 
     &:hover {
         background: ${theme.colors.azul.claro};
@@ -163,10 +163,22 @@ const BtnRetrair = styled.button`
         top: 96px;
         left: 240px;
         z-index: 30;
+
+        ${(props) =>
+            props.$colapsado &&
+            `
+            left: 32px;
+        `}
     }
 
     @media (min-width: 769px) and (max-width: 1024px) {
-        left: 200px;
+        left: 180px;
+
+        ${(props) =>
+            props.$colapsado &&
+            `
+            left: 20px;
+        `}
     }
 `;
 

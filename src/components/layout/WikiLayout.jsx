@@ -1,14 +1,20 @@
+import { useState } from "react";
 import Sidebar from "./Sidebar";
 import ContentArea from "./ContentArea";
 import styled from "styled-components";
 import { theme } from "../../theme/theme";
 
 export default function WikiLayout({ children }) {
+    const [colapsado, setColapsado] = useState(false);
+
     return (
         <LayoutStl>
             <GridStl>
-                <Sidebar />
-                <ContentArea>{children}</ContentArea>
+                <Sidebar
+                    colapsado={colapsado}
+                    onToggleColapsado={() => setColapsado((prev) => !prev)}
+                />
+                <ContentArea colapsado={colapsado}>{children}</ContentArea>
             </GridStl>
         </LayoutStl>
     );
