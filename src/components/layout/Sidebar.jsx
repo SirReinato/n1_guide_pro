@@ -14,33 +14,34 @@ export default function Sidebar({ colapsado, onToggleColapsado }) {
     const nomes = Object.keys(categorias || {});
 
     return (
-        <SidebarWrapper>
+        <>
             {/* Botão hamburguer visível apenas em mobile */}
             <BtnAbrirMobile onClick={() => setAberto(true)}>
                 <Menu size={20} />
             </BtnAbrirMobile>
 
-            {/* Botão retrair/colapsar (desktop) */}
-            <BtnRetrair
-                onClick={onToggleColapsado}
-                $colapsado={colapsado}
-                title={colapsado ? "Expandir menu" : "Retrair menu"}
-            >
-                {colapsado ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
-            </BtnRetrair>
-
-            {/* Sidebar fixa (desktop). Em mobile fica oculta via CSS. */}
+            {/* Sidebar sticky (desktop). Em mobile fica oculta via CSS. */}
             <SidebarStl $colapsado={colapsado}>
-                <SidebarHeaderStl $colapsado={colapsado}>
-                    {!colapsado && (
-                        <LogoStl>
-                            <BookOpen size={20} />
-                            <span>N1 GuidePro</span>
-                        </LogoStl>
+                <BtnRetrairStl
+                    onClick={onToggleColapsado}
+                    $colapsado={colapsado}
+                    title={colapsado ? "Expandir menu" : "Retrair menu"}
+                >
+                    {colapsado ? (
+                        <ChevronRight size={16} />
+                    ) : (
+                        <ChevronLeft size={16} />
                     )}
+                </BtnRetrairStl>
+
+                <SidebarHeaderStl $colapsado={colapsado}>
+                    <LogoStl $colapsado={colapsado}>
+                        <BookOpen size={20} />
+                        <span>N1 GuidePro</span>
+                    </LogoStl>
                 </SidebarHeaderStl>
 
-                <NavStl $colapsado={colapsado}>
+                <NavStl>
                     {carregando ? (
                         <CarregandoStl>Carregando módulos...</CarregandoStl>
                     ) : nomes.length === 0 ? (
@@ -57,8 +58,13 @@ export default function Sidebar({ colapsado, onToggleColapsado }) {
                                     onClick={() => setCategoriaAtiva(nome)}
                                 >
                                     <Link href={`#${id}`} passHref>
-                                        <ItemLink $ativo={ativo} $colapsado={colapsado}>
-                                            {!colapsado && <ChevronRight size={14} />}
+                                        <ItemLink
+                                            $ativo={ativo}
+                                            $colapsado={colapsado}
+                                        >
+                                            {!colapsado && (
+                                                <ChevronRight size={14} />
+                                            )}
                                             {!colapsado && nome}
                                         </ItemLink>
                                     </Link>
@@ -73,7 +79,7 @@ export default function Sidebar({ colapsado, onToggleColapsado }) {
             {aberto && (
                 <>
                     <OverlayStl onClick={() => setAberto(false)} />
-                    <DrawerStl $aberto={true}>
+                    <DrawerStl>
                         <DrawerHeaderStl>
                             <LogoStl>
                                 <BookOpen size={20} />
@@ -108,93 +114,24 @@ export default function Sidebar({ colapsado, onToggleColapsado }) {
                     </DrawerStl>
                 </>
             )}
-        </SidebarWrapper>
+        </>
     );
 }
 
-const SidebarWrapper = styled.div`
-    position: relative;
-    width: 100%;
-`;
-
-const BtnAbrirMobile = styled.div`
-    display: none;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    background: ${theme.colors.azul.escuro};
-    color: ${theme.colors.clara.claro};
-    border-radius: 8px;
-    cursor: pointer;
-    z-index: 30;
-    margin: 8px;
-
-    @media (max-width: 768px) {
-        display: flex;
-        position: fixed;
-        top: 96px;
-        left: 12px;
-    }
-`;
-
-const BtnRetrair = styled.button`
-    display: none;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    background: ${theme.colors.azul.medio};
-    color: ${theme.colors.clara.claro};
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    z-index: 25;
-    margin: 8px 8px 8px 0;
-    transition: background 0.2s ease, left 0.25s ease;
-
-    &:hover {
-        background: ${theme.colors.azul.claro};
-    }
-
-    @media (min-width: 769px) {
-        display: flex;
-        position: fixed;
-        top: 96px;
-        left: 240px;
-        z-index: 30;
-
-        ${(props) =>
-            props.$colapsado &&
-            `
-            left: 32px;
-        `}
-    }
-
-    @media (min-width: 769px) and (max-width: 1024px) {
-        left: 180px;
-
-        ${(props) =>
-            props.$colapsado &&
-            `
-            left: 20px;
-        `}
-    }
-`;
-
+/* Sidebar sticky no fluxo — gruda ao rolar, sem margin-left manual no conteúdo */
 const SidebarStl = styled.aside`
+    display: none;
     width: 280px;
     flex-shrink: 0;
-    position: fixed;
-    top: 80px;
-    bottom: 0;
-    left: 0;
+    position: sticky;
+    top: 0;
+    height: calc(100vh - 80px);
     overflow-y: auto;
     background: ${theme.colors.azul.escuro};
     color: ${theme.colors.clara.claro};
-    z-index: 20;
     box-shadow: 4px 0 12px rgba(0, 0, 0, 0.25);
-    transition: width 0.25s ease, left 0.25s ease;
+    transition: width 0.25s ease;
+    z-index: 20;
 
     ${(props) =>
         props.$colapsado &&
@@ -202,33 +139,47 @@ const SidebarStl = styled.aside`
         width: 72px;
     `}
 
-    @media (min-width: 769px) and (max-width: 1024px) {
-        width: 220px;
-        ${(props) =>
-            props.$colapsado &&
-            `
-            width: 60px;
-        `}
+    @media (min-width: 769px) {
+        display: block;
     }
+`;
 
-    @media (max-width: 768px) {
-        display: none;
+/* Botão retrair na borda direita da sidebar */
+const BtnRetrairStl = styled.button`
+    position: absolute;
+    top: 12px;
+    right: -18px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: ${theme.colors.azul.medio};
+    color: ${theme.colors.clara.claro};
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 30;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    transition: background 0.2s ease;
+
+    &:hover {
+        background: ${theme.colors.azul.claro};
     }
 `;
 
 const SidebarHeaderStl = styled.div`
     display: flex;
     align-items: center;
-    gap: 10px;
     padding: 20px 16px;
     border-bottom: 1px solid ${theme.colors.azul.medio};
-    transition: padding 0.25s ease, gap 0.25s ease;
-    justify-content: ${(props) => (props.$colapsado ? "center" : "flex-start")};
+    transition: padding 0.25s ease;
 
     ${(props) =>
         props.$colapsado &&
         `
         padding: 16px;
+        justify-content: center;
     `}
 `;
 
@@ -245,10 +196,10 @@ const LogoStl = styled.div`
     transition: opacity 0.2s ease;
 
     ${(props) =>
-        props.theme &&
+        props.$colapsado &&
         `
-        @media (max-width: 1024px) {
-            font-size: 1rem;
+        span {
+            display: none;
         }
     `}
 `;
@@ -256,13 +207,6 @@ const LogoStl = styled.div`
 const NavStl = styled.nav`
     padding: 16px 0;
     overflow-y: auto;
-    transition: padding 0.25s ease;
-
-    ${(props) =>
-        props.$colapsado &&
-        `
-        padding: 8px 0;
-    `}
 `;
 
 const ItemStl = styled.div`
@@ -272,9 +216,7 @@ const ItemStl = styled.div`
     cursor: pointer;
     border-left: 3px solid transparent;
     background: ${(props) =>
-        props.$ativo
-            ? theme.colors.azulMaisClaro.escuro
-            : "transparent"};
+        props.$ativo ? theme.colors.azulMaisClaro.escuro : "transparent"};
     color: ${theme.colors.clara.claro};
     font-family: ${theme.fontsFamily.paragrafos};
     font-size: 0.9rem;
@@ -302,7 +244,6 @@ const ItemLink = styled.a`
     color: inherit;
     text-decoration: none;
     font-weight: ${(props) => (props.$ativo ? "700" : "400")};
-    transition: opacity 0.2s ease;
 
     &:hover {
         text-decoration: none;
@@ -329,6 +270,28 @@ const VazioStl = styled.div`
     font-size: 0.85rem;
     color: ${theme.colors.azulMaisClaro.claro};
     font-style: italic;
+`;
+
+/* Hamburguer mobile (fixed) */
+const BtnAbrirMobile = styled.div`
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: ${theme.colors.azul.escuro};
+    color: ${theme.colors.clara.claro};
+    border-radius: 8px;
+    cursor: pointer;
+    z-index: 30;
+    margin: 8px;
+
+    @media (max-width: 768px) {
+        display: flex;
+        position: fixed;
+        top: 96px;
+        left: 12px;
+    }
 `;
 
 const OverlayStl = styled.div`

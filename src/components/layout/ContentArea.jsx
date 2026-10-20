@@ -6,32 +6,18 @@ export default function ContentArea({ colapsado, children }) {
 }
 
 const ConteudoStl = styled.main`
-    width: calc(100% - 280px);
+    flex: 1;
     min-width: 0;
-    margin-left: 280px;
-    padding: 24px 12%;
-    overflow-y: auto;
+    width: 100%;
+    padding: 24px 5%;
     background: transparent;
     min-height: calc(100vh - 80px);
     box-sizing: border-box;
-    transition: margin-left 0.25s ease, width 0.25s ease, padding 0.25s ease;
-
-    ${(props) =>
-        props.$colapsado &&
-        `
-        width: calc(100% - 72px);
-        margin-left: 72px;
-    `}
 
     @media (min-width: 1401px) {
-        padding: 32px 16%;
-    }
-    @media (min-width: 768px) and (max-width: 1200px) {
-        padding: 24px 6%;
+        padding: 32px 8%;
     }
     @media (max-width: 768px) {
-        width: 100%;
-        margin-left: 0;
         padding: 16px 4%;
         min-height: auto;
     }
