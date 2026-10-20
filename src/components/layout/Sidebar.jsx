@@ -4,12 +4,13 @@ import Link from "next/link";
 import slugify from "../../utils/slogify";
 import styled from "styled-components";
 import { theme } from "../../theme/theme";
-import { Menu, X, BookOpen, ChevronRight } from "react-feather";
+import { Menu, X, BookOpen, ChevronRight, ChevronLeft } from "react-feather";
 
 export default function Sidebar() {
     const { categorias, categoriaAtiva, setCategoriaAtiva, carregando } =
         useMenu();
     const [aberto, setAberto] = useState(false);
+    const [colapsado, setColapsado] = useState(false);
 
     const nomes = Object.keys(categorias || {});
 
@@ -20,16 +21,26 @@ export default function Sidebar() {
                 <Menu size={20} />
             </BtnAbrirMobile>
 
+            {/* Botão retrair/colapsar (desktop) */}
+            <BtnRetrair
+                onClick={() => setColapsado((prev) => !prev)}
+                title={colapsado ? "Expandir menu" : "Retrair menu"}
+            >
+                {colapsado ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
+            </BtnRetrair>
+
             {/* Sidebar fixa (desktop). Em mobile fica oculta via CSS. */}
-            <SidebarStl>
-                <SidebarHeaderStl>
-                    <LogoStl>
-                        <BookOpen size={20} />
-                        <span>N1 GuidePro</span>
-                    </LogoStl>
+            <SidebarStl $colapsado={colapsado}>
+                <SidebarHeaderStl $colapsado={colapsado}>
+                    {!colapsado && (
+                        <LogoStl>
+                            <BookOpen size={20} />
+                            <span>N1 GuidePro</span>
+                        </LogoStl>
+                    )}
                 </SidebarHeaderStl>
 
-                <NavStl>
+                <NavStl $colapsado={colapsado}>
                     {carregando ? (
                         <CarregandoStl>Carregando módulos...</CarregandoStl>
                     ) : nomes.length === 0 ? (
@@ -42,12 +53,13 @@ export default function Sidebar() {
                                 <ItemStl
                                     key={nome}
                                     $ativo={ativo}
+                                    $colapsado={colapsado}
                                     onClick={() => setCategoriaAtiva(nome)}
                                 >
                                     <Link href={`#${id}`} passHref>
-                                        <ItemLink $ativo={ativo}>
-                                            <ChevronRight size={14} />
-                                            {nome}
+                                        <ItemLink $ativo={ativo} $colapsado={colapsado}>
+                                            {!colapsado && <ChevronRight size={14} />}
+                                            {!colapsado && nome}
                                         </ItemLink>
                                     </Link>
                                 </ItemStl>
@@ -126,6 +138,38 @@ const BtnAbrirMobile = styled.div`
     }
 `;
 
+const BtnRetrair = styled.button`
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: ${theme.colors.azul.medio};
+    color: ${theme.colors.clara.claro};
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    z-index: 25;
+    margin: 8px 8px 8px 0;
+    transition: background 0.2s ease;
+
+    &:hover {
+        background: ${theme.colors.azul.claro};
+    }
+
+    @media (min-width: 769px) {
+        display: flex;
+        position: fixed;
+        top: 96px;
+        left: 240px;
+        z-index: 30;
+    }
+
+    @media (min-width: 769px) and (max-width: 1024px) {
+        left: 200px;
+    }
+`;
+
 const SidebarStl = styled.aside`
     width: 280px;
     flex-shrink: 0;
@@ -138,6 +182,22 @@ const SidebarStl = styled.aside`
     color: ${theme.colors.clara.claro};
     z-index: 20;
     box-shadow: 4px 0 12px rgba(0, 0, 0, 0.25);
+    transition: width 0.25s ease, left 0.25s ease;
+
+    ${(props) =>
+        props.$colapsado &&
+        `
+        width: 72px;
+    `}
+
+    @media (min-width: 769px) and (max-width: 1024px) {
+        width: 220px;
+        ${(props) =>
+            props.$colapsado &&
+            `
+            width: 60px;
+        `}
+    }
 
     @media (max-width: 768px) {
         display: none;
@@ -150,6 +210,14 @@ const SidebarHeaderStl = styled.div`
     gap: 10px;
     padding: 20px 16px;
     border-bottom: 1px solid ${theme.colors.azul.medio};
+    transition: padding 0.25s ease, gap 0.25s ease;
+    justify-content: ${(props) => (props.$colapsado ? "center" : "flex-start")};
+
+    ${(props) =>
+        props.$colapsado &&
+        `
+        padding: 16px;
+    `}
 `;
 
 const LogoStl = styled.div`
@@ -160,11 +228,29 @@ const LogoStl = styled.div`
     font-size: 1.1rem;
     font-weight: 400;
     color: ${theme.colors.clara.claro};
+    white-space: nowrap;
+    overflow: hidden;
+    transition: opacity 0.2s ease;
+
+    ${(props) =>
+        props.theme &&
+        `
+        @media (max-width: 1024px) {
+            font-size: 1rem;
+        }
+    `}
 `;
 
 const NavStl = styled.nav`
     padding: 16px 0;
     overflow-y: auto;
+    transition: padding 0.25s ease;
+
+    ${(props) =>
+        props.$colapsado &&
+        `
+        padding: 8px 0;
+    `}
 `;
 
 const ItemStl = styled.div`
@@ -180,11 +266,20 @@ const ItemStl = styled.div`
     color: ${theme.colors.clara.claro};
     font-family: ${theme.fontsFamily.paragrafos};
     font-size: 0.9rem;
-    transition: background 0.2s ease;
+    transition: background 0.2s ease, padding 0.25s ease;
+    white-space: nowrap;
+    overflow: hidden;
 
     &:hover {
         background: ${theme.colors.azul.medio};
     }
+
+    ${(props) =>
+        props.$colapsado &&
+        `
+        padding: 10px 12px;
+        justify-content: center;
+    `}
 `;
 
 const ItemLink = styled.a`
@@ -195,11 +290,19 @@ const ItemLink = styled.a`
     color: inherit;
     text-decoration: none;
     font-weight: ${(props) => (props.$ativo ? "700" : "400")};
+    transition: opacity 0.2s ease;
 
     &:hover {
         text-decoration: none;
         opacity: 0.9;
     }
+
+    ${(props) =>
+        props.$colapsado &&
+        `
+        justify-content: center;
+        gap: 4px;
+    `}
 `;
 
 const CarregandoStl = styled.div`

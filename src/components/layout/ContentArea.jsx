@@ -13,6 +13,16 @@ const ConteudoStl = styled.main`
     overflow-y: auto;
     background: transparent;
     min-height: calc(100vh - 80px);
+    transition: margin-left 0.25s ease, padding 0.25s ease;
+
+    /* Quando a sidebar está colapsada (desktop) */
+    @media (min-width: 769px) and (max-width: 1024px) {
+        margin-left: 220px;
+    }
+
+    @media (min-width: 1025px) {
+        margin-left: 72px;
+    }
 
     @media (min-width: 1401px) {
         padding: 32px 16%;

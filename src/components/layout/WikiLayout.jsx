@@ -1,4 +1,3 @@
-import Header from "../patterns/Header";
 import Sidebar from "./Sidebar";
 import ContentArea from "./ContentArea";
 import styled from "styled-components";
@@ -7,7 +6,6 @@ import { theme } from "../../theme/theme";
 export default function WikiLayout({ children }) {
     return (
         <LayoutStl>
-            <Header />
             <GridStl>
                 <Sidebar />
                 <ContentArea>{children}</ContentArea>
