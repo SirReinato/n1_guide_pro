@@ -14,14 +14,19 @@ export default function Footer() {
 
 const ConteinerFooterStl = styled.footer`
     width: 100%;
-    margin-top: 32px;
+    height: 44px;
     display: flex;
     align-items: center;
-    padding: 8px 0;
+    padding: 0 24px;
     justify-content: center;
-    background: #1a3a5f;
+    background: rgba(8, 26, 48, 0.92);
+    border-top: 1px solid rgba(108, 164, 197, 0.14);
+    box-sizing: border-box;
+
     .ajustesTitlo {
-        color: ${theme.colors.clara.claro};
-        font-size: 0.8rem;
+        color: ${theme.colors.azulMaisClaro.medio};
+        font-size: 0.78rem;
+        font-family: ${theme.fontsFamily.paragrafos};
+        letter-spacing: 0.03em;
     }
 `;

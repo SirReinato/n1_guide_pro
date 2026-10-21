@@ -38,6 +38,7 @@ export const theme = {
         paragrafos: {
             gg: "1.5rem",
             mm: "1.125rem",
+            m: "1rem",
             pp: "0.89rem",
         },
     },
@@ -118,6 +119,7 @@ export const ParagrafosStl = styled.p`
 // Conteiners
 export const ConteinerGeral = styled.div`
     width: 100%;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -125,10 +127,4 @@ export const ConteinerGeral = styled.div`
         props.$primary
             ? `${theme.colors.azulMaisClaro.escuro}`
             : `${theme.colors.clara.bgGeral}`};
-    @media (min-width: 1200px) {
-    }
-    @media (min-width: 432px) and (max-width: 780px) {
-    }
-    @media (max-width: 431px) {
-    }
 `;

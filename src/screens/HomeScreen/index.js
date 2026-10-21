@@ -1,42 +1,29 @@
 import Banner from "../../components/patterns/Banner";
 import ComoFunciona from "../../components/patterns/ComoFunciona";
-import Manuais from "../../components/patterns/Manuais";
-import Sobre from "../../components/patterns/Sobre";
-import { ConteinerGeral } from "../../theme/theme";
 import styled from "styled-components";
-import dynamic from "next/dynamic";
 
-// dynamic() fora do componente para evitar recriação a cada render
-const ModalBuscar = dynamic(
-    () => import("../../components/patterns/ModalBuscar"),
-    { ssr: false },
-);
-
-export default function HomeScreen({ instalacoesPorCategoria, todosOsItens }) {
+export default function HomeScreen() {
     return (
-        <ConteinerGeral>
-            <ModalBuscar />
-
+        <HomeWrapperStl>
             <Banner />
 
             <MainConteinerStl>
                 <ComoFunciona />
-
-                <Manuais
-                    instalacoesPorCategoria={instalacoesPorCategoria}
-                    todosOsItens={todosOsItens}
-                />
             </MainConteinerStl>
-
-            <Sobre />
-        </ConteinerGeral>
+        </HomeWrapperStl>
     );
 }
 
-const MainConteinerStl = styled.main`
+const HomeWrapperStl = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+`;
+
+const MainConteinerStl = styled.div`
     width: 100%;
     display: flex;
     align-items: center;
     flex-direction: column;
 `;
-
