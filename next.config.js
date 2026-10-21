@@ -5,6 +5,13 @@ const nextConfig = {
     // output: "export" removido para habilitar API Routes (Supabase + Gemini IA)
     // O deploy na Vercel continua funcionando normalmente no modo dinâmico.
 
+    reactStrictMode: true,
+
+    // Compilador SWC oficial para styled-components (SSR consistente e bundle menor)
+    compiler: {
+        styledComponents: true,
+    },
+
     // Optional: Change links `/me` -> `/me/` and emit `/me.html` -> `/me/index.html`
     // trailingSlash: true,
 
