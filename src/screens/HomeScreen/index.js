@@ -1,7 +1,6 @@
 import Banner from "../../components/patterns/Banner";
 import ComoFunciona from "../../components/patterns/ComoFunciona";
 import Manuais from "../../components/patterns/Manuais";
-import Sobre from "../../components/patterns/Sobre";
 import styled from "styled-components";
 import dynamic from "next/dynamic";
 
@@ -13,7 +12,7 @@ const ModalBuscar = dynamic(
 
 export default function HomeScreen({ instalacoesPorCategoria, todosOsItens }) {
     return (
-        <>
+        <HomeWrapperStl>
             <ModalBuscar />
 
             <Banner />
@@ -26,16 +25,21 @@ export default function HomeScreen({ instalacoesPorCategoria, todosOsItens }) {
                     todosOsItens={todosOsItens}
                 />
             </MainConteinerStl>
-
-            <Sobre />
-        </>
+        </HomeWrapperStl>
     );
 }
 
-const MainConteinerStl = styled.main`
+const HomeWrapperStl = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+`;
+
+const MainConteinerStl = styled.div`
     width: 100%;
     display: flex;
     align-items: center;
     flex-direction: column;
+    gap: 32px;
 `;
-

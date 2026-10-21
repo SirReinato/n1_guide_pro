@@ -22,17 +22,22 @@ export default function WikiLayout({ children }) {
 
 const LayoutStl = styled.div`
     width: 100%;
-    min-height: 100vh;
+    flex: 1;
     display: flex;
     flex-direction: column;
-    background: ${theme.colors.clara.bgGeral};
+    background: radial-gradient(
+            circle at 55% 0%,
+            rgba(26, 58, 95, 0.35) 0%,
+            rgba(7, 22, 41, 0) 65%
+        ),
+        ${theme.colors.clara.bgGeral};
 `;
 
 const GridStl = styled.div`
     display: flex;
     flex: 1;
     width: 100%;
-    min-height: calc(100vh - 80px);
+    min-height: calc(100vh - 64px);
     align-items: stretch;
 
     @media (max-width: 768px) {

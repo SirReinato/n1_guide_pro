@@ -43,20 +43,23 @@ const animacao = keyframes`
         transform: translateX(-50%);
     }
 `;
+
 const LetreiroWrapper = styled.div`
     overflow: hidden;
     width: 100%;
-    max-width: 420px;
+    max-width: 480px;
 
-    background: ${theme.colors.azulMaisClaro.claro};
-    border-radius: 8px;
-    padding: 8px 0;
+    background: rgba(26, 58, 95, 0.55);
+    border: 1px solid rgba(108, 164, 197, 0.22);
+    border-radius: 999px;
+    padding: 7px 16px;
 `;
 
 const LetreiroTrack = styled.div`
     display: flex;
+    align-items: center;
     width: max-content;
-    animation: ${animacao} 15s linear infinite;
+    animation: ${animacao} 18s linear infinite;
 
     &:hover {
         animation-play-state: paused;
@@ -65,9 +68,10 @@ const LetreiroTrack = styled.div`
 
 const Texto = styled.span`
     white-space: nowrap;
-    padding-right: 32px;
+    padding-right: 28px;
 
-    font-size: ${theme.fontSize.paragrafos.pp};
+    font-size: 0.82rem;
     font-family: ${theme.fontsFamily.paragrafos};
-    color: ${theme.colors.azul.escuro};
+    color: ${theme.colors.azulMaisClaro.claro};
+    letter-spacing: 0.02em;
 `;

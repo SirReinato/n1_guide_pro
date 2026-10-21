@@ -14,13 +14,9 @@ export default function ListaDeItens({ nome, descricao, icon, ...props }) {
         <ListaDeItensStl {...props}>
             <ContainerListaIconTituloStl {...props}>
                 {IconComponent && (
-                    <IconComponent
-                        size={60}
-                        style={{
-                            color: "#F5F0EA",
-                            width: "10%",
-                        }}
-                    />
+                    <IconBadgeStl>
+                        <IconComponent size={20} />
+                    </IconBadgeStl>
                 )}
                 <TituloListaStl>{nome}</TituloListaStl>
             </ContainerListaIconTituloStl>
@@ -30,61 +26,62 @@ export default function ListaDeItens({ nome, descricao, icon, ...props }) {
 }
 
 const ListaDeItensStl = styled.li`
-    width: 32%;
-    min-width: 290px;
-    min-height: 150px;
-    border-radius: 8px;
+    width: 100%;
+    min-height: 130px;
+    border-radius: 12px;
     display: flex;
-    justify-content: start;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
     flex-direction: column;
     background: ${(props) =>
         props.$primary
             ? `${theme.colors.azulMaisClaro.escuro}`
-            : `${theme.colors.azul.escuro}`};
+            : `rgba(14, 38, 68, 0.75)`};
+    border: 1px solid rgba(108, 164, 197, 0.16);
+    padding: 20px;
+    gap: 12px;
+    box-sizing: border-box;
+    transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
 
-    padding: 16px;
-    gap: 16px;
-    @media (min-width: 1401px) {
-    }
-    @media (min-width: 768px) and (max-width: 1200px) {
-        min-width: 0;
-    }
-    @media (min-width: 481px) and (max-width: 767px) {
-    }
-    @media (max-width: 480px) {
+    &:hover {
+        transform: translateY(-2px);
+        border-color: rgba(154, 195, 219, 0.35);
+        background: rgba(20, 48, 84, 0.85);
     }
 `;
+
 const ContainerListaIconTituloStl = styled.div`
     width: 100%;
     display: flex;
-
-    justify-content: ${(props) =>
-        props.$spaceBetween ? "space-around" : "center"};
-
     align-items: center;
+    gap: 12px;
+`;
+
+const IconBadgeStl = styled.span`
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: rgba(68, 140, 182, 0.2);
+    border: 1px solid rgba(108, 164, 197, 0.25);
+    color: ${theme.colors.azulMaisClaro.claro};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
 `;
 
 const TituloListaStl = styled.h3`
-    width: 85%;
-    font-size: ${theme.fontSize.paragrafos.gg};
+    font-size: 1.15rem;
     font-family: ${theme.fontsFamily.titulos};
-    font-weight: 500;
+    font-weight: 400;
     color: ${theme.colors.clara.medio};
-    margin-bottom: 8px;
-    @media (min-width: 1401px) {
-    }
-    @media (min-width: 768px) and (max-width: 1200px) {
-        font-size: ${theme.fontSize.paragrafos.gg};
-    }
-    @media (min-width: 481px) and (max-width: 767px) {
-    }
-    @media (max-width: 480px) {
-    }
+    line-height: 1.3;
 `;
+
 const DescricaoListaStl = styled.p`
-    font-size: ${theme.fontSize.paragrafos.pp};
+    font-size: 0.88rem;
     font-family: ${theme.fontsFamily.paragrafos};
-    color: ${theme.colors.clara.medio};
-    line-height: 20px;
+    color: ${theme.colors.azulMaisClaro.claro};
+    line-height: 1.5;
+    opacity: 0.9;
 `;

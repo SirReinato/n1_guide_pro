@@ -1,128 +1,116 @@
-import ItensMenu from "../../../components/ItensMenu";
-import { ConteinerGeral } from "../../../theme/theme";
 import Link from "next/link";
 import styled from "styled-components";
-import instalacoes from "../../../data/instalacao.json";
+import { theme } from "../../../theme/theme";
 import LetreiroHeader from "../../../components/LetreiroHeader";
-import { useRouter } from "next/router";
 
 export default function Header() {
-    // const itensDoMenu = Object.keys(instalacoes);
-    // const router = useRouter();
-    // const isHomePage = router.pathname === "/";
     return (
-        <ConteinerGeral $primary>
+        <HeaderWrapperStl>
             <ConteinerHeaderStl>
-                <Link href={"/"}>
-                    <img
-                        className="logosHeader"
-                        src="/assets/img/logoDeskop.png"
-                        alt="Logo do site"
-                    />
-                </Link>
-                {/* vou colcoar algo aqui */}
-                <LetreiroHeader />
+                <BrandAreaStl>
+                    <Link href={"/"}>
+                        <img
+                            className="logosHeader"
+                            src="/assets/img/logoDeskop.png"
+                            alt="Logo N1 GuidePro"
+                        />
+                    </Link>
+                </BrandAreaStl>
 
-                <Link href={"https://github.com/SirReinato"} target="_blank">
-                    <img
-                        className="logosHeader mobile"
-                        src="/assets/img/theBestDesktop.png"
-                        alt="Logo do site"
-                    />
-                </Link>
+                <CenterAreaStl>
+                    <LetreiroHeader />
+                </CenterAreaStl>
+
+                <RightAreaStl>
+                    <Link href={"https://github.com/SirReinato"} target="_blank">
+                        <img
+                            className="logosHeader mobile"
+                            src="/assets/img/theBestDesktop.png"
+                            alt="TheBest - SirReinato"
+                        />
+                    </Link>
+                </RightAreaStl>
             </ConteinerHeaderStl>
-            {/* <MenuNavStl>
-                <ul className="conteinerMenu">
-                    {itensDoMenu.map((nome) => (
-                        <li key={nome}>
-                            {isHomePage ? (
-                                <a href={`#${slugify(nome)}`}>
-                                    <ItensMenu>{nome}</ItensMenu>
-                                </a>
-                            ) : (
-                                <Link href={`/#${slugify(nome)}`}>
-                                    <ItensMenu>{nome}</ItensMenu>
-                                </Link>
-                            )}
-                        </li>
-                    ))}
-                </ul>
-            </MenuNavStl> */}
-        </ConteinerGeral>
+        </HeaderWrapperStl>
     );
 }
 
-const ConteinerHeaderStl = styled.header`
+const HeaderWrapperStl = styled.header`
     width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: rgba(8, 29, 53, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(108, 164, 197, 0.16);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+`;
+
+const ConteinerHeaderStl = styled.div`
+    width: 100%;
+    min-height: 64px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 16px 12%;
+    padding: 8px 24px;
+    box-sizing: border-box;
+
     .logosHeader {
-        width: 180px;
-        height: 50px;
-    }
-    @media (min-width: 1401px) {
-        padding: 16px 16%;
-    }
-    @media (min-width: 768px) and (max-width: 1200px) {
-        padding: 16px 6%;
-        .logosHeader {
-            width: 110px;
-            height: 40px;
+        height: 40px;
+        width: auto;
+        display: block;
+        object-fit: contain;
+        transition: opacity 0.2s ease, transform 0.2s ease;
+
+        &:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
         }
     }
-    @media (min-width: 481px) and (max-width: 767px) {
-        padding: 16px 10%;
+
+    @media (max-width: 768px) {
+        padding: 8px 16px;
+        .logosHeader {
+            height: 34px;
+        }
     }
+
     @media (max-width: 480px) {
         flex-direction: column;
         gap: 8px;
-        padding: 8px 2%;
-        .logosHeader {
-            width: 100%;
-        }
+        padding: 10px 12px;
         .mobile {
             display: none;
         }
     }
 `;
 
-const MenuNavStl = styled.nav`
-    width: 100%;
-    padding: 16px 14%;
-    .conteinerMenu {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        gap: 32px;
-    }
+const BrandAreaStl = styled.div`
+    display: flex;
+    align-items: center;
+    min-width: 240px;
 
-    @media (min-width: 1401px) {
-        padding: 16px 18%;
+    @media (max-width: 768px) {
+        min-width: auto;
     }
-    @media (min-width: 768px) and (max-width: 1200px) {
-        padding: 16px 6%;
-        .conteinerMenu {
-            width: 100%;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-evenly;
-            gap: 16px;
-        }
-    }
-    @media (min-width: 481px) and (max-width: 767px) {
-        padding: 16px 10%;
-    }
-    @media (max-width: 480px) {
-        padding: 16px 2%;
-        .conteinerMenu {
-            width: 100%;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            gap: 32px;
-            display: none;
-        }
+`;
+
+const CenterAreaStl = styled.div`
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 16px;
+    min-width: 0;
+`;
+
+const RightAreaStl = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    min-width: 180px;
+
+    @media (max-width: 768px) {
+        min-width: auto;
     }
 `;

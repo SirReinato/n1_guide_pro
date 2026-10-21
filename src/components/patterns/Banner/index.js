@@ -12,15 +12,17 @@ export default function Banner() {
         <ConteinerBannerStl>
             <div className="textBanner">
                 <CentralSuporteStl>
-                    <HelpCircle size={18} style={{ marginRight: "8px" }} />
+                    <HelpCircle size={16} />
                     <CentralSuporteTextStl>
                         Central de Suporte N1 - Guia Interno
                     </CentralSuporteTextStl>
                 </CentralSuporteStl>
-                <TitulosPrincipaisStl>N1 GuidePro</TitulosPrincipaisStl>
-                <TitulosPrincipaisStl>
-                    Simplificando o Suporte Técnico
-                </TitulosPrincipaisStl>
+                <TitulosWrapperStl>
+                    <TitulosPrincipaisStl>N1 GuidePro</TitulosPrincipaisStl>
+                    <SubtituloHeroStl>
+                        Simplificando o Suporte Técnico
+                    </SubtituloHeroStl>
+                </TitulosWrapperStl>
                 <ParagrafosStl $primary>
                     Acesse manuais práticos, fluxos de atendimento e
                     procedimentos padronizados para o dia a dia do suporte
@@ -28,80 +30,124 @@ export default function Banner() {
                 </ParagrafosStl>
                 <ManuaisPesquisaForm />
             </div>
-            <img
-                className="ImaBanner"
-                src="/assets/img/banner.png"
-                alt="Banner do site, um homem negro de terno segurando um notebook, atras varios itens tecnologicos"
-            />
+            <ImageWrapperStl>
+                <img
+                    className="ImaBanner"
+                    src="/assets/img/banner.png"
+                    alt="Banner do site, um homem negro de terno segurando um notebook, atras varios itens tecnologicos"
+                />
+            </ImageWrapperStl>
         </ConteinerBannerStl>
     );
 }
 
-const ConteinerBannerStl = styled.div`
+const ConteinerBannerStl = styled.section`
     width: 100%;
-    padding: 32px 12%;
+    padding: 40px 48px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: ${(props) =>
-        props.$primary ? theme.colors.azul.claro : theme.colors.azul.escuro};
+    gap: 32px;
+    border-radius: 16px;
+    background: linear-gradient(
+        135deg,
+        rgba(8, 29, 53, 0.92) 0%,
+        rgba(26, 58, 95, 0.55) 100%
+    );
+    border: 1px solid rgba(108, 164, 197, 0.16);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.22);
+    box-sizing: border-box;
+
     .textBanner {
         display: flex;
         flex-direction: column;
-        gap: 16px;
-        width: 50%;
+        gap: 18px;
+        flex: 1;
+        max-width: 580px;
     }
-    @media (min-width: 1401px) {
-        padding: 32px 16%;
+
+    @media (max-width: 1024px) {
+        padding: 32px 28px;
     }
-    @media (min-width: 768px) and (max-width: 1200px) {
-        padding: 16px 6%;
-    }
-    @media (min-width: 481px) and (max-width: 767px) {
-        padding: 16px 10%;
-    }
-    @media (max-width: 480px) {
-        padding: 16px 2%;
+
+    @media (max-width: 768px) {
+        padding: 28px 20px;
         flex-direction: column;
+        text-align: center;
 
         .textBanner {
-            display: flex;
-            flex-wrap: wrap;
-            flex-direction: column;
-            gap: 16px;
-            width: 100%;
+            align-items: center;
+            max-width: 100%;
         }
+    }
+`;
+
+const TitulosWrapperStl = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+`;
+
+const SubtituloHeroStl = styled(TitulosPrincipaisStl)`
+    font-size: 2.2rem;
+    color: ${theme.colors.azulMaisClaro.claro};
+    line-height: 1.2;
+
+    @media (max-width: 1200px) {
+        font-size: 1.8rem;
+    }
+    @media (max-width: 480px) {
+        font-size: 1.4rem;
+    }
+`;
+
+const ImageWrapperStl = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    .ImaBanner {
+        max-width: 320px;
+        width: 100%;
+        height: auto;
+        border-radius: 12px;
+        filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.35));
+    }
+
+    @media (max-width: 1024px) {
         .ImaBanner {
+            max-width: 250px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .ImaBanner {
+            max-width: 220px;
         }
     }
 `;
 
 const CentralSuporteStl = styled.span`
-    font-size: ${theme.fontSize.paragrafos.mm};
-    font-family: ${theme.fontsFamily.paragrafos};
-    color: ${theme.colors.azul.escuro};
-    background: ${theme.colors.azulMaisClaro.claro};
-    padding: 8px 16px;
-    border-radius: 16px;
-    width: fit-content;
+    display: inline-flex;
     align-items: center;
-    display: flex;
-    @media (max-width: 480px) {
-        margin: 0 auto;
-    }
+    gap: 8px;
+    color: ${theme.colors.azulMaisClaro.muitoClaro};
+    background: rgba(68, 140, 182, 0.22);
+    border: 1px solid rgba(154, 195, 219, 0.28);
+    padding: 6px 14px;
+    border-radius: 999px;
+    width: fit-content;
 `;
+
 const CentralSuporteTextStl = styled.span`
-    font-size: ${theme.fontSize.paragrafos.mm};
-    letter-spacing: 0.1em;
-    font-weight: bolder;
-    @media (min-width: 1401px) {
-    }
-    @media (min-width: 768px) and (max-width: 1200px) {
-        font-size: 0.76rem;
-    }
-    @media (min-width: 481px) and (max-width: 767px) {
-    }
+    font-size: 0.82rem;
+    font-family: ${theme.fontsFamily.paragrafos};
+    letter-spacing: 0.06em;
+    font-weight: 700;
+    text-transform: uppercase;
+
     @media (max-width: 480px) {
-        font-size: ${theme.fontSize.paragrafos.pp};
+        font-size: 0.75rem;
     }
 `;

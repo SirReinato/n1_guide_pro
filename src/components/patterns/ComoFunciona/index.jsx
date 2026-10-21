@@ -5,9 +5,14 @@ import ListaDeItens from "../../ListaDeItens";
 export default function ComoFunciona() {
     return (
         <ComoFuncionaContainerStl>
-            <TituloComoFuncionaStl>
-                Como Funciona o N1 GuidePro
-            </TituloComoFuncionaStl>
+            <HeaderSectionStl>
+                <TituloComoFuncionaStl>
+                    Como Funciona o N1 GuidePro
+                </TituloComoFuncionaStl>
+                <SubtituloSectionStl>
+                    Fluxo rápido de consulta para agilizar seu atendimento
+                </SubtituloSectionStl>
+            </HeaderSectionStl>
             <CardsComoFuncionaStl>
                 {comoFunciona.map((item) => {
                     return (
@@ -25,54 +30,55 @@ export default function ComoFunciona() {
     );
 }
 
-const ComoFuncionaContainerStl = styled.div`
+const ComoFuncionaContainerStl = styled.section`
     width: 100%;
     display: flex;
-    padding: 48px 12%;
+    padding: 36px 40px;
     flex-direction: column;
-    gap: 16px;
-    background: linear-gradient(
-        to bottom,
-        rgba(179, 212, 231, 0) 0%,
-        rgba(179, 212, 231, 0.55) 8%,
-        rgba(179, 212, 231, 1) 22%,
-        rgba(154, 195, 219, 1) 78%,
-        rgba(154, 195, 219, 0.55) 92%,
-        rgba(154, 195, 219, 0) 100%
-    );
-    @media (min-width: 1401px) {
-        padding: 56px 16%;
+    gap: 24px;
+    border-radius: 16px;
+    background: rgba(8, 29, 53, 0.55);
+    border: 1px solid rgba(108, 164, 197, 0.14);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
+    box-sizing: border-box;
+
+    @media (max-width: 1024px) {
+        padding: 28px 24px;
     }
-    @media (min-width: 768px) and (max-width: 1200px) {
-        padding: 56px 6%;
-    }
-    @media (min-width: 481px) and (max-width: 767px) {
-        padding: 40px 10%;
-    }
+
     @media (max-width: 480px) {
-        display: none;
+        padding: 24px 16px;
     }
+`;
+
+const HeaderSectionStl = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
 `;
 
 const TituloComoFuncionaStl = styled.h2`
-    font-size: ${theme.fontSize.titulosSecundarios.gg};
+    font-size: 1.5rem;
     font-family: ${theme.fontsFamily.titulos};
     font-weight: 400;
-    color: ${theme.colors.azul.medio};
+    color: ${theme.colors.clara.claro};
 `;
 
-const CardsComoFuncionaStl = styled.div`
+const SubtituloSectionStl = styled.p`
+    font-size: 0.92rem;
+    font-family: ${theme.fontsFamily.paragrafos};
+    color: ${theme.colors.azulMaisClaro.medio};
+`;
+
+const CardsComoFuncionaStl = styled.ul`
     width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    @media (min-width: 1401px) {
-    }
-    @media (min-width: 768px) and (max-width: 1200px) {
-    }
-    @media (min-width: 481px) and (max-width: 767px) {
-    }
-    @media (max-width: 480px) {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    align-items: stretch;
+
+    @media (max-width: 960px) {
+        grid-template-columns: 1fr;
     }
 `;
 
@@ -81,18 +87,18 @@ const comoFunciona = [
         id: 1,
         nome: "Busque o problema",
         icon: "Search",
-        descricao: "Use a busca ou navegue pelas categorias",
+        descricao: "Use a busca rápida (Ctrl + K) ou navegue pelas categorias ao lado",
     },
     {
         id: 2,
         nome: "Siga o manual",
         icon: "BookOpen",
-        descricao: "Tutoriais objetivos, com prints e validações",
+        descricao: "Tutoriais objetivos, com prints, comandos prontos e validações",
     },
     {
         id: 3,
         nome: "Resolva com confiança",
         icon: "CheckCircle",
-        descricao: "Procedimentos padronizados e testados",
+        descricao: "Procedimentos padronizados e prontos para copiar para o chamado",
     },
 ];
