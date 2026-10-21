@@ -14,17 +14,18 @@ export default function Footer() {
 
 const ConteinerFooterStl = styled.footer`
     width: 100%;
+    height: 44px;
     display: flex;
     align-items: center;
-    padding: 16px 24px;
+    padding: 0 24px;
     justify-content: center;
-    background: rgba(8, 26, 48, 0.9);
+    background: rgba(8, 26, 48, 0.92);
     border-top: 1px solid rgba(108, 164, 197, 0.14);
     box-sizing: border-box;
 
     .ajustesTitlo {
         color: ${theme.colors.azulMaisClaro.medio};
-        font-size: 0.8rem;
+        font-size: 0.78rem;
         font-family: ${theme.fontsFamily.paragrafos};
         letter-spacing: 0.03em;
     }

@@ -12,22 +12,22 @@ export default function Banner() {
         <ConteinerBannerStl>
             <div className="textBanner">
                 <CentralSuporteStl>
-                    <HelpCircle size={16} />
+                    <HelpCircle size={15} />
                     <CentralSuporteTextStl>
                         Central de Suporte N1 - Guia Interno
                     </CentralSuporteTextStl>
                 </CentralSuporteStl>
                 <TitulosWrapperStl>
-                    <TitulosPrincipaisStl>N1 GuidePro</TitulosPrincipaisStl>
+                    <TituloHeroStl>N1 GuidePro</TituloHeroStl>
                     <SubtituloHeroStl>
                         Simplificando o Suporte Técnico
                     </SubtituloHeroStl>
                 </TitulosWrapperStl>
-                <ParagrafosStl $primary>
+                <DescricaoHeroStl $primary>
                     Acesse manuais práticos, fluxos de atendimento e
                     procedimentos padronizados para o dia a dia do suporte
                     técnico.
-                </ParagrafosStl>
+                </DescricaoHeroStl>
                 <ManuaisPesquisaForm />
             </div>
             <ImageWrapperStl>
@@ -43,11 +43,11 @@ export default function Banner() {
 
 const ConteinerBannerStl = styled.section`
     width: 100%;
-    padding: 40px 48px;
+    padding: 24px 36px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 32px;
+    gap: 28px;
     border-radius: 16px;
     background: linear-gradient(
         135deg,
@@ -55,23 +55,23 @@ const ConteinerBannerStl = styled.section`
         rgba(26, 58, 95, 0.55) 100%
     );
     border: 1px solid rgba(108, 164, 197, 0.16);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.22);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22);
     box-sizing: border-box;
 
     .textBanner {
         display: flex;
         flex-direction: column;
-        gap: 18px;
+        gap: 12px;
         flex: 1;
         max-width: 580px;
     }
 
     @media (max-width: 1024px) {
-        padding: 32px 28px;
+        padding: 22px 24px;
     }
 
     @media (max-width: 768px) {
-        padding: 28px 20px;
+        padding: 20px 18px;
         flex-direction: column;
         text-align: center;
 
@@ -85,20 +85,37 @@ const ConteinerBannerStl = styled.section`
 const TitulosWrapperStl = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 4px;
+`;
+
+const TituloHeroStl = styled(TitulosPrincipaisStl)`
+    font-size: 2.35rem;
+    line-height: 1.15;
+
+    @media (max-width: 1200px) {
+        font-size: 2rem;
+    }
+    @media (max-width: 480px) {
+        font-size: 1.6rem;
+    }
 `;
 
 const SubtituloHeroStl = styled(TitulosPrincipaisStl)`
-    font-size: 2.2rem;
+    font-size: 1.75rem;
     color: ${theme.colors.azulMaisClaro.claro};
     line-height: 1.2;
 
     @media (max-width: 1200px) {
-        font-size: 1.8rem;
+        font-size: 1.45rem;
     }
     @media (max-width: 480px) {
-        font-size: 1.4rem;
+        font-size: 1.2rem;
     }
+`;
+
+const DescricaoHeroStl = styled(ParagrafosStl)`
+    font-size: 1rem;
+    line-height: 1.45;
 `;
 
 const ImageWrapperStl = styled.div`
@@ -108,22 +125,22 @@ const ImageWrapperStl = styled.div`
     flex-shrink: 0;
 
     .ImaBanner {
-        max-width: 320px;
+        max-width: 230px;
         width: 100%;
         height: auto;
         border-radius: 12px;
-        filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.35));
+        filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.35));
     }
 
     @media (max-width: 1024px) {
         .ImaBanner {
-            max-width: 250px;
+            max-width: 190px;
         }
     }
 
     @media (max-width: 480px) {
         .ImaBanner {
-            max-width: 220px;
+            max-width: 170px;
         }
     }
 `;
@@ -135,19 +152,19 @@ const CentralSuporteStl = styled.span`
     color: ${theme.colors.azulMaisClaro.muitoClaro};
     background: rgba(68, 140, 182, 0.22);
     border: 1px solid rgba(154, 195, 219, 0.28);
-    padding: 6px 14px;
+    padding: 5px 12px;
     border-radius: 999px;
     width: fit-content;
 `;
 
 const CentralSuporteTextStl = styled.span`
-    font-size: 0.82rem;
+    font-size: 0.76rem;
     font-family: ${theme.fontsFamily.paragrafos};
     letter-spacing: 0.06em;
     font-weight: 700;
     text-transform: uppercase;
 
     @media (max-width: 480px) {
-        font-size: 0.75rem;
+        font-size: 0.7rem;
     }
 `;

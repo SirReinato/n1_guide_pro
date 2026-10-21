@@ -33,9 +33,9 @@ export default function ComoFunciona() {
 const ComoFuncionaContainerStl = styled.section`
     width: 100%;
     display: flex;
-    padding: 36px 40px;
+    padding: 22px 36px;
     flex-direction: column;
-    gap: 24px;
+    gap: 16px;
     border-radius: 16px;
     background: rgba(8, 29, 53, 0.55);
     border: 1px solid rgba(108, 164, 197, 0.14);
@@ -43,29 +43,29 @@ const ComoFuncionaContainerStl = styled.section`
     box-sizing: border-box;
 
     @media (max-width: 1024px) {
-        padding: 28px 24px;
+        padding: 20px 24px;
     }
 
     @media (max-width: 480px) {
-        padding: 24px 16px;
+        padding: 18px 16px;
     }
 `;
 
 const HeaderSectionStl = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 4px;
 `;
 
 const TituloComoFuncionaStl = styled.h2`
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-family: ${theme.fontsFamily.titulos};
     font-weight: 400;
     color: ${theme.colors.clara.claro};
 `;
 
 const SubtituloSectionStl = styled.p`
-    font-size: 0.92rem;
+    font-size: 0.86rem;
     font-family: ${theme.fontsFamily.paragrafos};
     color: ${theme.colors.azulMaisClaro.medio};
 `;
@@ -74,7 +74,7 @@ const CardsComoFuncionaStl = styled.ul`
     width: 100%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    gap: 16px;
     align-items: stretch;
 
     @media (max-width: 960px) {

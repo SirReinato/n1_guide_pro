@@ -4,10 +4,11 @@ import { useBusca } from "../../context/BuscaContext";
 import { Search } from "react-feather";
 
 export default function ManuaisPesquisaForm() {
-    const { busca, setBusca } = useBusca();
+    const { busca, setBusca, setModalAberto } = useBusca();
 
     function handleSubmit(event) {
         event.preventDefault();
+        setModalAberto(true);
     }
 
     return (
@@ -20,10 +21,18 @@ export default function ManuaisPesquisaForm() {
                         type="text"
                         placeholder="Pesquisar solução... (Ctrl + K)"
                         value={busca}
-                        onChange={(e) => setBusca(e.target.value)}
+                        onFocus={() => setModalAberto(true)}
+                        onClick={() => setModalAberto(true)}
+                        onChange={(e) => {
+                            setBusca(e.target.value);
+                            setModalAberto(true);
+                        }}
                     />
                 </InputWrapperStl>
-                <ButtonManuaisPesquisaFormStl type="submit">
+                <ButtonManuaisPesquisaFormStl
+                    type="submit"
+                    onClick={() => setModalAberto(true)}
+                >
                     Pesquisar
                 </ButtonManuaisPesquisaFormStl>
             </FormStl>
@@ -71,9 +80,9 @@ const InputManuaisPesquisaFormStl = styled.input`
     width: 100%;
     border: none;
     outline: none;
-    padding: 13px 0;
+    padding: 11px 0;
     background: transparent;
-    font-size: 0.95rem;
+    font-size: 0.92rem;
     font-family: ${theme.fontsFamily.paragrafos};
     color: ${theme.colors.clara.claro};
 
@@ -85,7 +94,7 @@ const InputManuaisPesquisaFormStl = styled.input`
 const ButtonManuaisPesquisaFormStl = styled.button`
     border: none;
     padding: 0 22px;
-    font-size: 0.92rem;
+    font-size: 0.9rem;
     font-weight: 600;
     font-family: ${theme.fontsFamily.paragrafos};
     color: #ffffff;

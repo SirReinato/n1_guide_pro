@@ -235,7 +235,7 @@ const SidebarStl = styled.aside`
     flex-shrink: 0;
     position: sticky;
     top: 64px;
-    height: calc(100vh - 64px);
+    height: calc(100vh - 108px);
     background: rgba(8, 26, 48, 0.78);
     backdrop-filter: blur(10px);
     color: ${theme.colors.clara.claro};

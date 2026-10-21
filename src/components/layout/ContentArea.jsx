@@ -12,26 +12,26 @@ const ConteudoStl = styled.main`
     flex: 1;
     min-width: 0;
     width: 100%;
-    padding: 32px 40px 48px;
+    padding: 20px 36px 20px;
     background: transparent;
-    min-height: calc(100vh - 120px);
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 
     @media (min-width: 1401px) {
-        padding: 40px 56px 64px;
+        padding: 24px 48px 24px;
     }
     @media (max-width: 768px) {
-        padding: 20px 16px 40px;
-        min-height: auto;
+        padding: 16px 16px 24px;
+        justify-content: flex-start;
     }
 `;
 
 const InnerContentStl = styled.div`
     width: 100%;
-    max-width: 1200px;
+    max-width: 1180px;
     display: flex;
     flex-direction: column;
     align-items: center;

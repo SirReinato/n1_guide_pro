@@ -37,7 +37,7 @@ const GridStl = styled.div`
     display: flex;
     flex: 1;
     width: 100%;
-    min-height: calc(100vh - 64px);
+    min-height: calc(100vh - 108px);
     align-items: stretch;
 
     @media (max-width: 768px) {
