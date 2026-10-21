@@ -12,7 +12,7 @@ export default function Banner() {
         <ConteinerBannerStl>
             <div className="textBanner">
                 <CentralSuporteStl>
-                    <HelpCircle size={15} />
+                    <HelpCircle size={16} />
                     <CentralSuporteTextStl>
                         Central de Suporte N1 - Guia Interno
                     </CentralSuporteTextStl>
@@ -43,35 +43,35 @@ export default function Banner() {
 
 const ConteinerBannerStl = styled.section`
     width: 100%;
-    padding: 24px 36px;
+    padding: 36px 52px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 28px;
-    border-radius: 16px;
+    gap: 40px;
+    border-radius: 18px;
     background: linear-gradient(
         135deg,
         rgba(8, 29, 53, 0.92) 0%,
-        rgba(26, 58, 95, 0.55) 100%
+        rgba(26, 58, 95, 0.58) 100%
     );
-    border: 1px solid rgba(108, 164, 197, 0.16);
-    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22);
+    border: 1px solid rgba(108, 164, 197, 0.18);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.24);
     box-sizing: border-box;
 
     .textBanner {
         display: flex;
         flex-direction: column;
-        gap: 12px;
+        gap: 16px;
         flex: 1;
-        max-width: 580px;
+        max-width: 720px;
     }
 
-    @media (max-width: 1024px) {
-        padding: 22px 24px;
+    @media (max-width: 1200px) {
+        padding: 28px 32px;
     }
 
     @media (max-width: 768px) {
-        padding: 20px 18px;
+        padding: 24px 20px;
         flex-direction: column;
         text-align: center;
 
@@ -85,37 +85,37 @@ const ConteinerBannerStl = styled.section`
 const TitulosWrapperStl = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 6px;
 `;
 
 const TituloHeroStl = styled(TitulosPrincipaisStl)`
-    font-size: 2.35rem;
-    line-height: 1.15;
+    font-size: 2.8rem;
+    line-height: 1.12;
 
     @media (max-width: 1200px) {
-        font-size: 2rem;
+        font-size: 2.2rem;
     }
     @media (max-width: 480px) {
-        font-size: 1.6rem;
+        font-size: 1.75rem;
     }
 `;
 
 const SubtituloHeroStl = styled(TitulosPrincipaisStl)`
-    font-size: 1.75rem;
+    font-size: 2.1rem;
     color: ${theme.colors.azulMaisClaro.claro};
-    line-height: 1.2;
+    line-height: 1.18;
 
     @media (max-width: 1200px) {
-        font-size: 1.45rem;
+        font-size: 1.65rem;
     }
     @media (max-width: 480px) {
-        font-size: 1.2rem;
+        font-size: 1.35rem;
     }
 `;
 
 const DescricaoHeroStl = styled(ParagrafosStl)`
-    font-size: 1rem;
-    line-height: 1.45;
+    font-size: 1.1rem;
+    line-height: 1.5;
 `;
 
 const ImageWrapperStl = styled.div`
@@ -125,22 +125,22 @@ const ImageWrapperStl = styled.div`
     flex-shrink: 0;
 
     .ImaBanner {
-        max-width: 230px;
+        max-width: 300px;
         width: 100%;
         height: auto;
-        border-radius: 12px;
-        filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.35));
+        border-radius: 14px;
+        filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.38));
     }
 
-    @media (max-width: 1024px) {
+    @media (max-width: 1200px) {
         .ImaBanner {
-            max-width: 190px;
+            max-width: 240px;
         }
     }
 
     @media (max-width: 480px) {
         .ImaBanner {
-            max-width: 170px;
+            max-width: 200px;
         }
     }
 `;
@@ -150,21 +150,21 @@ const CentralSuporteStl = styled.span`
     align-items: center;
     gap: 8px;
     color: ${theme.colors.azulMaisClaro.muitoClaro};
-    background: rgba(68, 140, 182, 0.22);
-    border: 1px solid rgba(154, 195, 219, 0.28);
-    padding: 5px 12px;
+    background: rgba(68, 140, 182, 0.24);
+    border: 1px solid rgba(154, 195, 219, 0.3);
+    padding: 6px 14px;
     border-radius: 999px;
     width: fit-content;
 `;
 
 const CentralSuporteTextStl = styled.span`
-    font-size: 0.76rem;
+    font-size: 0.82rem;
     font-family: ${theme.fontsFamily.paragrafos};
     letter-spacing: 0.06em;
     font-weight: 700;
     text-transform: uppercase;
 
     @media (max-width: 480px) {
-        font-size: 0.7rem;
+        font-size: 0.72rem;
     }
 `;

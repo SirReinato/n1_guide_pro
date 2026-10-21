@@ -12,7 +12,7 @@ const ConteudoStl = styled.main`
     flex: 1;
     min-width: 0;
     width: 100%;
-    padding: 20px 36px 20px;
+    padding: 20px 32px;
     background: transparent;
     box-sizing: border-box;
     display: flex;
@@ -21,7 +21,7 @@ const ConteudoStl = styled.main`
     justify-content: center;
 
     @media (min-width: 1401px) {
-        padding: 24px 48px 24px;
+        padding: 24px 48px;
     }
     @media (max-width: 768px) {
         padding: 16px 16px 24px;
@@ -31,7 +31,7 @@ const ConteudoStl = styled.main`
 
 const InnerContentStl = styled.div`
     width: 100%;
-    max-width: 1180px;
+    max-width: 1460px;
     display: flex;
     flex-direction: column;
     align-items: center;

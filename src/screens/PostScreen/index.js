@@ -5,12 +5,11 @@ import {
     TitulosSecundariosStl,
     theme,
 } from "../../theme/theme";
-import Banner from "../../components/patterns/Banner";
 import PassoAPasso from "../../components/passo_a_passo";
 import dynamic from "next/dynamic";
 
 import { useState, useEffect } from "react";
-import { Copy, Check, ThumbsUp, ThumbsDown } from "react-feather";
+import { Copy, Check, ThumbsUp, ThumbsDown, ArrowLeft } from "react-feather";
 
 // dynamic() fora do componente para evitar recriação a cada render
 const ModalBuscar = dynamic(
@@ -76,75 +75,201 @@ export default function PostScreen({ id, nome, descricao, passo_a_passo }) {
     }
 
     return (
-        <>
+        <PostWrapperStl>
+            <ModalBuscar />
+
             <ConteinerPostStl>
-                <ModalBuscar />
+                <HeaderDocStl>
+                    <TopActionsRowStl>
+                        <Link href="/" passHref>
+                            <BtnVoltarDocStl>
+                                <ArrowLeft size={16} />
+                                <span>Voltar ao Início</span>
+                            </BtnVoltarDocStl>
+                        </Link>
 
-                <TitulosPrincipaisStl>{nome}</TitulosPrincipaisStl>
+                        <BotaoCopiarChamadoStl
+                            onClick={copiarParaChamado}
+                            title="Copiar procedimento formatado para colar em chamado ou ticket"
+                        >
+                            {copiado ? (
+                                <Check size={17} color="#10b981" />
+                            ) : (
+                                <Copy size={17} />
+                            )}
+                            <span>
+                                {copiado
+                                    ? "Copiado para o Chamado! ✅"
+                                    : "Copiar para o Chamado"}
+                            </span>
+                        </BotaoCopiarChamadoStl>
+                    </TopActionsRowStl>
 
-                <TitulosSecundariosStl $primary>
-                    {descricao}
-                </TitulosSecundariosStl>
+                    <TituloDocStl>{nome}</TituloDocStl>
 
-                {/* Botão de Cópia Rápida para Chamado N1 */}
-                <BotaoCopiarChamadoStl onClick={copiarParaChamado} title="Copiar procedimento formatado para colar em chamado ou ticket">
-                    {copiado ? <Check size={17} color="#10b981" /> : <Copy size={17} />}
-                    <span>{copiado ? "Copiado para o Chamado! ✅" : "Copiar para o Chamado"}</span>
-                </BotaoCopiarChamadoStl>
+                    {descricao && (
+                        <DescricaoDocStl>{descricao}</DescricaoDocStl>
+                    )}
+                </HeaderDocStl>
 
-                {passo_a_passo.map((dados) => (
-                    <PassoAPasso
-                        key={`${dados.passo}-${dados.titulo}`}
-                        passo={dados.passo}
-                        titulo={dados.titulo}
-                        paragrafo={dados.descricao}
-                        img={dados.imagem || null}
-                    />
-                ))}
+                <PassosListaStl>
+                    {passo_a_passo.map((dados) => (
+                        <PassoAPasso
+                            key={`${dados.passo}-${dados.titulo}`}
+                            passo={dados.passo}
+                            titulo={dados.titulo}
+                            paragrafo={dados.descricao}
+                            img={dados.imagem || null}
+                        />
+                    ))}
+                </PassosListaStl>
 
                 {/* Bloco de Avaliação de Utilidade */}
                 <BoxAvaliacaoStl>
                     <div className="textoAvaliacao">
                         <ThumbsUp size={18} color="#f59e0b" />
-                        <span>Este procedimento ajudou a resolver o problema?</span>
+                        <span>
+                            Este procedimento ajudou a resolver o problema?
+                        </span>
                     </div>
 
                     {votoRegistrado ? (
                         <MensagemAgradecimentoStl>
-                            ✅ Obrigado pelo seu feedback! Isso ajuda a aprimorar a base de conhecimento.
+                            ✅ Obrigado pelo seu feedback! Isso ajuda a
+                            aprimorar a base de conhecimento.
                         </MensagemAgradecimentoStl>
                     ) : (
                         <BotoesVotoStl>
-                            <BotaoVotoStl onClick={() => votar("positivo")} title="Sim, resolveu">
+                            <BotaoVotoStl
+                                onClick={() => votar("positivo")}
+                                title="Sim, resolveu"
+                            >
                                 <ThumbsUp size={15} /> Sim, ajudou
                             </BotaoVotoStl>
-                            <BotaoVotoStl onClick={() => votar("negativo")} title="Não resolveu">
+                            <BotaoVotoStl
+                                onClick={() => votar("negativo")}
+                                title="Não resolveu"
+                            >
                                 <ThumbsDown size={15} /> Não ajudou
                             </BotaoVotoStl>
                         </BotoesVotoStl>
                     )}
                 </BoxAvaliacaoStl>
             </ConteinerPostStl>
-            <Link href="/">
-                <BotaoFlutuante>← Home</BotaoFlutuante>
-            </Link>
-            <Banner />
-        </>
+        </PostWrapperStl>
     );
 }
+
+const PostWrapperStl = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`;
+
+const ConteinerPostStl = styled.article`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 36px 48px;
+    margin: 8px 0 24px;
+    gap: 28px;
+    background: rgba(8, 29, 53, 0.72);
+    border: 1px solid rgba(108, 164, 197, 0.2);
+    border-radius: 18px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.22);
+
+    @media (max-width: 1024px) {
+        padding: 28px 24px;
+    }
+
+    @media (max-width: 480px) {
+        padding: 20px 16px;
+        gap: 20px;
+    }
+`;
+
+const HeaderDocStl = styled.header`
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(108, 164, 197, 0.16);
+`;
+
+const TopActionsRowStl = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+`;
+
+const BtnVoltarDocStl = styled.a`
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-family: ${theme.fontsFamily.paragrafos};
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: ${theme.colors.azulMaisClaro.claro};
+    background: rgba(26, 58, 95, 0.55);
+    border: 1px solid rgba(108, 164, 197, 0.22);
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s ease;
+
+    &:hover {
+        background: ${theme.colors.azulMaisClaro.escuro};
+        color: #ffffff;
+    }
+`;
+
+const TituloDocStl = styled(TitulosPrincipaisStl)`
+    font-size: 2.3rem;
+    line-height: 1.2;
+    text-align: left;
+
+    @media (max-width: 768px) {
+        font-size: 1.75rem;
+    }
+`;
+
+const DescricaoDocStl = styled(TitulosSecundariosStl)`
+    font-size: 1.15rem;
+    font-family: ${theme.fontsFamily.paragrafos};
+    color: ${theme.colors.azulMaisClaro.claro};
+    line-height: 1.55;
+    text-align: left;
+    font-weight: 400;
+
+    @media (max-width: 768px) {
+        font-size: 1rem;
+    }
+`;
+
+const PassosListaStl = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+`;
 
 const BotaoCopiarChamadoStl = styled.button`
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 10px 20px;
-    border-radius: 999px;
-    border: 1px solid ${theme.colors.azulMaisClaro.escuro};
+    padding: 9px 18px;
+    border-radius: 8px;
+    border: 1px solid rgba(108, 164, 197, 0.35);
     background: ${theme.colors.azul.medio};
     color: ${theme.colors.clara.medio};
     font-family: ${theme.fontsFamily.paragrafos};
-    font-size: ${theme.fontSize.paragrafos.m};
-    font-weight: 500;
+    font-size: 0.9rem;
+    font-weight: 600;
     cursor: pointer;
     transition: all 0.2s ease;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
@@ -152,75 +277,16 @@ const BotaoCopiarChamadoStl = styled.button`
     &:hover {
         background: ${theme.colors.azulMaisClaro.escuro};
         color: #fff;
-        transform: translateY(-2px);
-    }
-`;
-
-const ConteinerPostStl = styled.div`
-    width: 80%;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    box-sizing: border-box;
-    padding: 32px 2%;
-    margin: 64px 0;
-    gap: 32px;
-    border: 2px solid ${theme.colors.azulMaisClaro.escuro};
-    border-radius: 16px;
-    @media (min-width: 1401px) {
-    }
-    @media (min-width: 768px) and (max-width: 1200px) {
-        width: 90%;
-    }
-    @media (min-width: 481px) and (max-width: 767px) {
-        width: 100%;
-    }
-    @media (max-width: 480px) {
-        width: 100%;
-        padding: 32px 2%;
-        flex-direction: column;
-    }
-`;
-
-const BotaoFlutuante = styled.button`
-    position: fixed;
-    right: 24px;
-    bottom: 64px;
-    z-index: 1000;
-
-    padding: 12px 20px;
-    border-radius: 999px;
-    border: none;
-
-    font-size: ${theme.fontSize.paragrafos.mm};
-    font-family: ${theme.fontsFamily.paragrafos};
-
-    color: ${theme.colors.azul.escuro};
-    background: ${theme.colors.azulMaisClaro.claro};
-
-    cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-
-    transition: all 0.2s ease;
-
-    &:hover {
-        background: ${theme.colors.azulMaisClaro.medio};
-        transform: translateY(-2px);
-    }
-
-    @media (max-width: 480px) {
-        right: 16px;
-        bottom: 16px;
-        padding: 10px 16px;
+        transform: translateY(-1px);
     }
 `;
 
 const BoxAvaliacaoStl = styled.div`
     width: 100%;
-    margin-top: 24px;
+    margin-top: 8px;
     padding: 20px;
-    background: rgba(30, 58, 95, 0.4);
-    border: 1px dashed ${theme.colors.azulMaisClaro.escuro};
+    background: rgba(14, 38, 68, 0.55);
+    border: 1px dashed rgba(108, 164, 197, 0.35);
     border-radius: 12px;
     display: flex;
     flex-direction: column;
@@ -234,7 +300,7 @@ const BoxAvaliacaoStl = styled.div`
         gap: 8px;
         color: ${theme.colors.clara.medio};
         font-family: ${theme.fontsFamily.titulos};
-        font-size: 0.95rem;
+        font-size: 0.98rem;
     }
 `;
 

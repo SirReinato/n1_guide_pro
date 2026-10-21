@@ -33,39 +33,39 @@ export default function ComoFunciona() {
 const ComoFuncionaContainerStl = styled.section`
     width: 100%;
     display: flex;
-    padding: 22px 36px;
+    padding: 32px 52px;
     flex-direction: column;
-    gap: 16px;
-    border-radius: 16px;
-    background: rgba(8, 29, 53, 0.55);
-    border: 1px solid rgba(108, 164, 197, 0.14);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
+    gap: 22px;
+    border-radius: 18px;
+    background: rgba(8, 29, 53, 0.58);
+    border: 1px solid rgba(108, 164, 197, 0.16);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
     box-sizing: border-box;
 
-    @media (max-width: 1024px) {
-        padding: 20px 24px;
+    @media (max-width: 1200px) {
+        padding: 26px 32px;
     }
 
     @media (max-width: 480px) {
-        padding: 18px 16px;
+        padding: 20px 16px;
     }
 `;
 
 const HeaderSectionStl = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 6px;
 `;
 
 const TituloComoFuncionaStl = styled.h2`
-    font-size: 1.3rem;
+    font-size: 1.55rem;
     font-family: ${theme.fontsFamily.titulos};
     font-weight: 400;
     color: ${theme.colors.clara.claro};
 `;
 
 const SubtituloSectionStl = styled.p`
-    font-size: 0.86rem;
+    font-size: 0.96rem;
     font-family: ${theme.fontsFamily.paragrafos};
     color: ${theme.colors.azulMaisClaro.medio};
 `;
@@ -74,7 +74,7 @@ const CardsComoFuncionaStl = styled.ul`
     width: 100%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
+    gap: 24px;
     align-items: stretch;
 
     @media (max-width: 960px) {

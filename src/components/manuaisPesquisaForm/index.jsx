@@ -15,7 +15,7 @@ export default function ManuaisPesquisaForm() {
         <ConteinerManuaisPesquisaFormStl>
             <FormStl onSubmit={handleSubmit}>
                 <InputWrapperStl>
-                    <Search size={18} />
+                    <Search size={19} />
                     <InputManuaisPesquisaFormStl
                         id="input-busca-principal"
                         type="text"
@@ -43,7 +43,7 @@ export default function ManuaisPesquisaForm() {
 const ConteinerManuaisPesquisaFormStl = styled.div`
     display: flex;
     width: 100%;
-    max-width: 480px;
+    max-width: 540px;
 
     @media (max-width: 768px) {
         margin: 0 auto;
@@ -55,9 +55,9 @@ const FormStl = styled.form`
     width: 100%;
     border-radius: 10px;
     overflow: hidden;
-    background: rgba(7, 22, 41, 0.75);
-    border: 1px solid rgba(108, 164, 197, 0.28);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    background: rgba(7, 22, 41, 0.78);
+    border: 1px solid rgba(108, 164, 197, 0.3);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.22);
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
 
     &:focus-within {
@@ -71,7 +71,7 @@ const InputWrapperStl = styled.div`
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 0 14px;
+    padding: 0 16px;
     color: ${theme.colors.azulMaisClaro.medio};
 `;
 
@@ -80,9 +80,9 @@ const InputManuaisPesquisaFormStl = styled.input`
     width: 100%;
     border: none;
     outline: none;
-    padding: 11px 0;
+    padding: 14px 0;
     background: transparent;
-    font-size: 0.92rem;
+    font-size: 0.98rem;
     font-family: ${theme.fontsFamily.paragrafos};
     color: ${theme.colors.clara.claro};
 
@@ -93,8 +93,8 @@ const InputManuaisPesquisaFormStl = styled.input`
 
 const ButtonManuaisPesquisaFormStl = styled.button`
     border: none;
-    padding: 0 22px;
-    font-size: 0.9rem;
+    padding: 0 26px;
+    font-size: 0.95rem;
     font-weight: 600;
     font-family: ${theme.fontsFamily.paragrafos};
     color: #ffffff;
