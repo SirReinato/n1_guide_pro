@@ -1,6 +1,6 @@
 {
     "name": "n1-guide-pro",
-    "version": "1.0.0",
+    "version": "3.0.0",
     "private": true,
     "dependencies": {
         "@supabase/supabase-js": "^2.45.4",
