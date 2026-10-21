@@ -2,8 +2,12 @@ import Link from "next/link";
 import styled from "styled-components";
 import { theme } from "../../../theme/theme";
 import LetreiroHeader from "../../../components/LetreiroHeader";
+import { useBusca } from "../../../context/BuscaContext";
+import { Search } from "react-feather";
 
 export default function Header() {
+    const { setModalAberto } = useBusca();
+
     return (
         <HeaderWrapperStl>
             <ConteinerHeaderStl>
@@ -22,6 +26,16 @@ export default function Header() {
                 </CenterAreaStl>
 
                 <RightAreaStl>
+                    <BtnBuscaRapidaStl
+                        type="button"
+                        onClick={() => setModalAberto(true)}
+                        title="Pesquisar manuais (Ctrl + K)"
+                    >
+                        <Search size={15} />
+                        <span>Buscar</span>
+                        <KbdStl>Ctrl K</KbdStl>
+                    </BtnBuscaRapidaStl>
+
                     <Link href={"https://github.com/SirReinato"} target="_blank">
                         <img
                             className="logosHeader mobile"
@@ -108,9 +122,52 @@ const RightAreaStl = styled.div`
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    min-width: 180px;
+    gap: 14px;
+    min-width: 240px;
 
     @media (max-width: 768px) {
         min-width: auto;
     }
+`;
+
+const BtnBuscaRapidaStl = styled.button`
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 12px;
+    border-radius: 999px;
+    background: rgba(26, 58, 95, 0.6);
+    border: 1px solid rgba(108, 164, 197, 0.24);
+    color: ${theme.colors.clara.medio};
+    font-family: ${theme.fontsFamily.paragrafos};
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    svg {
+        color: ${theme.colors.azulMaisClaro.claro};
+    }
+
+    &:hover {
+        background: rgba(68, 140, 182, 0.3);
+        border-color: ${theme.colors.azulMaisClaro.claro};
+    }
+
+    @media (max-width: 640px) {
+        span,
+        kbd {
+            display: none;
+        }
+        padding: 8px;
+    }
+`;
+
+const KbdStl = styled.kbd`
+    font-size: 0.68rem;
+    font-family: monospace;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: rgba(8, 29, 53, 0.8);
+    border: 1px solid rgba(108, 164, 197, 0.25);
+    color: ${theme.colors.azulMaisClaro.claro};
 `;

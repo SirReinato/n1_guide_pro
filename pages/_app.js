@@ -1,5 +1,5 @@
 import React from "react";
-import Head from "next/head";
+import { useRouter } from "next/router";
 import GlobalStyle from "../src/theme/GlobalStyle";
 import { ConteinerGeral } from "../src/theme/theme";
 import Header from "../src/components/patterns/Header";
@@ -11,7 +11,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import dynamic from "next/dynamic";
 
-// AssistenteIA e Aviso carregados apenas no cliente (usam browser state)
+// Componentes cliente carregados dinamicamente
 const AssistenteIA = dynamic(
     () => import("../src/components/patterns/AssistenteIA"),
     { ssr: false },
@@ -22,13 +22,33 @@ const AvisoNovidadeIA = dynamic(
     { ssr: false },
 );
 
+const ModalBuscar = dynamic(
+    () => import("../src/components/patterns/ModalBuscar"),
+    { ssr: false },
+);
+
 function MyApp({ Component, pageProps }) {
+    const router = useRouter();
+    const isAdminRoute = router?.pathname?.startsWith("/admin");
+
+    if (isAdminRoute) {
+        return (
+            <>
+                <GlobalStyle />
+                <Component {...pageProps} />
+                <Analytics />
+                <SpeedInsights />
+            </>
+        );
+    }
+
     return (
         <BuscaProvider>
             <GlobalStyle />
             <MenuProvider>
                 <ConteinerGeral>
                     <Header />
+                    <ModalBuscar />
                     <WikiLayout>
                         <Component {...pageProps} />
                     </WikiLayout>
@@ -43,6 +63,4 @@ function MyApp({ Component, pageProps }) {
     );
 }
 
-
 export default MyApp;
-

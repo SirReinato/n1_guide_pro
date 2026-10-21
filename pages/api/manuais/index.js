@@ -1,18 +1,21 @@
 import { supabase } from "../../../src/lib/supabase";
+import { adminClient } from "../../../src/lib/supabaseAdmin";
 import instalacoesLocal from "../../../src/data/instalacao.json";
 
 export default async function handler(req, res) {
+    const db = adminClient || supabase;
+
     if (req.method === "GET") {
         // Lista todos os manuais (id, nome, descricao)
-        if (supabase) {
-            let { data, error } = await supabase
+        if (db) {
+            let { data, error } = await db
                 .from("manuais")
                 .select("id, nome, descricao, categorias(nome)")
                 .eq("aprovado", true)
                 .order("id");
 
             if (error && error.message?.includes("aprovado")) {
-                const fallback = await supabase
+                const fallback = await db
                     .from("manuais")
                     .select("id, nome, descricao, categorias(nome)")
                     .order("id");
@@ -25,10 +28,11 @@ export default async function handler(req, res) {
             }
         }
 
-
         // Fallback local
         const todos = Object.values(instalacoesLocal).flat();
-        return res.status(200).json(todos.map(({ id, nome, descricao }) => ({ id, nome, descricao })));
+        return res
+            .status(200)
+            .json(todos.map(({ id, nome, descricao }) => ({ id, nome, descricao })));
     }
 
     if (req.method === "POST") {
@@ -36,17 +40,21 @@ export default async function handler(req, res) {
         const { nome, descricao, categoria, passos } = req.body;
 
         if (!nome || !passos?.length) {
-            return res.status(400).json({ error: "nome e passos são obrigatórios" });
+            return res
+                .status(400)
+                .json({ error: "nome e passos são obrigatórios" });
         }
 
-        if (!supabase) {
-            return res.status(503).json({ error: "Banco de dados não configurado" });
+        if (!db) {
+            return res
+                .status(503)
+                .json({ error: "Banco de dados não configurado" });
         }
 
         // Encontra ou cria categoria
         let categoriaId = null;
         const nomeCategoria = categoria || "Gerados por IA";
-        const { data: catData } = await supabase
+        const { data: catData } = await db
             .from("categorias")
             .upsert({ nome: nomeCategoria }, { onConflict: "nome" })
             .select()
@@ -55,7 +63,7 @@ export default async function handler(req, res) {
         if (catData) categoriaId = catData.id;
 
         // Calcula o próximo ID seguro (evita colisão com os manuais migrados)
-        const { data: ultimoManual } = await supabase
+        const { data: ultimoManual } = await db
             .from("manuais")
             .select("id")
             .order("id", { ascending: false })
@@ -65,7 +73,7 @@ export default async function handler(req, res) {
         const proximoId = (ultimoManual?.id || 52) + 1;
 
         // Insere o manual com o próximo ID seguro e status pendente de aprovação
-        let { data: manual, error: errManual } = await supabase
+        let { data: manual, error: errManual } = await db
             .from("manuais")
             .insert({
                 id: proximoId,
@@ -80,7 +88,7 @@ export default async function handler(req, res) {
 
         // Fallback se a coluna aprovado ainda não tiver sido criada no Supabase
         if (errManual && errManual.message?.includes("aprovado")) {
-            const fallbackInsert = await supabase
+            const fallbackInsert = await db
                 .from("manuais")
                 .insert({
                     id: proximoId,
@@ -97,7 +105,6 @@ export default async function handler(req, res) {
 
         if (errManual) return res.status(500).json({ error: errManual.message });
 
-
         // Insere os passos
         const passosParaInserir = passos.map((p, i) => ({
             manual_id: manual.id,
@@ -107,7 +114,9 @@ export default async function handler(req, res) {
             imagem: p.imagem || null,
         }));
 
-        const { error: errPassos } = await supabase.from("passos").insert(passosParaInserir);
+        const { error: errPassos } = await db
+            .from("passos")
+            .insert(passosParaInserir);
         if (errPassos) return res.status(500).json({ error: errPassos.message });
 
         return res.status(201).json({ id: manual.id, nome: manual.nome });

@@ -1,34 +1,27 @@
-import { useState, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 import { theme } from "../../theme/theme";
+import { useMenu } from "../../context/MenuContext";
 import instalacoes from "../../data/instalacao.json";
 
 export default function LetreiroHeader() {
-    const [itens, setItens] = useState(Object.keys(instalacoes));
+    const { categorias } = useMenu() || {};
+    const nomesMenu = Object.keys(categorias || {});
+    const itens =
+        nomesMenu.length > 0 ? nomesMenu : Object.keys(instalacoes);
 
-    useEffect(() => {
-        fetch("/api/manuais")
-            .then((res) => res.json())
-            .then((data) => {
-                if (Array.isArray(data) && data.length > 0) {
-                    const cats = Array.from(
-                        new Set(data.map((m) => m.categorias?.nome || "Outros"))
-                    );
-                    if (cats.length > 0) setItens(cats);
-                }
-            })
-            .catch(() => {});
-    }, []);
+    // Duplica a lista para que o loop translateX(-50%) seja contínuo sem pulos
+    const itensLoop = [...itens, ...itens];
 
     return (
-        <LetreiroWrapper>
+        <LetreiroWrapper aria-label="Categorias disponíveis na base de conhecimento">
             <LetreiroTrack>
-                <Texto>🛠️ Base interna N1 GuidePro •</Texto>
-
-                {itens.map((nome) => (
-                    <li key={nome}>
-                        <Texto>{nome}</Texto>
-                    </li>
+                {itensLoop.map((nome, idx) => (
+                    <ItemLetreiro key={`${nome}-${idx}`}>
+                        {idx % itens.length === 0 && (
+                            <DestaqueTexto>🛠️ Base interna N1 GuidePro •</DestaqueTexto>
+                        )}
+                        <Texto>{nome} •</Texto>
+                    </ItemLetreiro>
                 ))}
             </LetreiroTrack>
         </LetreiroWrapper>
@@ -47,7 +40,7 @@ const animacao = keyframes`
 const LetreiroWrapper = styled.div`
     overflow: hidden;
     width: 100%;
-    max-width: 480px;
+    max-width: 520px;
 
     background: rgba(26, 58, 95, 0.55);
     border: 1px solid rgba(108, 164, 197, 0.22);
@@ -59,16 +52,31 @@ const LetreiroTrack = styled.div`
     display: flex;
     align-items: center;
     width: max-content;
-    animation: ${animacao} 18s linear infinite;
+    animation: ${animacao} 24s linear infinite;
 
     &:hover {
         animation-play-state: paused;
     }
 `;
 
+const ItemLetreiro = styled.span`
+    display: inline-flex;
+    align-items: center;
+`;
+
+const DestaqueTexto = styled.span`
+    white-space: nowrap;
+    padding-right: 20px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    font-family: ${theme.fontsFamily.paragrafos};
+    color: ${theme.colors.clara.claro};
+    letter-spacing: 0.02em;
+`;
+
 const Texto = styled.span`
     white-space: nowrap;
-    padding-right: 28px;
+    padding-right: 20px;
 
     font-size: 0.82rem;
     font-family: ${theme.fontsFamily.paragrafos};

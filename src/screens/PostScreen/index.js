@@ -6,20 +6,35 @@ import {
     theme,
 } from "../../theme/theme";
 import PassoAPasso from "../../components/passo_a_passo";
-import dynamic from "next/dynamic";
+import { useMenu } from "../../context/MenuContext";
 
 import { useState, useEffect } from "react";
-import { Copy, Check, ThumbsUp, ThumbsDown, ArrowLeft } from "react-feather";
-
-// dynamic() fora do componente para evitar recriação a cada render
-const ModalBuscar = dynamic(
-    () => import("../../components/patterns/ModalBuscar"),
-    { ssr: false },
-);
+import {
+    Copy,
+    Check,
+    ThumbsUp,
+    ThumbsDown,
+    ArrowLeft,
+    ChevronRight,
+    Folder,
+} from "react-feather";
 
 export default function PostScreen({ id, nome, descricao, passo_a_passo }) {
     const [copiado, setCopiado] = useState(false);
     const [votoRegistrado, setVotoRegistrado] = useState(null);
+    const { categorias, categoriaAtiva } = useMenu() || {};
+
+    // Identifica a categoria atual para o breadcrumb
+    const categoriaManual = (() => {
+        if (categorias && id) {
+            for (const [cat, lista] of Object.entries(categorias)) {
+                if ((lista || []).some((m) => String(m.id) === String(id))) {
+                    return cat;
+                }
+            }
+        }
+        return categoriaAtiva || "Documentação";
+    })();
 
     useEffect(() => {
         if (!id) return;
@@ -76,17 +91,24 @@ export default function PostScreen({ id, nome, descricao, passo_a_passo }) {
 
     return (
         <PostWrapperStl>
-            <ModalBuscar />
-
             <ConteinerPostStl>
                 <HeaderDocStl>
                     <TopActionsRowStl>
-                        <Link href="/" passHref legacyBehavior>
-                            <BtnVoltarDocStl>
-                                <ArrowLeft size={16} />
-                                <span>Voltar ao Início</span>
-                            </BtnVoltarDocStl>
-                        </Link>
+                        <LeftTopNavStl>
+                            <Link href="/" passHref legacyBehavior>
+                                <BtnVoltarDocStl>
+                                    <ArrowLeft size={15} />
+                                    <span>Início</span>
+                                </BtnVoltarDocStl>
+                            </Link>
+
+                            <BreadcrumbStl aria-label="Breadcrumb">
+                                <Folder size={13} />
+                                <span>{categoriaManual}</span>
+                                <ChevronRight size={13} />
+                                <span className="atual">{nome}</span>
+                            </BreadcrumbStl>
+                        </LeftTopNavStl>
 
                         <BotaoCopiarChamadoStl
                             onClick={copiarParaChamado}
@@ -206,14 +228,39 @@ const TopActionsRowStl = styled.div`
     gap: 12px;
 `;
 
+const LeftTopNavStl = styled.div`
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+`;
+
+const BreadcrumbStl = styled.nav`
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: ${theme.fontsFamily.paragrafos};
+    font-size: 0.82rem;
+    color: ${theme.colors.azulMaisClaro.medio};
+
+    .atual {
+        color: ${theme.colors.clara.claro};
+        font-weight: 600;
+    }
+
+    @media (max-width: 640px) {
+        display: none;
+    }
+`;
+
 const BtnVoltarDocStl = styled.a`
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 8px 14px;
+    gap: 6px;
+    padding: 7px 12px;
     border-radius: 8px;
     font-family: ${theme.fontsFamily.paragrafos};
-    font-size: 0.88rem;
+    font-size: 0.85rem;
     font-weight: 600;
     color: ${theme.colors.azulMaisClaro.claro};
     background: rgba(26, 58, 95, 0.55);

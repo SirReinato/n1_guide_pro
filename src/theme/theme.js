@@ -38,6 +38,7 @@ export const theme = {
         paragrafos: {
             gg: "1.5rem",
             mm: "1.125rem",
+            m: "1rem",
             pp: "0.89rem",
         },
     },
