@@ -55,7 +55,7 @@ export default function Sidebar({ colapsado, onToggleColapsado }) {
             <NavStl>
                 {/* Link Início estilo Wiki.js */}
                 <HomeLinkWrapper $compacto={compacto}>
-                    <Link href="/" passHref>
+                    <Link href="/" passHref legacyBehavior>
                         <HomeNavItemStl
                             $ativo={isHome && !activePostId}
                             $compacto={compacto}
@@ -142,6 +142,7 @@ export default function Sidebar({ colapsado, onToggleColapsado }) {
                                                     <Link
                                                         href={`/posts/${item.id}`}
                                                         passHref
+                                                        legacyBehavior
                                                     >
                                                         <ItemLink
                                                             $ativo={itemAtivo}

@@ -81,7 +81,7 @@ export default function PostScreen({ id, nome, descricao, passo_a_passo }) {
             <ConteinerPostStl>
                 <HeaderDocStl>
                     <TopActionsRowStl>
-                        <Link href="/" passHref>
+                        <Link href="/" passHref legacyBehavior>
                             <BtnVoltarDocStl>
                                 <ArrowLeft size={16} />
                                 <span>Voltar ao Início</span>
